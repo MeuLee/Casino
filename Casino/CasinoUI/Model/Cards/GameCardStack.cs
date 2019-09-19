@@ -2,11 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CasinoUI.Model
+namespace CasinoUI.Model.Cards
 {
     public class GameCardStack : CardStack
     {
@@ -42,11 +39,11 @@ namespace CasinoUI.Model
             }
         }
 
-        public Card DrawCard()
+        public void DrawCard(Player current)
         {
             Card card = Cards[0];
+            current.Cards.Add(card);
             Cards.Remove(card);
-            return card;
         }
     }
 }

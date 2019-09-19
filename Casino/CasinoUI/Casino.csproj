@@ -56,9 +56,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Card.cs" />
-    <Compile Include="Model\CardStack.cs" />
-    <Compile Include="Model\GameCardStack.cs" />
+    <Compile Include="Model\Cards\Card.cs" />
+    <Compile Include="Model\Cards\CardStack.cs" />
+    <Compile Include="Model\Cards\GameCardStack.cs" />
+    <Compile Include="Model\HumanPlayer.cs" />
+    <Compile Include="Model\Player.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -68,6 +70,7 @@
     <Compile Include="View\CasinoGame.xaml.cs">
       <DependentUpon>CasinoGame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GameCanvas.cs" />
     <Compile Include="View\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>

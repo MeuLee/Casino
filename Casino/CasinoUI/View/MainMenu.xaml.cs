@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CasinoUI.Model.Cards;
+using System;
+using System.Drawing;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CasinoUI
 {
@@ -20,9 +10,25 @@ namespace CasinoUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private GameCardStack _cards = new GameCardStack();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void AddImageToCanvas(Card card)
+        {
+            MyCanvas.CardsToDraw.Add(card);
+            MyCanvas.InvalidateVisual();
+        }
+
+        private void BtnAddCards_Click(object sender, RoutedEventArgs e)
+        {
+            if (_cards.Cards.Count < 1) return;
+
+            Card card = _cards.Cards[0];
+            AddImageToCanvas(card);
+            _cards.Cards.Remove(card);
         }
     }
 }

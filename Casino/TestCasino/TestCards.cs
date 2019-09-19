@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CasinoUI.Model;
+using CasinoUI.Model.Cards;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestCasino
@@ -46,6 +46,25 @@ namespace TestCasino
 
             //Assert
             Assert.AreEqual(52, nbUniqueCards);
+        }
+
+        [TestMethod]
+        public void DrawProperly()
+        {
+            //Arrange
+            GameCardStack stack = new GameCardStack();
+            HumanPlayer player = new HumanPlayer();
+            int playerCardsBefore = player.Cards.Count, gameCardsBefore = stack.Cards.Count, 
+                playerCardsAfter, gameCardsAfter;
+
+            //Act
+            stack.DrawCard(player);
+            playerCardsAfter = player.Cards.Count;
+            gameCardsAfter = stack.Cards.Count;
+
+            //Assert
+            Assert.AreEqual(playerCardsBefore + 1, playerCardsAfter);
+            Assert.AreEqual(gameCardsBefore - 1, gameCardsAfter);
         }
     }
 }
