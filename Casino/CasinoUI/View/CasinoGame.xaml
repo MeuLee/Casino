@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CasinoUI.View"
         mc:Ignorable="d"
-        Title="CasinoGame" Height="450" Width="800">
+        Title="CasinoGame" Height="450" Width="800"
+        ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/table.jpg"/>
+        </Grid.Background>
+        <Image HorizontalAlignment="Left" Height="100" Margin="10,310,0,0" VerticalAlignment="Top" Width="100" Source="pack://siteoforigin:,,,/Resources/ExempleGeralt.jpg"/>
     </Grid>
 </Window>
