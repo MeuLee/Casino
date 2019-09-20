@@ -35,7 +35,7 @@
         <Label Content="Stress Bar" HorizontalAlignment="Left" Margin="10,50,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
         <Label Content="Argent" HorizontalAlignment="Left" Margin="10,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
       <Canvas Name="MyCanvas" KeyDown="Canvas_KeyDown" Focusable="True">
-        <Image Name="Hero" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Source="../Resources/droite1.gif"/>
+        <Image Name="Hero" Canvas.Left="150" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Top" Source="../Resources/droite1.gif"/>
     </Canvas>
     </Grid>
 </Window>
