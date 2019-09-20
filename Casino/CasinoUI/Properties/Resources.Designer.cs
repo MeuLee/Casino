@@ -63,9 +63,9 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ExempleGeralt {
+        internal static System.Drawing.Bitmap panda {
             get {
-                object obj = ResourceManager.GetObject("ExempleGeralt", resourceCulture);
+                object obj = ResourceManager.GetObject("panda", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
