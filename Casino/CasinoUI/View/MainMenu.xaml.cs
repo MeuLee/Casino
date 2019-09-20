@@ -28,7 +28,6 @@ namespace CasinoUI
 
             Card card = _cards.Cards[0];
             AddImageToCanvas(card);
-            _cards.Cards.Remove(card);
         }
     }
 }

@@ -24,10 +24,9 @@ namespace CasinoUI.View
                 dc.DrawImage(ToBitmapImage(card.Image), 
                              new Rect(((int)card.Value - 1) * 80, (int)card.Suit * 135, 80, 135));
             }
-            
         }
 
-        public BitmapImage ToBitmapImage(Bitmap bitmap)
+        public static BitmapImage ToBitmapImage(Bitmap bitmap)
         {
             using (var memory = new MemoryStream())
             {

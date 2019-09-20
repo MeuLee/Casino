@@ -8,8 +8,5 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1300">
     <Grid>
-        <view:GameCanvas x:Name="MyCanvas" Height="800" Width="1200">
-        </view:GameCanvas>
-        <Button x:Name="BtnAddCards" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="BtnAddCards_Click"/>
     </Grid>
 </Window>
