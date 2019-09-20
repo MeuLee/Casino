@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CasinoUI.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,19 @@ namespace CasinoUI
     {
         public MainWindow()
         {
+            Button btn = new Button();
+            btn.Name = "Button";
+            btn.Click += button_Click;
             InitializeComponent();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            CasinoGame game = new CasinoGame();
+            game.Show();
+            this.Close();
+        }
+
+
     }
 }
