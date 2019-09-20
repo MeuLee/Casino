@@ -114,10 +114,10 @@
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ExempleGeralt.jpg" />
+    <None Include="Resources\table.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\table.jpg" />
+    <None Include="Resources\panda.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

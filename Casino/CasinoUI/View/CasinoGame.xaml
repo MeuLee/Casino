@@ -8,9 +8,31 @@
         Title="CasinoGame" Height="450" Width="800"
         ResizeMode="NoResize">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130" />
+            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="160" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="90" />
+        </Grid.RowDefinitions>
+
         <Grid.Background>
             <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/table.jpg"/>
         </Grid.Background>
-        <Image HorizontalAlignment="Left" Height="100" Margin="10,310,0,0" VerticalAlignment="Top" Width="100" Source="pack://siteoforigin:,,,/Resources/ExempleGeralt.jpg"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="10,40,0,0" VerticalAlignment="Top" Width="100" Source="pack://siteoforigin:,,,/Resources/panda.png" RenderTransformOrigin="1.225,1.898" Stretch="Fill"/>
+        <Label Content="Master66" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="30" FontSize="20" FontFamily="Lucida Console"/>
+        <Label Content="12:30" Grid.Column="2" HorizontalAlignment="Left" Margin="0.4,0,0,0" VerticalAlignment="Top" Width="80" Height="53" FontSize="30" Background="#FFFAF6F6"/>
+        <Label Content="99" HorizontalAlignment="Left" Margin="96,127,0,0" VerticalAlignment="Top" Width="34" Height="34" FontSize="20" Background="#FF2060CE"/>
+        <ProgressBar HorizontalAlignment="Left" Height="20" Margin="10,30,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110"/>
+        <ProgressBar HorizontalAlignment="Left" Height="18" Margin="10,81,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110"/>
+        <Label Content="9999$" HorizontalAlignment="Left" Margin="10,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" Background="#FF099D10" FontSize="20" Height="33"/>
+        <Label Content="Experience" HorizontalAlignment="Left" Margin="10,1,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
+        <Label Content="Stress Bar" HorizontalAlignment="Left" Margin="10,50,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
+        <Label Content="Argent" HorizontalAlignment="Left" Margin="10,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
     </Grid>
 </Window>
