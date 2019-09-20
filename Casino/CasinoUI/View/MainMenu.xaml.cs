@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CasinoUI
 {
@@ -21,22 +22,7 @@ namespace CasinoUI
             //Button btn = new Button();
             //btn.Name = "Button";
             //btn.Click += button_Click;
-            //InitializeComponent();
-        }
-
-
-        private void AddImageToCanvas(Card card)
-        {
-            //MyCanvas.CardsToDraw.Add(card);
-            //MyCanvas.InvalidateVisual();
-        }
-
-        private void BtnAddCards_Click(object sender, RoutedEventArgs e)
-        {
-            if (_cards.Cards.Count < 1) return;
-
-            Card card = _cards.Cards[0];
-            AddImageToCanvas(card);
+            InitializeComponent();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
