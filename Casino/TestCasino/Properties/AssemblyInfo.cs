@@ -1,19 +1,18 @@
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("CasinoTest")]
+[assembly: AssemblyTitle("TestCasino")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CasinoTest")]
+[assembly: AssemblyProduct("TestCasino")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("7265a3aa-d5e2-4783-96b3-6b84dcdb7c16")]
+[assembly: Guid("c3929421-e84e-41ea-a2bb-6bcc816d3260")]
 
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]

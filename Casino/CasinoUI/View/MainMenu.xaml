@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CasinoUI"
+        xmlns:view="clr-namespace:CasinoUI.View"
         mc:Ignorable="d"
+    <Grid>
+
         Title="Menu Principal" Height="450" Width="800" Background="Black">
     <Grid>
         <Image x:Name="image" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792" Source="/CasinoUI;component/Resources/bgMainMenu.jpg" Stretch="UniformToFill" Opacity="0.6">
