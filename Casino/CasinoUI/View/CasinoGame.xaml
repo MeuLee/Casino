@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CasinoUI.View"
         mc:Ignorable="d"
-        Title="CasinoGame" Height="450" Width="800"
+        Title="CasinoGame" Height="450" Width="800" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}"
         ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -34,5 +34,8 @@
         <Label Content="Experience" HorizontalAlignment="Left" Margin="10,1,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
         <Label Content="Stress Bar" HorizontalAlignment="Left" Margin="10,50,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
         <Label Content="Argent" HorizontalAlignment="Left" Margin="10,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
+      <Canvas Name="MyCanvas" KeyDown="Canvas_KeyDown" Focusable="True">
+        <Image Name="Hero" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Source="../Resources/droite1.gif"/>
+    </Canvas>
     </Grid>
 </Window>
