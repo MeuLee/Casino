@@ -6,7 +6,23 @@
         xmlns:local="clr-namespace:CasinoUI"
         xmlns:view="clr-namespace:CasinoUI.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1300">
     <Grid>
+
+        Title="Menu Principal" Height="450" Width="800" Background="Black">
+    <Grid>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792" Source="/CasinoUI;component/Resources/bgMainMenu.jpg" Stretch="UniformToFill" Opacity="0.6">
+            <Image.Effect>
+                <BlurEffect Radius="10"/>
+            </Image.Effect>
+        </Image>
+        <Button x:Name="button" Click="button_Click" Content="Jouer&#xA;" HorizontalAlignment="Left" Margin="338,200,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
+        <Button x:Name="button_Copy" Content="Paramètres&#xA;" HorizontalAlignment="Left" Margin="338,250,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
+        <Button x:Name="button_Copy1" Content="Quitter&#xA;" HorizontalAlignment="Left" Margin="338,300,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
+        <Label x:Name="label" Content="CASINO" HorizontalAlignment="Left" Margin="264,42,0,0" VerticalAlignment="Top" Height="104" Width="270" FontSize="72" Background="#00000000" Opacity="0.99" Foreground="White">
+
+
+        </Label>
     </Grid>
 </Window>
+
+    <!--test-->
