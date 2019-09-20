@@ -8,6 +8,6 @@
         Title="CasinoGame" Height="450" Width="800" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}">
 
     <Canvas Name="MyCanvas" KeyDown="Canvas_KeyDown" Focusable="True">
-        <Image Name="Hero" Canvas.Left="187" Canvas.Top="177" HorizontalAlignment="Left" VerticalAlignment="Top" Source="../Resources/droite1.gif"/>
+        <Image Name="Hero" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Source="../Resources/droite1.gif"/>
     </Canvas>
 </Window>
