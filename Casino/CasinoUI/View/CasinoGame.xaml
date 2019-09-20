@@ -8,7 +8,6 @@
         Title="CasinoGame" Height="450" Width="800" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}"
         ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="BtnAddCards" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="BtnAddCards_Click"/>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="135" />
             <ColumnDefinition Width="230" />
@@ -23,9 +22,9 @@
         </Grid.RowDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/table.jpg"/>
+            <ImageBrush x:Name="TableBackground"/>
         </Grid.Background>
-        <Image HorizontalAlignment="Left" Height="100" Margin="10,40,0,0" VerticalAlignment="Top" Width="100" Source="pack://siteoforigin:,,,/Resources/panda.png" RenderTransformOrigin="1.225,1.898" Stretch="Fill"/>
+        <Image x:Name="ImageJoueur" HorizontalAlignment="Left" Height="100" Margin="10,40,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="1.225,1.898" Stretch="Fill"/>
         <Label Content="Master66" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="30" FontSize="20" FontFamily="Lucida Console"/>
         <Label Content="12:30" Grid.Column="2" HorizontalAlignment="Left" Margin="0.4,0,0,0" VerticalAlignment="Top" Width="80" Height="53" FontSize="30" Background="#FFFAF6F6"/>
         <Label Content="99" HorizontalAlignment="Left" Margin="96,127,0,0" VerticalAlignment="Top" Width="34" Height="34" FontSize="20" Background="#FF2060CE"/>
@@ -35,8 +34,8 @@
         <Label Content="Experience" HorizontalAlignment="Left" Margin="10,1,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
         <Label Content="Stress Bar" HorizontalAlignment="Left" Margin="10,50,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
         <Label Content="Argent" HorizontalAlignment="Left" Margin="10,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
-      <Canvas Name="MyCanvas" KeyDown="Canvas_KeyDown" Focusable="True">
-        <Image Name="Hero" Canvas.Left="150" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Top" Source="../Resources/droite1.gif"/>
+      <Canvas x:Name="MyCanvas" KeyDown="Canvas_KeyDown" Focusable="True">
+        <Image x:Name="Hero" Canvas.Left="150" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
       </Canvas>
     </Grid>
 </Window>

@@ -18,17 +18,17 @@ namespace CasinoUI
         private GameCardStack _cards = new GameCardStack();
         public MainWindow()
         {
-            Button btn = new Button();
-            btn.Name = "Button";
-            btn.Click += button_Click;
-            InitializeComponent();
+            //Button btn = new Button();
+            //btn.Name = "Button";
+            //btn.Click += button_Click;
+            //InitializeComponent();
         }
 
 
         private void AddImageToCanvas(Card card)
         {
-            MyCanvas.CardsToDraw.Add(card);
-            MyCanvas.InvalidateVisual();
+            //MyCanvas.CardsToDraw.Add(card);
+            //MyCanvas.InvalidateVisual();
         }
 
         private void BtnAddCards_Click(object sender, RoutedEventArgs e)
