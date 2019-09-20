@@ -146,5 +146,11 @@
   <ItemGroup>
     <Resource Include="Resources\bgMainMenu.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bas1.gif" />
+    <Resource Include="Resources\droite1.gif" />
+    <Resource Include="Resources\gauche1.gif" />
+    <Resource Include="Resources\haut1.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

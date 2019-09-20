@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CasinoUI.View"
         mc:Ignorable="d"
-        Title="CasinoGame" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="CasinoGame" Height="450" Width="800" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}">
+
+    <Canvas Name="MyCanvas" KeyDown="Canvas_KeyDown" Focusable="True">
+        <Image Name="Hero" Canvas.Left="187" Canvas.Top="177" HorizontalAlignment="Left" VerticalAlignment="Top" Source="../Resources/droite1.gif"/>
+    </Canvas>
 </Window>
