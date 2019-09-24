@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace CasinoUI.Model.Poker {
     public class PokerLogic {
-        private List<PokerAI> ListAI;
         private HumanPlayer Human;
+
+        private List<Player> ListPlayers;
 
         public PokerLogic(HumanPlayer Human) {
             this.Human = Human;
         }
 
-        private void InitAI() {
-            for (int i = 0; i < 4; i++) {
-                ListAI[i] = new PokerAI();
+        private void InitListPlayers() {
+            ListPlayers[0] = Human;
+
+            for (int i = 1; i < 5; i++) {
+                ListPlayers[i] = new PokerAI();
             }
         }
          
