@@ -24,29 +24,51 @@ namespace CasinoUI.View
 
         private void Canvas_KeyDown(object sender, KeyEventArgs e)
         {
+            long heroPosLeft = Convert.ToInt64(Hero.GetValue(Canvas.LeftProperty));
+            long heroPosTop = Convert.ToInt64(Hero.GetValue(Canvas.TopProperty));
+
             switch (e.Key)
             {
                 case Key.S:
-                    Hero.Source = ToBitmapImage(Properties.Resources.bas1);
-                    Canvas.SetTop(Hero, Canvas.GetTop(Hero) + 10);
+                    if (heroPosTop < 380)
+                    {
+                        Hero.Source = ToBitmapImage(Properties.Resources.bas1);
+                        Canvas.SetTop(Hero, Canvas.GetTop(Hero) + 10);
+                    }
                     break;
 
                 case Key.W:
-                    Hero.Source = ToBitmapImage(Properties.Resources.haut1);
-                    Canvas.SetTop(Hero, Canvas.GetTop(Hero) - 10);
+                    if (heroPosLeft > 125 || heroPosTop < 300)
+                    {
+                        if (heroPosTop > 0)
+                        {
+                            Hero.Source = ToBitmapImage(Properties.Resources.haut1);
+                            Canvas.SetTop(Hero, Canvas.GetTop(Hero) - 10);
+                        }
+                    }
+
                     break;
 
                 case Key.A:
-                    Hero.Source = ToBitmapImage(Properties.Resources.gauche1);
-                    Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) - 10);
+                    if (heroPosLeft > 135 || heroPosTop > 310)
+                    {
+                        if (heroPosLeft > 0)
+                        {
+                            Hero.Source = ToBitmapImage(Properties.Resources.gauche1);
+                            Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) - 10);
+                        }
+                    }
                     break;
 
                 case Key.D:
-                    Hero.Source = ToBitmapImage(Properties.Resources.droite1);
-                    Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) + 10);
+                    if (heroPosLeft < 750)
+                    {
+                        Hero.Source = ToBitmapImage(Properties.Resources.droite1);
+                        Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) + 10);
+                    }
                     break;
             }
-            
+
         }
 
         public static BitmapImage ToBitmapImage(Bitmap bitmap)
