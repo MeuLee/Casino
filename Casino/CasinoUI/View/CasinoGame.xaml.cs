@@ -20,6 +20,9 @@ namespace CasinoUI.View
             ImageJoueur.Source = ToBitmapImage(Properties.Resources.panda);
             TableBackground.ImageSource = ToBitmapImage(Properties.Resources.table);
             Hero.Source = ToBitmapImage(Properties.Resources.droite1);
+            EntrerPoker.Source = ToBitmapImage(Properties.Resources.PokerEntrer);
+            EntrerPoker.Height = 50;
+            EntrerPoker.Width = 50;
         }
 
         private void Canvas_KeyDown(object sender, KeyEventArgs e)
@@ -67,8 +70,18 @@ namespace CasinoUI.View
                         Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) + 10);
                     }
                     break;
+                case Key.E:
+                    if (heroPosLeft >= 400 && heroPosLeft <= 420)
+                    {
+                        if (heroPosTop >= 70 && heroPosTop <= 100)
+                        {
+                            Poker pokerGame = new Poker();
+                            pokerGame.Show();
+                            this.Close();
+                        }
+                    }
+                    break;
             }
-
         }
 
         public static BitmapImage ToBitmapImage(Bitmap bitmap)

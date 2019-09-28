@@ -1,0 +1,14 @@
+﻿<Window x:Class="CasinoUI.View.Poker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CasinoUI.View"
+        mc:Ignorable="d"
+        Title="Poker" Height="450" Width="800" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}">
+    <Grid>
+        <Canvas x:Name="MyCanvas" Focusable="True">
+            <Image x:Name="Hero" Canvas.Left="150" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </Canvas>
+    </Grid>
+</Window>
