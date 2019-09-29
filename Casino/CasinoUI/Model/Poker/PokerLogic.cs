@@ -18,22 +18,5 @@ namespace CasinoUI.Model.Poker {
                 ListAI[i] = new PokerAI();
             }
         }
-         
-        private void Check()
-        {
-
-        }
-        private void Fold()
-        {
-
-        }
-        private void Raise()
-        {
-
-        }
-        private void Call()
-        {
-
-        }
     }
 }
