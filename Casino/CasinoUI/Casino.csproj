@@ -80,6 +80,7 @@
     <Compile Include="Model\HumanPlayer.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Poker\PokerAI.cs" />
+    <Compile Include="Model\Poker\PokerHand.cs" />
     <Compile Include="Model\Poker\PokerLogic.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
