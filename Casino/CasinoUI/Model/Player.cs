@@ -7,19 +7,19 @@ namespace CasinoUI.Model {
         public List<Card> Cards { get; set; } = new List<Card>();
         public int Money { get; set; }
 
-        public void Call() {
+        public void PokerCall() {
             throw new System.NotImplementedException();
         }
 
-        public void Check() {
+        public void PokerCheck() {
             throw new System.NotImplementedException();
         }
 
-        public void Fold() {
+        public void PokerFold() {
             throw new System.NotImplementedException();
         }
 
-        public void Raise() {
+        public void PokerRaise() {
             throw new System.NotImplementedException();
         }
     }

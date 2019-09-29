@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CasinoUI.Model.Poker {
     interface IPokerAction {
-        void Check();
-        void Fold();
-        void Raise();
-        void Call();
+        void PokerCheck();
+        void PokerFold();
+        void PokerRaise();
+        void PokerCall();
 
     }
 }
