@@ -320,7 +320,7 @@
     <Resource Include="Resources\haut1.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Poker\PokerAction.cs" />
+    <Compile Include="Model\Poker\IPokerAction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

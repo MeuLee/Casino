@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 namespace CasinoUI.Model.Poker {
     public class PokerLogic {
         private HumanPlayer Human;
-
         private List<Player> ListPlayers;
+        private int FirstPlayer;
+        private int SmallBlind;
+        private int BigBlind;       
 
         public PokerLogic(HumanPlayer Human) {
             this.Human = Human;
