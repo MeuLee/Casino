@@ -6,8 +6,7 @@ namespace CasinoUI.Model.Cards
     {
         public enum CardRank
         {
-            Ace = 1,
-            Two,
+            Two = 2,
             Three,
             Four,
             Five,
@@ -18,7 +17,8 @@ namespace CasinoUI.Model.Cards
             Ten,
             Jack,
             Queen,
-            King
+            King,
+            Ace
         }
         public enum CardSuit
         {

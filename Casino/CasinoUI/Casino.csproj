@@ -79,6 +79,7 @@
     <Compile Include="Model\Cards\GameCardStack.cs" />
     <Compile Include="Model\HumanPlayer.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\Poker\PokerAction.cs" />
     <Compile Include="Model\Poker\PokerAI.cs" />
     <Compile Include="Model\Poker\PokerHand.cs" />
     <Compile Include="Model\Poker\PokerLogic.cs" />
@@ -318,9 +319,6 @@
     <Resource Include="Resources\droite1.gif" />
     <Resource Include="Resources\gauche1.gif" />
     <Resource Include="Resources\haut1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Model\Poker\IPokerAction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
