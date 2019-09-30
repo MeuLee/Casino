@@ -32,6 +32,7 @@ namespace CasinoUI.Model.Poker
 
             DescendingSuitList();
             isFlush = isFlushCombo();
+            //Creer methode possibilite flush
         }
 
         private void HighestCombo()
@@ -60,11 +61,12 @@ namespace CasinoUI.Model.Poker
                 }
                 else if (cardBefore == (int)card.Suit)
                 {
+                    cardBefore = (int)card.Suit;
                     compt++;
                 }
             }
 
-            if (compt >= 3)
+            if (compt >= 2)
             {
                 isFlush = true;
             }
