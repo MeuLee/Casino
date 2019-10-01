@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CasinoUI.Model.Cards;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,18 +9,27 @@ namespace CasinoUI.Model.Poker {
     public class PokerLogic {
         private HumanPlayer Human;
         private List<Player> ListPlayers;
-        private int FirstPlayer;
-        private int SmallBlind;
-        private int BigBlind;       
+        private GameCardStack CardStack;
+
+        private int[] PlayerRoles; // <---  idx[0] = SmallBlind's index in ListPlayers
+                                   //       idx[1] = BigBlind's index in ListPlayers
+                                   //       idx[2] = CurrentPlayersTurn index in ListPlayers
 
         public PokerLogic(HumanPlayer Human) {
             this.Human = Human;
             InitListPlayers();
             SetInitialRoles();
+            CardStack = new GameCardStack();
         }
 
         private void GameFlow() {
             // 1. Distribute cards to players
+            // TODO: Give cards to first player first;
+            foreach (Player player in ListPlayers) {
+                CardStack.DrawCard(player);
+                CardStack.DrawCard(player);
+            }
+
             // 2. small blind deposits
             // 3. Big blind deposits
             // 4. firstPlayer decides to call, fold or raise
@@ -43,9 +53,13 @@ namespace CasinoUI.Model.Poker {
         }
 
         private void SetInitialRoles() {
-            SmallBlind = 0;
-            BigBlind = 1;
-            FirstPlayer = 2;
+            PlayerRoles = new int[3];
+
+            PlayerRoles[0] = 0;
+            PlayerRoles[1] = 1;
+            PlayerRoles[2] = 2;
+
+
         }
 
         private void ProceedNextTurn() {
@@ -57,26 +71,12 @@ namespace CasinoUI.Model.Poker {
         private void RotateRoles() {
             int listLength = ListPlayers.Count;
 
-            // Can refactor into array
-            if (SmallBlind == listLength) {
-                SmallBlind = 0;
-            }
-            else {
-                SmallBlind++;
-            }
+            for (int i = 0; i < PlayerRoles.Length; i++) {
+                PlayerRoles[i]++;
 
-            if (BigBlind == listLength) {
-                BigBlind = 0;
-            }
-            else {
-                BigBlind++;
-            }
-
-            if (FirstPlayer == listLength) {
-                FirstPlayer = 0;
-            }
-            else {
-                FirstPlayer++;
+                if (PlayerRoles[i] == listLength) {
+                    PlayerRoles[i] = 0;
+                }
             }
         }
 
