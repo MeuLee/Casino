@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace CasinoUI.Model.Poker {
     public class PokerLogic {
         private HumanPlayer Human;
-        private List<Player> ListPlayers;
-        private GameCardStack CardStack;
+        public List<Player> ListPlayers { get; set; }
+        public GameCardStack CardStack { get; set; }
 
         private int[] PlayerRoles; // <---  idx[0] = SmallBlind's index in ListPlayers
                                    //       idx[1] = BigBlind's index in ListPlayers
@@ -25,10 +25,7 @@ namespace CasinoUI.Model.Poker {
         private void GameFlow() {
             // 1. Distribute cards to players
             // TODO: Give cards to first player first;
-            foreach (Player player in ListPlayers) {
-                CardStack.DrawCard(player);
-                CardStack.DrawCard(player);
-            }
+            DistributeCards();
 
             // 2. small blind deposits
             // 3. Big blind deposits
@@ -83,6 +80,13 @@ namespace CasinoUI.Model.Poker {
         private void ClearHands() {
             foreach (Player player in ListPlayers) {
                 player.Cards.Clear();
+            }
+        }
+
+        private void DistributeCards() {
+            foreach (Player player in ListPlayers) {
+                CardStack.DrawCard(player);
+                CardStack.DrawCard(player);
             }
         }
     }

@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="TestCards.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestPokerLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
