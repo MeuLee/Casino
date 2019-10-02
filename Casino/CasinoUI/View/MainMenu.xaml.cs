@@ -19,9 +19,6 @@ namespace CasinoUI
         private GameCardStack _cards = new GameCardStack();
         public MainWindow()
         {
-            //Button btn = new Button();
-            //btn.Name = "Button";
-            //btn.Click += button_Click;
             InitializeComponent();
         }
 

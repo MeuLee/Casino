@@ -89,6 +89,8 @@
       <DependentUpon>CasinoGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GameCanvas.cs" />
+    <Compile Include="View\Map\MapGenerator.cs" />
+    <Compile Include="View\Map\MapTile.cs" />
     <Compile Include="View\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>

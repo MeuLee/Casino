@@ -19,11 +19,7 @@ namespace CasinoUI.View
         public List<Card> CardsToDraw { get; set; } = new List<Card>();
         protected override void OnRender(DrawingContext dc)
         {
-            foreach (Card card in CardsToDraw)
-            {
-                dc.DrawImage(ToBitmapImage(card.Image), 
-                             new Rect(((int)card.Value - 1) * 80, (int)card.Suit * 135, 80, 135));
-            }
+            
         }
 
         public static BitmapImage ToBitmapImage(Bitmap bitmap)
