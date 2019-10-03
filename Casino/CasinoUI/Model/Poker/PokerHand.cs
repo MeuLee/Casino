@@ -10,7 +10,8 @@ namespace CasinoUI.Model.Poker
         private List<Card> listValue;
 
         private List<Tuple<int, int>> ComboValuePoss;
-        private List<Tuple<int, int>> ComboStraightPoss;
+        private List<int> ComboStraightPoss;
+        private Card.CardSuit FlushCombo;
 
         private bool isStraight = false;
         private bool isFlush = false;
@@ -18,8 +19,9 @@ namespace CasinoUI.Model.Poker
         public PokerHand(List<Card> listCardInGame)
         {
             this.listCardInGame = listCardInGame;
-            ComboStraightPoss = new List<Tuple<int, int>>;
-            ComboValuePoss = new List<Tuple<int, int>>;
+            ComboStraightPoss = new List<int>();
+            ComboValuePoss = new List<Tuple<int, int>>();
+            FlushCombo = Card.CardSuit.Diamonds;
         }
 
         public int ListCardInGame { get; set; }
@@ -40,93 +42,60 @@ namespace CasinoUI.Model.Poker
 
             DescendingSuitList();
             isFlush = isFlushCombo();
-            //Creer methode possibilite flush
+            if (isFlush)
+            {
+                ComboFlush();
+            }
 
             //Si seulement straight ou flish calcul hignestCombo
+        }
+        private void ComboFlush()
+        {
+            double nbr = listCardInGame.Count / 2.0;
+            int Middle =(int) Math.Ceiling(nbr);
+            FlushCombo = listCardInGame[Middle].Suit;
         }
 
         private void StraightCombo()
         {
+            CreateList();
 
-            int createrOne = 0;
-            int createrTwo = 0;
-
-            int cardBefore = 0;
-
-            for(int i = 0; i <listCardInGame.Count; i++)
+            foreach(Card card in listValue)
             {
-                createrOne = 0;
-                createrTwo = 0;
-
-                if (i == 0)
+                if (ComboStraightPoss.Contains((int)card.Value))
                 {
-                    createrOne = (int)listCardInGame[i].Value + 1;
-
-                    if(createrOne > (int)Card.CardRank.Ace)
-                    {
-                        createrOne = 2;
-                        createrTwo = createrOne + 1;
-
-                    }
-                    else
-                    {
-                        if (createrOne != 14)
-                        {
-                            createrTwo = (int)listCardInGame[i].Value + 2;
-                        }
-                        else
-                        {
-                            createrTwo = 2;
-                        }
-                    }
+                    ComboStraightPoss.Remove((int)card.Value);
                 }
-                else if(i == listCardInGame.Count - 1)
-                {
-                    createrOne = (int)listCardInGame[i].Value - 1;
-
-                    if (createrOne < (int)Card.CardRank.Two)
-                    {
-                        createrOne = 14;
-                        createrTwo = createrOne - 1;
-
-                    }
-                    else
-                    {
-                        if (createrOne != 2)
-                        {
-                            createrTwo = (int)listCardInGame[i].Value - 2;
-                        }
-                        else
-                        {
-                            createrTwo = 14;
-                        }
-                    }
-                }
-                else
-                {
-                    if (cardBefore - 2 == (int)listCardInGame[i].Value)
-                    {
-                        createrOne = cardBefore - 1;
-                    }
-                    else if (cardBefore - 3 == (int)listCardInGame[i].Value)
-                    {
-                        createrOne = cardBefore - 1;
-                        createrTwo = cardBefore - 2;
-
-                        //Checker 2 14 13
-                    }
-                }
-
-                ComboStraightPoss.Add(Tuple.Create(createrTwo, createrOne));
-                cardBefore = (int)listCardInGame[i].Value;
             }
         }
 
-        private void HighestCombo()
+        private void CreateList()
         {
+            ComboStraightPoss = new List<int>(listCardInGame.Count + 4);
+            int itemStraight = (int)listCardInGame[0].Value + 2;
 
+            for (int i = 0; i < ComboStraightPoss.Count; i++)
+            {
+                switch (itemStraight)
+                {
+                    case 15:
+                        itemStraight = 2;
+                        break;
+                    case 16:
+                        itemStraight = 3;
+                        break;
+                    case 1:
+                        itemStraight = 14;
+                        break;
+                    case 0:
+                        itemStraight = 13;
+                        break;
+                }
+
+                ComboStraightPoss.Add(itemStraight);
+                itemStraight--;
+            }
         }
-
         private void DescendingSuitList()
         {
             listCardInGame.Sort((a, b) => b.Suit.CompareTo(a.Suit));
@@ -148,8 +117,11 @@ namespace CasinoUI.Model.Poker
                 }
                 else if (cardBefore == (int)card.Suit)
                 {
-                    cardBefore = (int)card.Suit;
                     compt++;
+                }
+                else
+                {
+                    cardBefore = (int)card.Suit;
                 }
             }
 
