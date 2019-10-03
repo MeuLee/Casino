@@ -90,7 +90,13 @@
     </Compile>
     <Compile Include="View\GameCanvas.cs" />
     <Compile Include="View\Map\MapGenerator.cs" />
-    <Compile Include="View\Map\MapTile.cs" />
+    <Compile Include="View\Map\Tiles\BarTile.cs" />
+    <Compile Include="View\Map\Tiles\BrownTableTile.cs" />
+    <Compile Include="View\Map\Tiles\GreenTableTile.cs" />
+    <Compile Include="View\Map\Tiles\GreyFloorTile.cs" />
+    <Compile Include="View\Map\Tiles\MapTile.cs" />
+    <Compile Include="View\Map\Tiles\RedFloorTile.cs" />
+    <Compile Include="View\Map\Tiles\SlotMachineTile.cs" />
     <Compile Include="View\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>
@@ -125,7 +131,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -317,6 +323,12 @@
     <Resource Include="Resources\droite1.gif" />
     <Resource Include="Resources\gauche1.gif" />
     <Resource Include="Resources\haut1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map2.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

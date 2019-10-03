@@ -1,0 +1,144 @@
+<Map>
+  <Dimensions>
+    <Width X="25" />
+    <Height Y="20" />
+  </Dimensions>
+  <Tiles>
+    <!-- Horizontal Floor1 -->
+    <Tile X1="0" Y1="9" X2="24" Y2="10" Terrain="Floor1" />
+    <!-- Horizontal Floor1 -->
+
+    <!-- Vertical Floor1 -->
+    <Tile X1="11" Y1="0" X2="13" Y2="8" Terrain="Floor1" />
+    <Tile X1="11" Y1="11" X2="13" Y2="19" Terrain="Floor1" />
+    <!-- Vertical Floor1 -->
+
+    <!-- Horizontal Floor2 -->
+    <Tile X1="0" Y1="0" X2="10" Y2="0" Terrain="Floor2" />
+    <Tile X1="14" Y1="0" X2="24" Y2="0" Terrain="Floor2" />
+    <Tile X1="0" Y1="4" X2="10" Y2="4" Terrain="Floor2" />
+    <Tile X1="14" Y1="4" X2="24" Y2="4" Terrain="Floor2" />
+    <Tile X1="0" Y1="8" X2="10" Y2="8" Terrain="Floor2" />
+    <Tile X1="14" Y1="8" X2="24" Y2="8" Terrain="Floor2" />
+
+    <Tile X1="0" Y1="11" X2="10" Y2="11" Terrain="Floor2" />
+    <Tile X1="14" Y1="11" X2="24" Y2="11" Terrain="Floor2" />
+    <Tile X1="14" Y1="13" X2="24" Y2="13" Terrain="Floor2" />
+    <Tile X1="0" Y1="15" X2="10" Y2="15" Terrain="Floor2" />
+    <Tile X1="14" Y1="15" X2="24" Y2="15" Terrain="Floor2" />
+    <Tile X1="14" Y1="17" X2="24" Y2="17" Terrain="Floor2" />
+    <Tile X1="0" Y1="19" X2="10" Y2="19" Terrain="Floor2" />
+    <Tile X1="14" Y1="19" X2="24" Y2="19" Terrain="Floor2" />
+    <!-- Horizontal Floor2 -->
+
+    <!-- Vertical Floor2 -->
+    <Tile X1="0" Y1="1" X2="0" Y2="3" Terrain="Floor2" />
+    <Tile X1="5" Y1="1" X2="5" Y2="3" Terrain="Floor2" />
+    <Tile X1="10" Y1="1" X2="10" Y2="3" Terrain="Floor2" />
+    <Tile X1="14" Y1="1" X2="14" Y2="3" Terrain="Floor2" />
+    <Tile X1="19" Y1="1" X2="19" Y2="3" Terrain="Floor2" />
+    <Tile X1="24" Y1="1" X2="24" Y2="3" Terrain="Floor2" />
+    <Tile X1="0" Y1="5" X2="0" Y2="7" Terrain="Floor2" />
+    <Tile X1="5" Y1="5" X2="5" Y2="7" Terrain="Floor2" />
+    <Tile X1="10" Y1="5" X2="10" Y2="7" Terrain="Floor2" />
+    <Tile X1="14" Y1="5" X2="14" Y2="7" Terrain="Floor2" />
+    <Tile X1="19" Y1="5" X2="19" Y2="7" Terrain="Floor2" />
+    <Tile X1="24" Y1="5" X2="24" Y2="7" Terrain="Floor2" />
+    <Tile X1="0" Y1="12" X2="0" Y2="14" Terrain="Floor2" />
+    <Tile X1="5" Y1="12" X2="5" Y2="14" Terrain="Floor2" />
+    <Tile X1="10" Y1="12" X2="10" Y2="14" Terrain="Floor2" />
+    <Tile X1="0" Y1="16" X2="0" Y2="18" Terrain="Floor2" />
+    <Tile X1="5" Y1="16" X2="5" Y2="18" Terrain="Floor2" />
+    <Tile X1="10" Y1="16" X2="10" Y2="18" Terrain="Floor2" />
+    <!-- Vertical Floor2 -->
+
+    <!-- Single Tile Floor2 -->
+    <Tile X1="14" Y1="12" X2="14" Y2="12" Terrain="Floor2" />
+    <Tile X1="19" Y1="12" X2="19" Y2="12" Terrain="Floor2" />
+    <Tile X1="24" Y1="12" X2="24" Y2="12" Terrain="Floor2" />
+    <Tile X1="14" Y1="14" X2="14" Y2="14" Terrain="Floor2" />
+    <Tile X1="19" Y1="14" X2="19" Y2="14" Terrain="Floor2" />
+    <Tile X1="24" Y1="14" X2="24" Y2="14" Terrain="Floor2" />
+    <Tile X1="14" Y1="16" X2="14" Y2="16" Terrain="Floor2" />
+    <Tile X1="19" Y1="16" X2="19" Y2="16" Terrain="Floor2" />
+    <Tile X1="24" Y1="16" X2="24" Y2="16" Terrain="Floor2" />
+    <Tile X1="14" Y1="18" X2="14" Y2="18" Terrain="Floor2" />
+    <Tile X1="19" Y1="18" X2="19" Y2="18" Terrain="Floor2" />
+    <Tile X1="24" Y1="18" X2="24" Y2="18" Terrain="Floor2" />
+    <!-- Single Tile Floor2 -->
+
+    <!-- Tables -->
+    <Tile X1="1" Y1="1" X2="4" Y2="1" Terrain="Table1" />
+    <Tile X1="1" Y1="3" X2="4" Y2="3" Terrain="Table1" />
+    <Tile X1="1" Y1="2" X2="1" Y2="2" Terrain="Table1" />
+    <Tile X1="4" Y1="2" X2="4" Y2="2" Terrain="Table1" />
+    <Tile X1="2" Y1="2" X2="3" Y2="2" Terrain="Table2" />
+    <Tile X1="6" Y1="1" X2="9" Y2="1" Terrain="Table1" />
+    <Tile X1="6" Y1="3" X2="9" Y2="3" Terrain="Table1" />
+    <Tile X1="6" Y1="2" X2="6" Y2="2" Terrain="Table1" />
+    <Tile X1="9" Y1="2" X2="9" Y2="2" Terrain="Table1" />
+    <Tile X1="7" Y1="2" X2="8" Y2="2" Terrain="Table2" />
+    <Tile X1="15" Y1="1" X2="18" Y2="1" Terrain="Table1" />
+    <Tile X1="15" Y1="3" X2="18" Y2="3" Terrain="Table1" />
+    <Tile X1="15" Y1="2" X2="15" Y2="2" Terrain="Table1" />
+    <Tile X1="18" Y1="2" X2="18" Y2="2" Terrain="Table1" />
+    <Tile X1="16" Y1="2" X2="17" Y2="2" Terrain="Table2" />
+    <Tile X1="20" Y1="1" X2="23" Y2="1" Terrain="Table1" />
+    <Tile X1="20" Y1="3" X2="23" Y2="3" Terrain="Table1" />
+    <Tile X1="20" Y1="2" X2="20" Y2="2" Terrain="Table1" />
+    <Tile X1="23" Y1="2" X2="23" Y2="2" Terrain="Table1" />
+    <Tile X1="21" Y1="2" X2="22" Y2="2" Terrain="Table2" />
+    <Tile X1="1" Y1="5" X2="4" Y2="5" Terrain="Table1" />
+    <Tile X1="1" Y1="7" X2="4" Y2="7" Terrain="Table1" />
+    <Tile X1="1" Y1="6" X2="1" Y2="6" Terrain="Table1" />
+    <Tile X1="4" Y1="6" X2="4" Y2="6" Terrain="Table1" />
+    <Tile X1="2" Y1="6" X2="3" Y2="6" Terrain="Table2" />
+    <Tile X1="6" Y1="5" X2="9" Y2="5" Terrain="Table1" />
+    <Tile X1="6" Y1="7" X2="9" Y2="7" Terrain="Table1" />
+    <Tile X1="6" Y1="6" X2="6" Y2="6" Terrain="Table1" />
+    <Tile X1="9" Y1="6" X2="9" Y2="6" Terrain="Table1" />
+    <Tile X1="7" Y1="6" X2="8" Y2="6" Terrain="Table2" />
+    <Tile X1="15" Y1="5" X2="18" Y2="5" Terrain="Table1" />
+    <Tile X1="15" Y1="7" X2="18" Y2="7" Terrain="Table1" />
+    <Tile X1="15" Y1="6" X2="15" Y2="6" Terrain="Table1" />
+    <Tile X1="18" Y1="6" X2="18" Y2="6" Terrain="Table1" />
+    <Tile X1="16" Y1="6" X2="17" Y2="6" Terrain="Table2" />
+    <Tile X1="20" Y1="5" X2="23" Y2="5" Terrain="Table1" />
+    <Tile X1="20" Y1="7" X2="23" Y2="7" Terrain="Table1" />
+    <Tile X1="20" Y1="6" X2="20" Y2="6" Terrain="Table1" />
+    <Tile X1="23" Y1="6" X2="23" Y2="6" Terrain="Table1" />
+    <Tile X1="21" Y1="6" X2="22" Y2="6" Terrain="Table2" />
+    <Tile X1="1" Y1="12" X2="4" Y2="12" Terrain="Table1" />
+    <Tile X1="1" Y1="14" X2="4" Y2="14" Terrain="Table1" />
+    <Tile X1="1" Y1="13" X2="1" Y2="13" Terrain="Table1" />
+    <Tile X1="4" Y1="13" X2="4" Y2="13" Terrain="Table1" />
+    <Tile X1="2" Y1="13" X2="3" Y2="13" Terrain="Table2" />
+    <Tile X1="6" Y1="12" X2="9" Y2="12" Terrain="Table1" />
+    <Tile X1="6" Y1="14" X2="9" Y2="14" Terrain="Table1" />
+    <Tile X1="6" Y1="13" X2="6" Y2="13" Terrain="Table1" />
+    <Tile X1="9" Y1="13" X2="9" Y2="13" Terrain="Table1" />
+    <Tile X1="7" Y1="13" X2="8" Y2="13" Terrain="Table2" />
+    <Tile X1="1" Y1="16" X2="4" Y2="16" Terrain="Table1" />
+    <Tile X1="1" Y1="18" X2="4" Y2="18" Terrain="Table1" />
+    <Tile X1="1" Y1="17" X2="1" Y2="17" Terrain="Table1" />
+    <Tile X1="4" Y1="17" X2="4" Y2="17" Terrain="Table1" />
+    <Tile X1="2" Y1="17" X2="3" Y2="17" Terrain="Table2" />
+    <Tile X1="6" Y1="16" X2="9" Y2="16" Terrain="Table1" />
+    <Tile X1="6" Y1="18" X2="9" Y2="18" Terrain="Table1" />
+    <Tile X1="6" Y1="17" X2="6" Y2="17" Terrain="Table1" />
+    <Tile X1="9" Y1="17" X2="9" Y2="17" Terrain="Table1" />
+    <Tile X1="7" Y1="17" X2="8" Y2="17" Terrain="Table2" />
+    <!-- Tables -->
+
+    <!-- Slot Machines -->
+    <Tile X1="15" Y1="12" X2="18" Y2="12" Terrain="SlotMachine" />
+    <Tile X1="20" Y1="12" X2="23" Y2="12" Terrain="SlotMachine" />
+    <Tile X1="15" Y1="14" X2="18" Y2="14" Terrain="SlotMachine" />
+    <Tile X1="20" Y1="14" X2="23" Y2="14" Terrain="SlotMachine" />
+    <Tile X1="15" Y1="16" X2="18" Y2="16" Terrain="SlotMachine" />
+    <Tile X1="20" Y1="16" X2="23" Y2="16" Terrain="SlotMachine" />
+    <Tile X1="15" Y1="18" X2="18" Y2="18" Terrain="SlotMachine" />
+    <Tile X1="20" Y1="18" X2="23" Y2="18" Terrain="SlotMachine" />
+    <!-- Slot Machines -->
+  </Tiles>
+</Map>
