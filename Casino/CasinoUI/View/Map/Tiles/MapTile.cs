@@ -11,7 +11,13 @@ namespace CasinoUI.View.Map.Tiles
     public abstract class MapTile
     {
         public abstract BitmapImage Sprite { get; }
-        public MapTile(int x, int y)
+
+        /// <summary>
+        /// Child classes call this ctor. 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        protected MapTile(int x, int y)
         {
             X = x;
             Y = y;
