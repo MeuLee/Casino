@@ -81,14 +81,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(859, 836);
+            this.ClientSize = new System.Drawing.Size(1140, 836);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TxtHeight);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtWidth);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Editor";
             this.Text = "Form1";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

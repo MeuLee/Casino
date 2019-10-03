@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace EditorMap
 {
-    class Tile
+    public class Tile
     {
         Color Color { get; set; }
-        string TileType { get; set; }
+        public string TileType { get; set; }
 
         public Tile(Color c, string tileType)
         {

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace EditorMap
 {
-    static class TileGenerator
+    public static class TileGenerator
     {
-        static Tile CreateTile(string tileType)
+        public static Tile CreateTile(string tileType)
         {
             switch (tileType)
             {
@@ -26,7 +26,7 @@ namespace EditorMap
                 case "Bar":
                     return new Tile(Color.Blue, tileType);
                 default:
-                    throw new ArgumentException();
+                    return null;
             }
         }
     }
