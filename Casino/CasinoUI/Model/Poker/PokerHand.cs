@@ -72,33 +72,29 @@ namespace CasinoUI.Model.Poker
         {
             for (int i = 0; i < ListTempCombo.Count - 2; i++)
             {
-                ComboValuePoss.Add(Tuple.Create(VerificationStraight(ListTempCombo[i]), VerificationStraight(ListTempCombo[i+1])));
+                ComboValuePoss.Add(Tuple.Create(ListTempCombo[i], ListTempCombo[i+1]));
             }
         }
-
-        private int VerificationStraight(int itemStraight)
-        {
-            switch ( itemStraight)
-            {
-                case 15:
-                case 16:
-                case 1:
-                case 0:
-                    itemStraight = -1;
-                    break;
-            }
-
-            return itemStraight;
-        }
-
         private void RemoveSameCard()
         {
+            int compt = 0;
+            // A refaire chekc si un a la suite de lautre
             foreach (Card card in listValue)
             {
                 if (ListTempCombo.Contains((int)card.Value))
                 {
                     ListTempCombo.Remove((int)card.Value);
+                    compt++;
                 }
+                else if(compt < 3)
+                {
+                    compt = 0;
+                }
+            }
+
+            if (compt >= 3)
+            {
+                ListTempCombo.RemoveRange(0,2);
             }
         }
 
