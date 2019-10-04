@@ -33,9 +33,10 @@ namespace CasinoUI.Model.Cards
                 foreach (var suit in Extensions.GetValues<Card.CardSuit>())
                 {
                     string suitPrefix = suit.ToString()[0].ToString();
-                    var image = Properties.Resources.ResourceManager.GetObject($"{value}{suitPrefix}") as Bitmap;
+                    var image = CasinoUI.Properties.Resources.ResourceManager.GetObject($"{value}{suitPrefix}") as Bitmap;
                     Cards.Add(new Card(rank, suit, image));
                 }
+                
             }
         }
 

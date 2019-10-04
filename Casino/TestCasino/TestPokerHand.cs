@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CasinoUI.Model.Poker;
 using CasinoUI.Model.Cards;
+using System.Drawing;
 
 namespace TestCasino
 {
@@ -15,12 +16,15 @@ namespace TestCasino
     {
         private PokerHand pokerCombo;
         private List<Card> list;
+        private Bitmap image;
 
         public TestPokerHand()
         {
             list = new List<Card>();
             pokerCombo = new PokerHand(list);
+            image = Properties.Resources._2C;
         }
+
 
         #region Additional test attributes
         //
@@ -45,9 +49,8 @@ namespace TestCasino
         #endregion
 
         [TestMethod]
-        public void CreateListValue()
+        public void CreateListValueTestfilter1()
         {
-            var image = Properties.Resources._2C;
 
             list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Clubs, image));
             list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
@@ -57,6 +60,30 @@ namespace TestCasino
 
             Assert.AreEqual(1, pokerCombo.ListValue.Count);
 
+            list.Clear();
+            pokerCombo.ListValue.Clear();
+
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Clubs, image));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
+            list.Add(new Card(Card.CardRank.Five, Card.CardSuit.Hearts, image));
+
+            pokerCombo.CreateListValue();
+
+            Assert.AreEqual(2, pokerCombo.ListValue.Count);
+
+            list.Clear();
+            pokerCombo.ListValue.Clear();
+
+            list.Add(new Card(Card.CardRank.Four, Card.CardSuit.Clubs, image));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
+            list.Add(new Card(Card.CardRank.King, Card.CardSuit.Hearts, image));
+
+            pokerCombo.CreateListValue();
+
+            Assert.AreEqual(3, pokerCombo.ListValue.Count);
+
+            list.Clear();
+            pokerCombo.ListValue.Clear();
         }
     }
 }
