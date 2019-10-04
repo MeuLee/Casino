@@ -23,6 +23,7 @@ namespace CasinoUI
             //btn.Name = "Button";
             //btn.Click += button_Click;
             InitializeComponent();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

@@ -34,7 +34,8 @@
         <Label Content="Stress Bar" HorizontalAlignment="Left" Margin="10,50,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
         <Label Content="Argent" HorizontalAlignment="Left" Margin="10,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" FontSize="15"/>
       <Canvas x:Name="MyCanvas" KeyDown="Canvas_KeyDown" Focusable="True">
-        <Image x:Name="Hero" Canvas.Left="150" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Image x:Name="EntrerPoker" Canvas.Left="400" Canvas.Top="70" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Image x:Name="Hero" Canvas.Left="150" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>            
       </Canvas>
     </Grid>
 </Window>

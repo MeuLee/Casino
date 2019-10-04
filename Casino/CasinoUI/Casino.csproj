@@ -92,6 +92,9 @@
     <Compile Include="View\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Poker.xaml.cs">
+      <DependentUpon>Poker.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\CasinoGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -109,6 +112,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\OptionsMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Poker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -315,6 +322,12 @@
     <Resource Include="Resources\droite1.gif" />
     <Resource Include="Resources\gauche1.gif" />
     <Resource Include="Resources\haut1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PokerEntrer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Table_Blue_background.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
