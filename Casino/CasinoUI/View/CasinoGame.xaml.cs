@@ -19,15 +19,15 @@ namespace CasinoUI.View
         {
             InitializeComponent();
             InitializeImage();
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void InitializeImage()
         {
-            ImageJoueur.Source = ToBitmapImage(Properties.Resources.panda);
-            TableBackground.ImageSource = ToBitmapImage(Properties.Resources.table);
-            Hero.Source = ToBitmapImage(Properties.Resources.droite1);
-            EntrerPoker.Source = ToBitmapImage(Properties.Resources.PokerEntrer);
+            ImageJoueur.Source = Properties.Resources.panda.ToBitmapImage();
+            TableBackground.ImageSource = Properties.Resources.table.ToBitmapImage();
+            Hero.Source = Properties.Resources.droite1.ToBitmapImage();
+            EntrerPoker.Source = Properties.Resources.PokerEntrer.ToBitmapImage();
             EntrerPoker.Height = 50;
             EntrerPoker.Width = 50;
         }
@@ -42,7 +42,7 @@ namespace CasinoUI.View
                 case Key.S:
                     if (heroPosTop < 380)
                     {
-                        Hero.Source = ToBitmapImage(Properties.Resources.bas1);
+                        Hero.Source = Properties.Resources.bas1.ToBitmapImage();
                         Canvas.SetTop(Hero, Canvas.GetTop(Hero) + 10);
                     }
                     break;
@@ -52,7 +52,7 @@ namespace CasinoUI.View
                     {
                         if (heroPosTop > 0)
                         {
-                            Hero.Source = ToBitmapImage(Properties.Resources.haut1);
+                            Hero.Source = Properties.Resources.haut1.ToBitmapImage();
                             Canvas.SetTop(Hero, Canvas.GetTop(Hero) - 10);
                         }
                     }
@@ -64,7 +64,7 @@ namespace CasinoUI.View
                     {
                         if (heroPosLeft > 0)
                         {
-                            Hero.Source = ToBitmapImage(Properties.Resources.gauche1);
+                            Hero.Source = Properties.Resources.gauche1.ToBitmapImage();
                             Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) - 10);
                         }
                     }
@@ -73,7 +73,7 @@ namespace CasinoUI.View
                 case Key.D:
                     if (heroPosLeft < 750)
                     {
-                        Hero.Source = ToBitmapImage(Properties.Resources.droite1);
+                        Hero.Source = Properties.Resources.droite1.ToBitmapImage();
                         Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) + 10);
                     }
                     break;

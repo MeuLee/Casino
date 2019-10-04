@@ -15,5 +15,7 @@ namespace CasinoUI.View.Map.Tiles
         }
 
         public override BitmapImage Sprite => throw new NotImplementedException();
+
+        public override bool CanBeMovedOver => throw new NotImplementedException();
     }
 }

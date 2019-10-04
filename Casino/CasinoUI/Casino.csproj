@@ -336,7 +336,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\TableNeuve.jpg" />
-    <Resource Include="Resources\Table_Blue_background.png" />
     <None Include="Resources\map.xml" />
   </ItemGroup>
   <ItemGroup>
