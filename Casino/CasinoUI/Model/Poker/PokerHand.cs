@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CasinoUI.Model.Poker
 {
-    class PokerHand
+    public class PokerHand
     {
         private List<Card> listCardInGame;
         private List<Card> listValue;
@@ -21,31 +21,29 @@ namespace CasinoUI.Model.Poker
         {
             this.listCardInGame = listCardInGame;
             ListTempCombo = new List<int>();
+            listValue = new List<Card>();
             ComboValuePoss = new List<Tuple<int, int>>();
             ComboSraightPoss = new List<Tuple<int, int>>();
             FlushCombo = Card.CardSuit.Diamonds;
         }
 
-        public int ListCardInGame { get; set; }
+        public List<Card> ListCardInGame { get; set; }
+        public List<Card> ListValue { get => listValue; }
 
         private void CheckCombo()
         {
-            //Si seulement straight ou flish calcul hignestCombo
+            //Si seulement straight ou flush calcul hignestCombo
         }
-        private void CreateCombo()
+        public void CreateAllCombo()
         {
+            CreateListValue();
+            CreateSameKindCombo();
+            CreateStraightCombo();
+            CreateFlushCombo();
+        }
 
-            DescendingValueList();
-            OnlyValue();
-
-            SameKindCombo();
-
-            isStraight = isStraightCombo();
-            if (isStraight)
-            {
-                StraightCombo();
-            }
-
+        public void CreateFlushCombo()
+        {
             DescendingSuitList();
             isFlush = isFlushCombo();
             if (isFlush)
@@ -53,10 +51,29 @@ namespace CasinoUI.Model.Poker
                 ComboFlush();
             }
         }
+
+        public void CreateStraightCombo()
+        {
+            DescendingValueList();
+            isStraight = isStraightCombo();
+            if (isStraight)
+            {
+                StraightCombo();
+            }
+        }
+
+        public void CreateListValue()
+        {
+            DescendingValueList();
+            OnlyValue();
+
+        }
+
+
         private void ComboFlush()
         {
             double nbr = listCardInGame.Count / 2.0;
-            int Middle =(int) Math.Ceiling(nbr);
+            int Middle = (int)Math.Ceiling(nbr);
             FlushCombo = listCardInGame[Middle].Suit;
         }
 
@@ -72,13 +89,12 @@ namespace CasinoUI.Model.Poker
         {
             for (int i = 0; i < ListTempCombo.Count - 2; i++)
             {
-                ComboValuePoss.Add(Tuple.Create(ListTempCombo[i], ListTempCombo[i+1]));
+                ComboValuePoss.Add(Tuple.Create(ListTempCombo[i], ListTempCombo[i + 1]));
             }
         }
         private void RemoveSameCard()
         {
             int compt = 0;
-            // A refaire chekc si un a la suite de lautre
             foreach (Card card in listValue)
             {
                 if (ListTempCombo.Contains((int)card.Value))
@@ -86,7 +102,7 @@ namespace CasinoUI.Model.Poker
                     ListTempCombo.Remove((int)card.Value);
                     compt++;
                 }
-                else if(compt < 3)
+                else if (compt < 3)
                 {
                     compt = 0;
                 }
@@ -94,7 +110,7 @@ namespace CasinoUI.Model.Poker
 
             if (compt >= 3)
             {
-                ListTempCombo.RemoveRange(0,2);
+                ListTempCombo.RemoveRange(0, 2);
             }
         }
 
@@ -121,7 +137,7 @@ namespace CasinoUI.Model.Poker
             int cardBefore = 0;
             int compt = 0;
 
-            foreach(Card card in listCardInGame)
+            foreach (Card card in listCardInGame)
             {
                 if (firstTime)
                 {
@@ -175,7 +191,8 @@ namespace CasinoUI.Model.Poker
                     cardBefore -= 2;
                     comptStraight++;
 
-                    if (listCardInGame.Count < 4) {
+                    if (listCardInGame.Count < 4)
+                    {
                         blockCombo = true;
                     }
                 }
@@ -189,11 +206,11 @@ namespace CasinoUI.Model.Poker
                         blockCombo = true;
                     }
                 }
-                
+
 
             }
 
-            if(comptStraight >= 2)
+            if (comptStraight >= 2)
             {
                 isStraight = true;
             }
@@ -201,15 +218,18 @@ namespace CasinoUI.Model.Poker
             return isStraight;
         }
 
-        private void SameKindCombo()
+        private void CreateSameKindCombo()
         {
+            DescendingValueList();
+
             int taille = listValue.Count;
             int compt = 0;
-            for(int i =0; i< listValue.Count; i++)
+            for (int i = 0; i < listValue.Count; i++)
             {
                 while (compt <= taille)
                 {
-                    if (compt < taille) {
+                    if (compt < taille)
+                    {
                         ComboValuePoss.Add(Tuple.Create((int)listValue[i].Value, (int)listValue[compt].Value));
                     }
                     else
@@ -228,7 +248,8 @@ namespace CasinoUI.Model.Poker
             bool firstTime = true;
             Card.CardRank CardBefore = 0;
 
-            foreach (Card card in listCardInGame) {
+            foreach (Card card in listCardInGame)
+            {
 
                 if (firstTime)
                 {

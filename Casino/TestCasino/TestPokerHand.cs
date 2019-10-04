@@ -1,0 +1,62 @@
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CasinoUI.Model.Poker;
+using CasinoUI.Model.Cards;
+
+namespace TestCasino
+{
+    /// <summary>
+    /// Summary description for TestPokerHand
+    /// </summary>
+    [TestClass]
+    public class TestPokerHand
+    {
+        private PokerHand pokerCombo;
+        private List<Card> list;
+
+        public TestPokerHand()
+        {
+            list = new List<Card>();
+            pokerCombo = new PokerHand(list);
+        }
+
+        #region Additional test attributes
+        //
+        // You can use the following additional attributes as you write your tests:
+        //
+        // Use ClassInitialize to run code before running the first test in the class
+        // [ClassInitialize()]
+        // public static void MyClassInitialize(TestContext testContext) { }
+        //
+        // Use ClassCleanup to run code after all tests in a class have run
+        // [ClassCleanup()]
+        // public static void MyClassCleanup() { }
+        //
+        // Use TestInitialize to run code before running each test 
+        // [TestInitialize()]
+        // public void MyTestInitialize() { }
+        //
+        // Use TestCleanup to run code after each test has run
+        // [TestCleanup()]
+        // public void MyTestCleanup() { }
+        //
+        #endregion
+
+        [TestMethod]
+        public void CreateListValue()
+        {
+            var image = Properties.Resources._2C;
+
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Clubs, image));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Hearts, image));
+
+            pokerCombo.CreateListValue();
+
+            Assert.AreEqual(1, pokerCombo.ListValue.Count);
+
+        }
+    }
+}
