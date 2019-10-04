@@ -62,7 +62,7 @@ namespace CasinoUI.Model.Poker
             }
         }
 
-        public void CreateListValue()
+        private void CreateListValue()
         {
             DescendingValueList();
             OnlyValue();

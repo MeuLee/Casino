@@ -51,12 +51,13 @@ namespace TestCasino
         [TestMethod]
         public void CreateListValueTestfilter1()
         {
+            PrivateObject obj = new PrivateObject(pokerCombo);
 
             list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Clubs, image));
             list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
             list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Hearts, image));
 
-            pokerCombo.CreateListValue();
+            obj.Invoke("CreateListValue");
 
             Assert.AreEqual(1, pokerCombo.ListValue.Count);
 
@@ -67,7 +68,7 @@ namespace TestCasino
             list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
             list.Add(new Card(Card.CardRank.Five, Card.CardSuit.Hearts, image));
 
-            pokerCombo.CreateListValue();
+            obj.Invoke("CreateListValue");
 
             Assert.AreEqual(2, pokerCombo.ListValue.Count);
 
@@ -78,7 +79,7 @@ namespace TestCasino
             list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
             list.Add(new Card(Card.CardRank.King, Card.CardSuit.Hearts, image));
 
-            pokerCombo.CreateListValue();
+            obj.Invoke("CreateListValue");
 
             Assert.AreEqual(3, pokerCombo.ListValue.Count);
 
