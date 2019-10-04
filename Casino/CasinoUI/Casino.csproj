@@ -326,5 +326,8 @@
   <ItemGroup>
     <Resource Include="Resources\PokerEntrer.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Table_Blue_background.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

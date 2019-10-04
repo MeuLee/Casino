@@ -17,6 +17,12 @@ namespace CasinoUI.View
         public CasinoGame()
         {
             InitializeComponent();
+            InitializeImage();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+        }
+
+        private void InitializeImage()
+        {
             ImageJoueur.Source = ToBitmapImage(Properties.Resources.panda);
             TableBackground.ImageSource = ToBitmapImage(Properties.Resources.table);
             Hero.Source = ToBitmapImage(Properties.Resources.droite1);
