@@ -12,6 +12,8 @@ namespace CasinoUI.View.Map.Tiles
     {
         public abstract BitmapImage Sprite { get; }
 
+        public abstract bool CanBeMovedOver { get; }
+
         /// <summary>
         /// Child classes call this ctor. 
         /// </summary>

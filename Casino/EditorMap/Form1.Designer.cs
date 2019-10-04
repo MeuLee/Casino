@@ -92,6 +92,8 @@
             this.Name = "Editor";
             this.Text = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

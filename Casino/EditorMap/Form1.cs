@@ -14,9 +14,11 @@ namespace EditorMap
     public partial class Editor : Form
     {
         private Tile[,] tile;
-        private double bigger, tileSize;
+        private float bigger, tileSize;
         private Color colorToDraw;
         private string btnText;
+        private bool _mouseIsDown = false;
+        private int brushSize = 1;
         
         public Editor()
         {
@@ -25,16 +27,18 @@ namespace EditorMap
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            double width = double.Parse(TxtWidth.Text),
-                height = double.Parse(TxtHeight.Text);
+            float width = float.Parse(TxtWidth.Text),
+                height = float.Parse(TxtHeight.Text);
             tile = new Tile[Convert.ToInt32(width), Convert.ToInt32(height)];
             bigger = width > height ? width : height;
 
             Controls.Clear();
             DrawTileMap();
             AddButtonsToggleColor();
+            AddPaintBrushSize();
         }
 
+        #region programmatically add controls
         private void AddButtonsToggleColor()
         {
             CreateButton(15, Color.Red, "Floor1");
@@ -58,6 +62,34 @@ namespace EditorMap
             Controls.Add(xml);
         }
 
+        private void AddPaintBrushSize()
+        {
+            ComboBox box = new ComboBox()
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location = new Point(850, 255),
+                Name = "CboBrushSize",
+                Width = 75
+            };
+            box.Items.Add(1);
+            box.Items.Add(3);
+            box.Items.Add(5);
+            box.SelectedIndex = 1;
+            Controls.Add(box);
+        }
+
+        private void CreateButton(int y, Color c, string str)
+        {
+            Button btn = new Button()
+            {
+                Location = new Point(850, y),
+                BackColor = c,
+                Text = str
+            };
+            btn.Click += Color_Click;
+            Controls.Add(btn);
+        }
+
         private void Xml_Click(object sender, EventArgs e)
         {
             XmlWriter writer = XmlWriter.Create("map.xml", new XmlWriterSettings() { Indent = true });
@@ -79,6 +111,7 @@ namespace EditorMap
             writer.WriteEndDocument();
             writer.Close();
         }
+        #endregion
 
         private void WriteTilesToXml(XmlWriter writer)
         {
@@ -89,22 +122,10 @@ namespace EditorMap
                     writer.WriteStartElement("Tile");
                     writer.WriteAttributeString("X", i.ToString());
                     writer.WriteAttributeString("Y", j.ToString());
-                    writer.WriteAttributeString("Terrain", tile[i, j].TileType);
+                    writer.WriteAttributeString("Terrain", tile[i, j].TileType); // don't forget to fill all tiles if you get nullpointer here!
                     writer.WriteEndElement();
                 }
             }
-        }
-
-        private void CreateButton(int y, Color c, string str)
-        {
-            Button btn = new Button()
-            {
-                Location = new Point(800, y),
-                BackColor = c,
-                Text = str
-            };
-            btn.Click += Color_Click;
-            Controls.Add(btn);
         }
 
         private void Color_Click(object sender, EventArgs e)
@@ -117,24 +138,36 @@ namespace EditorMap
         {
             Graphics g = CreateGraphics();
             Pen p = Pens.Black;
-            tileSize = 750.0 / bigger;
-            g.DrawLine(p, 1, 1, (float)(1 + tileSize * tile.GetLength(0)), 1);
-            g.DrawLine(p, 1, 1, 1, (float)(1 + tileSize * tile.GetLength(1)));
-            for (double i = 1; i < tile.GetLength(0) + 1; i++)
+            tileSize = 750.0f / bigger;
+            g.DrawLine(p, 1.0f, 1.0f, 1.0f + tileSize * tile.GetLength(0), 1.0f);
+            g.DrawLine(p, 1.0f, 1.0f, 1.0f, 1.0f + tileSize * tile.GetLength(1));
+            for (float i = 1; i < tile.GetLength(0) + 1; i++)
             {
-                g.DrawLine(p, (float)(1 + i * tileSize), 1, 
-                              (float)(1 + i * tileSize), (float)(1 + tileSize * tile.GetLength(1)));
+                g.DrawLine(p, 1.0f + i * tileSize, 1.0f,
+                              1.0f + i * tileSize, 1.0f + tileSize * tile.GetLength(1));
             }
 
-            for (double j = 1; j < tile.GetLength(1) + 1; j++)
+            for (float j = 1; j < tile.GetLength(1) + 1; j++)
             {
-                g.DrawLine(p, 1, (float)(1 + j * tileSize), 
-                              (1 + (float)tileSize * tile.GetLength(0)), (float)(1 + j * tileSize));
+                g.DrawLine(p, 1.0f, 1.0f + j * tileSize, 
+                              (1.0f + tileSize * tile.GetLength(0)), 1.0f + j * tileSize);
             }
         }
 
         private void Editor_MouseDown(object sender, MouseEventArgs e)
         {
+            _mouseIsDown = true;
+            brushSize = int.Parse(Controls.OfType<ComboBox>().First().Text);
+        }
+
+        private void Editor_MouseUp(object sender, MouseEventArgs e)
+        {
+            _mouseIsDown = false;
+        }
+
+        private void Editor_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_mouseIsDown) return;
             // bs code just checking if there is no grid yet didnt feel like creating a boolean IDK should work
             if (Controls.Count == 5)
             {
@@ -143,6 +176,50 @@ namespace EditorMap
 
             var x = Math.Floor((e.X - 1) / tileSize);
             var y = Math.Floor((e.Y - 1) / tileSize);
+
+            switch (brushSize)
+            {
+                case 1:
+                    DrawOneTile(x, y);
+                    break;
+                case 3:
+                    DrawThreeTiles(x, y);
+                    break;
+                case 5:
+                    DrawFiveTiles(x, y);
+                    break;
+            }
+
+            
+            
+
+            
+        }
+
+        private void DrawFiveTiles(double x, double y)
+        {
+            for (int i = (int)x - 2; i <= (int)x + 2; i++)
+            {
+                for (int j = (int)y - 2; j <= y + 2; j++)
+                {
+                    DrawOneTile(i, j);
+                }
+            }
+        }
+
+        private void DrawThreeTiles(double x, double y)
+        {
+            for (int i = (int)x - 1; i <= (int)x + 1; i++)
+            {
+                for (int j = (int)y - 1; j <= y + 1; j++)
+                {
+                    DrawOneTile(i, j);
+                }
+            }
+        }
+
+        private void DrawOneTile(double x, double y)
+        {
             try
             {
                 tile[(int)x, (int)y] = TileGenerator.CreateTile(btnText);
@@ -151,9 +228,8 @@ namespace EditorMap
             {
                 return;
             }
-
             Graphics g = CreateGraphics();
-            g.FillRectangle(ColorToBrush(colorToDraw), (float)(3 + x * tileSize), (float)(3 + y * tileSize), (float)(tileSize - 4), (float)(tileSize - 4));
+            g.FillRectangle(ColorToBrush(colorToDraw), (float)Math.Ceiling((float)x * tileSize + 3.0f), (float)Math.Ceiling((float)y * tileSize + 3.0f), (float)Math.Ceiling(tileSize - 4.0f), (float)Math.Ceiling(tileSize - 4.0f));
         }
 
         private Brush ColorToBrush(Color c)
