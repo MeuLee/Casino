@@ -32,5 +32,11 @@ namespace CasinoUI
             game.Show();
             this.Close();
         }
+
+        private void button_Options_Click(object sender, RoutedEventArgs e)
+        {
+            OptionMenu options = new OptionMenu();
+            options.Show();
+        }
     }
 }
