@@ -721,9 +721,9 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Table_Blue_background {
+        internal static System.Drawing.Bitmap TableNeuve {
             get {
-                object obj = ResourceManager.GetObject("Table_Blue_background", resourceCulture);
+                object obj = ResourceManager.GetObject("TableNeuve", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

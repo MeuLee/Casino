@@ -25,7 +25,7 @@ namespace CasinoUI.View
         public Poker()
         {
             InitializeComponent();
-            TableBlueBackground.ImageSource = ToBitmapImage(Properties.Resources.Table_Blue_background);
+            TableBlueBackground.ImageSource = ToBitmapImage(Properties.Resources.TableNeuve);
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
