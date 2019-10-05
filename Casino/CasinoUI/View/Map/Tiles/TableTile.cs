@@ -1,5 +1,4 @@
-﻿using CasinoUI.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +7,12 @@ using System.Windows.Media.Imaging;
 
 namespace CasinoUI.View.Map.Tiles
 {
-    public class GreenTableTile : MapTile
+    public class TableTile : MapTile
     {
-        public GreenTableTile(int x, int y) : base(x, y)
+        public TableTile(int x, int y) : base (x, y)
         {
 
         }
-
-        public override BitmapImage Sprite { get; set; }
 
         public override bool CanBeMovedOver => throw new NotImplementedException();
     }

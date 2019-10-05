@@ -91,8 +91,7 @@
     <Compile Include="View\GameCanvas.cs" />
     <Compile Include="View\Map\MapGenerator.cs" />
     <Compile Include="View\Map\Tiles\BarTile.cs" />
-    <Compile Include="View\Map\Tiles\BrownTableTile.cs" />
-    <Compile Include="View\Map\Tiles\GreenTableTile.cs" />
+    <Compile Include="View\Map\Tiles\TableTile.cs" />
     <Compile Include="View\Map\Tiles\GreyFloorTile.cs" />
     <Compile Include="View\Map\Tiles\MapTile.cs" />
     <Compile Include="View\Map\Tiles\RedFloorTile.cs" />
@@ -336,7 +335,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\TableNeuve.jpg" />
-    <None Include="Resources\map.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\table1.png" />
@@ -373,6 +371,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\table12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

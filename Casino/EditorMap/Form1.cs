@@ -176,7 +176,7 @@ namespace EditorMap
         {
             Graphics g = CreateGraphics();
             Pen p = Pens.Black;
-            tileSize = 750.0f / bigger;
+            tileSize = 600.0f / bigger;
             g.DrawLine(p, 1.0f, 1.0f, 1.0f + tileSize * tile.GetLength(0), 1.0f);
             g.DrawLine(p, 1.0f, 1.0f, 1.0f, 1.0f + tileSize * tile.GetLength(1));
             for (float i = 1; i < tile.GetLength(0) + 1; i++)
