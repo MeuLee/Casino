@@ -189,11 +189,6 @@ namespace EditorMap
                     DrawFiveTiles(x, y);
                     break;
             }
-
-            
-            
-
-            
         }
 
         private void DrawFiveTiles(double x, double y)
