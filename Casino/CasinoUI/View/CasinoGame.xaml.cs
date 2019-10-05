@@ -24,7 +24,7 @@ namespace CasinoUI.View
 
         private void InitializeImage()
         {
-            ImageJoueur.Source = Properties.Resources.panda.ToBitmapImage();
+            ImgPlayer.Source = Properties.Resources.panda.ToBitmapImage();
             TableBackground.ImageSource = Properties.Resources.table.ToBitmapImage();
             Hero.Source = Properties.Resources.droite1.ToBitmapImage();
             EntrerPoker.Source = Properties.Resources.PokerEntrer.ToBitmapImage();

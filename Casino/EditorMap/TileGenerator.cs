@@ -17,9 +17,9 @@ namespace EditorMap
                     return new Tile(Color.Red, tileType);
                 case "Floor2":
                     return new Tile(Color.Gray, tileType);
-                case "Table1":
+                case string s when IsBrownTable(s):
                     return new Tile(Color.Brown, tileType);
-                case "Table2":
+                case string s when IsGreenTable(s):
                     return new Tile(Color.Green, tileType);
                 case "SlotMachine":
                     return new Tile(Color.Yellow, tileType);
@@ -28,6 +28,26 @@ namespace EditorMap
                 default:
                     return null;
             }
+        }
+
+        private static bool IsGreenTable(string s)
+        {
+            return s == "Table6" ||
+                   s == "Table7";
+        }
+
+        private static bool IsBrownTable(string s)
+        {
+            return s == "Table1" ||
+                   s == "Table2" ||
+                   s == "Table3" ||
+                   s == "Table4" ||
+                   s == "Table5" ||
+                   s == "Table8" ||
+                   s == "Table9" ||
+                   s == "Table10" ||
+                   s == "Table11" ||
+                   s == "Table12";
         }
     }
 }

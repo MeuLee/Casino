@@ -19,6 +19,8 @@ namespace EditorMap
         private string btnText;
         private bool _mouseIsDown = false;
         private int brushSize = 1;
+        private bool _drawVerticalTable = false;
+        private bool _drawHorizontalTable = false;
         
         public Editor()
         {
@@ -43,12 +45,46 @@ namespace EditorMap
         {
             CreateButton(15, Color.Red, "Floor1");
             CreateButton(45, Color.Gray, "Floor2");
-            CreateButton(75, Color.Brown, "Table1");
-            CreateButton(105, Color.Green, "Table2");
-            CreateButton(135, Color.Yellow, "SlotMachine");
-            CreateButton(165, Color.Blue, "Bar");
-            CreateButton(195, SystemColors.Control, "Undo");
+            CreateButton(75, Color.Yellow, "SlotMachine");
+            CreateButton(105, Color.Blue, "Bar");
+            CreateButton(135, SystemColors.Control, "Undo");
+            CreateVerticalTableButton();
+            CreateHorizontalTableButton();
             CreateXmlButton();
+        }
+
+        private void CreateHorizontalTableButton()
+        {
+            Button hTable = new Button()
+            {
+                Text = "Horizontal table",
+                Location = new Point(850, 225)
+            };
+            hTable.Click += HTable_Click;
+            Controls.Add(hTable);
+        }
+
+        private void HTable_Click(object sender, EventArgs e)
+        {
+            _drawVerticalTable = false;
+            _drawHorizontalTable = true;
+        }
+
+        private void CreateVerticalTableButton()
+        {
+            Button vTable = new Button()
+            {
+                Text = "Vertical table",
+                Location = new Point(850, 195)
+            };
+            vTable.Click += VTable_Click;
+            Controls.Add(vTable);
+        }
+
+        private void VTable_Click(object sender, EventArgs e)
+        {
+            _drawVerticalTable = true;
+            _drawHorizontalTable = false;
         }
 
         private void CreateXmlButton()
@@ -56,7 +92,7 @@ namespace EditorMap
             Button xml = new Button()
             {
                 Text = "Generate xml",
-                Location = new Point(850, 225)
+                Location = new Point(850, 255)
             };
             xml.Click += Xml_Click;
             Controls.Add(xml);
@@ -67,7 +103,7 @@ namespace EditorMap
             ComboBox box = new ComboBox()
             {
                 DropDownStyle = ComboBoxStyle.DropDownList,
-                Location = new Point(850, 255),
+                Location = new Point(850, 165),
                 Name = "CboBrushSize",
                 Width = 75
             };
@@ -88,6 +124,14 @@ namespace EditorMap
             };
             btn.Click += Color_Click;
             Controls.Add(btn);
+        }
+
+        private void Color_Click(object sender, EventArgs e)
+        {
+            colorToDraw = (sender as Button).BackColor;
+            btnText = (sender as Button).Text;
+            _drawHorizontalTable = false;
+            _drawVerticalTable = false;
         }
 
         private void Xml_Click(object sender, EventArgs e)
@@ -128,12 +172,6 @@ namespace EditorMap
             }
         }
 
-        private void Color_Click(object sender, EventArgs e)
-        {
-            colorToDraw = (sender as Button).BackColor;
-            btnText = (sender as Button).Text;
-        }
-
         private void DrawTileMap()
         {
             Graphics g = CreateGraphics();
@@ -156,8 +194,52 @@ namespace EditorMap
 
         private void Editor_MouseDown(object sender, MouseEventArgs e)
         {
+            if (_drawHorizontalTable || _drawVerticalTable)
+            {
+                DrawTable(e);
+                return;
+            }
+
             _mouseIsDown = true;
             brushSize = int.Parse(Controls.OfType<ComboBox>().First().Text);
+        }
+
+        private void DrawTable(MouseEventArgs e)
+        {
+            var x = Math.Floor((e.X - 1) / tileSize);
+            var y = Math.Floor((e.Y - 1) / tileSize);
+
+            if (_drawHorizontalTable)
+            {
+                colorToDraw = Color.Brown;
+                for (int i = (int)x, index = 1; i < x + 4; i++, index++)
+                {
+                    DrawOneTile(i, y, $"Table{index}");
+                    DrawOneTile(i, y + 2, $"Table{index + 8}");
+                }
+                DrawOneTile(x, y + 1, "Table5");
+                DrawOneTile(x + 3, y + 1, "Table8");
+                colorToDraw = Color.Green;
+                DrawOneTile(x + 1, y + 1, "Table6");
+                DrawOneTile(x + 2, y + 1, "Table7");
+            }
+            else if (_drawVerticalTable)
+            {
+                colorToDraw = Color.Brown;
+                DrawOneTile(x, y, "Table9");
+                DrawOneTile(x + 1, y, "Table5");
+                DrawOneTile(x + 2, y, "Table1");
+                DrawOneTile(x, y + 1, "Table10");
+                DrawOneTile(x + 2, y + 1, "Table2");
+                DrawOneTile(x, y + 2, "Table11");
+                DrawOneTile(x + 2, y + 2, "Table3");
+                DrawOneTile(x, y + 3, "Table12");
+                DrawOneTile(x + 1, y + 3, "Table8");
+                DrawOneTile(x + 2, y + 3, "Table4");
+                colorToDraw = Color.Green;
+                DrawOneTile(x + 1, y + 1, "Table6");
+                DrawOneTile(x + 1, y + 2, "Table7");
+            }
         }
 
         private void Editor_MouseUp(object sender, MouseEventArgs e)
@@ -180,7 +262,7 @@ namespace EditorMap
             switch (brushSize)
             {
                 case 1:
-                    DrawOneTile(x, y);
+                    DrawOneTile(x, y, btnText);
                     break;
                 case 3:
                     DrawThreeTiles(x, y);
@@ -189,11 +271,6 @@ namespace EditorMap
                     DrawFiveTiles(x, y);
                     break;
             }
-
-            
-            
-
-            
         }
 
         private void DrawFiveTiles(double x, double y)
@@ -202,7 +279,7 @@ namespace EditorMap
             {
                 for (int j = (int)y - 2; j <= y + 2; j++)
                 {
-                    DrawOneTile(i, j);
+                    DrawOneTile(i, j, btnText);
                 }
             }
         }
@@ -213,16 +290,16 @@ namespace EditorMap
             {
                 for (int j = (int)y - 1; j <= y + 1; j++)
                 {
-                    DrawOneTile(i, j);
+                    DrawOneTile(i, j, btnText);
                 }
             }
         }
 
-        private void DrawOneTile(double x, double y)
+        private void DrawOneTile(double x, double y, string xmlText)
         {
             try
             {
-                tile[(int)x, (int)y] = TileGenerator.CreateTile(btnText);
+                tile[(int)x, (int)y] = TileGenerator.CreateTile(xmlText);
             }
             catch (IndexOutOfRangeException)
             {

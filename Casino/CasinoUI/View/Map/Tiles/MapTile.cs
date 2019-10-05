@@ -10,7 +10,7 @@ namespace CasinoUI.View.Map.Tiles
 {
     public abstract class MapTile
     {
-        public abstract BitmapImage Sprite { get; }
+        public abstract BitmapImage Sprite { get; set; }
 
         public abstract bool CanBeMovedOver { get; }
 

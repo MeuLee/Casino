@@ -1,21 +1,13 @@
-﻿using CasinoUI.Model.Cards;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using CasinoUI.View.Map;
+using CasinoUI.View.Map.Tiles;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace CasinoUI.View
 {
     public class GameCanvas : Canvas
     {
+        private MapTile[,] _map = MapGenerator.LoadMapFromFile(Properties.Resources.map);
         protected override void OnRender(DrawingContext dc)
         {
             

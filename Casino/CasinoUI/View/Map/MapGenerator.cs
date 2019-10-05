@@ -1,12 +1,8 @@
 ﻿using CasinoUI.Utils;
 using CasinoUI.View.Map.Tiles;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
 namespace CasinoUI.View.Map
@@ -20,9 +16,16 @@ namespace CasinoUI.View.Map
             GetDimensions(out int width, out int height, topElem);
             MapTile[,] map = CreateEmptyMapTile2dArr(width, height);
             FillMap(topElem, map);
+            //InitializeImages(map);
             return map;
         }
 
+        /// <summary>
+        /// Not gonna try catch this, not my problem is the xml is not correctly formatted
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="topElem"></param>
         private static void GetDimensions(out int width, out int height, XElement topElem)
         {
             var dimensions = topElem.Elements().First(e => e.Name == "Dimensions").Descendants();
@@ -41,23 +44,10 @@ namespace CasinoUI.View.Map
 
             foreach (var tile in tilesArr)
             {
-                int x1 = tile.Attribute("X1").Value.ToInteger();
-                int y1 = tile.Attribute("Y1").Value.ToInteger();
-                int x2 = tile.Attribute("X2").Value.ToInteger();
-                int y2 = tile.Attribute("Y2").Value.ToInteger();
+                int x = tile.Attribute("X").Value.ToInteger();
+                int y = tile.Attribute("Y").Value.ToInteger();
                 string floorType = tile.Attribute("Terrain").Value;
-                FillMap(x1, y1, x2, y2, floorType, map);
-            }
-        }
-
-        private static void FillMap(int x1, int y1, int x2, int y2, string floorType, MapTile[,] map)
-        {
-            for (int i = x1; i <= x2; i++)
-            {
-                for (int j = y1; j <= y2; j++)
-                {
-                    map[i, j] = MapTile.CreateMapTile(i, j, floorType);
-                }
+                map[x, y] = MapTile.CreateMapTile(x, y, floorType);
             }
         }
     }

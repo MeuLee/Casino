@@ -18,12 +18,6 @@ namespace TestCasino
             NoTileNull(CasinoUI.Properties.Resources.map);
         }
 
-        [TestMethod]
-        public void NoTileNullMap2()
-        {
-            NoTileNull(CasinoUI.Properties.Resources.map2);          
-        }
-
         private void NoTileNull(string mapContent)
         {
             //Arrange

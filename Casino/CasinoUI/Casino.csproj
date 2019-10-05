@@ -339,7 +339,40 @@
     <None Include="Resources\map.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\map2.xml" />
+    <None Include="Resources\table1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table12.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

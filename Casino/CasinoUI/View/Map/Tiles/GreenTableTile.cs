@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CasinoUI.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace CasinoUI.View.Map.Tiles
 
         }
 
-        public override BitmapImage Sprite => throw new NotImplementedException();
+        public override BitmapImage Sprite { get; set; }
 
         public override bool CanBeMovedOver => throw new NotImplementedException();
     }
