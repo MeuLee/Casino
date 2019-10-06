@@ -664,19 +664,17 @@ namespace CasinoUI.Properties {
         ///   Recherche une chaîne localisée semblable à &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;map&gt;
         ///  &lt;Dimensions&gt;
-        ///    &lt;Width X=&quot;40&quot; /&gt;
-        ///    &lt;Height Y=&quot;20&quot; /&gt;
+        ///    &lt;Width X=&quot;50&quot; /&gt;
+        ///    &lt;Height Y=&quot;40&quot; /&gt;
         ///  &lt;/Dimensions&gt;
         ///  &lt;Tiles&gt;
-        ///    &lt;Tile X=&quot;0&quot; Y=&quot;0&quot; Terrain=&quot;Floor2&quot; /&gt;
-        ///    &lt;Tile X=&quot;0&quot; Y=&quot;1&quot; Terrain=&quot;Floor2&quot; /&gt;
-        ///    &lt;Tile X=&quot;0&quot; Y=&quot;2&quot; Terrain=&quot;Floor2&quot; /&gt;
-        ///    &lt;Tile X=&quot;0&quot; Y=&quot;3&quot; Terrain=&quot;Floor2&quot; /&gt;
-        ///    &lt;Tile X=&quot;0&quot; Y=&quot;4&quot; Terrain=&quot;Floor2&quot; /&gt;
-        ///    &lt;Tile X=&quot;0&quot; Y=&quot;5&quot; Terrain=&quot;Floor2&quot; /&gt;
-        ///    &lt;Tile X=&quot;0&quot; Y=&quot;6&quot; Terrain=&quot;Floor2&quot; /&gt;
-        ///    &lt;Tile X=&quot;0&quot; Y=&quot;7&quot; Terrain=&quot;Floor2&quot; /&gt;
-        ///    &lt;Tile X=&quot;0&quot; Y=&quot;8&quot; Terrain=&quot;F [le reste de la chaîne a été tronqué]&quot;;.
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;0&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;1&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;2&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;3&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;4&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;5&quot; Terrain=&quot;Floor1&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;6&quot; Terrain=&quot;Floor1&quot; Rota [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         public static string map {
             get {

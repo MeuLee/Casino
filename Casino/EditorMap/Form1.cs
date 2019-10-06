@@ -167,6 +167,7 @@ namespace EditorMap
                     writer.WriteAttributeString("X", i.ToString());
                     writer.WriteAttributeString("Y", j.ToString());
                     writer.WriteAttributeString("Terrain", tile[i, j].TileType); // don't forget to fill all tiles if you get nullpointer here!
+                    writer.WriteAttributeString("Rotate", tile[i, j].Rotate.ToString());
                     writer.WriteEndElement();
                 }
             }
@@ -226,19 +227,19 @@ namespace EditorMap
             else if (_drawVerticalTable)
             {
                 colorToDraw = Color.Brown;
-                DrawOneTile(x, y, "Table9");
-                DrawOneTile(x + 1, y, "Table5");
-                DrawOneTile(x + 2, y, "Table1");
-                DrawOneTile(x, y + 1, "Table10");
-                DrawOneTile(x + 2, y + 1, "Table2");
-                DrawOneTile(x, y + 2, "Table11");
-                DrawOneTile(x + 2, y + 2, "Table3");
-                DrawOneTile(x, y + 3, "Table12");
-                DrawOneTile(x + 1, y + 3, "Table8");
-                DrawOneTile(x + 2, y + 3, "Table4");
+                DrawOneTile(x, y, "Table9", true);
+                DrawOneTile(x + 1, y, "Table5", true);
+                DrawOneTile(x + 2, y, "Table1", true);
+                DrawOneTile(x, y + 1, "Table10", true);
+                DrawOneTile(x + 2, y + 1, "Table2", true);
+                DrawOneTile(x, y + 2, "Table11", true);
+                DrawOneTile(x + 2, y + 2, "Table3", true);
+                DrawOneTile(x, y + 3, "Table12", true);
+                DrawOneTile(x + 1, y + 3, "Table8", true);
+                DrawOneTile(x + 2, y + 3, "Table4", true);
                 colorToDraw = Color.Green;
-                DrawOneTile(x + 1, y + 1, "Table6");
-                DrawOneTile(x + 1, y + 2, "Table7");
+                DrawOneTile(x + 1, y + 1, "Table6", true);
+                DrawOneTile(x + 1, y + 2, "Table7", true);
             }
         }
 
@@ -295,11 +296,11 @@ namespace EditorMap
             }
         }
 
-        private void DrawOneTile(double x, double y, string xmlText)
+        private void DrawOneTile(double x, double y, string xmlText, bool flip = false)
         {
             try
             {
-                tile[(int)x, (int)y] = TileGenerator.CreateTile(xmlText);
+                tile[(int)x, (int)y] = TileGenerator.CreateTile(xmlText, flip);
             }
             catch (IndexOutOfRangeException)
             {

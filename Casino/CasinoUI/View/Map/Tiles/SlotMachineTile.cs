@@ -10,7 +10,7 @@ namespace CasinoUI.View.Map.Tiles
 {
     public class SlotMachineTile : MapTile 
     {
-        public SlotMachineTile(int x, int y, Bitmap image) : base(x, y, image)
+        public SlotMachineTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
         {
 
         }

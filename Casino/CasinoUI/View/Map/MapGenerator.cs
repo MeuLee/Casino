@@ -46,7 +46,8 @@ namespace CasinoUI.View.Map
                 int x = tile.Attribute("X").Value.ToInteger();
                 int y = tile.Attribute("Y").Value.ToInteger();
                 string floorType = tile.Attribute("Terrain").Value;
-                map[x, y] = MapTile.CreateMapTile(x, y, floorType);
+                bool rotate = tile.Attribute("Rotate").Value.ToBoolean();
+                map[x, y] = MapTile.CreateMapTile(x, y, floorType, rotate);
             }
         }
     }

@@ -43,5 +43,10 @@ namespace CasinoUI.Utils
         {
             return int.Parse(str);
         }
+
+        public static bool ToBoolean(this string str)
+        {
+            return bool.Parse(str);
+        }
     }
 }

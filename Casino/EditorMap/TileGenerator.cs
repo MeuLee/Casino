@@ -9,22 +9,22 @@ namespace EditorMap
 {
     public static class TileGenerator
     {
-        public static Tile CreateTile(string tileType)
+        public static Tile CreateTile(string tileType, bool flip)
         {
             switch (tileType)
             {
                 case "Floor1":
-                    return new Tile(Color.Red, tileType);
+                    return new Tile(tileType);
                 case "Floor2":
-                    return new Tile(Color.Gray, tileType);
+                    return new Tile(tileType);
                 case string s when IsBrownTable(s):
-                    return new Tile(Color.Brown, tileType);
+                    return new Tile(tileType, flip);
                 case string s when IsGreenTable(s):
-                    return new Tile(Color.Green, tileType);
+                    return new Tile(tileType, flip);
                 case "SlotMachine":
-                    return new Tile(Color.Yellow, tileType);
+                    return new Tile(tileType);
                 case "Bar":
-                    return new Tile(Color.Blue, tileType);
+                    return new Tile(tileType);
                 default:
                     return null;
             }

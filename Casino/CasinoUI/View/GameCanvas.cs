@@ -44,7 +44,6 @@ namespace CasinoUI.View
             }
         }
 
-        //Not sure why -1 for else if x but -2 for else if y
         private void SetCameraCenterValues(int playerX, int playerY)
         {
             if (0 > playerX - TILES_AROUND_PLAYER_X)

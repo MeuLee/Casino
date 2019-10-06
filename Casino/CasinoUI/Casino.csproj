@@ -373,9 +373,6 @@
     <None Include="Resources\table12.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\map.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\blackfloor.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -386,6 +383,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\slotmachinetemp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
