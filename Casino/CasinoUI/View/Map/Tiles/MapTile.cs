@@ -28,11 +28,11 @@ namespace CasinoUI.View.Map.Tiles
         {
             X = x;
             Y = y;
-            Sprite = image.ToBitmapImage();
             if (rotate)
             {
-                //Sprite.Rotation = Rotation.Rotate90;
+                image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             }
+            Sprite = image.ToBitmapImage();
         }
 
         public int X { get; private set; }

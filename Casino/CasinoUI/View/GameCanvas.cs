@@ -33,8 +33,8 @@ namespace CasinoUI.View
                     dc.DrawImage(tile.Sprite, new Rect(index * tileWidth, jndex * tileWidth, tileWidth, tileWidth));
                     if (i == PlayerX && j == PlayerY)
                     {
-                        dc.DrawEllipse(Brushes.Black, 
-                                       new Pen(Brushes.Black, 1.0), 
+                        dc.DrawEllipse(Brushes.Green, 
+                                       new Pen(Brushes.Green, 1.0), 
                                        new Point(index * tileWidth + tileWidth / 2, 
                                                  jndex * tileWidth + tileWidth / 2), 
                                        tileWidth / 3, 
