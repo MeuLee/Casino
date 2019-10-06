@@ -16,7 +16,6 @@ namespace CasinoUI.View.Map
             GetDimensions(out int width, out int height, topElem);
             MapTile[,] map = CreateEmptyMapTile2dArr(width, height);
             FillMap(topElem, map);
-            //InitializeImages(map);
             return map;
         }
 

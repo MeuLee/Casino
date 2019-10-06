@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace CasinoUI.View.Map.Tiles
 {
     public class TableTile : MapTile
     {
-        public TableTile(int x, int y) : base (x, y)
+        public TableTile(int x, int y, Bitmap image) : base(x, y, image)
         {
 
         }

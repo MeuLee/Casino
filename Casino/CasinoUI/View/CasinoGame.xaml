@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:CasinoUI.View"
         mc:Ignorable="d"
         Title="CasinoGame" Height="700" Width="950" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        KeyDown="Grid_KeyDown" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="135" />
@@ -49,10 +50,6 @@
         <Label Content="9999$" HorizontalAlignment="Left" Margin="10,127,0,0" 
                Grid.Row="2" VerticalAlignment="Top" Width="110" 
                Background="#FF099D10" FontSize="20" Height="33"/>
-        <Canvas x:Name="MyCanvas" KeyDown="Canvas_KeyDown" Focusable="True">
-              <Image x:Name="EntrerPoker" Canvas.Left="400" Canvas.Top="70" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-              <Image x:Name="Hero" Canvas.Left="150" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>            
-        </Canvas>
-        <local:GameCanvas x:Name="GameCanvas" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" />
+        <local:GameCanvas x:Name="GameCanvas" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Width="auto" Height="auto" />
     </Grid>
 </Window>

@@ -20,13 +20,14 @@ namespace CasinoUI.View.Map.Tiles
         /// <summary>
         /// Child classes call this ctor. Only initializes properties
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        protected MapTile(int x, int y /*, BitmapImage image*/)
+        /// <param name="x">X coordinate on the map</param>
+        /// <param name="y">Y coordinate on the map</param>
+        /// <param name="image">Bitmap to be printed on screen representing this tile</param>
+        protected MapTile(int x, int y , Bitmap image)
         {
             X = x;
             Y = y;
-            //Sprite = image;
+            Sprite = image.ToBitmapImage();
         }
 
         public int X { get; private set; }
@@ -37,15 +38,15 @@ namespace CasinoUI.View.Map.Tiles
             switch (tileType)
             {
                 case "Floor1":
-                    return new RedFloorTile(x, y /*, Properties.Resources.*/);
+                    return new RedFloorTile(x, y , Properties.Resources.redfloor);
                 case "Floor2":
-                    return new GreyFloorTile(x, y /*, Properties.Resources.*/);
+                    return new GreyFloorTile(x, y, Properties.Resources.blackfloor);
                 case string str when IsTableTile(str):
                     return CreateTableTile(x, y, tileType);
                 case "SlotMachine":
-                    return new SlotMachineTile(x, y /*, Properties.Resources.*/);
+                    return new SlotMachineTile(x, y , Properties.Resources.slotmachinetemp);
                 case "Bar":
-                    return new BarTile(x, y /*, Properties.Resources.*/);
+                    return new BarTile(x, y , Properties.Resources.bartemp);
                 default:
                     throw new ArgumentException($"Argument {tileType} is not valid");
             }
@@ -59,13 +60,13 @@ namespace CasinoUI.View.Map.Tiles
         private static MapTile CreateTableTile(int x, int y, string tileType)
         {
             FirstCharToUpper(ref tileType);
-            BitmapImage image = (Properties.Resources.ResourceManager.GetObject(tileType) as Bitmap).ToBitmapImage();
-            return new TableTile(x, y /*, image*/);
+            Bitmap image = Properties.Resources.ResourceManager.GetObject(tileType) as Bitmap;
+            return new TableTile(x, y , image);
         }
 
         private static void FirstCharToUpper(ref string str)
         {
-            str = char.ToUpper(str[0]) + str.Substring(1);
+            str = char.ToLower(str[0]) + str.Substring(1);
         }
     }
 }

@@ -274,6 +274,9 @@
   <data name="9S" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\9S.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bartemp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bartemp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="bas1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\bas1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -282,6 +285,9 @@
   </data>
   <data name="bgMainMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\bgmainmenu.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blackfloor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blackfloor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="droite1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\droite1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -300,6 +306,12 @@
   </data>
   <data name="PokerEntrer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\pokerentrer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redfloor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redfloor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="slotmachinetemp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\slotmachinetemp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="table" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\table.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -26,71 +26,41 @@ namespace CasinoUI.View
         {
             ImgPlayer.Source = Properties.Resources.panda.ToBitmapImage();
             TableBackground.ImageSource = Properties.Resources.table.ToBitmapImage();
-            Hero.Source = Properties.Resources.droite1.ToBitmapImage();
-            EntrerPoker.Source = Properties.Resources.PokerEntrer.ToBitmapImage();
-            EntrerPoker.Height = 50;
-            EntrerPoker.Width = 50;
         }
 
-        private void Canvas_KeyDown(object sender, KeyEventArgs e)
+        private void Grid_KeyDown(object sender, KeyEventArgs e)
         {
-            long heroPosLeft = Convert.ToInt64(Hero.GetValue(Canvas.LeftProperty));
-            long heroPosTop = Convert.ToInt64(Hero.GetValue(Canvas.TopProperty));
-
             switch (e.Key)
             {
-                case Key.S:
-                    if (heroPosTop < 380)
-                    {
-                        Hero.Source = Properties.Resources.bas1.ToBitmapImage();
-                        Canvas.SetTop(Hero, Canvas.GetTop(Hero) + 10);
-                    }
-                    break;
-
-                case Key.W:
-                    if (heroPosLeft > 125 || heroPosTop < 300)
-                    {
-                        if (heroPosTop > 0)
-                        {
-                            Hero.Source = Properties.Resources.haut1.ToBitmapImage();
-                            Canvas.SetTop(Hero, Canvas.GetTop(Hero) - 10);
-                        }
-                    }
-
-                    break;
-
                 case Key.A:
-                    if (heroPosLeft > 135 || heroPosTop > 310)
+                    if (GameCanvas.PlayerX > 0)
                     {
-                        if (heroPosLeft > 0)
-                        {
-                            Hero.Source = Properties.Resources.gauche1.ToBitmapImage();
-                            Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) - 10);
-                        }
+                        GameCanvas.PlayerX--;
+                        GameCanvas.InvalidateVisual();
                     }
                     break;
-
+                case Key.W:
+                    if (GameCanvas.PlayerY > 0)
+                    {
+                        GameCanvas.PlayerY--;
+                        GameCanvas.InvalidateVisual();
+                    }
+                    break;
+                case Key.S:
+                    if (GameCanvas._map.GetLength(1) - 1 > GameCanvas.PlayerY)
+                    {
+                        GameCanvas.PlayerY++;
+                        GameCanvas.InvalidateVisual();
+                    }
+                    break;
                 case Key.D:
-                    if (heroPosLeft < 750)
+                    if (GameCanvas._map.GetLength(0) - 1 > GameCanvas.PlayerX)
                     {
-                        Hero.Source = Properties.Resources.droite1.ToBitmapImage();
-                        Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) + 10);
-                    }
-                    break;
-                case Key.E:
-                    if (heroPosLeft >= 400 && heroPosLeft <= 420)
-                    {
-                        if (heroPosTop >= 70 && heroPosTop <= 100)
-                        {
-                            Poker pokerGame = new Poker();
-                            pokerGame.Show();
-                            this.Close();
-                        }
+                        GameCanvas.PlayerX++;
+                        GameCanvas.InvalidateVisual();
                     }
                     break;
             }
         }
-
-
     }
 }

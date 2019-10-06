@@ -583,6 +583,16 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap bartemp {
+            get {
+                object obj = ResourceManager.GetObject("bartemp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap bas1 {
             get {
                 object obj = ResourceManager.GetObject("bas1", resourceCulture);
@@ -606,6 +616,16 @@ namespace CasinoUI.Properties {
         public static System.Drawing.Bitmap bgMainMenu {
             get {
                 object obj = ResourceManager.GetObject("bgMainMenu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap blackfloor {
+            get {
+                object obj = ResourceManager.GetObject("blackfloor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -680,6 +700,26 @@ namespace CasinoUI.Properties {
         public static System.Drawing.Bitmap PokerEntrer {
             get {
                 object obj = ResourceManager.GetObject("PokerEntrer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap redfloor {
+            get {
+                object obj = ResourceManager.GetObject("redfloor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap slotmachinetemp {
+            get {
+                object obj = ResourceManager.GetObject("slotmachinetemp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

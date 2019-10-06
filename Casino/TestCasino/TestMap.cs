@@ -15,16 +15,11 @@ namespace TestCasino
         [TestMethod]
         public void NoTileNullMap()
         {
-            NoTileNull(CasinoUI.Properties.Resources.map);
-        }
-
-        private void NoTileNull(string mapContent)
-        {
             //Arrange
             int nbTileNull;
 
             //Act
-            MapTile[,] map = MapGenerator.LoadMapFromFile(mapContent);
+            MapTile[,] map = MapGenerator.LoadMapFromFile(CasinoUI.Properties.Resources.map);
             nbTileNull = 0;
             for (int i = 0; i < map.GetLength(0); i++)
             {
@@ -39,6 +34,30 @@ namespace TestCasino
 
             //Assert
             Assert.AreEqual(0, nbTileNull);
+        }
+
+        [TestMethod]
+        public void NoImageNullMap()
+        {
+            //Arrange
+            int nbImageNull;
+
+            //Act
+            MapTile[,] map = MapGenerator.LoadMapFromFile(CasinoUI.Properties.Resources.map);
+            nbImageNull = 0;
+            for (int i = 0; i < map.GetLength(0); i++)
+            {
+                for (int j = 0; j < map.GetLength(1); j++)
+                {
+                    if (map[i, j].Sprite == null)
+                    {
+                        nbImageNull++;
+                    }
+                }
+            }
+
+            //Assert
+            Assert.AreEqual(0, nbImageNull);
         }
     }
 }
