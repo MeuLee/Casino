@@ -12,10 +12,17 @@ namespace CasinoUI.View.Map.Tiles
 {
     public abstract class MapTile
     {
-        public delegate void MovedOver(HumanPlayer human); // would it work? 
-        public MovedOver OnMovedOver { get; set; } // ^
+        public Action OnMovedOver { get; set; } 
+        /* Game is the superclass of all casino games.
+         * OnMovedOver returns the Game the user wants to play, or null if he does not want to play any game.
+         * The player invokes OnMovedOver for the tile he just moved on.
+         * Classes TableTile should ask the user (pop up window) which game he wants to play,
+         *         SlotMachine should ask the user if he really wants to play a game of SlotMachine then start one if so.
+         * Will uncomment this code after tuesday 8th's merge.
+         * This property could be tested by being changed to Action instead of Func<Game>, still with a pop up window.
+         * Add OnMovedOverEventArgs class with old X and old Y to kick the player to the correct position if he does not want to play the game
+         */
         public BitmapImage Sprite { get; private set; }
-        public bool Rotate { get; private set; }
         public abstract bool CanBeMovedOver { get; }
 
         /// <summary>

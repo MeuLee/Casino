@@ -9,67 +9,95 @@ namespace CasinoUI.View
 {
     public class GameCanvas : Canvas
     {
-        public MapTile[,] _map { get; private set; } = MapGenerator.LoadMapFromFile(Properties.Resources.map);
-        private const int TILES_AROUND_PLAYER_X = 5,
-                          TILES_AROUND_PLAYER_Y = 3;
+        public MapTile[,] Map { get; private set; } = MapGenerator.LoadMapFromFile(Properties.Resources.map);
+
+        public static int TilesAroundPlayerX { get; set; } = 4;
+        public static int TilesAroundPlayerY { get; set; } = 3;
+
         private int _cameraCenterX, _cameraCenterY;
 
+        // Will be removed once the HumanPlayer instance can be accesssed.
         public int PlayerX { get; set; } = 10;
         public int PlayerY { get; set; } = 4;
 
         protected override void OnRender(DrawingContext dc)
         {
-            float tileWidth = (float)ActualWidth / (Math.Max(TILES_AROUND_PLAYER_X, TILES_AROUND_PLAYER_Y) * 2 + 1);
             SetCameraCenterValues(PlayerX, PlayerY);
-            for (int i = _cameraCenterX - TILES_AROUND_PLAYER_X, index = 0;
-                 i <= _cameraCenterX + TILES_AROUND_PLAYER_X;
-                 i++, index++)
-            {
-                for (int j = _cameraCenterY - TILES_AROUND_PLAYER_Y, jndex = 0; 
-                     j <= _cameraCenterY + TILES_AROUND_PLAYER_Y;
-                     j++, jndex++)
-                {
-                    MapTile tile = _map[i, j];
-                    dc.DrawImage(tile.Sprite, new Rect(index * tileWidth, jndex * tileWidth, tileWidth, tileWidth));
-                    if (i == PlayerX && j == PlayerY)
-                    {
-                        dc.DrawEllipse(Brushes.Green, 
-                                       new Pen(Brushes.Green, 1.0), 
-                                       new Point(index * tileWidth + tileWidth / 2, 
-                                                 jndex * tileWidth + tileWidth / 2), 
-                                       tileWidth / 3, 
-                                       tileWidth / 3);
-                    }
-                }
-            }
+            float tileWidth = SetTileWidth();
+            DrawTiles(dc, tileWidth); // tileWidth could be a property, when TilesAroundPlayer properties are set, TileWidth's value is re-set
+            DrawPlayer(dc, tileWidth);
+        }
+
+        private float SetTileWidth()
+        {
+            return (float)ActualWidth / (Math.Max(TilesAroundPlayerX, TilesAroundPlayerY) * 2 + 1);
         }
 
         private void SetCameraCenterValues(int playerX, int playerY)
         {
-            if (0 > playerX - TILES_AROUND_PLAYER_X)
-            {
-                _cameraCenterX = TILES_AROUND_PLAYER_X;
-            }
-            else if (playerX + TILES_AROUND_PLAYER_X > _map.GetLength(0) - 1)
-            {
-                _cameraCenterX = _map.GetLength(0) - 1 - TILES_AROUND_PLAYER_X;
-            }
-            else
-            {
-                _cameraCenterX = playerX;
-            }
+            _cameraCenterX = SetCameraCenterValue(playerX, TilesAroundPlayerX, 0);
+            _cameraCenterY = SetCameraCenterValue(playerY, TilesAroundPlayerY, 1);
+        }
 
-            if (0 > playerY - TILES_AROUND_PLAYER_Y)
+        private int SetCameraCenterValue(int playerCoord, int tilesAroundPlayer, int dimension)
+        {
+            if (0 > playerCoord - tilesAroundPlayer)
             {
-                _cameraCenterY = TILES_AROUND_PLAYER_Y;
+                return tilesAroundPlayer;
             }
-            else if (playerY + TILES_AROUND_PLAYER_Y > _map.GetLength(1) - 1)
+            else if (playerCoord + tilesAroundPlayer > Map.GetLength(dimension) - 1)
             {
-                _cameraCenterY = _map.GetLength(1) - 1 - TILES_AROUND_PLAYER_Y;
+                return Map.GetLength(dimension) - 1 - tilesAroundPlayer;
             }
             else
             {
-                _cameraCenterY = playerY;
+                return playerCoord;
+            }
+        }
+
+        private void DrawTiles(DrawingContext dc, double tileWidth)
+        {
+            //i: x coord on the (entire) map. index: x coord on the visible map.
+            for (int i = _cameraCenterX - TilesAroundPlayerX, index = 0;
+                 i <= _cameraCenterX + TilesAroundPlayerX;
+                 i++, index++) 
+            {
+                //j: y coord on the (entire) map. jndex: y coord on the visible map.
+                for (int j = _cameraCenterY - TilesAroundPlayerY, jndex = 0;
+                     j <= _cameraCenterY + TilesAroundPlayerY;
+                     j++, jndex++) 
+                {
+                    MapTile tile = Map[i, j];
+                    dc.DrawImage(tile.Sprite, new Rect(index * tileWidth, jndex * tileWidth, tileWidth, tileWidth));                    
+                }
+            }            
+        }
+
+        private void DrawPlayer(DrawingContext dc, float tileWidth)
+        {
+            int uiPlayerX = PlayerCoordOnUI(_cameraCenterX, PlayerX, 0, TilesAroundPlayerX), 
+                uiPlayerY = PlayerCoordOnUI(_cameraCenterY, PlayerY, 1, TilesAroundPlayerY);
+            dc.DrawEllipse(Brushes.Green,
+                           new Pen(Brushes.Green, 1.0),
+                           new Point(uiPlayerX * tileWidth + tileWidth / 2,
+                                     uiPlayerY * tileWidth + tileWidth / 2),
+                           tileWidth / 3,
+                           tileWidth / 3);
+        }
+
+        private int PlayerCoordOnUI(int cameraCenterCoord, int playerCoord, int dimension, int tilesAroundPlayerCoord)
+        {
+            if (cameraCenterCoord > playerCoord)
+            {
+                return playerCoord;
+            }
+            else if (playerCoord > Map.GetLength(dimension) - 1 - tilesAroundPlayerCoord)
+            {
+                return tilesAroundPlayerCoord * 2 - (Map.GetLength(dimension) - 1 - playerCoord);
+            }
+            else
+            {
+                return tilesAroundPlayerCoord;
             }
         }
     }

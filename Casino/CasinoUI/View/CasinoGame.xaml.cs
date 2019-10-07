@@ -47,20 +47,23 @@ namespace CasinoUI.View
                     }
                     break;
                 case Key.S:
-                    if (GameCanvas._map.GetLength(1) - 1 > GameCanvas.PlayerY)
+                    if (GameCanvas.Map.GetLength(1) - 1 > GameCanvas.PlayerY)
                     {
                         GameCanvas.PlayerY++;
                         GameCanvas.InvalidateVisual();
                     }
                     break;
                 case Key.D:
-                    if (GameCanvas._map.GetLength(0) - 1 > GameCanvas.PlayerX)
+                    if (GameCanvas.Map.GetLength(0) - 1 > GameCanvas.PlayerX)
                     {
                         GameCanvas.PlayerX++;
                         GameCanvas.InvalidateVisual();
                     }
                     break;
+                default:
+                    return;
             }
+            GameCanvas.Map[GameCanvas.PlayerX, GameCanvas.PlayerY].OnMovedOver?.Invoke();
         }
     }
 }

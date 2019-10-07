@@ -12,7 +12,12 @@ namespace CasinoUI.View.Map.Tiles
     {
         public SlotMachineTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
         {
+            OnMovedOver += MovedOver;
+        }
 
+        private void MovedOver()
+        {
+            Console.WriteLine("SlotMachine");
         }
 
         public override bool CanBeMovedOver => throw new NotImplementedException();
