@@ -20,9 +20,9 @@ namespace CasinoUI.View.Map
         /// <summary>
         /// Not gonna try catch this, not my problem is the xml is not correctly formatted
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="topElem"></param>
+        /// <param name="width">2d array width</param>
+        /// <param name="height">2d array height</param>
+        /// <param name="topElem">XML file root element</param>
         private static void GetDimensions(out int width, out int height, XElement topElem)
         {
             var dimensions = topElem.Elements().First(e => e.Name == "Dimensions").Descendants();
@@ -35,6 +35,13 @@ namespace CasinoUI.View.Map
             return new MapTile[width, height];
         }
 
+        /// <summary>
+        /// Fills the 2d array passed in argument with the XML file content
+        /// This method is slow as fuck.
+        /// Either optimize it (not sure how tbh) or add a loading screen 
+        /// </summary>
+        /// <param name="topElem">XML file root element</param>
+        /// <param name="map">The 2d array to be filled.</param>
         private static void FillMap(XElement topElem, MapTile[,] map)
         {
             var tilesArr = topElem.Elements().First(e => e.Name == "Tiles").Descendants();

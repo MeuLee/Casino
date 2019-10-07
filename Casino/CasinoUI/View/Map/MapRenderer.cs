@@ -20,18 +20,32 @@ namespace CasinoUI.View.Map
 
         public static void RenderMap(float canvasWidth, float canvasHeight, DrawingContext dc)
         {
-            SetCameraCenterValues(PlayerX, PlayerY);
-            float tileWidth = SetTileWidth(canvasWidth, canvasHeight);
+            SetCameraCenterValues();
+            float tileWidth = SetTileSize(canvasWidth, canvasHeight);
             DrawTiles(dc, tileWidth);
             DrawPlayer(dc, tileWidth);
         }
 
-        private static void SetCameraCenterValues(int playerX, int playerY)
+        /// <summary>
+        /// Sets the x, y point in the entire map where the camera will be centered on.
+        /// </summary>
+        private static void SetCameraCenterValues()
         {
-            _cameraCenterX = SetCameraCenterValue(playerX, TilesAroundPlayerX, 0);
-            _cameraCenterY = SetCameraCenterValue(playerY, TilesAroundPlayerY, 1);
+            _cameraCenterX = SetCameraCenterValue(PlayerX, TilesAroundPlayerX, 0);
+            _cameraCenterY = SetCameraCenterValue(PlayerY, TilesAroundPlayerY, 1);
         }
 
+        /// <summary>
+        /// Sets a camera's coordinate (x or y).
+        /// </summary>
+        /// <param name="playerCoord">Player's X or Y</param>
+        /// <param name="tilesAroundPlayer">Tiles around player, x or y</param>
+        /// <param name="dimension">Should be 0 or 1 as the map is 2d. 0 for horizontal (x), 1 for vertical (y)</param>
+        /// <returns>
+        /// Most of the time, playerCoord will be returned.
+        /// However, if playerCoord is closer to the edge than tilesAroundPlayer, 
+        /// the value returned will be either edge + tilesAroundPlayer (if) or edge - tilesAroundPlayer (else if).
+        /// </returns>
         private static int SetCameraCenterValue(int playerCoord, int tilesAroundPlayer, int dimension)
         {
             if (0 > playerCoord - tilesAroundPlayer)
@@ -48,13 +62,21 @@ namespace CasinoUI.View.Map
             }
         }
 
-        private static float SetTileWidth(float canvasWidth, float canvasHeight)
+        /// <summary>
+        /// Divides the available space (height or width) by the camera size (x or y) 
+        /// and returns the lowest value.
+        /// The whole map will fit in the canvas
+        /// </summary>
+        private static float SetTileSize(float canvasWidth, float canvasHeight)
         {
             return Math.Min(canvasWidth / (TilesAroundPlayerX * 2 + 1),
                             canvasHeight / (TilesAroundPlayerY * 2 + 1));
         }
 
-        private static void DrawTiles(DrawingContext dc, float tileWidth)
+        /// <summary>
+        /// Draws each tile present in the camera's sight.
+        /// </summary>
+        private static void DrawTiles(DrawingContext dc, float tileSize)
         {
             //i: x coord on the (entire) map. index: x coord on the visible map.
             for (int i = _cameraCenterX - TilesAroundPlayerX, index = 0;
@@ -67,7 +89,7 @@ namespace CasinoUI.View.Map
                      j++, jndex++)
                 {
                     MapTile tile = Map[i, j];
-                    dc.DrawImage(tile.Sprite, new Rect(index * tileWidth, jndex * tileWidth, tileWidth, tileWidth));
+                    dc.DrawImage(tile.Sprite, new Rect(index * tileSize, jndex * tileSize, tileSize, tileSize));
                 }
             }
         }

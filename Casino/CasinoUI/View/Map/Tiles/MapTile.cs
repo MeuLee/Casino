@@ -13,12 +13,12 @@ namespace CasinoUI.View.Map.Tiles
          * OnMovedOver returns the Game the user wants to play, or null if he does not want to play any game.
          * Classes TableTile should ask the user (pop up window) which game he wants to play,
          *         SlotMachine should ask the user if he really wants to play a game of SlotMachine then start one if so.
-         * Will uncomment this code after tuesday 8th's merge.
+         * Will remove this comment after tuesday 8th's merge.
          */
         public BitmapImage Sprite { get; private set; }
 
         /// <summary>
-        /// Child classes call this ctor. Only initializes properties
+        /// Child classes call this ctor. Initializes properties and rotates the image if needed
         /// </summary>
         /// <param name="x">X coordinate on the map</param>
         /// <param name="y">Y coordinate on the map</param>
@@ -37,6 +37,9 @@ namespace CasinoUI.View.Map.Tiles
         public int X { get; private set; }
         public int Y { get; private set; }
 
+        /// <summary>
+        /// MapTile Factory method
+        /// </summary>
         public static MapTile CreateMapTile(int x, int y, string tileType, bool rotate)
         {
             switch (tileType)
