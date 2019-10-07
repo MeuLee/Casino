@@ -16,13 +16,13 @@ namespace TestCasino
     {
         private PokerHand pokerCombo;
         private List<Card> list;
-        private Bitmap image;
+        private Bitmap imageBidon;
 
         public TestPokerHand()
         {
             list = new List<Card>();
             pokerCombo = new PokerHand(list);
-            image = Properties.Resources._2C;
+            imageBidon = Properties.Resources._2C;
         }
 
 
@@ -49,13 +49,13 @@ namespace TestCasino
         #endregion
 
         [TestMethod]
-        public void CreateListValueTestfilter1()
+        public void CreateListValueTestfilter()
         {
             PrivateObject obj = new PrivateObject(pokerCombo);
 
-            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Clubs, image));
-            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
-            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Hearts, image));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Clubs, imageBidon));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, imageBidon));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Hearts, imageBidon));
 
             obj.Invoke("CreateListValue");
 
@@ -64,9 +64,9 @@ namespace TestCasino
             list.Clear();
             pokerCombo.ListValue.Clear();
 
-            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Clubs, image));
-            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
-            list.Add(new Card(Card.CardRank.Five, Card.CardSuit.Hearts, image));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Clubs, imageBidon));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, imageBidon));
+            list.Add(new Card(Card.CardRank.Five, Card.CardSuit.Hearts, imageBidon));
 
             obj.Invoke("CreateListValue");
 
@@ -75,9 +75,9 @@ namespace TestCasino
             list.Clear();
             pokerCombo.ListValue.Clear();
 
-            list.Add(new Card(Card.CardRank.Four, Card.CardSuit.Clubs, image));
-            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, image));
-            list.Add(new Card(Card.CardRank.King, Card.CardSuit.Hearts, image));
+            list.Add(new Card(Card.CardRank.Four, Card.CardSuit.Clubs, imageBidon));
+            list.Add(new Card(Card.CardRank.Eight, Card.CardSuit.Spades, imageBidon));
+            list.Add(new Card(Card.CardRank.King, Card.CardSuit.Hearts, imageBidon));
 
             obj.Invoke("CreateListValue");
 

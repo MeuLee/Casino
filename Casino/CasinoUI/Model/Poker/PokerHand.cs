@@ -33,6 +33,7 @@ namespace CasinoUI.Model.Poker
         private void CheckCombo()
         {
             //Si seulement straight ou flush calcul hignestCombo
+            //
         }
         public void CreateAllCombo()
         {
@@ -42,7 +43,7 @@ namespace CasinoUI.Model.Poker
             CreateFlushCombo();
         }
 
-        public void CreateFlushCombo()
+        private void CreateFlushCombo()
         {
             DescendingSuitList();
             isFlush = isFlushCombo();
@@ -52,7 +53,7 @@ namespace CasinoUI.Model.Poker
             }
         }
 
-        public void CreateStraightCombo()
+        private void CreateStraightCombo()
         {
             DescendingValueList();
             isStraight = isStraightCombo();
