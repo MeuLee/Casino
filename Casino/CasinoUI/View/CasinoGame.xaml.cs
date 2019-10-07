@@ -1,12 +1,8 @@
 ﻿using CasinoUI.Utils;
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
+using CasinoUI.View.Map;
+using CasinoUI.View.Map.Tiles;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace CasinoUI.View
 {
@@ -30,40 +26,44 @@ namespace CasinoUI.View
 
         private void Grid_KeyDown(object sender, KeyEventArgs e)
         {
+            int oldPlayerX = MapRenderer.PlayerX,
+                oldPlayerY = MapRenderer.PlayerY;
             switch (e.Key)
             {
                 case Key.A:
-                    if (GameCanvas.PlayerX > 0)
+                    if (MapRenderer.PlayerX > 0)
                     {
-                        GameCanvas.PlayerX--;
-                        GameCanvas.InvalidateVisual();
+                        MapRenderer.PlayerX--;
+                        GameCanvas.InvalidateVisual(); // could be called in set property
                     }
                     break;
                 case Key.W:
-                    if (GameCanvas.PlayerY > 0)
+                    if (MapRenderer.PlayerY > 0)
                     {
-                        GameCanvas.PlayerY--;
+                        MapRenderer.PlayerY--;
                         GameCanvas.InvalidateVisual();
                     }
                     break;
                 case Key.S:
-                    if (GameCanvas.Map.GetLength(1) - 1 > GameCanvas.PlayerY)
+                    if (MapRenderer.Map.GetLength(1) - 1 > MapRenderer.PlayerY)
                     {
-                        GameCanvas.PlayerY++;
+                        MapRenderer.PlayerY++;
                         GameCanvas.InvalidateVisual();
                     }
                     break;
                 case Key.D:
-                    if (GameCanvas.Map.GetLength(0) - 1 > GameCanvas.PlayerX)
+                    if (MapRenderer.Map.GetLength(0) - 1 > MapRenderer.PlayerX)
                     {
-                        GameCanvas.PlayerX++;
+                        MapRenderer.PlayerX++;
                         GameCanvas.InvalidateVisual();
                     }
                     break;
                 default:
                     return;
             }
-            GameCanvas.Map[GameCanvas.PlayerX, GameCanvas.PlayerY].OnMovedOver?.Invoke();
+            MapRenderer.Map[MapRenderer.PlayerX, MapRenderer.PlayerY]
+                       .OnMovedOver?
+                       .Invoke(this, new OnMovedOverEventArgs(oldPlayerX, oldPlayerY));
         }
     }
 }

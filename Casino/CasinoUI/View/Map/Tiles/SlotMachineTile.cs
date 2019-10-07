@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
+﻿using System.Drawing;
+using System.Windows;
 
 namespace CasinoUI.View.Map.Tiles
 {
@@ -15,11 +10,19 @@ namespace CasinoUI.View.Map.Tiles
             OnMovedOver += MovedOver;
         }
 
-        private void MovedOver()
+        private void MovedOver(object sender, OnMovedOverEventArgs e)
         {
-            Console.WriteLine("SlotMachine");
+            var result = MessageBox.Show("Wanna play slot machine?", "nice title m8", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                MessageBox.Show("epic gamer slot machine simulation");
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                MapRenderer.PlayerX = e.OldX;
+                MapRenderer.PlayerY = e.OldY;
+                (sender as CasinoGame).GameCanvas.InvalidateVisual();
+            }
         }
-
-        public override bool CanBeMovedOver => throw new NotImplementedException();
     }
 }

@@ -1,13 +1,5 @@
-﻿using CasinoUI.Model.Cards;
-using System;
-using System.Drawing;
 ﻿using CasinoUI.View;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace CasinoUI
 {
@@ -16,7 +8,6 @@ namespace CasinoUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GameCardStack _cards = new GameCardStack();
         public MainWindow()
         {
             InitializeComponent();
