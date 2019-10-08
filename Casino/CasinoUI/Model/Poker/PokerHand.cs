@@ -10,9 +10,9 @@ namespace CasinoUI.Model.Poker
         private List<Card> listValue;
         private List<int> ListTempCombo;
 
-        private List<Tuple<int, int>> ComboValuePoss;
-        private List<Tuple<int, int>> ComboSraightPoss;
-        private Card.CardSuit FlushCombo;
+        private List<Tuple<int, int>> comboValuePoss;
+        private List<Tuple<int, int>> comboSraightPoss;
+        private Card.CardSuit flushCombo;
 
         private bool isStraight = false;
         private bool isFlush = false;
@@ -22,14 +22,23 @@ namespace CasinoUI.Model.Poker
             this.listCardInGame = listCardInGame;
             ListTempCombo = new List<int>();
             listValue = new List<Card>();
-            ComboValuePoss = new List<Tuple<int, int>>();
-            ComboSraightPoss = new List<Tuple<int, int>>();
-            FlushCombo = Card.CardSuit.Diamonds;
+            comboValuePoss = new List<Tuple<int, int>>();
+            comboSraightPoss = new List<Tuple<int, int>>();
+            flushCombo = Card.CardSuit.Diamonds;
         }
 
-        public List<Card> ListCardInGame { get; set; }
-        public List<Card> ListValue { get => listValue; }
+        public List<Card> ListCardInGame {
+            get { return listCardInGame; }
+            set { this.listCardInGame = value; }
+        }
+        public List<Card> ListValue {
+            get { return listValue; }
+        }
 
+        public List<Tuple<int, int>> ComboValuePoss {
+            get { return comboValuePoss; }
+            set { this.comboValuePoss = value; }
+        }
         private void CheckCombo()
         {
             //Si seulement straight ou flush calcul hignestCombo
@@ -37,15 +46,17 @@ namespace CasinoUI.Model.Poker
         }
         public void CreateAllCombo()
         {
+            DescendingValueList();
             CreateListValue();
             CreateSameKindCombo();
             CreateStraightCombo();
+
+            DescendingSuitList();
             CreateFlushCombo();
         }
 
         private void CreateFlushCombo()
         {
-            DescendingSuitList();
             isFlush = isFlushCombo();
             if (isFlush)
             {
@@ -55,7 +66,6 @@ namespace CasinoUI.Model.Poker
 
         private void CreateStraightCombo()
         {
-            DescendingValueList();
             isStraight = isStraightCombo();
             if (isStraight)
             {
@@ -65,7 +75,6 @@ namespace CasinoUI.Model.Poker
 
         private void CreateListValue()
         {
-            DescendingValueList();
             OnlyValue();
 
         }
@@ -75,7 +84,7 @@ namespace CasinoUI.Model.Poker
         {
             double nbr = listCardInGame.Count / 2.0;
             int Middle = (int)Math.Ceiling(nbr);
-            FlushCombo = listCardInGame[Middle].Suit;
+            flushCombo = listCardInGame[Middle].Suit;
         }
 
         private void StraightCombo()
@@ -90,7 +99,7 @@ namespace CasinoUI.Model.Poker
         {
             for (int i = 0; i < ListTempCombo.Count - 2; i++)
             {
-                ComboValuePoss.Add(Tuple.Create(ListTempCombo[i], ListTempCombo[i + 1]));
+                comboSraightPoss.Add(Tuple.Create(ListTempCombo[i], ListTempCombo[i + 1]));
             }
         }
         private void RemoveSameCard()
@@ -221,8 +230,6 @@ namespace CasinoUI.Model.Poker
 
         private void CreateSameKindCombo()
         {
-            DescendingValueList();
-
             int taille = listValue.Count;
             int compt = 0;
             for (int i = 0; i < listValue.Count; i++)
@@ -231,11 +238,11 @@ namespace CasinoUI.Model.Poker
                 {
                     if (compt < taille)
                     {
-                        ComboValuePoss.Add(Tuple.Create((int)listValue[i].Value, (int)listValue[compt].Value));
+                        comboValuePoss.Add(Tuple.Create((int)listValue[i].Value, (int)listValue[compt].Value));
                     }
                     else
                     {
-                        ComboValuePoss.Add(Tuple.Create((int)listValue[i].Value, -1));
+                        comboValuePoss.Add(Tuple.Create((int)listValue[i].Value, -1));
                     }
                     compt++;
                 }
