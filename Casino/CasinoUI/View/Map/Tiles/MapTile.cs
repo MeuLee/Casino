@@ -47,7 +47,7 @@ namespace CasinoUI.View.Map.Tiles
                 case "Floor1":
                     return new RedFloorTile(x, y , Properties.Resources.redfloor, rotate);
                 case "Floor2":
-                    return new GreyFloorTile(x, y, Properties.Resources.blackfloor, rotate);
+                    return new BlackFloorTile(x, y, Properties.Resources.blackfloor, rotate);
                 case string str when IsTableTile(str):
                     return CreateTableTile(x, y, tileType, rotate);
                 case "SlotMachine":

@@ -2,9 +2,9 @@
 
 namespace CasinoUI.View.Map.Tiles
 {
-    public class GreyFloorTile : MapTile
+    public class BlackFloorTile : MapTile
     {
-        public GreyFloorTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
+        public BlackFloorTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
         {
 
         }

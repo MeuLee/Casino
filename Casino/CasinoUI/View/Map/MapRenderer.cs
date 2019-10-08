@@ -9,8 +9,8 @@ namespace CasinoUI.View.Map
     {
         public static MapTile[,] Map { get; private set; } = MapGenerator.LoadMapFromFile(Properties.Resources.map);
 
-        public static int TilesAroundPlayerX { get; set; } = 15;
-        public static int TilesAroundPlayerY { get; set; } = 7;
+        public static int TilesAroundPlayerX { get; set; } = 5;
+        public static int TilesAroundPlayerY { get; set; } = 3;
 
         private static int _cameraCenterX, _cameraCenterY;
 
@@ -31,8 +31,8 @@ namespace CasinoUI.View.Map
         /// </summary>
         private static void SetCameraCenterValues()
         {
-            _cameraCenterX = SetCameraCenterValue(PlayerX, TilesAroundPlayerX, 0);
-            _cameraCenterY = SetCameraCenterValue(PlayerY, TilesAroundPlayerY, 1);
+            _cameraCenterX = SetCameraCenterValue(PlayerX, TilesAroundPlayerX, Map.GetLength(0));
+            _cameraCenterY = SetCameraCenterValue(PlayerY, TilesAroundPlayerY, Map.GetLength(1));
         }
 
         /// <summary>
@@ -46,15 +46,18 @@ namespace CasinoUI.View.Map
         /// However, if playerCoord is closer to the edge than tilesAroundPlayer, 
         /// the value returned will be either edge + tilesAroundPlayer (if) or edge - tilesAroundPlayer (else if).
         /// </returns>
-        private static int SetCameraCenterValue(int playerCoord, int tilesAroundPlayer, int dimension)
+        private static int SetCameraCenterValue(
+            int playerCoord,
+            int tilesAroundPlayer, 
+            int mapLength)
         {
             if (0 > playerCoord - tilesAroundPlayer)
             {
                 return tilesAroundPlayer;
             }
-            else if (playerCoord + tilesAroundPlayer > Map.GetLength(dimension) - 1)
+            else if (playerCoord + tilesAroundPlayer > mapLength - 1)
             {
-                return Map.GetLength(dimension) - 1 - tilesAroundPlayer;
+                return mapLength - 1 - tilesAroundPlayer;
             }
             else
             {
@@ -106,7 +109,11 @@ namespace CasinoUI.View.Map
                            tileWidth / 3);
         }
 
-        private static int PlayerCoordOnUI(int cameraCenterCoord, int playerCoord, int dimension, int tilesAroundPlayerCoord)
+        private static int PlayerCoordOnUI(
+            int cameraCenterCoord, 
+            int playerCoord, 
+            int dimension, 
+            int tilesAroundPlayerCoord)
         {
             if (cameraCenterCoord > playerCoord)
             {
