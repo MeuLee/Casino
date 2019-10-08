@@ -1,12 +1,8 @@
 ﻿using CasinoUI.Utils;
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
+using CasinoUI.View.Map;
+using CasinoUI.View.Map.Tiles;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace CasinoUI.View
 {
@@ -24,73 +20,48 @@ namespace CasinoUI.View
 
         private void InitializeImage()
         {
-            ImageJoueur.Source = Properties.Resources.panda.ToBitmapImage();
+            ImgPlayer.Source = Properties.Resources.panda.ToBitmapImage();
             TableBackground.ImageSource = Properties.Resources.table.ToBitmapImage();
-            Hero.Source = Properties.Resources.droite1.ToBitmapImage();
-            EntrerPoker.Source = Properties.Resources.PokerEntrer.ToBitmapImage();
-            EntrerPoker.Height = 50;
-            EntrerPoker.Width = 50;
         }
 
-        private void Canvas_KeyDown(object sender, KeyEventArgs e)
+        private void Grid_KeyDown(object sender, KeyEventArgs e) // how tf do i fire this event with the same interval inbetween
         {
-            long heroPosLeft = Convert.ToInt64(Hero.GetValue(Canvas.LeftProperty));
-            long heroPosTop = Convert.ToInt64(Hero.GetValue(Canvas.TopProperty));
-
+            int oldPlayerX = MapRenderer.PlayerX,
+                oldPlayerY = MapRenderer.PlayerY;
             switch (e.Key)
             {
-                case Key.S:
-                    if (heroPosTop < 380)
-                    {
-                        Hero.Source = Properties.Resources.bas1.ToBitmapImage();
-                        Canvas.SetTop(Hero, Canvas.GetTop(Hero) + 10);
-                    }
-                    break;
-
-                case Key.W:
-                    if (heroPosLeft > 125 || heroPosTop < 300)
-                    {
-                        if (heroPosTop > 0)
-                        {
-                            Hero.Source = Properties.Resources.haut1.ToBitmapImage();
-                            Canvas.SetTop(Hero, Canvas.GetTop(Hero) - 10);
-                        }
-                    }
-
-                    break;
-
                 case Key.A:
-                    if (heroPosLeft > 135 || heroPosTop > 310)
+                    if (MapRenderer.PlayerX > 0)
                     {
-                        if (heroPosLeft > 0)
-                        {
-                            Hero.Source = Properties.Resources.gauche1.ToBitmapImage();
-                            Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) - 10);
-                        }
+                        MapRenderer.PlayerX--;
                     }
                     break;
-
+                case Key.W:
+                    if (MapRenderer.PlayerY > 0)
+                    {
+                        MapRenderer.PlayerY--;
+                    }
+                    break;
+                case Key.S:
+                    if (MapRenderer.Map.GetLength(1) - 1 > MapRenderer.PlayerY)
+                    {
+                        MapRenderer.PlayerY++;
+                    }
+                    break;
                 case Key.D:
-                    if (heroPosLeft < 750)
+                    if (MapRenderer.Map.GetLength(0) - 1 > MapRenderer.PlayerX)
                     {
-                        Hero.Source = Properties.Resources.droite1.ToBitmapImage();
-                        Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) + 10);
+                        MapRenderer.PlayerX++;
                     }
                     break;
-                case Key.E:
-                    if (heroPosLeft >= 400 && heroPosLeft <= 420)
-                    {
-                        if (heroPosTop >= 70 && heroPosTop <= 100)
-                        {
-                            Poker pokerGame = new Poker();
-                            pokerGame.Show();
-                            this.Close();
-                        }
-                    }
-                    break;
+                default:
+                    return;
             }
+            // could be called in set property
+            GameCanvas.InvalidateVisual();
+            MapRenderer.Map[MapRenderer.PlayerX, MapRenderer.PlayerY]
+                       .OnMovedOver?
+                       .Invoke(this, new OnMovedOverEventArgs(oldPlayerX, oldPlayerY));
         }
-
-
     }
 }

@@ -1,16 +1,6 @@
-﻿using CasinoUI.Model.Cards;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using CasinoUI.View.Map;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace CasinoUI.View
 {
@@ -18,7 +8,7 @@ namespace CasinoUI.View
     {
         protected override void OnRender(DrawingContext dc)
         {
-            
+            MapRenderer.RenderMap((float)ActualWidth, (float)ActualHeight, dc);
         }
     }
 }

@@ -2,49 +2,47 @@
 using CasinoUI.View.Map.Tiles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestCasino
 {
     [TestClass]
     public class TestMap
     {
+        static readonly MapTile[,] _map = MapGenerator.LoadMapFromFile(CasinoUI.Properties.Resources.map);
+
         [TestMethod]
         public void NoTileNullMap()
         {
-            //NoTileNull(CasinoUI.Properties.Resources.map); dw about this ^_^
-        }
-
-        [TestMethod]
-        public void NoTileNullMap2()
-        {
-            //NoTileNull(CasinoUI.Properties.Resources.map2); dw about this ^_^
-        }
-
-        private void NoTileNull(string mapContent)
-        {
-            //Arrange
-            int nbTileNull;
-
-            //Act
-            MapTile[,] map = MapGenerator.LoadMapFromFile(mapContent);
-            nbTileNull = 0;
-            for (int i = 0; i < map.GetLength(0); i++)
+            int nbTileNull = 0;
+            for (int i = 0; i < _map.GetLength(0); i++)
             {
-                for (int j = 0; j < map.GetLength(1); j++)
+                for (int j = 0; j < _map.GetLength(1); j++)
                 {
-                    if (map[i, j] == null)
+                    if (_map[i, j] == null)
                     {
                         nbTileNull++;
                     }
                 }
             }
-
-            //Assert
             Assert.AreEqual(0, nbTileNull);
+        }
+
+        [TestMethod]
+        public void NoImageNullMap()
+        {
+            MapTile[,] map = MapGenerator.LoadMapFromFile(CasinoUI.Properties.Resources.map);
+            int nbImageNull = 0;
+            for (int i = 0; i < map.GetLength(0); i++)
+            {
+                for (int j = 0; j < map.GetLength(1); j++)
+                {
+                    if (map[i, j].Sprite == null)
+                    {
+                        nbImageNull++;
+                    }
+                }
+            }
+            Assert.AreEqual(0, nbImageNull);
         }
     }
 }

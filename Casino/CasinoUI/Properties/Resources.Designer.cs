@@ -583,6 +583,16 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap bartemp {
+            get {
+                object obj = ResourceManager.GetObject("bartemp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap bas1 {
             get {
                 object obj = ResourceManager.GetObject("bas1", resourceCulture);
@@ -606,6 +616,16 @@ namespace CasinoUI.Properties {
         public static System.Drawing.Bitmap bgMainMenu {
             get {
                 object obj = ResourceManager.GetObject("bgMainMenu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap blackfloor {
+            get {
+                object obj = ResourceManager.GetObject("blackfloor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -641,6 +661,28 @@ namespace CasinoUI.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;map&gt;
+        ///  &lt;Dimensions&gt;
+        ///    &lt;Width X=&quot;50&quot; /&gt;
+        ///    &lt;Height Y=&quot;40&quot; /&gt;
+        ///  &lt;/Dimensions&gt;
+        ///  &lt;Tiles&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;0&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;1&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;2&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;3&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;4&quot; Terrain=&quot;Bar&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;5&quot; Terrain=&quot;Floor1&quot; Rotate=&quot;False&quot; /&gt;
+        ///    &lt;Tile X=&quot;0&quot; Y=&quot;6&quot; Terrain=&quot;Floor1&quot; Rota [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        public static string map {
+            get {
+                return ResourceManager.GetString("map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap panda {
@@ -663,9 +705,149 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap redfloor {
+            get {
+                object obj = ResourceManager.GetObject("redfloor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap slotmachinetemp {
+            get {
+                object obj = ResourceManager.GetObject("slotmachinetemp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap table {
             get {
                 object obj = ResourceManager.GetObject("table", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table1 {
+            get {
+                object obj = ResourceManager.GetObject("table1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table10 {
+            get {
+                object obj = ResourceManager.GetObject("table10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table11 {
+            get {
+                object obj = ResourceManager.GetObject("table11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table12 {
+            get {
+                object obj = ResourceManager.GetObject("table12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table2 {
+            get {
+                object obj = ResourceManager.GetObject("table2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table3 {
+            get {
+                object obj = ResourceManager.GetObject("table3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table4 {
+            get {
+                object obj = ResourceManager.GetObject("table4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table5 {
+            get {
+                object obj = ResourceManager.GetObject("table5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table6 {
+            get {
+                object obj = ResourceManager.GetObject("table6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table7 {
+            get {
+                object obj = ResourceManager.GetObject("table7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table8 {
+            get {
+                object obj = ResourceManager.GetObject("table8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap table9 {
+            get {
+                object obj = ResourceManager.GetObject("table9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

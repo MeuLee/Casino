@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
+﻿using System.Drawing;
 
 namespace CasinoUI.View.Map.Tiles
 {
-    public class GreyFloorTile : MapTile
+    public class BlackFloorTile : MapTile
     {
-        public GreyFloorTile(int x, int y) : base (x, y)
+        public BlackFloorTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
         {
 
         }
-
-        public override BitmapImage Sprite => throw new NotImplementedException();
-
-        public override bool CanBeMovedOver => throw new NotImplementedException();
     }
 }

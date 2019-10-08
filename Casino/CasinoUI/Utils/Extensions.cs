@@ -28,7 +28,6 @@ namespace CasinoUI.Utils
             {
                 bitmap.Save(memory, ImageFormat.Png);
                 memory.Position = 0;
-
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.StreamSource = memory;
@@ -42,6 +41,11 @@ namespace CasinoUI.Utils
         public static int ToInteger(this string str)
         {
             return int.Parse(str);
+        }
+
+        public static bool ToBoolean(this string str)
+        {
+            return bool.Parse(str);
         }
     }
 }

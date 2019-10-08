@@ -9,13 +9,13 @@ namespace EditorMap
 {
     public class Tile
     {
-        Color Color { get; set; }
         public string TileType { get; set; }
+        public bool Rotate { get; set; }
 
-        public Tile(Color c, string tileType)
+        public Tile(string tileType, bool rotate = false)
         {
-            Color = c;
             TileType = tileType;
+            Rotate = rotate;
         }
     }
 }
