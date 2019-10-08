@@ -74,33 +74,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Cards\Card.cs" />
-    <Compile Include="Model\Cards\CardStack.cs" />
-    <Compile Include="Model\Cards\GameCardStack.cs" />
-    <Compile Include="Model\HumanPlayer.cs" />
-    <Compile Include="Model\Player.cs" />
-    <Compile Include="Model\Poker\IPokerAction.cs" />
-    <Compile Include="Model\Poker\PokerAI.cs" />
-    <Compile Include="Model\Poker\PokerHand.cs" />
-    <Compile Include="Model\Poker\PokerLogic.cs" />
+    <Compile Include="Models\Cards\Card.cs" />
+    <Compile Include="Models\Cards\CardStack.cs" />
+    <Compile Include="Models\Cards\GameCardStack.cs" />
+    <Compile Include="Models\HumanPlayer.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Poker\IPokerAction.cs" />
+    <Compile Include="Models\Poker\PokerActionCode.cs" />
+    <Compile Include="Models\Poker\PokerAI.cs" />
+    <Compile Include="Controllers\PokerController.cs" />
+    <Compile Include="Models\Poker\PokerHand.cs" />
+    <Compile Include="Models\Poker\PokerLogic.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Extensions.cs" />
-    <Compile Include="View\CasinoGame.xaml.cs">
+    <Compile Include="Views\CasinoGame.xaml.cs">
       <DependentUpon>CasinoGame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GameCanvas.cs" />
-    <Compile Include="View\OptionsMenu.xaml.cs">
+    <Compile Include="Views\GameCanvas.cs" />
+    <Compile Include="Views\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\CasinoGame.xaml">
+    <Page Include="Views\CasinoGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainMenu.xaml">
+    <Page Include="Views\MainMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -108,11 +110,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainMenu.xaml.cs">
+    <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\OptionsMenu.xaml">
+    <Page Include="Views\OptionsMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -320,5 +322,6 @@
     <Resource Include="Resources\gauche1.gif" />
     <Resource Include="Resources\haut1.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

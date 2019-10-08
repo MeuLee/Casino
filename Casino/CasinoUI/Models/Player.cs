@@ -7,7 +7,7 @@ namespace CasinoUI.Model {
         public List<Card> Cards { get; set; } = new List<Card>();
         public int Money { get; set; }
 
-        public void PokerCall() {
+        public void PokerCall(int Money) {
             throw new System.NotImplementedException();
         }
 
