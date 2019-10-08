@@ -329,5 +329,11 @@
   <ItemGroup>
     <Resource Include="Resources\TableNeuve.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Wooden_Board.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Carte_Dos.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -26,6 +26,9 @@ namespace CasinoUI.View
         {
             InitializeComponent();
             TableBlueBackground.ImageSource = ToBitmapImage(Properties.Resources.TableNeuve);
+            CarteJoueurGauche.Source = ToBitmapImage(Properties.Resources._13S);
+            CarteJoueurDroite.Source = ToBitmapImage(Properties.Resources._13H);
+            CarteRetourne.Source = ToBitmapImage(Properties.Resources.Carte_Dos);
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
