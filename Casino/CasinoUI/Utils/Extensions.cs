@@ -28,7 +28,6 @@ namespace CasinoUI.Utils
             {
                 bitmap.Save(memory, ImageFormat.Png);
                 memory.Position = 0;
-
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.StreamSource = memory;

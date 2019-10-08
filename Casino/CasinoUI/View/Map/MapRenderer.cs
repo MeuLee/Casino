@@ -99,8 +99,8 @@ namespace CasinoUI.View.Map
 
         private static void DrawPlayer(DrawingContext dc, float tileWidth)
         {
-            int uiPlayerX = PlayerCoordOnUI(_cameraCenterX, PlayerX, 0, TilesAroundPlayerX),
-                uiPlayerY = PlayerCoordOnUI(_cameraCenterY, PlayerY, 1, TilesAroundPlayerY);
+            int uiPlayerX = PlayerCoordOnUI(_cameraCenterX, PlayerX, Map.GetLength(0), TilesAroundPlayerX),
+                uiPlayerY = PlayerCoordOnUI(_cameraCenterY, PlayerY, Map.GetLength(1), TilesAroundPlayerY);
             dc.DrawEllipse(Brushes.Green,
                            new Pen(Brushes.Green, 1.0),
                            new Point(uiPlayerX * tileWidth + tileWidth / 2,
@@ -109,19 +109,19 @@ namespace CasinoUI.View.Map
                            tileWidth / 3);
         }
 
-        private static int PlayerCoordOnUI(
+        public static int PlayerCoordOnUI(
             int cameraCenterCoord, 
             int playerCoord, 
-            int dimension, 
+            int mapLength, 
             int tilesAroundPlayerCoord)
         {
             if (cameraCenterCoord > playerCoord)
             {
                 return playerCoord;
             }
-            else if (playerCoord > Map.GetLength(dimension) - 1 - tilesAroundPlayerCoord)
+            else if (playerCoord > mapLength - 1 - tilesAroundPlayerCoord)
             {
-                return tilesAroundPlayerCoord * 2 - (Map.GetLength(dimension) - 1 - playerCoord);
+                return tilesAroundPlayerCoord * 2 - (mapLength - 1 - playerCoord);
             }
             else
             {

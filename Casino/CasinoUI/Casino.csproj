@@ -375,12 +375,6 @@
     <None Include="Resources\table12.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\blackfloor.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\redfloor.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\bartemp.png" />
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +382,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\map.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackfloor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redfloor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackfloor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redfloor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
