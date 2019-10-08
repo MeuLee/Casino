@@ -232,6 +232,8 @@ namespace CasinoUI.Model.Poker
         {
             int taille = listValue.Count;
             int compt = 0;
+            int comptC = 0;
+
             for (int i = 0; i < listValue.Count; i++)
             {
                 while (compt <= taille)
@@ -246,8 +248,8 @@ namespace CasinoUI.Model.Poker
                     }
                     compt++;
                 }
-                compt = 0;
-                taille--;
+                comptC++;
+                compt = comptC;
             }
         }
 

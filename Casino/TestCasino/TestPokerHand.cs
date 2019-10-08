@@ -38,6 +38,7 @@ namespace TestCasino
         {
             list.Clear();
             pokerCombo.ListValue.Clear();
+            pokerCombo.ComboValuePoss.Clear();
         }
 
         private void AddCardList(Card.CardRank rank, Card.CardSuit suit)
@@ -66,17 +67,21 @@ namespace TestCasino
         {
             List<Card> listValue = pokerCombo.ListValue;
             int compt = 0;
+            int comptC = 0;
 
             for(int i = 0; i < pokerCombo.ComboValuePoss.Count; i++)
             {
-                if (compt < pokerCombo.ComboValuePoss.Count - 1) {
-                    Assert.AreEqual((int)listValue[compt].Value, pokerCombo.ComboValuePoss[i].Item1);
+                if (compt < listValue.Count && comptC < listValue.Count) {
+                    Assert.AreEqual((int)listValue[comptC].Value, pokerCombo.ComboValuePoss[i].Item1);
                     Assert.AreEqual((int)listValue[compt].Value, pokerCombo.ComboValuePoss[i].Item2);
                 }
                 else
                 {
-                    Assert.AreEqual((int)listValue[compt - 1].Value, pokerCombo.ComboValuePoss[i].Item1);
+                    Assert.AreEqual((int)listValue[comptC].Value, pokerCombo.ComboValuePoss[i].Item1);
                     Assert.AreEqual(-1, pokerCombo.ComboValuePoss[i].Item2);
+
+                    comptC++;
+                    compt = 0;
                 }
 
                 compt++;
@@ -157,7 +162,13 @@ namespace TestCasino
         {
 
             CreateBoardCard(3, 0);
+            pokerTest.Invoke("DescendingValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("CreateSameKindCombo");
+            AssertSameCombo();
+            ClearLists();
 
+            CreateBoardCard(3, 1);
             pokerTest.Invoke("DescendingValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("CreateSameKindCombo");
