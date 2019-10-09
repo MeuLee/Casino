@@ -88,16 +88,18 @@
     <Compile Include="View\CasinoGame.xaml.cs">
       <DependentUpon>CasinoGame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GameCanvas.cs" />
+    <Compile Include="View\Map\GameCanvas.cs" />
     <Compile Include="View\Map\MapGenerator.cs" />
     <Compile Include="View\Map\MapRenderer.cs" />
+    <Compile Include="View\Map\MiniMapCanvas.cs" />
     <Compile Include="View\Map\Tiles\BarTile.cs" />
     <Compile Include="View\Map\Tiles\OnMovedOverEventArgs.cs" />
-    <Compile Include="View\Map\Tiles\TableTile.cs" />
-    <Compile Include="View\Map\Tiles\GreyFloorTile.cs" />
+    <Compile Include="View\Map\Tiles\ChairTile.cs" />
+    <Compile Include="View\Map\Tiles\BlackFloorTile.cs" />
     <Compile Include="View\Map\Tiles\MapTile.cs" />
     <Compile Include="View\Map\Tiles\RedFloorTile.cs" />
     <Compile Include="View\Map\Tiles\SlotMachineTile.cs" />
+    <Compile Include="View\Map\Tiles\TableTile.cs" />
     <Compile Include="View\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>
@@ -388,6 +390,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\map.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackfloor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redfloor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

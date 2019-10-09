@@ -1,5 +1,9 @@
-﻿using System.Drawing;
-using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CasinoUI.View.Map.Tiles
 {
@@ -7,22 +11,8 @@ namespace CasinoUI.View.Map.Tiles
     {
         public TableTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
         {
-            OnMovedOver += MovedOver;
-        }
-
-        private void MovedOver(object sender, OnMovedOverEventArgs e)
-        {
-            var result = MessageBox.Show("Wanna play poker?", "nice title m8", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                MessageBox.Show("epic gamer poker simulation");
-            }
-            else if (result == MessageBoxResult.No)
-            {
-                MapRenderer.PlayerX = e.OldX;
-                MapRenderer.PlayerY = e.OldY;
-                (sender as CasinoGame).GameCanvas.InvalidateVisual();
-            }
+            MiniMapBrush = System.Windows.Media.Brushes.Green;
+            MiniMapPen = new System.Windows.Media.Pen(MiniMapBrush, PEN_WIDTH);
         }
     }
 }

@@ -18,10 +18,11 @@ namespace CasinoUI.View.Map
         public static int PlayerX { get; set; } = 10;
         public static int PlayerY { get; set; } = 4;
 
-        public static void RenderMap(float canvasWidth, float canvasHeight, DrawingContext dc)
+        #region RenderMap
+        public static void RenderMap(DrawingContext dc, float canvasWidth, float canvasHeight)
         {
             SetCameraCenterValues();
-            float tileWidth = SetTileSize(canvasWidth, canvasHeight);
+            float tileWidth = SetMapTileSize(canvasWidth, canvasHeight);
             DrawTiles(dc, tileWidth);
             DrawPlayer(dc, tileWidth);
         }
@@ -70,7 +71,7 @@ namespace CasinoUI.View.Map
         /// and returns the lowest value.
         /// The whole map will fit in the canvas
         /// </summary>
-        private static float SetTileSize(float canvasWidth, float canvasHeight)
+        private static float SetMapTileSize(float canvasWidth, float canvasHeight)
         {
             return Math.Min(canvasWidth / (TilesAroundPlayerX * 2 + 1),
                             canvasHeight / (TilesAroundPlayerY * 2 + 1));
@@ -79,7 +80,7 @@ namespace CasinoUI.View.Map
         /// <summary>
         /// Draws each tile present in the camera's sight.
         /// </summary>
-        private static void DrawTiles(DrawingContext dc, float tileSize)
+        private static void DrawTiles(DrawingContext dc, float tileWidth)
         {
             //i: x coord on the (entire) map. index: x coord on the visible map.
             for (int i = _cameraCenterX - TilesAroundPlayerX, index = 0;
@@ -92,7 +93,7 @@ namespace CasinoUI.View.Map
                      j++, jndex++)
                 {
                     MapTile tile = Map[i, j];
-                    dc.DrawImage(tile.Sprite, new Rect(index * tileSize, jndex * tileSize, tileSize, tileSize));
+                    dc.DrawImage(tile.Sprite, new Rect(index * tileWidth, jndex * tileWidth, tileWidth, tileWidth));
                 }
             }
         }
@@ -128,5 +129,54 @@ namespace CasinoUI.View.Map
                 return tilesAroundPlayerCoord;
             }
         }
+        #endregion
+
+        #region RenderMiniMap
+        public static void RenderMiniMap(DrawingContext dc, float canvasWidth, float canvasHeight)
+        {
+            float tileWidth = SetMiniMapTileSize(canvasWidth, canvasHeight);
+            DrawMiniMapTiles(dc, tileWidth);
+            DrawPlayerOnMiniMap(dc, tileWidth);
+            SetCameraCenterValues();
+            DrawCameraSight(dc, tileWidth);
+        }
+
+        private static float SetMiniMapTileSize(float canvasWidth, float canvasHeight)
+        {
+            return Math.Min(canvasWidth / Map.GetLength(0), canvasHeight / Map.GetLength(1));
+        }
+
+        private static void DrawMiniMapTiles(DrawingContext dc, float tileWidth)
+        {
+            for (int i = 0; i < Map.GetLength(0); i++)
+            {
+                for (int j = 0; j < Map.GetLength(1); j++)
+                {
+                    MapTile t = Map[i, j];
+                    dc.DrawRectangle(t.MiniMapBrush, t.MiniMapPen, new Rect(i * tileWidth, j * tileWidth, tileWidth, tileWidth));
+                }
+            }
+        }
+
+        private static void DrawPlayerOnMiniMap(DrawingContext dc, float tileWidth)
+        {
+            dc.DrawEllipse(Brushes.Green,
+                            new Pen(Brushes.Green, 1.0),
+                            new Point(PlayerX * tileWidth + tileWidth / 2,
+                                      PlayerY * tileWidth + tileWidth / 2),
+                            tileWidth / 3,
+                            tileWidth / 3);
+        }
+
+        private static void DrawCameraSight(DrawingContext dc, float tileWidth)
+        {
+            Pen p = new Pen(Brushes.White, 0.75);
+            Point p1 = new Point((_cameraCenterX - TilesAroundPlayerX) * tileWidth,
+                                 (_cameraCenterY - TilesAroundPlayerY) * tileWidth);
+            Point p2 = new Point((_cameraCenterX + 1 + TilesAroundPlayerX) * tileWidth ,
+                                 (_cameraCenterY + 1 + TilesAroundPlayerY) * tileWidth);
+            dc.DrawRectangle(null, p, new Rect(p1, p2));
+        }
+        #endregion
     }
 }

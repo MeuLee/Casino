@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CasinoUI.View"
+        xmlns:local="clr-namespace:CasinoUI.View.Map"
         mc:Ignorable="d"
         Title="CasinoGame" Height="700" Width="950" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}"
         ResizeMode="NoResize"
-        KeyDown="Grid_KeyDown" >
+        KeyDown="Grid_KeyDown" 
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="135" />
@@ -20,7 +21,7 @@
             <RowDefinition Height="80" />
             <RowDefinition Height="80" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="90" />
+            <RowDefinition Height="150" />
         </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush x:Name="TableBackground"/>
@@ -51,5 +52,6 @@
                Grid.Row="2" VerticalAlignment="Top" Width="110" 
                Background="#FF099D10" FontSize="20" Height="33"/>
         <local:GameCanvas x:Name="GameCanvas" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Width="auto" Height="auto" />
+        <local:MiniMapCanvas x:Name="MiniMapCanvas" Grid.Row="3" Grid.Column="1" Width="auto" Height="auto" />
     </Grid>
 </Window>
