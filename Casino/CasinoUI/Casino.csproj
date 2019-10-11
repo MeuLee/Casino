@@ -339,6 +339,10 @@
     <Resource Include="Resources\TableNeuve.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Wooden_Board.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Carte_Dos.jpg" />
     <None Include="Resources\table1.png" />
   </ItemGroup>
   <ItemGroup>

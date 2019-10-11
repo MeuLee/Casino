@@ -623,9 +623,18 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Carte_Dos {
+            get {
+                object obj = ResourceManager.GetObject("Carte_Dos", resourceCulture);  
+                
+                return ((System.Drawing.Bitmap)(obj));
+             }
+         }
+
         public static System.Drawing.Bitmap blackfloor {
             get {
                 object obj = ResourceManager.GetObject("blackfloor", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -858,6 +867,16 @@ namespace CasinoUI.Properties {
         public static System.Drawing.Bitmap TableNeuve {
             get {
                 object obj = ResourceManager.GetObject("TableNeuve", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Wooden_Board {
+            get {
+                object obj = ResourceManager.GetObject("Wooden_Board", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
