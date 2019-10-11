@@ -19,7 +19,7 @@ namespace CasinoUI.Model {
             throw new System.NotImplementedException();
         }
 
-        public void PokerRaise() {
+        public void PokerRaise(int money) {
             throw new System.NotImplementedException();
         }
     }

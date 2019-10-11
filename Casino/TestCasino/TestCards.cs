@@ -58,7 +58,7 @@ namespace TestCasino
                 playerCardsAfter, gameCardsAfter;
 
             //Act
-            stack.DrawCard(player);
+            stack.PlayerDrawCard(player);
             playerCardsAfter = player.Cards.Count;
             gameCardsAfter = stack.Cards.Count;
 

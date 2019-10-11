@@ -1,4 +1,5 @@
-﻿using CasinoUI.Model.Cards;
+﻿    using CasinoUI.Model.Cards;
+using CasinoUI.Models.Poker;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +12,20 @@ namespace CasinoUI.Model.Poker {
         public List<Player> ListPlayers { get; set; }
         public GameCardStack CardStack { get; set; }
 
-        private int[] PlayerRoles; // <---  idx[0] = SmallBlind's index in ListPlayers
-                                   //       idx[1] = BigBlind's index in ListPlayers
-                                   //       idx[2] = CurrentPlayersTurn index in ListPlayers
+        public int[] PlayerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers
+                                                    //       idx[1] = BigBlind's index in ListPlayers
+                                                    //       idx[2] = CurrentPlayersTurn index in ListPlayers
 
-        private int Pot;
-        private CardStack TableCards;
+        public int Pot { get; set; }
+        public int CurrentRaise { get; set; }
+        public List<Card> TableCards { get; set; }
 
         public PokerLogic(HumanPlayer Human) {
             this.Human = Human;
             InitListPlayers();
             SetInitialRoles();
             CardStack = new GameCardStack();
-            TableCards = new CardStack();
+            TableCards = new List<Card>();
             Pot = 0;
         }
 
@@ -37,11 +39,13 @@ namespace CasinoUI.Model.Poker {
 
             // 4. firstPlayer decides to call, fold or raise
             // 5. other players do the same...
-            PlayRound();
-
             // 6. back to small blind: He decides if he wants to call, raise or fold
             // 7. back to big blind: He decides if he wants to raise or fold if someone raised
+            CurrentPlayerPlay(PokerActionCode.CALL);
+
             // 8. Place first 3 cards on table
+            PlaceInit3TableCards();
+
             // 9. rotate through players for them to play...
             // 10. go to second round... (NOTE: check if everybody but one folded or not)
             // 11. third... (NOTE: check if everybody but one folded or not)
@@ -64,8 +68,6 @@ namespace CasinoUI.Model.Poker {
             PlayerRoles[0] = 0;
             PlayerRoles[1] = 1;
             PlayerRoles[2] = 2;
-
-
         }
 
         private void ProceedNextTurn() {
@@ -97,8 +99,8 @@ namespace CasinoUI.Model.Poker {
         private void DistributeCards() {
             // TODO: Give cards to first player first;
             foreach (Player player in ListPlayers) {
-                CardStack.DrawCard(player);
-                CardStack.DrawCard(player);
+                CardStack.PlayerDrawCard(player);
+                CardStack.PlayerDrawCard(player);
             }
         }
 
@@ -108,10 +110,24 @@ namespace CasinoUI.Model.Poker {
             ListPlayers[PlayerRoles[1]].Money -= 3;
         }
 
-        private void PlayRound() {
-            int currentRaise = 0;
+        private void CurrentPlayerPlay(PokerActionCode Action) {
+            // TODO: add logic
 
-            
+            IncCurrentPlayerTurn();
+        }
+
+        private void PlaceInit3TableCards() {
+            for (int i = 0; i < 3; i++) {
+                TableCards.Add(CardStack.DrawCard());
+            }
+        }
+
+        private void IncCurrentPlayerTurn() {
+            PlayerRoles[2]++;
+
+            if (PlayerRoles[2] == ListPlayers.Count) {
+                PlayerRoles[2] = 0;
+            }
         }
     }
 }

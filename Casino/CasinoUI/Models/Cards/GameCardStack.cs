@@ -40,11 +40,17 @@ namespace CasinoUI.Model.Cards
             }
         }
 
-        public void DrawCard(Player current)
+        public void PlayerDrawCard(Player current)
         {
             Card card = Cards[0];
             current.Cards.Add(card);
             Cards.Remove(card);
+        }
+
+        public Card DrawCard() {
+            Card card = Cards[0];
+            Cards.Remove(card);
+            return card;
         }
     }
 }
