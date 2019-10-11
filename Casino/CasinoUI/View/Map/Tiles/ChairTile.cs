@@ -3,21 +3,21 @@ using System.Windows;
 
 namespace CasinoUI.View.Map.Tiles
 {
-    public class SlotMachineTile : MapTile 
+    public class ChairTile : MapTile
     {
-        public SlotMachineTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
+        public ChairTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
         {
             OnMovedOver += MovedOver;
-            MiniMapBrush = System.Windows.Media.Brushes.Yellow;
+            MiniMapBrush = System.Windows.Media.Brushes.Brown;
             MiniMapPen = new System.Windows.Media.Pen(MiniMapBrush, PEN_WIDTH);
         }
 
         private void MovedOver(object sender, OnMovedOverEventArgs e)
         {
-            var result = MessageBox.Show("Wanna play slot machine?", "nice title m8", MessageBoxButton.YesNo);
+            var result = MessageBox.Show("Wanna play poker?", "nice title m8", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                MessageBox.Show("epic gamer slot machine simulation");
+                MessageBox.Show("epic gamer poker simulation");
             }
             else if (result == MessageBoxResult.No)
             {

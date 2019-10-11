@@ -62,7 +62,7 @@ namespace CasinoUI.View.Map
                 System.Console.WriteLine($"CreateMapTile: {sw1.ElapsedMilliseconds} ms. Type: {map[x, y].GetType()}");
             }
             sw.Stop();
-            System.Console.WriteLine($"For loop: {(double)sw.ElapsedMilliseconds / (double)1000} seconds");
+            System.Console.WriteLine($"For loop: {sw.ElapsedMilliseconds / (double)1000} seconds");
         }
     }
 }
