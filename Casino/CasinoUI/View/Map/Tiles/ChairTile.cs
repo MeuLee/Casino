@@ -17,7 +17,8 @@ namespace CasinoUI.View.Map.Tiles
             var result = MessageBox.Show("Wanna play poker?", "nice title m8", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                MessageBox.Show("epic gamer poker simulation");
+                Poker nouveauJeuxPoker = new Poker();
+                nouveauJeuxPoker.Show();                
             }
             else if (result == MessageBoxResult.No)
             {
