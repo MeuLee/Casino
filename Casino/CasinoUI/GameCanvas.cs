@@ -1,33 +1,38 @@
-﻿using System;
+﻿using CasinoUI.Model.Cards;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace CasinoUI.Utils
+namespace CasinoUI.View
 {
-    public static class Extensions
+    public class GameCanvas : Canvas
     {
-        public static List<T> GetValues<T>()
+        public List<Card> CardsToDraw { get; set; } = new List<Card>();
+        protected override void OnRender(DrawingContext dc)
         {
-            return Enum.GetValues(typeof(T)).Cast<T>().ToList();
+            foreach (Card card in CardsToDraw)
+            {
+                dc.DrawImage(ToBitmapImage(card.Image), 
+                             new Rect(((int)card.Value - 1) * 80, (int)card.Suit * 135, 80, 135));
+            }
         }
 
-        public static void Swap<T>(this List<T> list, int index1, int index2)
-        {
-            T temp = list[index1];
-            list[index1] = list[index2];
-            list[index2] = temp;
-        }
-
-        public static BitmapImage ToBitmapImage(this Bitmap bitmap)
+        public static BitmapImage ToBitmapImage(Bitmap bitmap)
         {
             using (var memory = new MemoryStream())
             {
                 bitmap.Save(memory, ImageFormat.Png);
                 memory.Position = 0;
+
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.StreamSource = memory;
@@ -36,16 +41,6 @@ namespace CasinoUI.Utils
                 bitmapImage.Freeze();
                 return bitmapImage;
             }
-        }
-
-        public static int ToInteger(this string str)
-        {
-            return int.Parse(str);
-        }
-
-        public static bool ToBoolean(this string str)
-        {
-            return bool.Parse(str);
         }
     }
 }

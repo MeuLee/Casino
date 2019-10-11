@@ -14,7 +14,7 @@
             </Image.Effect>
         </Image>
         <Button x:Name="button" Click="button_Click" Content="Jouer&#xA;" HorizontalAlignment="Left" Margin="338,200,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
-        <Button x:Name="button_Copy" Content="Paramètres&#xA;" HorizontalAlignment="Left" Margin="338,250,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
+        <Button x:Name="button_Copy" Click="button_Options_Click" Content="Paramètres&#xA;" HorizontalAlignment="Left" Margin="338,250,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
         <Button x:Name="button_Copy1" Content="Quitter&#xA;" HorizontalAlignment="Left" Margin="338,300,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
         <Label x:Name="label" Content="CASINO" HorizontalAlignment="Left" Margin="264,42,0,0" VerticalAlignment="Top" Height="104" Width="270" FontSize="72" Background="#00000000" Opacity="0.99" Foreground="White">
 
