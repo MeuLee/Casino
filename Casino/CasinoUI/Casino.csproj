@@ -96,51 +96,34 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Extensions.cs" />
-    <Compile Include="Views\CasinoGame.xaml.cs">
-      <DependentUpon>CasinoGame.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Map\GameCanvas.cs" />
-    <Compile Include="View\Map\MapGenerator.cs" />
-    <Compile Include="View\Map\MapRenderer.cs" />
-    <Compile Include="View\Map\MiniMapCanvas.cs" />
-    <Compile Include="View\Map\Tiles\BarTile.cs" />
-    <Compile Include="View\Map\Tiles\OnMovedOverEventArgs.cs" />
-    <Compile Include="View\Map\Tiles\ChairTile.cs" />
-    <Compile Include="View\Map\Tiles\BlackFloorTile.cs" />
-    <Compile Include="View\Map\Tiles\MapTile.cs" />
-    <Compile Include="View\Map\Tiles\RedFloorTile.cs" />
-    <Compile Include="View\Map\Tiles\SlotMachineTile.cs" />
-    <Compile Include="View\Map\Tiles\TableTile.cs" />
-    <Compile Include="View\OptionsMenu.xaml.cs">
-      <DependentUpon>OptionsMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Poker.xaml.cs">
-      <DependentUpon>Poker.xaml</DependentUpon>
-    </Compile>
-    <Page Include="View\CasinoGame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\CasinoGame.xaml.cs" />
+    <Compile Include="Views\GameCanvas.cs" />
     <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\OptionsMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Poker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="Views\Map\GameCanvas.cs" />
+    <Compile Include="Views\Map\MapGenerator.cs" />
+    <Compile Include="Views\Map\MapRenderer.cs" />
+    <Compile Include="Views\Map\MiniMapCanvas.cs" />
+    <Compile Include="Views\Map\Tiles\BarTile.cs" />
+    <Compile Include="Views\Map\Tiles\BlackFloorTile.cs" />
+    <Compile Include="Views\Map\Tiles\ChairTile.cs" />
+    <Compile Include="Views\Map\Tiles\MapTile.cs" />
+    <Compile Include="Views\Map\Tiles\OnMovedOverEventArgs.cs" />
+    <Compile Include="Views\Map\Tiles\RedFloorTile.cs" />
+    <Compile Include="Views\Map\Tiles\SlotMachineTile.cs" />
+    <Compile Include="Views\Map\Tiles\TableTile.cs" />
+    <Compile Include="Views\OptionsMenu.xaml.cs">
+      <DependentUpon>OptionsMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Poker.xaml.cs">
+      <DependentUpon>Poker.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -417,6 +400,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\redfloor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\CasinoGame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\OptionsMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\Poker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
