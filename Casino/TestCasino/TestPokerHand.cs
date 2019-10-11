@@ -74,6 +74,7 @@ namespace TestCasino
                 if (compt < listValue.Count && comptC < listValue.Count) {
                     Assert.AreEqual((int)listValue[comptC].Value, pokerCombo.ComboValuePoss[i].Item1);
                     Assert.AreEqual((int)listValue[compt].Value, pokerCombo.ComboValuePoss[i].Item2);
+                    compt++;
                 }
                 else
                 {
@@ -81,10 +82,8 @@ namespace TestCasino
                     Assert.AreEqual(-1, pokerCombo.ComboValuePoss[i].Item2);
 
                     comptC++;
-                    compt = 0;
+                    compt = comptC;
                 }
-
-                compt++;
             }
         }
         #region Additional test attributes
@@ -169,6 +168,13 @@ namespace TestCasino
             ClearLists();
 
             CreateBoardCard(3, 1);
+            pokerTest.Invoke("DescendingValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("CreateSameKindCombo");
+            AssertSameCombo();
+            ClearLists();
+
+            CreateBoardCard(5, 4);
             pokerTest.Invoke("DescendingValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("CreateSameKindCombo");
