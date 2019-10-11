@@ -1,11 +1,8 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
+﻿using CasinoUI.Utils;
+using CasinoUI.View.Map;
+using CasinoUI.View.Map.Tiles;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace CasinoUI.View
 {
@@ -18,93 +15,53 @@ namespace CasinoUI.View
         {
             InitializeComponent();
             InitializeImage();
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void InitializeImage()
         {
-            ImageJoueur.Source = ToBitmapImage(Properties.Resources.panda);
-            TableBackground.ImageSource = ToBitmapImage(Properties.Resources.table);
-            Hero.Source = ToBitmapImage(Properties.Resources.droite1);
-            EntrerPoker.Source = ToBitmapImage(Properties.Resources.PokerEntrer);
-            EntrerPoker.Height = 50;
-            EntrerPoker.Width = 50;
+            ImgPlayer.Source = Properties.Resources.panda.ToBitmapImage();
+            TableBackground.ImageSource = Properties.Resources.table.ToBitmapImage();
         }
 
-        private void Canvas_KeyDown(object sender, KeyEventArgs e)
+        private void Grid_KeyDown(object sender, KeyEventArgs e) // how tf do i fire this event with the same interval inbetween
         {
-            long heroPosLeft = Convert.ToInt64(Hero.GetValue(Canvas.LeftProperty));
-            long heroPosTop = Convert.ToInt64(Hero.GetValue(Canvas.TopProperty));
-
+            int oldPlayerX = MapRenderer.PlayerX,
+                oldPlayerY = MapRenderer.PlayerY;
             switch (e.Key)
             {
-                case Key.S:
-                    if (heroPosTop < 380)
-                    {
-                        Hero.Source = ToBitmapImage(Properties.Resources.bas1);
-                        Canvas.SetTop(Hero, Canvas.GetTop(Hero) + 10);
-                    }
-                    break;
-
-                case Key.W:
-                    if (heroPosLeft > 125 || heroPosTop < 300)
-                    {
-                        if (heroPosTop > 0)
-                        {
-                            Hero.Source = ToBitmapImage(Properties.Resources.haut1);
-                            Canvas.SetTop(Hero, Canvas.GetTop(Hero) - 10);
-                        }
-                    }
-
-                    break;
-
                 case Key.A:
-                    if (heroPosLeft > 135 || heroPosTop > 310)
+                    if (MapRenderer.PlayerX > 0)
                     {
-                        if (heroPosLeft > 0)
-                        {
-                            Hero.Source = ToBitmapImage(Properties.Resources.gauche1);
-                            Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) - 10);
-                        }
+                        MapRenderer.PlayerX--;
                     }
                     break;
-
+                case Key.W:
+                    if (MapRenderer.PlayerY > 0)
+                    {
+                        MapRenderer.PlayerY--;
+                    }
+                    break;
+                case Key.S:
+                    if (MapRenderer.Map.GetLength(1) - 1 > MapRenderer.PlayerY)
+                    {
+                        MapRenderer.PlayerY++;
+                    }
+                    break;
                 case Key.D:
-                    if (heroPosLeft < 750)
+                    if (MapRenderer.Map.GetLength(0) - 1 > MapRenderer.PlayerX)
                     {
-                        Hero.Source = ToBitmapImage(Properties.Resources.droite1);
-                        Canvas.SetLeft(Hero, Canvas.GetLeft(Hero) + 10);
+                        MapRenderer.PlayerX++;
                     }
                     break;
-                case Key.E:
-                    if (heroPosLeft >= 400 && heroPosLeft <= 420)
-                    {
-                        if (heroPosTop >= 70 && heroPosTop <= 100)
-                        {
-                            Poker pokerGame = new Poker();
-                            pokerGame.Show();
-                            this.Close();
-                        }
-                    }
-                    break;
+                default:
+                    return;
             }
-        }
-
-        public static BitmapImage ToBitmapImage(Bitmap bitmap)
-        {
-            using (var memory = new MemoryStream())
-            {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-                bitmapImage.Freeze();
-                return bitmapImage;
-            }
+            // could be called in set property
+            GameCanvas.InvalidateVisual();
+            MapRenderer.Map[MapRenderer.PlayerX, MapRenderer.PlayerY]
+                       .OnMovedOver?
+                       .Invoke(this, new OnMovedOverEventArgs(oldPlayerX, oldPlayerY));
         }
     }
 }

@@ -89,6 +89,15 @@
       <DependentUpon>CasinoGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GameCanvas.cs" />
+    <Compile Include="View\Map\MapGenerator.cs" />
+    <Compile Include="View\Map\MapRenderer.cs" />
+    <Compile Include="View\Map\Tiles\BarTile.cs" />
+    <Compile Include="View\Map\Tiles\OnMovedOverEventArgs.cs" />
+    <Compile Include="View\Map\Tiles\TableTile.cs" />
+    <Compile Include="View\Map\Tiles\GreyFloorTile.cs" />
+    <Compile Include="View\Map\Tiles\MapTile.cs" />
+    <Compile Include="View\Map\Tiles\RedFloorTile.cs" />
+    <Compile Include="View\Map\Tiles\SlotMachineTile.cs" />
     <Compile Include="View\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>
@@ -130,7 +139,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -334,6 +343,61 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Carte_Dos.jpg" />
+    <None Include="Resources\table1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bartemp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\slotmachinetemp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackfloor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redfloor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackfloor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redfloor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

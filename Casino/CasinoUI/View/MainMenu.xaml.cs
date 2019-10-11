@@ -1,13 +1,5 @@
-﻿using CasinoUI.Model.Cards;
-using System;
-using System.Drawing;
 ﻿using CasinoUI.View;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace CasinoUI
 {
@@ -16,12 +8,8 @@ namespace CasinoUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GameCardStack _cards = new GameCardStack();
         public MainWindow()
         {
-            //Button btn = new Button();
-            //btn.Name = "Button";
-            //btn.Click += button_Click;
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
@@ -31,6 +19,12 @@ namespace CasinoUI
             CasinoGame game = new CasinoGame();
             game.Show();
             this.Close();
+        }
+
+        private void button_Options_Click(object sender, RoutedEventArgs e)
+        {
+            OptionMenu options = new OptionMenu();
+            options.Show();
         }
     }
 }
