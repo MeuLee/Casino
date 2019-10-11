@@ -46,7 +46,7 @@ namespace TestCasino
             list.Add(new Card(rank,suit, imageBidon));
         }
 
-        private void CreateBoardCard(int nbrCard, int diffCard)
+        private void CreateTableCard(int nbrCard, int diffCard)
         {
             int compt = 0;
 
@@ -111,18 +111,18 @@ namespace TestCasino
         [TestMethod]
         public void CreateListValueTestfilter()
         {
-            pokerTest.Invoke("DescendingValueList");
-            CreateBoardCard(3, 0);
+            pokerTest.Invoke("DescendValueList");
+            CreateTableCard(3, 0);
             pokerTest.Invoke("CreateListValue");
             Assert.AreEqual(1, pokerCombo.ListValue.Count);
             ClearLists();
 
-            CreateBoardCard(3, 1);
+            CreateTableCard(3, 1);
             pokerTest.Invoke("CreateListValue");
             Assert.AreEqual(2, pokerCombo.ListValue.Count);
             ClearLists();
 
-            CreateBoardCard(5, 4);
+            CreateTableCard(5, 4);
             pokerTest.Invoke("CreateListValue");
             Assert.AreEqual(5, pokerCombo.ListValue.Count);
             ClearLists();
@@ -135,7 +135,7 @@ namespace TestCasino
             AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
             AddCardList(Card.CardRank.Jack, Card.CardSuit.Hearts);
 
-            pokerTest.Invoke("DescendingValueList");
+            pokerTest.Invoke("DescendValueList");
 
             for(int i = 0; i < pokerCombo.ListValue.Count; i++)
             {
@@ -160,22 +160,22 @@ namespace TestCasino
         public void TestSameKindCombo()
         {
 
-            CreateBoardCard(3, 0);
-            pokerTest.Invoke("DescendingValueList");
+            CreateTableCard(3, 0);
+            pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("CreateSameKindCombo");
             AssertSameCombo();
             ClearLists();
 
-            CreateBoardCard(3, 1);
-            pokerTest.Invoke("DescendingValueList");
+            CreateTableCard(3, 1);
+            pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("CreateSameKindCombo");
             AssertSameCombo();
             ClearLists();
 
-            CreateBoardCard(5, 4);
-            pokerTest.Invoke("DescendingValueList");
+            CreateTableCard(5, 4);
+            pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("CreateSameKindCombo");
             AssertSameCombo();

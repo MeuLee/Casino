@@ -46,12 +46,12 @@ namespace CasinoUI.Model.Poker
         }
         public void CreateAllCombo()
         {
-            DescendingValueList();
+            DescendValueList();
             CreateListValue();
             CreateSameKindCombo();
             CreateStraightCombo();
 
-            DescendingSuitList();
+            DescendSuitList();
             CreateFlushCombo();
         }
 
@@ -135,7 +135,7 @@ namespace CasinoUI.Model.Poker
                 itemStraight--;
             }
         }
-        private void DescendingSuitList()
+        private void DescendSuitList()
         {
             listCardInGame.Sort((a, b) => b.Suit.CompareTo(a.Suit));
         }
@@ -276,7 +276,7 @@ namespace CasinoUI.Model.Poker
             }
         }
 
-        private void DescendingValueList()
+        private void DescendValueList()
         {
             listCardInGame.Sort((a, b) => b.Value.CompareTo(a.Value));
         }
