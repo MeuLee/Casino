@@ -71,7 +71,7 @@ namespace TestCasino
 
             for(int i = 0; i < pokerCombo.ComboValuePoss.Count; i++)
             {
-                if (compt < listValue.Count && comptC < listValue.Count) {
+                if (compt < listValue.Count && comptC < listValue.Count && listValue.Count > 1) {
                     Assert.AreEqual((int)listValue[comptC].Value, pokerCombo.ComboValuePoss[i].Item1);
                     Assert.AreEqual((int)listValue[compt].Value, pokerCombo.ComboValuePoss[i].Item2);
                     compt++;
@@ -85,6 +85,89 @@ namespace TestCasino
                     compt = comptC;
                 }
             }
+        }
+
+        private void StraightDirect()
+        {
+            CreateTableCard(3, 0);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(false, pokerCombo.IsStraight);
+            ClearLists();
+
+            CreateTableCard(3, 1);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(false, pokerCombo.IsStraight);
+            ClearLists();
+
+            CreateTableCard(4, 1);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(false, pokerCombo.IsStraight);
+            ClearLists();
+
+            CreateTableCard(4, 2);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+
+            CreateTableCard(5, 4);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+        }
+
+        private void StraightIndirect()
+        {
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.Jack, cardSuit);
+            AddCardList(Card.CardRank.Ten, cardSuit);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.Nine, cardSuit);
+            AddCardList(Card.CardRank.Ten, cardSuit);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.Ten, cardSuit);
+            AddCardList(Card.CardRank.Six, cardSuit);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(false, pokerCombo.IsStraight);
+            ClearLists();
+
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.Jack, cardSuit);
+            AddCardList(Card.CardRank.Ten, cardSuit);
+            AddCardList(Card.CardRank.Seven, cardSuit);
+            AddCardList(Card.CardRank.Two, cardSuit);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+
+
+
         }
         #region Additional test attributes
         //
@@ -183,5 +266,11 @@ namespace TestCasino
 
         }
 
+        [TestMethod]
+        public void TestisStraight()
+        {
+            StraightDirect();
+            StraightIndirect();
+        }
     }
 }
