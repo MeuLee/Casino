@@ -13,12 +13,17 @@ namespace CasinoUI.Model.Blackjack
 
         public int Pot { get; set; }
 
+        public int PlayerHandValue { get; set; }
+        public int DealerHandValue { get; set; }
+
         public BlackjackLogic(HumanPlayer Human)
         {
             this.Human = Human;
             InitListPlayers();
             CardStack = new GameCardStack();
             Pot = 0;
+            PlayerHandValue = 0;
+            DealerHandValue = 0;
         }
 
         private void GameFlow()
