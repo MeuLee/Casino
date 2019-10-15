@@ -3,47 +3,41 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CasinoUI.View"
         mc:Ignorable="d"
         Title="OptionsMenu" Height="350" Width="600">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="150"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="btnOpt1" 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Click="ClickedOption1"
-                Opacity="1">
-                Option 1
-        </Button>
-        <Button x:Name="btnOpt2" 
-                Grid.Row="0" 
-                Grid.Column="1"
-                Click="ClickedOption2"
-                Opacity="0.25">
-                Option 2
-        </Button>
-        <Button x:Name="btnOpt3" 
-                Grid.Row="0" 
-                Grid.Column="2"
-                Click="ClickedOption3"
-                Opacity="0.25">
-                Option 3
-        </Button>
-        <Button x:Name="btnOpt4" 
-                Grid.Row="0" 
-                Grid.Column="3"
-                Click="ClickedOption4"
-                Opacity="0.25">
-                Option 4
-        </Button>
+        <TabControl>
+            <TabItem Header="Audio" Width="196">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <Grid  Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="BtnMuteSoundFx" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="100, 5, 0, 0"/>
+                        <Label x:Name="LblMuteSoundFx" Grid.Row="0" Grid.Column="1" Content="Mute sound effects" />
+                        <Slider x:Name="SldGameSound" Maximum="100" Grid.Row="1" TickPlacement="BottomRight" TickFrequency="5" />
+                        <Label x:Name="LblGameSound" Content="Game volume" Grid.Row="1" Grid.Column="1" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Hotkeys" Width="196"/>
+            <TabItem Header="Game" Width="196"/>
+        </TabControl>
     </Grid>
 </Window>
