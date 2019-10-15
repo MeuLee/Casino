@@ -68,6 +68,8 @@ namespace CasinoUI.Model.Poker {
             PlayerRoles[0] = 0;
             PlayerRoles[1] = 1;
             PlayerRoles[2] = 2;
+
+            // draw high card for dealer
         }
 
         private void ProceedNextTurn() {
