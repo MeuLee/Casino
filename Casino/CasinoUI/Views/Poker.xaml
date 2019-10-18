@@ -113,7 +113,7 @@
             <Image x:Name="CarteRetourne_AI35" Canvas.Left="830" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
 
 
-            <Image x:Name="CarteRetourne_AI41" Canvas.Left="925" Canvas.Top="230" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="CarteRetourne_AI41" Canvas.Left="922" Canvas.Top="230" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -123,7 +123,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CarteRetourne_AI42" Canvas.Left="925" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="CarteRetourne_AI42" Canvas.Left="922" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -133,7 +133,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CarteRetourne_AI43" Canvas.Left="925" Canvas.Top="270" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="CarteRetourne_AI43" Canvas.Left="922" Canvas.Top="270" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -143,7 +143,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CarteRetourne_AI44" Canvas.Left="925" Canvas.Top="290" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="CarteRetourne_AI44" Canvas.Left="922" Canvas.Top="290" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -153,7 +153,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CarteRetourne_AI45" Canvas.Left="925" Canvas.Top="310" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="CarteRetourne_AI45" Canvas.Left="922" Canvas.Top="310" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
