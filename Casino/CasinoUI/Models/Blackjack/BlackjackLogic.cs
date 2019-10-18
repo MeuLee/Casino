@@ -39,12 +39,12 @@ namespace CasinoUI.Model.Blackjack
             {
                 if (player is HumanPlayer)
                 {
-                    checkHandValue(PlayerHandValue, player);
+                    CheckHandValue(PlayerHandValue, player);
 
                 }
                 else
                 {
-                    checkHandValue(DealerHandValue, player);
+                    CheckHandValue(DealerHandValue, player);
                 }
             }
 
@@ -84,17 +84,17 @@ namespace CasinoUI.Model.Blackjack
                 CardStack.PlayerDrawCard(player);
                 if(player is HumanPlayer)
                 {
-                    checkHandValue(PlayerHandValue, player);
+                    CheckHandValue(PlayerHandValue, player);
                     
                 } else
                 {
-                    checkHandValue(DealerHandValue, player);
+                    CheckHandValue(DealerHandValue, player);
                 }
             }
             RoundEnd = false;
         }
 
-        private void checkHandValue(int handValue, Player player)
+        private void CheckHandValue(int handValue, Player player)
         {
             handValue = 0;
             foreach (Card card in player.Cards)
@@ -136,18 +136,51 @@ namespace CasinoUI.Model.Blackjack
 
         private void CurrentPlayerPlay(BlackjackActionCode Action, Player CurrentPlayer)
         {
-            // TODO: add logic
             switch (Action)
             {
                 case BlackjackActionCode.HIT:
-                    CardStack.PlayerDrawCard(CurrentPlayer);                    
+                    CardStack.PlayerDrawCard(CurrentPlayer);
+                    if (CurrentPlayer is HumanPlayer)
+                    {
+                        CheckHandValue(PlayerHandValue, CurrentPlayer);
+                    }
+                    else
+                    {
+                        CheckHandValue(DealerHandValue, CurrentPlayer);
+                    }                    
                     break;
                 case BlackjackActionCode.STAND:
+                    if(CurrentPlayer is HumanPlayer)
+                    {
+                        PlayerStand = true;
+                    } else
+                    {
+                        DealerStand = true;
+                    }
                     break;
                 case BlackjackActionCode.INSURANCE:
+                    //only available if dealer face up card is ACE
+                    //first turn only
+                    //put side bet = to 1/2 initial bet. 
+                    //If dealer has 21 on first 2 cards, dealer pays 2:1 the side bet but you lose the init bet
+                    //If dealer has 21 on first 2 cards and so does player, dealer pays 2:1 the side bet and you take back init bet
+                    //If dealer does not have 21 on first 2 cards, player loses side bet and continue playing until end
+                    //If in previous case Player wins, player gets init bet, but loses side bet
+                    //If in previous case Player loses, player loses both bets
                     break;
                 case BlackjackActionCode.DOUBLEDOWN:
                     CardStack.PlayerDrawCard(CurrentPlayer);
+                    if (CurrentPlayer is HumanPlayer)
+                    {
+                        CheckHandValue(PlayerHandValue, CurrentPlayer);
+
+                    }
+                    else
+                    {
+                        CheckHandValue(DealerHandValue, CurrentPlayer);
+                    }
+                    PlayerStand = true;
+                    //Double init bet
                     break;
             }
 
