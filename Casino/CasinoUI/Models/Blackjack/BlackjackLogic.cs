@@ -43,6 +43,38 @@ namespace CasinoUI.Model.Blackjack
             {
                 CardStack.PlayerDrawCard(player);
                 CardStack.PlayerDrawCard(player);
+                if(player is HumanPlayer)
+                {
+                    checkHandValue(PlayerHandValue, player);
+                    
+                } else
+                {
+                    checkHandValue(DealerHandValue, player);
+                }
+            }
+        }
+
+        private void checkHandValue(int handValue, Player player)
+        {
+            handValue = 0;
+            foreach (Card card in player.Cards)
+            {
+                if (card.Equals(Card.CardRank.Jack) || card.Equals(Card.CardRank.Queen) || card.Equals(Card.CardRank.King))
+                {
+                    handValue += 10;
+                }
+                else if (card.Equals(Card.CardRank.Ace) && (handValue + 11 <= 21))
+                {
+                    handValue += 11;
+                }
+                else if (card.Equals(Card.CardRank.Ace) && (handValue + 11 > 21))
+                {
+                    handValue += 1;
+                }
+                else
+                {
+                    handValue += (int)card.Value;
+                }
             }
         }
 
@@ -58,6 +90,8 @@ namespace CasinoUI.Model.Blackjack
             {
                 player.Cards.Clear();
             }
+            PlayerHandValue = 0;
+            DealerHandValue = 0;
         }
 
         private void CurrentPlayerPlay(BlackjackActionCode Action, Player CurrentPlayer)
