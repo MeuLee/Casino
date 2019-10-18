@@ -16,6 +16,11 @@ namespace CasinoUI.Model.Blackjack
         public int PlayerHandValue { get; set; }
         public int DealerHandValue { get; set; }
 
+        public bool PlayerStand { get; set; }
+        public bool DealerStand { get; set; }
+
+        public bool RoundEnd { get; set; }
+
         public BlackjackLogic(HumanPlayer Human)
         {
             this.Human = Human;
@@ -23,12 +28,44 @@ namespace CasinoUI.Model.Blackjack
             CardStack = new GameCardStack();
             Pot = 0;
             PlayerHandValue = 0;
-            DealerHandValue = 0;
+            DealerHandValue = 0;            
         }
 
         private void GameFlow()
         {
             DistributeCards();
+
+            foreach (Player player in ListPlayers)
+            {
+                if (player is HumanPlayer)
+                {
+                    checkHandValue(PlayerHandValue, player);
+
+                }
+                else
+                {
+                    checkHandValue(DealerHandValue, player);
+                }
+            }
+
+            CheckForBlackjack();
+            if (RoundEnd)
+            {
+                ProceedNextTurn();
+            }
+        }
+
+        private void CheckForBlackjack()
+        {
+            if (PlayerHandValue == 21 && DealerHandValue != 21)
+            {
+                //Player wins bet 3:2
+                RoundEnd = true;
+            } else if (PlayerHandValue == 21 && DealerHandValue == 21)
+            {
+                //There is a tie. Return bet to player.
+                RoundEnd = true;
+            }
         }
 
         private void InitListPlayers()
@@ -39,6 +76,8 @@ namespace CasinoUI.Model.Blackjack
 
         private void DistributeCards()
         {
+            PlayerStand = false;
+            DealerStand = false;
             foreach (Player player in ListPlayers)
             {
                 CardStack.PlayerDrawCard(player);
@@ -52,6 +91,7 @@ namespace CasinoUI.Model.Blackjack
                     checkHandValue(DealerHandValue, player);
                 }
             }
+            RoundEnd = false;
         }
 
         private void checkHandValue(int handValue, Player player)
@@ -104,11 +144,10 @@ namespace CasinoUI.Model.Blackjack
                     break;
                 case BlackjackActionCode.STAND:
                     break;
-                case BlackjackActionCode.SPLIT:
-                    break;
                 case BlackjackActionCode.INSURANCE:
                     break;
                 case BlackjackActionCode.DOUBLEDOWN:
+                    CardStack.PlayerDrawCard(CurrentPlayer);
                     break;
             }
 
