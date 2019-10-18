@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CasinoUI.View.Map"
         mc:Ignorable="d"
-        Title="CasinoGame" Height="700" Width="950" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}"
+        Title="CasinoGame" Height="700" Width="950"
         ResizeMode="NoResize"
         KeyDown="Grid_KeyDown" 
         WindowStartupLocation="CenterScreen">
