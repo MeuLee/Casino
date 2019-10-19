@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CasinoUI"
-        xmlns:view="clr-namespace:CasinoUI.View"
         mc:Ignorable="d"
-        Title="Menu Principal" Height="450" Width="800" Background="Black"
-        FontFamily="Algerian" >
+        Title="Menu Principal" 
+        Height="450" Width="800" Background="Black" WindowStartupLocation="CenterScreen"
+        FontFamily="Algerian" FontSize="18">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -25,41 +24,44 @@
             <RowDefinition />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <Image x:Name="image" HorizontalAlignment="Left" 
+        <Image Grid.ColumnSpan="5" Grid.RowSpan="9"
                Source="/CasinoUI;component/Resources/bgMainMenu.jpg" 
-               Stretch="UniformToFill" Opacity="0.6" Grid.ColumnSpan="5" Grid.RowSpan="9">
+               Stretch="UniformToFill" Opacity="0.6">
             <Image.Effect>
                 <BlurEffect Radius="10"/>
             </Image.Effect>
         </Image>
-        <Button x:Name="button" Click="button_Click" Grid.Column="1" Grid.Row="3" 
-                Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                FontSize="18">
+        <TextBlock Grid.Column="1" Grid.Row="1"
+                   FontSize="72" Background="#00000000" Text="CASINO" TextAlignment="Center"/>
+        <Button x:Name="BtnPlay" Click="BtnPlay_Click" 
+                Grid.Column="1" Grid.Row="3"
+                HorizontalAlignment="Center"
+                Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
             <StackPanel Orientation="Horizontal">
-                <Image Source="../Resources/casinoChip.png" Height="25" Margin="0, 0, 10, 0"/>
+                <Image x:Name="ImgChip1" Height="25" Margin="0, 0, 10, 0"/>
                 <TextBlock Text="Jouer" Foreground="White" />
-                <Image Source="../Resources/casinoChip.png" Height="25" Margin="10, 0, 0, 0"/>
+                <Image x:Name="ImgChip2" Height="25" Margin="10, 0, 0, 0"/>
             </StackPanel>
         </Button>
-        <Button x:Name="button_Copy" Click="button_Options_Click"
-                Grid.Column="1" Grid.Row="5" FontSize="18"
+        <Button x:Name="BtnSettings" Click="BtnSettings_Click"
+                Grid.Column="1" Grid.Row="5" 
+                HorizontalAlignment="Center"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
             <StackPanel Orientation="Horizontal">
-                <Image Source="../Resources/casinoChip.png" Height="25" Margin="0, 0, 10, 0"/>
+                <Image x:Name="ImgChip3" Height="25" Margin="0, 0, 10, 0"/>
                 <TextBlock Text="Paramètres" Foreground="White" />
-                <Image Source="../Resources/casinoChip.png" Height="25" Margin="10, 0, 0, 0"/>
+                <Image x:Name="ImgChip4" Height="25" Margin="10, 0, 0, 0"/>
             </StackPanel>
         </Button>
-        <Button x:Name="button_Copy1" 
-                Grid.Column="1" Grid.Row="7" FontSize="18"
+        <Button x:Name="BtnClose" Click="BtnClose_Click"
+                Grid.Column="1" Grid.Row="7"
+                HorizontalAlignment="Center"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
             <StackPanel Orientation="Horizontal">
-                <Image Source="../Resources/casinoChip.png" Height="25" Margin="0, 0, 10, 0"/>
+                <Image x:Name="ImgChip5" Height="25" Margin="0, 0, 10, 0"/>
                 <TextBlock Text="Quitter" Foreground="White" />
-                <Image Source="../Resources/casinoChip.png" Height="25" Margin="10, 0, 0, 0"/>
+                <Image x:Name="ImgChip6" Height="25" Margin="10, 0, 0, 0"/>
             </StackPanel>
         </Button>
-        <Label x:Name="label" Content="CASINO" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"
-               FontSize="72" Background="#00000000" Opacity="0.99" Foreground="White" />
     </Grid>
 </Window>
