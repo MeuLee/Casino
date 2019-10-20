@@ -90,6 +90,7 @@
     <Compile Include="Controllers\PokerController.cs" />
     <Compile Include="Models\Poker\PokerHand.cs" />
     <Compile Include="Models\Poker\PokerLogic.cs" />
+    <Compile Include="Models\Poker\TexasHoldemLogic.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
