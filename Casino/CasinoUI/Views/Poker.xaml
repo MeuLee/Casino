@@ -38,7 +38,6 @@
                 Canvas.Left="710"
                 Canvas.Top="500">
             </Rectangle>
-            <Image x:Name="CarteJoueurGauche" Canvas.Left="453" Canvas.Top="418" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5">
             <Image x:Name="CarteJoueur1" Canvas.Left="482" Canvas.Top="415" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteJoueur2" Canvas.Left="502" Canvas.Top="415" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteJoueur3" Canvas.Left="522" Canvas.Top="415" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5"/>
@@ -55,19 +54,16 @@
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-8.826"/>
                         <RotateTransform Angle="90"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="CarteJoueurDroite" Canvas.Left="599" Canvas.Top="417" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5">
             <Image x:Name="CarteRetourne_AI12" Canvas.Left="210" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="8.826"/>
                         <RotateTransform Angle="90"/>
                         <TranslateTransform/>
                     </TransformGroup>
