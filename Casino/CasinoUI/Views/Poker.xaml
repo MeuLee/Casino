@@ -19,6 +19,7 @@
                 Canvas.Left="0"
                 Canvas.Top="495" />
             <Rectangle
+                x:Name="LeftRectangle"
                 Width="485"
                 Height="145"
                 Fill= "White"
@@ -39,6 +40,42 @@
                 Canvas.Left="710"
                 Canvas.Top="500">
             </Rectangle>
+            <Ellipse
+                x:Name="EllipseBlindJoueurAI1"
+                Width="30"
+                Height="30"
+                Canvas.Left="235"
+                Canvas.Top="380" />
+            <Ellipse
+                x:Name="EllipseBlindJoueurAI2"
+                Width="30"
+                Height="30"
+                Canvas.Left="450"
+                Canvas.Top="170" />
+            <Ellipse
+                x:Name="EllipseBlindJoueurAI3"
+                Width="30"
+                Height="30"
+                Canvas.Left="710"
+                Canvas.Top="170" />
+            <Ellipse
+                x:Name="EllipseBlindJoueurAI4"
+                Width="30"
+                Height="30"
+                Canvas.Left="910"
+                Canvas.Top="380" />
+            <Ellipse
+                x:Name="EllipseBlindJoueur"
+                Width="80"
+                Height="80"
+                Canvas.Left="1100"
+                Canvas.Top="510" />
+            <Ellipse
+                x:Name="EllipseDealer"
+                Width="30"
+                Height="30"
+                Canvas.Left="630"
+                Canvas.Top="200" />
             <Image x:Name="CarteJoueur1" Canvas.Left="482" Canvas.Top="415" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteJoueur2" Canvas.Left="502" Canvas.Top="415" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteJoueur3" Canvas.Left="522" Canvas.Top="415" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5"/>
@@ -107,8 +144,8 @@
             <Image x:Name="CarteRetourne_AI24" Canvas.Left="370" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteRetourne_AI25" Canvas.Left="390" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
 
-            <Image x:Name="CarteRetourne_AI32" Canvas.Left="750" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
-            <Image x:Name="CarteRetourne_AI31" Canvas.Left="770" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
+            <Image x:Name="CarteRetourne_AI31" Canvas.Left="750" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
+            <Image x:Name="CarteRetourne_AI32" Canvas.Left="770" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteRetourne_AI33" Canvas.Left="790" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteRetourne_AI34" Canvas.Left="810" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteRetourne_AI35" Canvas.Left="830" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>

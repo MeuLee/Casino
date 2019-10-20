@@ -420,5 +420,10 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BIG_BLIND.jpg" />
+    <Resource Include="Resources\DEALER.jpg" />
+    <Resource Include="Resources\SMALL_BLIND.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
