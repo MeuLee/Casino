@@ -12,7 +12,8 @@ namespace CasinoUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static readonly BitmapImage _casinoChip = Properties.Resources.redChip.ToBitmapImage();
+        private static readonly BitmapImage _casinoChip1 = Properties.Resources.PokerEntrer.ToBitmapImage();
+        private static readonly BitmapImage _casinoChip2 = Properties.Resources.redChip.ToBitmapImage();
         public MainWindow()
         {
             InitializeComponent();
@@ -22,12 +23,12 @@ namespace CasinoUI
         // S/O answers did not work as you can see.
         private void SetImages()
         {
-            ImgChip1.Source = _casinoChip;
-            ImgChip2.Source = _casinoChip;
-            ImgChip3.Source = _casinoChip;
-            ImgChip4.Source = _casinoChip;
-            ImgChip5.Source = _casinoChip;
-            ImgChip6.Source = _casinoChip;
+            ImgChip1.Source = _casinoChip1;
+            ImgChip2.Source = _casinoChip1;
+            ImgChip3.Source = _casinoChip1;
+            ImgChip4.Source = _casinoChip1;
+            ImgChip5.Source = _casinoChip1;
+            ImgChip6.Source = _casinoChip1;
         }
 
         private void BtnPlay_Click(object sender, RoutedEventArgs e)
@@ -51,8 +52,8 @@ namespace CasinoUI
             Button btn = sender as Button;
             btn.FontSize += 4;
             StackPanel sp = btn.Content as StackPanel;
-            (sp.Children[0] as Image).Source = Properties.Resources.blueChip.ToBitmapImage();
-            (sp.Children[2] as Image).Source = Properties.Resources.blueChip.ToBitmapImage();
+            (sp.Children[0] as Image).Source = _casinoChip2;
+            (sp.Children[2] as Image).Source = _casinoChip2;
         }
 
         private void Btn_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
@@ -60,8 +61,8 @@ namespace CasinoUI
             Button btn = sender as Button;
             btn.FontSize -= 4;
             StackPanel sp = btn.Content as StackPanel;
-            (sp.Children[0] as Image).Source = Properties.Resources.redChip.ToBitmapImage();
-            (sp.Children[2] as Image).Source = Properties.Resources.redChip.ToBitmapImage();
+            (sp.Children[0] as Image).Source = _casinoChip1;
+            (sp.Children[2] as Image).Source = _casinoChip1;
         }
     }
 }

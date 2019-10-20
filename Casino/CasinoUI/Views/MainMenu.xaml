@@ -45,7 +45,7 @@
             </StackPanel>
         </Button>
         <Button x:Name="BtnSettings" Style="{StaticResource Button.Hoverless}"
-                Click="BtnPlay_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
+                Click="BtnSettings_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
                 Grid.Column="1" Grid.Row="5" 
                 HorizontalAlignment="Center"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
@@ -56,7 +56,7 @@
             </StackPanel>
         </Button>
         <Button x:Name="BtnClose" Style="{StaticResource Button.Hoverless}"
-                Click="BtnPlay_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
+                Click="BtnClose_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
                 Grid.Column="1" Grid.Row="7"
                 HorizontalAlignment="Center"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
