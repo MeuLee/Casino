@@ -1,7 +1,7 @@
 ﻿using CasinoUI.Utils;
 using System.Windows;
 
-namespace CasinoUI.View
+namespace CasinoUI.Views
 {
     /// <summary>
     /// Logique d'interaction pour Poker.xaml

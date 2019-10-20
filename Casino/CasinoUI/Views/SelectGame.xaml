@@ -1,0 +1,89 @@
+﻿<Window x:Class="CasinoUI.Views.SelectGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="SelectGame" Height="450" Width="800" Background="Black"
+        FontSize="18" FontFamily="Algerian"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.ColumnSpan="7" Grid.RowSpan="7"
+               Source="/CasinoUI;component/Resources/bgMainMenu.jpg" 
+               Stretch="UniformToFill" Opacity="0.6">
+            <Image.Effect>
+                <BlurEffect Radius="10"/>
+            </Image.Effect>
+        </Image>
+        <Button x:Name="BtnMap" Style="{StaticResource Button.Hoverless}"
+                Grid.Column="0" Grid.Row="0"
+                MouseEnter="BtnMap_MouseEnter" MouseLeave="BtnMap_MouseLeave" Click="BtnMap_Click"
+                Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="White"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                FontSize="16">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgBackArrow" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Go back to Map" Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="BtnPoker" Style="{StaticResource Button.Hoverless}"
+                Grid.Column="1" Grid.Row="1"
+                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave" Click="BtnPoker_Click"
+                Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip1" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Poker" Foreground="White" />
+                <Image x:Name="ImgChip2" Height="25" Width ="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="BtnBlackJack" Style="{StaticResource Button.Hoverless}"
+                Grid.Column="3" Grid.Row="1"
+                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"  
+                Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="White"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip3" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="BlackJack" Foreground="White" />
+                <Image x:Name="ImgChip4" Height="25" Width ="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>            
+        </Button>
+        <Button x:Name="BtnSolitaire" Style="{StaticResource Button.Hoverless}"
+                Grid.Column="1" Grid.Row="3"
+                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"  
+                Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="White"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip5" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Solitaire" Foreground="White" />
+                <Image x:Name="ImgChip6" Height="25" Width ="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="BtnSlotMachine" Style="{StaticResource Button.Hoverless}"
+                Grid.Column="3" Grid.Row="3"
+                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"  
+                Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="White"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip7" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Slot Machine" Foreground="White" />
+                <Image x:Name="ImgChip8" Height="25" Width ="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>

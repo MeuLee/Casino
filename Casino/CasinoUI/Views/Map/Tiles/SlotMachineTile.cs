@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows;
 
-namespace CasinoUI.View.Map.Tiles
+namespace CasinoUI.Views.Map.Tiles
 {
     public class SlotMachineTile : MapTile 
     {

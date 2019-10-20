@@ -124,6 +124,9 @@
     <Compile Include="Views\Poker.xaml.cs">
       <DependentUpon>Poker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SelectGame.xaml.cs">
+      <DependentUpon>SelectGame.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -419,6 +422,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\SelectGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\casinoChip.png" />
@@ -428,6 +435,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\blueChip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

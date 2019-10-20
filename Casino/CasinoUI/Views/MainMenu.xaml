@@ -6,23 +6,24 @@
         mc:Ignorable="d"
         Title="Menu Principal" 
         Height="450" Width="800" Background="Black" WindowStartupLocation="CenterScreen"
-        FontFamily="Algerian" FontSize="18">
+        FontFamily="Algerian" FontSize="18"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="275" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="275"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="45" />
-            <RowDefinition Height="100" />
-            <RowDefinition Height="40" />
-            <RowDefinition />
-            <RowDefinition Height="40" />
-            <RowDefinition />
-            <RowDefinition Height="40" />
-            <RowDefinition />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Image Grid.ColumnSpan="5" Grid.RowSpan="9"
                Source="/CasinoUI;component/Resources/bgMainMenu.jpg" 
@@ -32,9 +33,9 @@
             </Image.Effect>
         </Image>
         <TextBlock Grid.Column="1" Grid.Row="1"
-                   FontSize="72" Background="#00000000" Text="CASINO" TextAlignment="Center"/>
+                   FontSize="72" Text="CASINO" TextAlignment="Center" Foreground="White"/>
         <Button x:Name="BtnPlay" Style="{StaticResource Button.Hoverless}"
-                Click="BtnPlay_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"                
+                Click="BtnPlay_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
                 Grid.Column="1" Grid.Row="3"
                 HorizontalAlignment="Center"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
@@ -46,7 +47,7 @@
         </Button>
         <Button x:Name="BtnSettings" Style="{StaticResource Button.Hoverless}"
                 Click="BtnSettings_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
-                Grid.Column="1" Grid.Row="5" 
+                Grid.Column="1" Grid.Row="5"
                 HorizontalAlignment="Center"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
             <StackPanel Orientation="Horizontal">
