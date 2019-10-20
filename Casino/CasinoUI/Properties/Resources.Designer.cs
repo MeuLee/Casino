@@ -623,6 +623,16 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap blackChip {
+            get {
+                object obj = ResourceManager.GetObject("blackChip", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap blackfloor {
             get {
                 object obj = ResourceManager.GetObject("blackfloor", resourceCulture);
@@ -633,9 +643,9 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Carte_Dos {
+        public static System.Drawing.Bitmap blueChip {
             get {
-                object obj = ResourceManager.GetObject("Carte_Dos", resourceCulture);
+                object obj = ResourceManager.GetObject("blueChip", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -643,9 +653,9 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap casinoChip {
+        public static System.Drawing.Bitmap Carte_Dos {
             get {
-                object obj = ResourceManager.GetObject("casinoChip", resourceCulture);
+                object obj = ResourceManager.GetObject("Carte_Dos", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -718,6 +728,16 @@ namespace CasinoUI.Properties {
         public static System.Drawing.Bitmap PokerEntrer {
             get {
                 object obj = ResourceManager.GetObject("PokerEntrer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap redChip {
+            get {
+                object obj = ResourceManager.GetObject("redChip", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

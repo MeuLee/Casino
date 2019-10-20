@@ -33,7 +33,8 @@
         </Image>
         <TextBlock Grid.Column="1" Grid.Row="1"
                    FontSize="72" Background="#00000000" Text="CASINO" TextAlignment="Center"/>
-        <Button x:Name="BtnPlay" Click="BtnPlay_Click" 
+        <Button x:Name="BtnPlay" Style="{StaticResource Button.Hoverless}"
+                Click="BtnPlay_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"                
                 Grid.Column="1" Grid.Row="3"
                 HorizontalAlignment="Center"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
@@ -43,7 +44,8 @@
                 <Image x:Name="ImgChip2" Height="25" Margin="10, 0, 0, 0"/>
             </StackPanel>
         </Button>
-        <Button x:Name="BtnSettings" Click="BtnSettings_Click"
+        <Button x:Name="BtnSettings" Style="{StaticResource Button.Hoverless}"
+                Click="BtnPlay_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
                 Grid.Column="1" Grid.Row="5" 
                 HorizontalAlignment="Center"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
@@ -53,7 +55,8 @@
                 <Image x:Name="ImgChip4" Height="25" Margin="10, 0, 0, 0"/>
             </StackPanel>
         </Button>
-        <Button x:Name="BtnClose" Click="BtnClose_Click"
+        <Button x:Name="BtnClose" Style="{StaticResource Button.Hoverless}"
+                Click="BtnPlay_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
                 Grid.Column="1" Grid.Row="7"
                 HorizontalAlignment="Center"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0">

@@ -268,6 +268,7 @@
     <None Include="Resources\AS.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\blueChip" />
     <None Include="Resources\JC.png" />
   </ItemGroup>
   <ItemGroup>
@@ -421,6 +422,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\casinoChip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackChip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blueChip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
