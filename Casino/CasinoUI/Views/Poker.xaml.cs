@@ -1,5 +1,7 @@
 ﻿using CasinoUI.Utils;
+using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace CasinoUI.View
 {
@@ -13,6 +15,11 @@ namespace CasinoUI.View
             InitializeComponent();
             TableBlueBackground.ImageSource = Properties.Resources.TableNeuve.ToBitmapImage();
             CarteRetourne.Source = Properties.Resources.Carte_Dos.ToBitmapImage();
+
+            ImageBrush imgBrush = new ImageBrush();
+            imgBrush.ImageSource = Properties.Resources.table.ToBitmapImage();
+
+            RightRectangle.Fill = imgBrush;
 
             CarteRetourne_AI11.Source = Properties.Resources.Carte_Dos.ToBitmapImage();
             CarteRetourne_AI12.Source = Properties.Resources.Carte_Dos.ToBitmapImage();

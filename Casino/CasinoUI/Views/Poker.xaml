@@ -32,6 +32,7 @@
                 Canvas.Left="705"
                 Canvas.Top="495" />
             <Rectangle
+                x:Name="RightRectangle"
                 Width="485"
                 Height="145"
                 Fill= "White"
@@ -45,10 +46,10 @@
             <Image x:Name="CarteJoueur5" Canvas.Left="562" Canvas.Top="415" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5"/>
 
             <Image x:Name="CartePack" Canvas.Left="565" Canvas.Top="175" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
-            <Button x:Name="BtnSeCoucher" Content="Coucher" Canvas.Left="10" Canvas.Top="560" Width="90" Height="35"/>
-            <Button x:Name ="BtnSuivre" Content="Suivre" Canvas.Left="136" Canvas.Top="560" Width="90" Height="35"/>
-            <Button x:Name ="BtnRelancer" Content="Relancer" Canvas.Left="261" Canvas.Top="560" Width="90" Height="35"/>
-            
+            <Button x:Name="BtnSeCoucher" Content="Coucher" Canvas.Left="50" Canvas.Top="560" Width="90" Height="35"/>
+            <Button x:Name ="BtnSuivre" Content="Suivre" Canvas.Left="200" Canvas.Top="560" Width="90" Height="35"/>
+            <Button x:Name ="BtnRelancer" Content="Relancer" Canvas.Left="350" Canvas.Top="560" Width="90" Height="35"/>
+
             <Image x:Name="CarteRetourne_AI11" Canvas.Left="210" Canvas.Top="230" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -99,7 +100,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            
+
             <Image x:Name="CarteRetourne_AI21" Canvas.Left="310" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteRetourne_AI22" Canvas.Left="330" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteRetourne_AI23" Canvas.Left="350" Canvas.Top="160" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
@@ -168,7 +169,9 @@
             <Image x:Name="CarteJeu2" Canvas.Left="465" Canvas.Top="280" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteJeu3" Canvas.Left="565" Canvas.Top="280" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteJeu4" Canvas.Left="665" Canvas.Top="280" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
-            <Image x:Name="CarteJeu5" Canvas.Left="765" Canvas.Top="280" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>        
+            <Image x:Name="CarteJeu5" Canvas.Left="765" Canvas.Top="280" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
+            <Label Content="Argent :" Canvas.Left="710" Canvas.Top="500" FontSize="24" Foreground="White" Height="49" Width="110"/>
+            <Label Content="000000$" Canvas.Left="880" Canvas.Top="550" FontSize="34"  Foreground="White" Height="75" Width="139"/>
         </Canvas>
     </Grid>
 </Window>
