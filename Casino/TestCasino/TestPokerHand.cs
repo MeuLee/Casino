@@ -189,7 +189,7 @@ namespace TestCasino
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("CreateList");
-            pokerTest.Invoke("RemoveCard");
+            pokerTest.Invoke("AdjustCards");
             AssertRemoveCard(tab);
             ClearLists();
         }

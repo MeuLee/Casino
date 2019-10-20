@@ -95,7 +95,7 @@ namespace CasinoUI.Model.Poker
         private void StraightCombo()
         {
             CreateList();
-            RemoveCard();
+            AdjustCards();
             InsertComboStraight();
 
         }
@@ -107,7 +107,7 @@ namespace CasinoUI.Model.Poker
                 comboSraightPoss.Add(Tuple.Create(ListTempCombo[i], ListTempCombo[i + 1]));
             }
         }
-        private void RemoveCard()
+        private void AdjustCards()
         {
 
             foreach (Card card in listValue)
@@ -117,78 +117,100 @@ namespace CasinoUI.Model.Poker
                     ListTempCombo.Remove((int)card.Value);
                 }
             }
+
+            DetermineStraight();
+
+        }
+
+        private void DetermineStraight()
+        {
             if (listValue.Count == 4)
             {
-                if (ListTempCombo.Count > 2)
-                {
-                    switch (CheckerTypeStraight())
-                    {
-                        case 2:
-                            if (ListTempCombo[0] != 14)
-                            {
-                                ListTempCombo.RemoveAt(0);
-                            }
-                            break;
-                        case 3:
-                            ListTempCombo.RemoveAt(0);
-                            break;
-                    }
-                }
+                FourCardStraightPoss();
             }
-            else if(listValue.Count == 3)
+            else if (listValue.Count == 3)
             {
-                if (ListTempCombo.Count > 3)
-                {
-
-                    switch (CheckerTypeStraight())
-                    {
-                        case 2:
-                            ListTempCombo.RemoveAt(0);
-                            break;
-                        case 3:
-                            ListTempCombo.RemoveRange(0, 2);
-                            break;
-                    }
-                }
-                else if (ListTempCombo.Count > 2)
-                {
-                    switch (CheckerTypeStraight())
-                    {
-                        case 3:
-                            ListTempCombo.RemoveAt(0);
-                            break;
-                    }
-                }
+                ThreeCardsStraighPoss();
             }
             else
+            {
+                FiveCardsStraightPoss();
+            }
+        }
+
+        private void FiveCardsStraightPoss()
+        {
+            switch (CheckerTypeStraight())
+            {
+                case 2:
+                    if (ThreeCardEnd() && ListTempCombo[0] == 14)
+                    {
+                        ListTempCombo.RemoveAt(0);
+                    }
+                    break;
+                case 3:
+                    if (ThreeCardEnd())
+                    {
+                        int compt = 1;
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int itemStraight = (int)listValue[listValue.Count - 1].Value - compt;
+
+                            if (itemStraight < 15 && itemStraight > 1 && !ListTempCombo.Contains(itemStraight))
+                            {
+                                ListTempCombo.Add(itemStraight);
+                            }
+                            compt++;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private void ThreeCardsStraighPoss()
+        {
+            if (ListTempCombo.Count > 3)
+            {
+
+                switch (CheckerTypeStraight())
+                {
+                    case 2:
+                        ListTempCombo.RemoveAt(0);
+                        break;
+                    case 3:
+                        ListTempCombo.RemoveRange(0, 2);
+                        break;
+                }
+            }
+            else if (ListTempCombo.Count > 2)
+            {
+                switch (CheckerTypeStraight())
+                {
+                    case 3:
+                        ListTempCombo.RemoveAt(0);
+                        break;
+                }
+            }
+        }
+
+        private void FourCardStraightPoss()
+        {
+            if (ListTempCombo.Count > 2)
             {
                 switch (CheckerTypeStraight())
                 {
                     case 2:
-                        if (ThreeCardEnd() && ListTempCombo[0] == 14) {
+                        if (ListTempCombo[0] != 14)
+                        {
                             ListTempCombo.RemoveAt(0);
                         }
                         break;
                     case 3:
-                        if (ThreeCardEnd())
-                        {
-                            int compt = 1;
-
-                            for (int i = 0; i < 2; i++)
-                            {
-                                int itemStraight = (int)listValue[listValue.Count - 1].Value - compt;
-
-                                if (itemStraight < 15 && itemStraight > 1 && !ListTempCombo.Contains(itemStraight))
-                                {
-                                    ListTempCombo.Add(itemStraight);
-                                }
-                                compt++;
-                            }
-                        }
-                            break;
+                        ListTempCombo.RemoveAt(0);
+                        break;
                 }
             }
-
         }
 
         private bool ThreeCardEnd()
