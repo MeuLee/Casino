@@ -467,14 +467,14 @@ namespace TestCasino
                                  Card.CardRank.Ten,
                                  Card.CardRank.Nine);
 
-            TestRemoveCardGeneric(new int[] { 14, 11, 10, 6, 5},
+            TestRemoveCardGeneric(new int[] { 14, 11, 10, 6, 5 },
                                  Card.CardRank.King,
                                  Card.CardRank.Queen,
                                  Card.CardRank.Nine,
                                  Card.CardRank.Eight,
                                  Card.CardRank.Seven);
 
-            TestRemoveCardGeneric(new int[] { 9, 8},
+            TestRemoveCardGeneric(new int[] { 9, 8 },
                                  Card.CardRank.Ace,
                                  Card.CardRank.King,
                                  Card.CardRank.Queen,
@@ -494,6 +494,13 @@ namespace TestCasino
                                  Card.CardRank.Nine,
                                  Card.CardRank.Eight,
                                  Card.CardRank.Ten);
+
+            TestRemoveCardGeneric(new int[] {13, 10, 6, 5},
+                                Card.CardRank.Queen,
+                                Card.CardRank.Eight,
+                                Card.CardRank.Jack,
+                                Card.CardRank.Seven,
+                                Card.CardRank.Nine);
         }
     }
 

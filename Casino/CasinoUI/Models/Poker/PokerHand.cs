@@ -160,22 +160,30 @@ namespace CasinoUI.Model.Poker
                     }
                 }
             }
-            else if(ThreeCardEnd())
+            else
             {
                 switch (CheckerTypeStraight())
                 {
+                    case 2:
+                        if (ThreeCardEnd() && ListTempCombo[0] == 14) {
+                            ListTempCombo.RemoveAt(0);
+                        }
+                        break;
                     case 3:
-                        int compt = 1;
-
-                        for(int i = 0; i < 2; i++)
+                        if (ThreeCardEnd())
                         {
-                            int itemStraight = (int)listValue[listValue.Count - 1].Value - compt;
+                            int compt = 1;
 
-                            if (itemStraight < 15 && itemStraight > 1 && !ListTempCombo.Contains(itemStraight))
+                            for (int i = 0; i < 2; i++)
                             {
-                                ListTempCombo.Add(itemStraight);
+                                int itemStraight = (int)listValue[listValue.Count - 1].Value - compt;
+
+                                if (itemStraight < 15 && itemStraight > 1 && !ListTempCombo.Contains(itemStraight))
+                                {
+                                    ListTempCombo.Add(itemStraight);
+                                }
+                                compt++;
                             }
-                            compt ++;
                         }
                             break;
                 }
@@ -188,21 +196,21 @@ namespace CasinoUI.Model.Poker
             bool isTrue = false;
             int comptSuite = 0;
             if (ListValue.Count == 5) {
-                for (int i = 2; i < ListValue.Count - 1; i++)
+                for (int i = 0; i < ListValue.Count - 1; i++)
                 {
-                    if(ListValue[i] == ListValue[i + 1])
+                    if(ListValue[i].Value == ListValue[i + 1].Value + 1)
                     {
                         comptSuite++;
                     }
                     else
                     {
-                        comptSuite = -1;
+                        comptSuite = 0;
                     }
 
                 }
             }
 
-            if (comptSuite >= 2)
+            if (comptSuite == 2)
             {
                 isTrue = true;
             }
