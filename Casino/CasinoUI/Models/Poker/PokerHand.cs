@@ -140,7 +140,7 @@ namespace CasinoUI.Model.Poker
 
         private void FiveCardsStraightPoss()
         {
-            switch (CheckerTypeStraight())
+            switch (SpaceBetweenCard())
             {
                 case 2:
                     if (ThreeCardEnd() && ListTempCombo[0] == 14)
@@ -173,7 +173,7 @@ namespace CasinoUI.Model.Poker
             if (ListTempCombo.Count > 3)
             {
 
-                switch (CheckerTypeStraight())
+                switch (SpaceBetweenCard())
                 {
                     case 2:
                         ListTempCombo.RemoveAt(0);
@@ -185,7 +185,7 @@ namespace CasinoUI.Model.Poker
             }
             else if (ListTempCombo.Count > 2)
             {
-                switch (CheckerTypeStraight())
+                switch (SpaceBetweenCard())
                 {
                     case 3:
                         ListTempCombo.RemoveAt(0);
@@ -198,7 +198,7 @@ namespace CasinoUI.Model.Poker
         {
             if (ListTempCombo.Count > 2)
             {
-                switch (CheckerTypeStraight())
+                switch (SpaceBetweenCard())
                 {
                     case 2:
                         if (ListTempCombo[0] != 14)
@@ -240,7 +240,7 @@ namespace CasinoUI.Model.Poker
             return isTrue;
         }
 
-        private int CheckerTypeStraight()
+        private int SpaceBetweenCard()
         {
             int compt = 0;
             int nbr = 1;
