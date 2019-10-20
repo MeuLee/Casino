@@ -15,6 +15,8 @@ namespace CasinoUI.View
             CarteJoueurGauche.Source = Properties.Resources._13S.ToBitmapImage();
             CarteJoueurDroite.Source = Properties.Resources._13H.ToBitmapImage();
             CarteRetourne.Source = Properties.Resources.Carte_Dos.ToBitmapImage();
+            CarteRetourne_AI11.Source = Properties.Resources.Carte_Dos.ToBitmapImage();
+            CarteRetourne_AI12.Source = Properties.Resources.Carte_Dos.ToBitmapImage();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
     }
