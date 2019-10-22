@@ -84,6 +84,7 @@
     <Compile Include="Models\Cards\GameCardStack.cs" />
     <Compile Include="Models\HumanPlayer.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PokerPlayer.cs" />
     <Compile Include="Models\Poker\IPokerAction.cs" />
     <Compile Include="Models\Poker\PokerActionCode.cs" />
     <Compile Include="Models\Poker\PokerAI.cs" />
