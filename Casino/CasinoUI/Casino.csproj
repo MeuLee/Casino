@@ -100,6 +100,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\BlackJack.xaml.cs">
+      <DependentUpon>BlackJack.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CasinoGame.xaml.cs" />
     <Compile Include="Views\GameCanvas.cs" />
     <Compile Include="Views\MainMenu.xaml.cs">
@@ -406,6 +409,10 @@
     <None Include="Resources\redfloor.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\BlackJack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CasinoGame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -438,6 +445,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\backArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackjackTable.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

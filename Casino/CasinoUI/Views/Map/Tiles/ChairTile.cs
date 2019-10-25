@@ -1,5 +1,4 @@
-﻿using CasinoUI.Views;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace CasinoUI.Views.Map.Tiles
 {

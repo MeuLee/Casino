@@ -1,5 +1,4 @@
 ﻿using CasinoUI.Utils;
-using CasinoUI.Views;
 using CasinoUI.Views.Map;
 using System.Windows;
 using System.Windows.Controls;
@@ -85,6 +84,11 @@ namespace CasinoUI.Views
         {
             new Poker().Show();
             Close();
+        }
+
+        private void BtnBlackJack_Click(object sender, RoutedEventArgs e)
+        {
+            new BlackJack().Show();
         }
     }
 }

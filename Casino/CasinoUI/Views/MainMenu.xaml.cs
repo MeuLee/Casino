@@ -32,7 +32,8 @@ namespace CasinoUI
 
         private void BtnPlay_Click(object sender, RoutedEventArgs e)
         {
-            new CasinoGame().Show();
+            //new CasinoGame().Show();
+            new BlackJack().Show();
             Close();
         }
 

@@ -54,7 +54,7 @@
         </Button>
         <Button x:Name="BtnBlackJack" Style="{StaticResource Button.Hoverless}"
                 Grid.Column="3" Grid.Row="1"
-                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"  
+                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave" Click="BtnBlackJack_Click"
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="White"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
