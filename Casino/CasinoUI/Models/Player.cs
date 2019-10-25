@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CasinoUI.Model {
     public class Player : IBlackjackAction {
-        public List<Card> Cards { get; set; } = new List<Card>();
+        public List<Card> hand { get; set; } = new List<Card>();
         public int Money { get; set; }
 
         public void BlackjackDoubleDown()

@@ -1,4 +1,5 @@
 ﻿using CasinoUI.Model.Cards;
+using CasinoUI.Models;
 using CasinoUI.Models.Poker;
 using System;
 using System.Collections.Generic;
@@ -8,37 +9,39 @@ using System.Threading.Tasks;
 
 namespace CasinoUI.Model.Poker {
     public class PokerLogic {
-        private HumanPlayer human;
-        public List<Player> listAI { get; set; }
+        public List<PokerPlayer> listPlayers { get; set; }  // index 0 is always the human player
         public GameCardStack cardStack { get; set; }
 
         public int[] playerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers                            
                                                     //       idx[1] = BigBlind's index in ListPlayers
+                                                    //       idx[2] = First player to play
         public int pot { get; set; }
         public int currentRaise { get; set; }
 
-        public PokerLogic(HumanPlayer Human) {
-            this.human = Human;
-            initListPlayers();
+        public PokerLogic(PokerPlayer human) {
+            initListPlayers(human);
             setInitialRoles();
             cardStack = new GameCardStack();            
             pot = 0;
+            currentRaise = 2;
         }
 
-        private void initListPlayers() {
-            listAI = new List<Player>();
+        private void initListPlayers(PokerPlayer human) {
+            listPlayers = new List<PokerPlayer>();
 
-            for (int i = 0; i < listAI.Count; i++) {
-                listAI[i] = new PokerAI();
-                listAI[i].Money = 1000;
+            listPlayers.Add(human);
+
+            for (int i = 0; i < 4; i++) {
+                listPlayers.Add(new PokerAI());
             }
         }
 
         private void setInitialRoles() {
-            playerRoles = new int[2];
+            playerRoles = new int[3];
 
             playerRoles[0] = 0;
             playerRoles[1] = 1;
+            playerRoles[2] = 2;
 
             // draw high card for dealer
         }
@@ -52,7 +55,7 @@ namespace CasinoUI.Model.Poker {
         }
 
         private void rotateRoles() {
-            int listLength = listAI.Count;
+            int listLength = listPlayers.Count;
 
             for (int i = 0; i < playerRoles.Length; i++) {
                 playerRoles[i]++;
@@ -64,27 +67,27 @@ namespace CasinoUI.Model.Poker {
         }
 
         private void clearRoles() {
-            foreach (Player player in listAI) {
-                player.Cards.Clear();
+            foreach (Player player in listPlayers) {
+                player.hand.Clear();
             }
         }
 
-        private void playTurn(PokerActionCode pokerActionCode) {
+        private void playerPlaysTurn(PokerActionCode pokerActionCode, int playerIdx) {
             switch (pokerActionCode) {
                 case PokerActionCode.CALL:
-
+                    pot += listPlayers[playerIdx].PokerCall(currentRaise);
                     break;
                 case PokerActionCode.CHECK:
+                    listPlayers[playerIdx].PokerCheck();
                     break;
                 case PokerActionCode.FOLD:
+                    listPlayers[playerIdx].PokerFold();
                     break;
                 case PokerActionCode.RAISE:
+                    pot += listPlayers[playerIdx].PokerRaise(22); // should take in amount from UI
                     break;
             }
 
-
-
-            // AIs play their turn.
         }
 
     }
