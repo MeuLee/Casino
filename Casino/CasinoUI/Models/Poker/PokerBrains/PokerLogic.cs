@@ -1,4 +1,6 @@
-﻿using CasinoUI.Model.Cards;
+﻿using CasinoUI.Model;
+using CasinoUI.Model.Cards;
+using CasinoUI.Model.Poker;
 using CasinoUI.Models;
 using CasinoUI.Models.Poker;
 using System;
@@ -7,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CasinoUI.Model.Poker {
+namespace CasinoUI.Models.Poker.PokerBrains {
     public class PokerLogic {
         public List<PokerPlayer> listPlayers { get; set; }  // index 0 is always the human player
         public GameCardStack cardStack { get; set; }

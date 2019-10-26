@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CasinoUI.Models.Poker {
+namespace CasinoUI.Models.Poker.PokerBrains {
     public class TexasHoldemLogic : PokerLogic {
 
         public List<Card> TableCards { get; set; }
