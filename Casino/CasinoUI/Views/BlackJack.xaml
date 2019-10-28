@@ -5,13 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CasinoUI.Views"
         mc:Ignorable="d"
-        Title="BlackJack" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="BlackJack" Height="600" Width="900" 
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Algerian"
+        FontSize="18">
+    <Grid x:Name="Grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush x:Name="ImgBackground"/>
         </Grid.Background>
-        <Image x:Name="ImgBlackJackTable" 
-               Grid.RowSpan="10" Grid.ColumnSpan="10"/>
+        <Image x:Name="ImgBlackJackTable"
+               Source="/CasinoUI;component/Resources/blackjackTable.png"
+               VerticalAlignment="Top"
+               Grid.Column="1" Grid.ColumnSpan="4"/>
+        <Button x:Name="BtnAction1" Style="{StaticResource Button.Hoverless}"
+                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
+                Grid.Row="2" Grid.Column="2">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip1" Height="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Action1" Foreground="White"/>
+                <Image x:Name="ImgChip2" Height="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="BtnAction2" Style="{StaticResource Button.Hoverless}"
+                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
+                Grid.Row="2" Grid.Column="3">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip3" Height="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Action2" Foreground="White"/>
+                <Image x:Name="ImgChip4" Height="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="BtnAction3" Style="{StaticResource Button.Hoverless}"
+                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
+                Grid.Row="4" Grid.Column="2">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip5" Height="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Action3" Foreground="White"/>
+                <Image x:Name="ImgChip6" Height="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="BtnAction4" Style="{StaticResource Button.Hoverless}"
+                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
+                Grid.Row="4" Grid.Column="3">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip7" Height="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Action4" Foreground="White"/>
+                <Image x:Name="ImgChip8" Height="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

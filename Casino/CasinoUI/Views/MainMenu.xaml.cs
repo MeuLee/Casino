@@ -1,5 +1,6 @@
 ﻿using CasinoUI.Utils;
 using CasinoUI.Views;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -22,12 +23,16 @@ namespace CasinoUI
         // S/O answers did not work as you can see.
         private void SetImages()
         {
-            ImgChip1.Source = _casinoChip1;
-            ImgChip2.Source = _casinoChip1;
-            ImgChip3.Source = _casinoChip1;
-            ImgChip4.Source = _casinoChip1;
-            ImgChip5.Source = _casinoChip1;
-            ImgChip6.Source = _casinoChip1;
+            foreach (var btn in Grid.Children.OfType<Button>())
+            {
+                if (btn.Content is StackPanel sp)
+                {
+                    foreach (Image img in sp.Children.OfType<Image>())
+                    {
+                        img.Source = _casinoChip1;
+                    }
+                }
+            }
         }
 
         private void BtnPlay_Click(object sender, RoutedEventArgs e)
@@ -51,18 +56,20 @@ namespace CasinoUI
         {
             Button btn = sender as Button;
             btn.FontSize += 4;
-            StackPanel sp = btn.Content as StackPanel;
-            (sp.Children[0] as Image).Source = _casinoChip2;
-            (sp.Children[2] as Image).Source = _casinoChip2;
+            if (btn.Content is StackPanel sp)
+            {
+                sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip2);
+            }
         }
 
         private void Btn_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             Button btn = sender as Button;
             btn.FontSize -= 4;
-            StackPanel sp = btn.Content as StackPanel;
-            (sp.Children[0] as Image).Source = _casinoChip1;
-            (sp.Children[2] as Image).Source = _casinoChip1;
+            if (btn.Content is StackPanel sp)
+            {
+                sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip1);
+            }
         }
     }
 }

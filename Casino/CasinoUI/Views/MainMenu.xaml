@@ -8,7 +8,7 @@
         Height="450" Width="800" Background="Black" WindowStartupLocation="CenterScreen"
         FontFamily="Algerian" FontSize="18"
         ResizeMode="NoResize">
-    <Grid>
+    <Grid x:Name="Grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="275"/>
@@ -37,30 +37,27 @@
         <Button x:Name="BtnPlay" Style="{StaticResource Button.Hoverless}"
                 Click="BtnPlay_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
                 Grid.Column="1" Grid.Row="3"
-                HorizontalAlignment="Center"
-                Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip1" Height="25" Margin="0, 0, 10, 0"/>
-                <TextBlock Text="Jouer" Foreground="White" />
+                <TextBlock Text="Jouer" Foreground="White"/>
                 <Image x:Name="ImgChip2" Height="25" Margin="10, 0, 0, 0"/>
             </StackPanel>
         </Button>
         <Button x:Name="BtnSettings" Style="{StaticResource Button.Hoverless}"
                 Click="BtnSettings_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
                 Grid.Column="1" Grid.Row="5"
-                HorizontalAlignment="Center"
-                Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip3" Height="25" Margin="0, 0, 10, 0"/>
-                <TextBlock Text="Paramètres" Foreground="White" />
+                <TextBlock Text="Paramètres" Foreground="White"/>
                 <Image x:Name="ImgChip4" Height="25" Margin="10, 0, 0, 0"/>
             </StackPanel>
         </Button>
         <Button x:Name="BtnClose" Style="{StaticResource Button.Hoverless}"
                 Click="BtnClose_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
                 Grid.Column="1" Grid.Row="7"
-                HorizontalAlignment="Center"
-                Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip5" Height="25" Margin="0, 0, 10, 0"/>
                 <TextBlock Text="Quitter" Foreground="White" />
