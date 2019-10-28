@@ -8,7 +8,8 @@
         Title="BlackJack" Height="600" Width="900" 
         WindowStartupLocation="CenterScreen"
         FontFamily="Algerian"
-        FontSize="18">
+        FontSize="18"
+        ResizeMode="NoResize">
     <Grid x:Name="Grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"/>
@@ -30,7 +31,6 @@
             <ImageBrush x:Name="ImgBackground"/>
         </Grid.Background>
         <Image x:Name="ImgBlackJackTable"
-               Source="/CasinoUI;component/Resources/blackjackTable.png"
                VerticalAlignment="Top"
                Grid.Column="1" Grid.ColumnSpan="4"/>
         <Button x:Name="BtnAction1" Style="{StaticResource Button.Hoverless}"

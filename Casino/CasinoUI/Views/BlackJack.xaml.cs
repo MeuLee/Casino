@@ -30,10 +30,7 @@ namespace CasinoUI.Views
             {
                 if (btn.Content is StackPanel sp)
                 {
-                    foreach (Image img in sp.Children.OfType<Image>())
-                    {
-                        img.Source = _casinoChip1;
-                    }
+                    sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip1);
                 }
             }
         }
