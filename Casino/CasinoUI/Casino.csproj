@@ -125,8 +125,8 @@
     <Compile Include="Views\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Poker.xaml.cs">
-      <DependentUpon>Poker.xaml</DependentUpon>
+    <Compile Include="Views\GamePoker.xaml.cs">
+      <DependentUpon>GamePoker.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -418,7 +418,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Views\Poker.xaml">
+    <Page Include="Views\GamePoker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

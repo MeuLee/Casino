@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using CasinoUI.Models.Poker;
+using System.Drawing;
 using System.Windows;
 
 namespace CasinoUI.View.Map.Tiles
@@ -17,8 +18,9 @@ namespace CasinoUI.View.Map.Tiles
             var result = MessageBox.Show("Wanna play poker?", "nice title m8", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                Poker nouveauJeuxPoker = new Poker();
-                nouveauJeuxPoker.Show();                
+                //GamePoker nouveauJeuxPoker = new GamePoker();
+                //nouveauJeuxPoker.Show();                
+                new PokerController();
             }
             else if (result == MessageBoxResult.No)
             {
