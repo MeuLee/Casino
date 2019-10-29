@@ -19,6 +19,8 @@ namespace CasinoUI
             CasinoGame game = new CasinoGame();
             game.Show();
             this.Close();
+            //Poker test = new Poker();
+            //test.Show();
         }
 
         private void button_Options_Click(object sender, RoutedEventArgs e)

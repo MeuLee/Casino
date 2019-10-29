@@ -84,12 +84,16 @@
     <Compile Include="Models\Cards\GameCardStack.cs" />
     <Compile Include="Models\HumanPlayer.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PokerPlayer.cs" />
     <Compile Include="Models\Poker\IPokerAction.cs" />
     <Compile Include="Models\Poker\PokerActionCode.cs" />
     <Compile Include="Models\Poker\PokerAI.cs" />
     <Compile Include="Controllers\PokerController.cs" />
     <Compile Include="Models\Poker\PokerHand.cs" />
-    <Compile Include="Models\Poker\PokerLogic.cs" />
+    <Compile Include="Models\Poker\PokerBrains\FiveCardDrawLogic.cs" />
+    <Compile Include="Models\Poker\PokerBrains\PokerLogic.cs" />
+    <Compile Include="Models\Poker\PokerPlayerState.cs" />
+    <Compile Include="Models\Poker\PokerBrains\TexasHoldemLogic.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -418,6 +422,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BIG_BLIND.jpg" />
+    <Resource Include="Resources\DEALER.jpg" />
+    <Resource Include="Resources\SMALL_BLIND.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
