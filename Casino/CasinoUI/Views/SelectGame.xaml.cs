@@ -1,6 +1,8 @@
-﻿using CasinoUI.Utils;
+﻿using CasinoUI.Controllers;
+using CasinoUI.Utils;
 using CasinoUI.View;
 using CasinoUI.Views.Map;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -31,14 +33,13 @@ namespace CasinoUI.Views
 
         private void SetImages()
         {
-            ImgChip1.Source = _casinoChip1;
-            ImgChip2.Source = _casinoChip1;
-            ImgChip3.Source = _casinoChip1;
-            ImgChip4.Source = _casinoChip1;
-            ImgChip5.Source = _casinoChip1;
-            ImgChip6.Source = _casinoChip1;
-            ImgChip7.Source = _casinoChip1;
-            ImgChip8.Source = _casinoChip1;
+            foreach (var btn in Grid.Children.OfType<Button>())
+            {
+                if (btn.Content is StackPanel sp)
+                {
+                    sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip1);
+                }
+            }
             ImgBackArrow.Source = _backArrow;
         }
 
@@ -89,8 +90,7 @@ namespace CasinoUI.Views
 
         private void BtnBlackJack_Click(object sender, RoutedEventArgs e)
         {
-            new BlackJack().Show();
-            Close();
+            new BlackjackController();
         }
     }
 }

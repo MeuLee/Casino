@@ -27,8 +27,11 @@ namespace CasinoUI.Model.Blackjack
 
         private void InitListPlayers()
         {
-            ListPlayers[0] = Human;
-            ListPlayers[1] = new BlackjackAI();
+            ListPlayers = new List<Player>
+            {
+                Human,
+                new BlackjackAI()
+            };
         }
 
         private void DistributeCards()
@@ -50,7 +53,7 @@ namespace CasinoUI.Model.Blackjack
         {
             foreach (Player player in ListPlayers)
             {
-                player.hand.Clear();
+                player.Hand.Clear();
             }
         }
 

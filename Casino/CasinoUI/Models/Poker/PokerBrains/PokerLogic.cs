@@ -70,7 +70,7 @@ namespace CasinoUI.Models.Poker.PokerBrains {
 
         private void clearRoles() {
             foreach (Player player in listPlayers) {
-                player.hand.Clear();
+                player.Hand.Clear();
             }
         }
 

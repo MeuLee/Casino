@@ -17,14 +17,14 @@ namespace CasinoUI.Models.Poker.PokerBrains {
 
         private void playersDrawCards() {
             for (int i = playerRoles[3]; i < listPlayers.Count; i++) {
-                listPlayers[i].hand.Add(cardStack.DrawCard());
-                listPlayers[i].hand.Add(cardStack.DrawCard());
+                listPlayers[i].Hand.Add(cardStack.DrawCard());
+                listPlayers[i].Hand.Add(cardStack.DrawCard());
             }
 
             if (playerRoles[3] > 0) {
                 for (int i = 0; i < playerRoles[3]; i++) {
-                    listPlayers[i].hand.Add(cardStack.DrawCard());
-                    listPlayers[i].hand.Add(cardStack.DrawCard());
+                    listPlayers[i].Hand.Add(cardStack.DrawCard());
+                    listPlayers[i].Hand.Add(cardStack.DrawCard());
                 }
             }
         }
