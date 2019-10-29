@@ -1,12 +1,9 @@
-﻿    using CasinoUI.Model.Cards;
+﻿using CasinoUI.Model.Cards;
 using CasinoUI.Models.Poker;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CasinoUI.Model.Poker {
+namespace CasinoUI.Model.Poker
+{
     public class PokerLogic {
         private HumanPlayer Human;
         public List<Player> ListPlayers { get; set; }

@@ -1,9 +1,9 @@
-﻿using CasinoUI.View.Map.Tiles;
+﻿using CasinoUI.Views.Map.Tiles;
 using System;
 using System.Windows;
 using System.Windows.Media;
 
-namespace CasinoUI.View.Map
+namespace CasinoUI.Views.Map
 {
     public class MapRenderer
     {

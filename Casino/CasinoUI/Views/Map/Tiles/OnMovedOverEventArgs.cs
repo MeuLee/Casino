@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CasinoUI.View.Map.Tiles
+namespace CasinoUI.Views.Map.Tiles
 {
     public class OnMovedOverEventArgs : EventArgs
     {

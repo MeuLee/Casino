@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace CasinoUI.View.Map
+namespace CasinoUI.Views.Map
 {
     public class MiniMapCanvas : Canvas
     {
