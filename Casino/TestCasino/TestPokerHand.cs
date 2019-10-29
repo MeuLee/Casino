@@ -38,6 +38,7 @@ namespace TestCasino
         {
             list.Clear();
             pokerCombo.ListValue.Clear();
+            pokerCombo.ComboValuePoss.Clear();
         }
 
         private void AddCardList(Card.CardRank rank, Card.CardSuit suit)
@@ -45,7 +46,7 @@ namespace TestCasino
             list.Add(new Card(rank,suit, imageBidon));
         }
 
-        private void CreateBoardCard(int nbrCard, int diffCard)
+        private void CreateTableCard(int nbrCard, int diffCard)
         {
             int compt = 0;
 
@@ -66,21 +67,107 @@ namespace TestCasino
         {
             List<Card> listValue = pokerCombo.ListValue;
             int compt = 0;
+            int comptC = 0;
 
             for(int i = 0; i < pokerCombo.ComboValuePoss.Count; i++)
             {
-                if (compt < pokerCombo.ComboValuePoss.Count - 1) {
-                    Assert.AreEqual((int)listValue[compt].Value, pokerCombo.ComboValuePoss[i].Item1);
+                if (compt < listValue.Count && comptC < listValue.Count && listValue.Count > 1) {
+                    Assert.AreEqual((int)listValue[comptC].Value, pokerCombo.ComboValuePoss[i].Item1);
                     Assert.AreEqual((int)listValue[compt].Value, pokerCombo.ComboValuePoss[i].Item2);
+                    compt++;
                 }
                 else
                 {
-                    Assert.AreEqual((int)listValue[compt - 1].Value, pokerCombo.ComboValuePoss[i].Item1);
+                    Assert.AreEqual((int)listValue[comptC].Value, pokerCombo.ComboValuePoss[i].Item1);
                     Assert.AreEqual(-1, pokerCombo.ComboValuePoss[i].Item2);
-                }
 
-                compt++;
+                    comptC++;
+                    compt = comptC;
+                }
             }
+        }
+
+        private void StraightDirect()
+        {
+            CreateTableCard(3, 0);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(false, pokerCombo.IsStraight);
+            ClearLists();
+
+            CreateTableCard(3, 1);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(false, pokerCombo.IsStraight);
+            ClearLists();
+
+            CreateTableCard(4, 1);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(false, pokerCombo.IsStraight);
+            ClearLists();
+
+            CreateTableCard(4, 2);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+
+            CreateTableCard(5, 4);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+        }
+
+        private void StraightIndirect()
+        {
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.Jack, cardSuit);
+            AddCardList(Card.CardRank.Ten, cardSuit);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.Nine, cardSuit);
+            AddCardList(Card.CardRank.Ten, cardSuit);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.Ten, cardSuit);
+            AddCardList(Card.CardRank.Six, cardSuit);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(false, pokerCombo.IsStraight);
+            ClearLists();
+
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.Jack, cardSuit);
+            AddCardList(Card.CardRank.Ten, cardSuit);
+            AddCardList(Card.CardRank.Seven, cardSuit);
+            AddCardList(Card.CardRank.Two, cardSuit);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("isStraightCombo");
+            Assert.AreEqual(true, pokerCombo.IsStraight);
+            ClearLists();
+
+
+
         }
         #region Additional test attributes
         //
@@ -107,18 +194,18 @@ namespace TestCasino
         [TestMethod]
         public void CreateListValueTestfilter()
         {
-            pokerTest.Invoke("DescendingValueList");
-            CreateBoardCard(3, 0);
+            pokerTest.Invoke("DescendValueList");
+            CreateTableCard(3, 0);
             pokerTest.Invoke("CreateListValue");
             Assert.AreEqual(1, pokerCombo.ListValue.Count);
             ClearLists();
 
-            CreateBoardCard(3, 1);
+            CreateTableCard(3, 1);
             pokerTest.Invoke("CreateListValue");
             Assert.AreEqual(2, pokerCombo.ListValue.Count);
             ClearLists();
 
-            CreateBoardCard(5, 4);
+            CreateTableCard(5, 4);
             pokerTest.Invoke("CreateListValue");
             Assert.AreEqual(5, pokerCombo.ListValue.Count);
             ClearLists();
@@ -131,7 +218,7 @@ namespace TestCasino
             AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
             AddCardList(Card.CardRank.Jack, Card.CardSuit.Hearts);
 
-            pokerTest.Invoke("DescendingValueList");
+            pokerTest.Invoke("DescendValueList");
 
             for(int i = 0; i < pokerCombo.ListValue.Count; i++)
             {
@@ -156,9 +243,22 @@ namespace TestCasino
         public void TestSameKindCombo()
         {
 
-            CreateBoardCard(3, 0);
+            CreateTableCard(3, 0);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("CreateSameKindCombo");
+            AssertSameCombo();
+            ClearLists();
 
-            pokerTest.Invoke("DescendingValueList");
+            CreateTableCard(3, 1);
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("CreateSameKindCombo");
+            AssertSameCombo();
+            ClearLists();
+
+            CreateTableCard(5, 4);
+            pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("CreateSameKindCombo");
             AssertSameCombo();
@@ -166,5 +266,11 @@ namespace TestCasino
 
         }
 
+        [TestMethod]
+        public void TestisStraight()
+        {
+            StraightDirect();
+            StraightIndirect();
+        }
     }
 }

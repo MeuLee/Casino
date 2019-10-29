@@ -90,6 +90,7 @@
     <Compile Include="Controllers\PokerController.cs" />
     <Compile Include="Models\Poker\PokerHand.cs" />
     <Compile Include="Models\Poker\PokerLogic.cs" />
+    <Compile Include="Models\Poker\TexasHoldemLogic.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -418,6 +419,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BIG_BLIND.jpg" />
+    <Resource Include="Resources\DEALER.jpg" />
+    <Resource Include="Resources\SMALL_BLIND.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
