@@ -11,7 +11,6 @@ namespace CasinoUI.Model.Poker
         private List<int> ListTempCombo;
 
         private List<Tuple<int, int>> comboValuePoss;
-        private List<Tuple<int, int>> comboSraightPoss;
         private Card.CardSuit flushCombo;
 
         private bool isStraight = false;
@@ -23,7 +22,6 @@ namespace CasinoUI.Model.Poker
             ListTempCombo = new List<int>();
             listValue = new List<Card>();
             comboValuePoss = new List<Tuple<int, int>>();
-            comboSraightPoss = new List<Tuple<int, int>>();
             flushCombo = Card.CardSuit.Diamonds;
         }
 
@@ -35,6 +33,12 @@ namespace CasinoUI.Model.Poker
             get { return listValue; }
         }
 
+        public Card.CardSuit FlushCombo
+        {
+            get { return flushCombo; }
+            set { this.flushCombo = value; }
+        }
+
         public List<Tuple<int, int>> ComboValuePoss {
             get { return comboValuePoss; }
             set { this.comboValuePoss = value; }
@@ -43,6 +47,12 @@ namespace CasinoUI.Model.Poker
         public bool IsStraight { 
             get { return isStraight; }
             set { this.isStraight = value; }
+        }
+
+        public bool IsFlush
+        {
+            get { return isFlush; }
+            set { this.isFlush = value; }
         }
         private void CheckCombo()
         {
@@ -62,7 +72,7 @@ namespace CasinoUI.Model.Poker
 
         private void CreateFlushCombo()
         {
-            isFlush = isFlushCombo();
+            isFlushCombo();
             if (isFlush)
             {
                 ComboFlush();
@@ -96,16 +106,7 @@ namespace CasinoUI.Model.Poker
         {
             CreateList();
             AdjustCards();
-            InsertComboStraight();
 
-        }
-
-        private void InsertComboStraight()
-        {
-            for (int i = 0; i < ListTempCombo.Count - 2; i++)
-            {
-                comboSraightPoss.Add(Tuple.Create(ListTempCombo[i], ListTempCombo[i + 1]));
-            }
         }
         private void AdjustCards()
         {
@@ -278,9 +279,8 @@ namespace CasinoUI.Model.Poker
             listCardInGame.Sort((a, b) => b.Suit.CompareTo(a.Suit));
         }
 
-        private bool isFlushCombo()
+        private void isFlushCombo()
         {
-            bool isTrue = false;
             bool firstTime = true;
             int cardBefore = 0;
             int compt = 0;
@@ -304,10 +304,13 @@ namespace CasinoUI.Model.Poker
 
             if (compt >= 2)
             {
-                isTrue = true;
+                isFlush = true;
+            }
+            else
+            {
+                isFlush = false;
             }
 
-            return isTrue;
         }
 
         private void isStraightCombo()
