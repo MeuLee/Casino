@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using CasinoUI.Models.Poker;
+using System.Drawing;
+using System.Windows;
 
 namespace CasinoUI.Views.Map.Tiles
 {

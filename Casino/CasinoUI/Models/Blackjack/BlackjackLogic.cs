@@ -50,7 +50,7 @@ namespace CasinoUI.Model.Blackjack
         {
             foreach (Player player in ListPlayers)
             {
-                player.Cards.Clear();
+                player.hand.Clear();
             }
         }
 
