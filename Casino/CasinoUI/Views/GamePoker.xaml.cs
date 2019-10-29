@@ -1,7 +1,10 @@
 ﻿using CasinoUI.Utils;
 using System;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace CasinoUI.View
 {
@@ -10,12 +13,24 @@ namespace CasinoUI.View
     /// </summary>
     public partial class GamePoker : Window
     {
+        private static readonly BitmapImage _casinoChip1 = Properties.Resources.PokerEntrer.ToBitmapImage();
+        private static readonly BitmapImage _casinoChip2 = Properties.Resources.redChip.ToBitmapImage();
         public GamePoker()
         {
             InitializeComponent();
             InitilizeCarte();
             InitilizeForm();
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            SetImage();
+        }
+
+        private void SetImage()
+        {
+            ImgChip1.Source = _casinoChip1;
+            ImgChip2.Source = _casinoChip1;
+            ImgChip3.Source = _casinoChip1;
+            ImgChip4.Source = _casinoChip1;
+            ImgChip5.Source = _casinoChip1;
+            ImgChip6.Source = _casinoChip1;
         }
 
         /// <summary>
@@ -59,6 +74,26 @@ namespace CasinoUI.View
             ImageBrush dealer = new ImageBrush();
             dealer.ImageSource = Properties.Resources.DEALER.ToBitmapImage();
             EllipseDealer.Fill = dealer;
+        }
+
+        private void Btn_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.FontSize += 4;
+            if (btn.Content is StackPanel sp)
+            {
+                sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip2);
+            }
+        }
+
+        private void Btn_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.FontSize -= 4;
+            if (btn.Content is StackPanel sp)
+            {
+                sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip1);
+            }
         }
     }
 }

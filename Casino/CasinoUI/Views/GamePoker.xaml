@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:CasinoUI.Views"
         mc:Ignorable="d"
         Title="Poker" Height="675" Width="1200" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        FontFamily="Algerian" FontSize="18"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <ImageBrush x:Name="TableBlueBackground"/>
@@ -83,9 +85,30 @@
             <Image x:Name="CarteJoueur5" Canvas.Left="562" Canvas.Top="415" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="228" RenderTransformOrigin="0.5,0.5"/>
 
             <Image x:Name="CartePack" Canvas.Left="565" Canvas.Top="175" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
-            <Button x:Name="BtnSeCoucher" Content="Coucher" Canvas.Left="50" Canvas.Top="560" Width="90" Height="35"/>
-            <Button x:Name ="BtnSuivre" Content="Suivre" Canvas.Left="200" Canvas.Top="560" Width="90" Height="35"/>
-            <Button x:Name ="BtnRelancer" Content="Relancer" Canvas.Left="350" Canvas.Top="560" Width="90" Height="35"/>
+            <Button x:Name="BtnSeCoucher" Canvas.Left="10" Canvas.Top="540" Width="170" Height="35"
+                    Style="{StaticResource Button.Hoverless}" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="ImgChip1" Height="25" Margin="0, 0, 10, 0"/>
+                    <TextBlock Text="Coucher" Foreground="White"/>
+                    <Image x:Name="ImgChip2" Height="25" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name ="BtnSuivre" Canvas.Left="160" Canvas.Top="600" Width="150" Height="35"
+                    Style="{StaticResource Button.Hoverless}" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="ImgChip3" Height="25" Margin="0, 0, 10, 0"/>
+                    <TextBlock Text="Suivre" Foreground="White"/>
+                    <Image x:Name="ImgChip4" Height="25" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name ="BtnRelancer" Canvas.Left="290" Canvas.Top="540" Width="190" Height="35"
+                    Style="{StaticResource Button.Hoverless}" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="ImgChip5" Height="25" Margin="0, 0, 10, 0"/>
+                    <TextBlock Text="Relancer" Foreground="White"/>
+                    <Image x:Name="ImgChip6" Height="25" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Button>
 
             <Image x:Name="CarteRetourne_AI11" Canvas.Left="210" Canvas.Top="230" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>

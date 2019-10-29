@@ -680,16 +680,6 @@ namespace CasinoUI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Carte_Dos {
-            get {
-                object obj = ResourceManager.GetObject("Carte_Dos", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap DEALER {
             get {
                 object obj = ResourceManager.GetObject("DEALER", resourceCulture);
