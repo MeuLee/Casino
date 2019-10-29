@@ -26,7 +26,7 @@ namespace TestCasino
         {
             list = new List<Card>();
             pokerCombo = new PokerHand(list);
-            pokerTest = new PrivateObject(pokerCombo);
+            pokerTest = new PrivateObject(pokerCombo, new PrivateType(typeof(PokerHand)));
 
             cardRank = Card.CardRank.Two;
             cardSuit = Card.CardSuit.Clubs;
@@ -41,7 +41,7 @@ namespace TestCasino
             pokerCombo.ComboValuePoss.Clear();
         }
 
-        private void AddCardList(Card.CardRank rank, Card.CardSuit suit)
+        private void AddCardList(Card.CardRank rank, Card.CardSuit suit = Card.CardSuit.Clubs)
         {
             list.Add(new Card(rank,suit, imageBidon));
         }
@@ -169,6 +169,38 @@ namespace TestCasino
 
 
         }
+
+        private void AsserCreateList()
+        {
+            int[] tab = {14, 13, 12, 11, 10, 9};
+            List<int> list =(List<int>) pokerTest.GetFieldOrProperty("ListTempCombo");
+            for(int i = 0; i < list.Count; i++)
+            {
+                Assert.AreEqual(tab[i],list[i]);
+            }
+        }
+
+        private void TestRemoveCardGeneric(int[] tab, params Card.CardRank[] ranks)
+        {
+            foreach (var rank in ranks)
+            {
+                AddCardList(rank, cardSuit);
+            }
+            pokerTest.Invoke("DescendValueList");
+            pokerTest.Invoke("CreateListValue");
+            pokerTest.Invoke("CreateList");
+            pokerTest.Invoke("AdjustCards");
+            AssertRemoveCard(tab);
+            ClearLists();
+        }
+        private void AssertRemoveCard(int[] tab)
+        {
+            List<int> list = (List<int>)pokerTest.GetFieldOrProperty("ListTempCombo");
+            for (int i = 0; i < list.Count; i++)
+            {
+                Assert.AreEqual(tab[i], list[i]);
+            }
+        }
         #region Additional test attributes
         //
         // You can use the following additional attributes as you write your tests:
@@ -272,5 +304,206 @@ namespace TestCasino
             StraightDirect();
             StraightIndirect();
         }
+
+        [TestMethod]
+        public void TestCreateListStraightCombo()
+        {
+            AddCardList(Card.CardRank.King, cardSuit);
+            AddCardList(Card.CardRank.Jack, cardSuit);
+            AddCardList(Card.CardRank.Ten, cardSuit);
+            pokerTest.Invoke("CreateList");
+            AsserCreateList();
+            ClearLists();
+        }
+
+        [TestMethod]
+        public void TestThreeCardRemoveCard()
+        {
+            TestRemoveCardGeneric(new int[] { 14, 12, 9 },
+                                  Card.CardRank.King,
+                                  Card.CardRank.Jack,
+                                  Card.CardRank.Ten);
+
+            TestRemoveCardGeneric(new int[] { 7, 5, 2 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Four,
+                                  Card.CardRank.Three);
+
+            TestRemoveCardGeneric(new int[] { 13, 10 },
+                                  Card.CardRank.Ace,
+                                  Card.CardRank.Queen,
+                                  Card.CardRank.Jack);
+
+            TestRemoveCardGeneric(new int[] { 12, 11 },
+                                  Card.CardRank.King,
+                                  Card.CardRank.Nine,
+                                  Card.CardRank.Ten);
+
+            TestRemoveCardGeneric(new int[] { 5, 4 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Three,
+                                  Card.CardRank.Two);
+
+            TestRemoveCardGeneric(new int[] { 13, 12 },
+                                  Card.CardRank.Ace,
+                                  Card.CardRank.Jack,
+                                  Card.CardRank.Ten);
+
+            TestRemoveCardGeneric(new int[] { 14, 10, 9 },
+                                  Card.CardRank.King,
+                                  Card.CardRank.Queen,
+                                  Card.CardRank.Jack);
+
+            TestRemoveCardGeneric(new int[] { 11, 10 },
+                                  Card.CardRank.Ace,
+                                  Card.CardRank.King,
+                                  Card.CardRank.Queen);
+
+            TestRemoveCardGeneric(new int[] { 8, 7, 3, 2 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Five,
+                                  Card.CardRank.Four);
+
+            TestRemoveCardGeneric(new int[] {7, 4, 2 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Five,
+                                  Card.CardRank.Three);
+
+        }
+
+        [TestMethod]
+        public void TestFourCardRemoveCard()
+        {
+            TestRemoveCardGeneric(new int[] { 7, 5 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Four,
+                                  Card.CardRank.Three,
+                                  Card.CardRank.Two);
+
+            TestRemoveCardGeneric(new int[] { 7, 4 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Five,
+                                  Card.CardRank.Three,
+                                  Card.CardRank.Two);
+
+            TestRemoveCardGeneric(new int[] {8, 7, 2 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Five,
+                                  Card.CardRank.Three,
+                                  Card.CardRank.Four);
+
+            TestRemoveCardGeneric(new int[] { 14, 9, 8 },
+                                  Card.CardRank.King,
+                                  Card.CardRank.Queen,
+                                  Card.CardRank.Jack,
+                                  Card.CardRank.Ten);
+
+            TestRemoveCardGeneric(new int[] { 14, 11, 8 },
+                                  Card.CardRank.King,
+                                  Card.CardRank.Queen,
+                                  Card.CardRank.Nine,
+                                  Card.CardRank.Ten);
+
+            TestRemoveCardGeneric(new int[] {11, 10 },
+                                  Card.CardRank.King,
+                                  Card.CardRank.Queen,
+                                  Card.CardRank.Nine,
+                                  Card.CardRank.Eight);
+
+            TestRemoveCardGeneric(new int[] { 10, 9 },
+                                 Card.CardRank.King,
+                                 Card.CardRank.Queen,
+                                 Card.CardRank.Ace,
+                                 Card.CardRank.Jack);
+
+            TestRemoveCardGeneric(new int[] { 12, 9 },
+                                 Card.CardRank.King,
+                                 Card.CardRank.Ten,
+                                 Card.CardRank.Ace,
+                                 Card.CardRank.Jack);
+
+            TestRemoveCardGeneric(new int[] { 12, 11 },
+                                 Card.CardRank.King,
+                                 Card.CardRank.Ten,
+                                 Card.CardRank.Ace,
+                                 Card.CardRank.Nine);
+        }
+
+        [TestMethod]
+        public void TestFiveCardRemoveCard()
+        {
+            TestRemoveCardGeneric(new int[] { 8, 7 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Four,
+                                  Card.CardRank.Three,
+                                  Card.CardRank.Two,
+                                  Card.CardRank.Five);
+
+            TestRemoveCardGeneric(new int[] { 10, 9, 5, 2 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Four,
+                                  Card.CardRank.Three,
+                                  Card.CardRank.Seven,
+                                  Card.CardRank.Eight);
+
+            TestRemoveCardGeneric(new int[] { 10, 9, 5, 4 },
+                                  Card.CardRank.Six,
+                                  Card.CardRank.Three,
+                                  Card.CardRank.Two,
+                                  Card.CardRank.Seven,
+                                  Card.CardRank.Eight);
+
+            TestRemoveCardGeneric(new int[] { 14, 8, 7 },
+                                  Card.CardRank.King,
+                                  Card.CardRank.Queen,
+                                  Card.CardRank.Jack,
+                                  Card.CardRank.Ten,
+                                  Card.CardRank.Nine);
+
+            TestRemoveCardGeneric(new int[] { 14, 12, 7 },
+                                 Card.CardRank.King,
+                                 Card.CardRank.Eight,
+                                 Card.CardRank.Jack,
+                                 Card.CardRank.Ten,
+                                 Card.CardRank.Nine);
+
+            TestRemoveCardGeneric(new int[] { 14, 11, 10, 6, 5 },
+                                 Card.CardRank.King,
+                                 Card.CardRank.Queen,
+                                 Card.CardRank.Nine,
+                                 Card.CardRank.Eight,
+                                 Card.CardRank.Seven);
+
+            TestRemoveCardGeneric(new int[] { 9, 8 },
+                                 Card.CardRank.Ace,
+                                 Card.CardRank.King,
+                                 Card.CardRank.Queen,
+                                 Card.CardRank.Jack,
+                                 Card.CardRank.Ten);
+
+            TestRemoveCardGeneric(new int[] { 12, 8, 7 },
+                                 Card.CardRank.Ace,
+                                 Card.CardRank.King,
+                                 Card.CardRank.Nine,
+                                 Card.CardRank.Jack,
+                                 Card.CardRank.Ten);
+
+            TestRemoveCardGeneric(new int[] { 12, 11, 7, 6 },
+                                 Card.CardRank.Ace,
+                                 Card.CardRank.King,
+                                 Card.CardRank.Nine,
+                                 Card.CardRank.Eight,
+                                 Card.CardRank.Ten);
+
+            TestRemoveCardGeneric(new int[] {13, 10, 6, 5},
+                                Card.CardRank.Queen,
+                                Card.CardRank.Eight,
+                                Card.CardRank.Jack,
+                                Card.CardRank.Seven,
+                                Card.CardRank.Nine);
+        }
     }
-}
+
+
+    }
+
