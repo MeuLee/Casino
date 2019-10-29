@@ -1,4 +1,5 @@
 ﻿using CasinoUI.Utils;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,15 @@ namespace CasinoUI.Views
         {
             InitializeComponent();
             SetImages();
+            SetCardImagesTemp();
+        }
+
+        private void SetCardImagesTemp()
+        {
+            Img1Player.Source = Properties.Resources._10C.ToBitmapImage();
+            Img2Player.Source = Properties.Resources._9D.ToBitmapImage();
+            Img1Dealer.Source = Properties.Resources._6S.ToBitmapImage();
+            Img2Dealer.Source = Properties.Resources._11S.ToBitmapImage();
         }
 
         private void SetImages()

@@ -89,6 +89,7 @@ namespace CasinoUI.Views
         private void BtnBlackJack_Click(object sender, RoutedEventArgs e)
         {
             new BlackJack().Show();
+            Close();
         }
     }
 }
