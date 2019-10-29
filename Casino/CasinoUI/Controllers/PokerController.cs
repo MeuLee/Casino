@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CasinoUI.Models.Poker.PokerBrains;
 
 namespace CasinoUI.Models.Poker {
     class PokerController {
-        PokerLogic PokerModel;
+        PokerLogic pokerModel;
 
         public PokerController() {
 
