@@ -4,7 +4,7 @@
         void BlackjackHit();
         void BlackjackStand();
         void BlackjackInsurance();
-        void BlackjackDoubleDown();
+        int BlackjackDoubleDown(int currentBet);
 
     }
 }

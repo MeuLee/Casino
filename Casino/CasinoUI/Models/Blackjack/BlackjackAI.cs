@@ -1,6 +1,8 @@
-﻿namespace CasinoUI.Model.Blackjack
+﻿using CasinoUI.Models;
+
+namespace CasinoUI.Model.Blackjack
 {
-    public class BlackjackAI : Player {
+    public class BlackjackAI : BlackjackPlayer {
 
     }
 }
