@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace CasinoUI.View.Map.Tiles
+namespace CasinoUI.Views.Map.Tiles
 {
     public abstract class MapTile
     {

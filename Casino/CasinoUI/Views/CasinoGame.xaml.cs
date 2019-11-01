@@ -1,10 +1,10 @@
 ﻿using CasinoUI.Utils;
-using CasinoUI.View.Map;
-using CasinoUI.View.Map.Tiles;
+using CasinoUI.Views.Map;
+using CasinoUI.Views.Map.Tiles;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CasinoUI.View
+namespace CasinoUI.Views
 {
     /// <summary>
     /// Logique d'interaction pour CasinoGame.xaml

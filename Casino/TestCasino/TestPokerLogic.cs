@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using CasinoUI.Model;
 using CasinoUI.Model.Cards;
 using CasinoUI.Model.Poker;
+using CasinoUI.Models;
+using CasinoUI.Models.Poker.PokerBrains;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestCasino {
@@ -13,7 +15,12 @@ namespace TestCasino {
 
         public TestPokerLogic() {
             humanPlayer = new HumanPlayer();
-            PokerLogic = new PokerLogic(humanPlayer);
+            Player p = new PokerPlayer();
+            //if (p is PokerPlayer)
+            //{
+            //    PokerPlayer pokerPlayer = p as PokerPlayer;
+            //    PokerLogic = new PokerLogic(pokerPlayer);
+            //}
         }
 
         [TestMethod]

@@ -1,10 +1,10 @@
 ﻿using CasinoUI.Utils;
-using CasinoUI.View.Map.Tiles;
+using CasinoUI.Views.Map.Tiles;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace CasinoUI.View.Map
+namespace CasinoUI.Views.Map
 {
     public class MapGenerator
     {

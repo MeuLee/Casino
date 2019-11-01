@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows;
 
-namespace CasinoUI.View.Map.Tiles
+namespace CasinoUI.Views.Map.Tiles
 {
     public class ChairTile : MapTile
     {
@@ -15,19 +15,9 @@ namespace CasinoUI.View.Map.Tiles
 
         private void MovedOver(object sender, OnMovedOverEventArgs e)
         {
-            var result = MessageBox.Show("Wanna play poker?", "nice title m8", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                //GamePoker nouveauJeuxPoker = new GamePoker();
-                //nouveauJeuxPoker.Show();                
-                new PokerController();
-            }
-            else if (result == MessageBoxResult.No)
-            {
-                MapRenderer.PlayerX = e.OldX;
-                MapRenderer.PlayerY = e.OldY;
-                (sender as CasinoGame).OnPlayerMoved(e.OldX, e.OldY);
-            }
+            CasinoGame cg = sender as CasinoGame;
+            cg.Hide();
+            new SelectGame(cg, e.OldX, e.OldY).Show();
         }
     }
 }
