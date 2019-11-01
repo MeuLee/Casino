@@ -502,6 +502,99 @@ namespace TestCasino
                                 Card.CardRank.Seven,
                                 Card.CardRank.Nine);
         }
+
+        [TestMethod]
+        public void TestDescendingSuitList()
+        {
+            AddCardList(Card.CardRank.Eight, Card.CardSuit.Clubs);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Hearts);
+
+            pokerTest.Invoke("DescendSuitList");
+
+            for (int i = 0; i < pokerCombo.ListCardInGame.Count; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        Assert.AreEqual(Card.CardSuit.Hearts, pokerCombo.ListCardInGame[i].Suit);
+                        break;
+                    case 1:
+                        Assert.AreEqual(Card.CardSuit.Clubs, pokerCombo.ListCardInGame[i].Suit);
+                        break;
+                    case 2:
+                        Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.ListCardInGame[i].Suit);
+                        break;
+                }
+            }
+
+            ClearLists();
+        }
+
+        [TestMethod]
+        public void TestIsFlush()
+        {
+            AddCardList(Card.CardRank.Eight, Card.CardSuit.Clubs);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Hearts);
+
+            pokerTest.Invoke("DescendSuitList");
+            pokerTest.Invoke("isFlushCombo");
+
+            Assert.IsFalse(pokerCombo.IsFlush);
+            ClearLists();
+
+            AddCardList(Card.CardRank.Eight, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Diamonds);
+
+            pokerTest.Invoke("DescendSuitList");
+            pokerTest.Invoke("isFlushCombo");
+
+            Assert.IsTrue(pokerCombo.IsFlush);
+
+        }
+
+        [TestMethod]
+        public void TestFlushCombo()
+        {
+            AddCardList(Card.CardRank.Eight, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Diamonds);
+
+            pokerTest.Invoke("DescendSuitList");
+            pokerTest.Invoke("isFlushCombo");
+            pokerTest.Invoke("ComboFlush");
+
+            Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.FlushCombo);
+            ClearLists();
+
+
+            AddCardList(Card.CardRank.Eight, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Hearts);
+
+            pokerTest.Invoke("DescendSuitList");
+            pokerTest.Invoke("isFlushCombo");
+            pokerTest.Invoke("ComboFlush");
+
+            Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.FlushCombo);
+            ClearLists();
+
+            AddCardList(Card.CardRank.Eight, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Clubs);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Hearts);
+
+            pokerTest.Invoke("DescendSuitList");
+            pokerTest.Invoke("isFlushCombo");
+            pokerTest.Invoke("ComboFlush");
+
+            Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.FlushCombo);
+            ClearLists();
+        }
     }
 
 
