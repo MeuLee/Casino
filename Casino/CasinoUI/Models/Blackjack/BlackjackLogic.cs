@@ -96,7 +96,7 @@ namespace CasinoUI.Model.Blackjack
         private void CheckHandValue(int handValue, Player player)
         {
             handValue = 0;
-            foreach (Card card in player.Cards)
+            foreach (Card card in player.Hand)
             {
                 if (card.Equals(Card.CardRank.Jack) || card.Equals(Card.CardRank.Queen) || card.Equals(Card.CardRank.King))
                 {
