@@ -173,7 +173,7 @@ namespace TestCasino
         private void AsserCreateList()
         {
             int[] tab = {14, 13, 12, 11, 10, 9};
-            List<int> list =(List<int>) pokerTest.GetFieldOrProperty("_listStraightCombo");
+            List<int> list =(List<int>) pokerTest.GetFieldOrProperty("ListTempCombo");
             for(int i = 0; i < list.Count; i++)
             {
                 Assert.AreEqual(tab[i],list[i]);
@@ -195,7 +195,7 @@ namespace TestCasino
         }
         private void AssertRemoveCard(int[] tab)
         {
-            List<int> list = (List<int>)pokerTest.GetFieldOrProperty("_listStraightCombo");
+            List<int> list = (List<int>)pokerTest.GetFieldOrProperty("ListTempCombo");
             for (int i = 0; i < list.Count; i++)
             {
                 Assert.AreEqual(tab[i], list[i]);
