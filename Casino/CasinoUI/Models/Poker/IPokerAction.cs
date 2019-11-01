@@ -1,6 +1,6 @@
 ﻿namespace CasinoUI.Models.Poker
 {
-    public interface IPokerAction
+    public interface IPokerAction : IGameType
     {
         void PokerCheck();
         void PokerFold();

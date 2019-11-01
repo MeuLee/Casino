@@ -79,6 +79,7 @@
     <Compile Include="Models\Blackjack\BlackjackActionCode.cs" />
     <Compile Include="Models\Blackjack\BlackjackLogic.cs" />
     <Compile Include="Models\Blackjack\IBlackjackAction.cs" />
+    <Compile Include="Models\IGameType.cs" />
     <Compile Include="Models\PlayerModel\BlackjackAI.cs" />
     <Compile Include="Models\Cards\Card.cs" />
     <Compile Include="Models\Cards\CardStack.cs" />

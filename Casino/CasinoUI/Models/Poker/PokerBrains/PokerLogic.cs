@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace CasinoUI.Models.Poker.PokerBrains
 {
     public class PokerLogic {
-        public List<IPokerAction> ListPlayers { get; set; }  // index 0 is always the human player
+        public List<Player> ListPlayers { get; set; }  // index 0 is always the human player
         public GameCardStack CardStack { get; set; }
 
         public int[] PlayerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers                            
@@ -26,10 +26,7 @@ namespace CasinoUI.Models.Poker.PokerBrains
         private void InitListPlayers(HumanPlayer human)
         {
             human.CurrentProfile = new PokerProfile(); // might wanna call this somewhere else, in humanplayer class? 
-            ListPlayers = new List<IPokerAction>
-            {
-                human.CurrentProfile as PokerProfile
-            };
+            ListPlayers = new List<Player> { human };
 
             for (int i = 0; i < 4; i++) {
                 ListPlayers.Add(new PokerAI());
@@ -72,18 +69,19 @@ namespace CasinoUI.Models.Poker.PokerBrains
         }
 
         private void playerPlaysTurn(PokerActionCode pokerActionCode, int playerIdx) {
+            IPokerAction player = ListPlayers[playerIdx].GetGameType<IPokerAction>();
             switch (pokerActionCode) {
                 case PokerActionCode.CALL:
-                    Pot += ListPlayers[playerIdx].PokerCall(CurrentRaise);
+                    Pot += player.PokerCall(CurrentRaise);
                     break;
                 case PokerActionCode.CHECK:
-                    ListPlayers[playerIdx].PokerCheck();
+                    player.PokerCheck();
                     break;
                 case PokerActionCode.FOLD:
-                    ListPlayers[playerIdx].PokerFold();
+                    player.PokerFold();
                     break;
                 case PokerActionCode.RAISE:
-                    Pot += ListPlayers[playerIdx].PokerRaise(22); // should take in amount from UI
+                    Pot += player.PokerRaise(22); // should take in amount from UI
                     break;
             }
 

@@ -96,16 +96,7 @@ namespace CasinoUI.Models.Blackjack
         private void CheckHandValue(int handValue, Player player)
         {
             handValue = 0;
-            List<Card> cards = null;
-            if (player is PlayerAI ai)
-            {
-                cards = ai.Hand;
-            }
-            else if (player is HumanPlayer hp)
-            {
-                cards = hp.CurrentProfile.Hand;
-            }
-            foreach (Card card in cards)
+            foreach (Card card in player.GetHand())
             {
                 if (card.Equals(Card.CardRank.Jack) || card.Equals(Card.CardRank.Queen) || card.Equals(Card.CardRank.King))
                 {
@@ -136,7 +127,7 @@ namespace CasinoUI.Models.Blackjack
         {
             foreach (Player player in ListPlayers)
             {
-                player.Hand.Clear();
+                player.GetHand().Clear();
             }
             PlayerHandValue = 0;
             DealerHandValue = 0;

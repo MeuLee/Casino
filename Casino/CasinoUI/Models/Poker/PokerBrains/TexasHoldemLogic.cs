@@ -15,16 +15,8 @@ namespace CasinoUI.Models.Poker.PokerBrains
         private void PlayersDrawCards() {
             foreach (var player in ListPlayers)
             {
-                if (player is PlayerAI ai)
-                {
-                    ai.Hand.Add(CardStack.DrawCard());
-                    ai.Hand.Add(CardStack.DrawCard());
-                } 
-                else if (player is PokerProfile pp)
-                {
-                    pp.Hand.Add(CardStack.DrawCard());
-                    pp.Hand.Add(CardStack.DrawCard());
-                }
+                player.GetHand().Add(CardStack.DrawCard());
+                player.GetHand().Add(CardStack.DrawCard());
             }
 
             if (PlayerRoles[3] > 0) // pas mal sur que ca va planter si playerroles.length <= 3
@@ -32,16 +24,8 @@ namespace CasinoUI.Models.Poker.PokerBrains
             {
                 foreach (var player in ListPlayers)
                 {
-                    if (player is PlayerAI ai)
-                    {
-                        ai.Hand.Add(CardStack.DrawCard());
-                        ai.Hand.Add(CardStack.DrawCard());
-                    }
-                    else if (player is PokerProfile pp)
-                    {
-                        pp.Hand.Add(CardStack.DrawCard());
-                        pp.Hand.Add(CardStack.DrawCard());
-                    }
+                    player.GetHand().Add(CardStack.DrawCard());
+                    player.GetHand().Add(CardStack.DrawCard());
                 }
             }
 

@@ -1,6 +1,7 @@
 ﻿namespace CasinoUI.Models.Blackjack
 {
-    interface IBlackjackAction {
+    public interface IBlackjackAction : IGameType
+    {
         void BlackjackHit();
         void BlackjackStand();
         void BlackjackInsurance();
