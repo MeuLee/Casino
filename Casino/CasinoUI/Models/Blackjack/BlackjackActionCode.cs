@@ -3,7 +3,6 @@
     enum BlackjackActionCode {
         HIT,
         STAND,
-        SPLIT,
         INSURANCE,
         DOUBLEDOWN
     }
