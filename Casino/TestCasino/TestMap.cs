@@ -1,5 +1,5 @@
-﻿using CasinoUI.View.Map;
-using CasinoUI.View.Map.Tiles;
+﻿using CasinoUI.Views.Map;
+using CasinoUI.Views.Map.Tiles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 

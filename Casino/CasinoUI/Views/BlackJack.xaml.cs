@@ -1,54 +1,48 @@
 ﻿using CasinoUI.Utils;
-using CasinoUI.Views;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace CasinoUI
+namespace CasinoUI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Interaction logic for BlackJack.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BlackJack : Window
     {
+        private static BitmapImage _blackjackTable = Properties.Resources.blackjackTable.ToBitmapImage();
+        private static BitmapImage _greenTable = Properties.Resources.table.ToBitmapImage();
         private static readonly BitmapImage _casinoChip1 = Properties.Resources.PokerEntrer.ToBitmapImage();
         private static readonly BitmapImage _casinoChip2 = Properties.Resources.redChip.ToBitmapImage();
-        public MainWindow()
+
+        public BlackJack()
         {
             InitializeComponent();
             SetImages();
+            SetCardImagesTemp();
         }
 
-        // S/O answers did not work as you can see.
+        private void SetCardImagesTemp()
+        {
+            Img1Player.Source = Properties.Resources._10C.ToBitmapImage();
+            Img2Player.Source = Properties.Resources._9D.ToBitmapImage();
+            Img1Dealer.Source = Properties.Resources._6S.ToBitmapImage();
+            Img2Dealer.Source = Properties.Resources._11S.ToBitmapImage();
+        }
+
         private void SetImages()
         {
+            ImgBackground.ImageSource = _greenTable;
+            ImgBlackJackTable.Source = _blackjackTable;
             foreach (var btn in Grid.Children.OfType<Button>())
             {
                 if (btn.Content is StackPanel sp)
                 {
-                    foreach (Image img in sp.Children.OfType<Image>())
-                    {
-                        img.Source = _casinoChip1;
-                    }
+                    sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip1);
                 }
             }
-        }
-
-        private void BtnPlay_Click(object sender, RoutedEventArgs e)
-        {
-            new CasinoGame().Show();
-            Close();
-        }
-
-        private void BtnSettings_Click(object sender, RoutedEventArgs e)
-        {
-            new OptionMenu().Show();
-        }
-
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
 
         private void Btn_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

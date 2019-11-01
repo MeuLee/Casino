@@ -1,23 +1,28 @@
-﻿<Window x:Class="CasinoUI.View.CasinoGame"
+﻿<Window x:Class="CasinoUI.Views.CasinoGame"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CasinoUI.View.Map"
+        xmlns:local="clr-namespace:CasinoUI.Views.Map"
         mc:Ignorable="d"
-        Title="CasinoGame" Height="700" Width="950" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}"
+        Title="CasinoGame" Height="700" Width="950"
         ResizeMode="NoResize"
         KeyDown="Grid_KeyDown" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Algerian">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="135" />
+            <ColumnDefinition Width="150" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="80" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="80" />
             <RowDefinition Height="80" />
             <RowDefinition Height="*" />
@@ -26,32 +31,15 @@
         <Grid.Background>
             <ImageBrush x:Name="TableBackground"/>
         </Grid.Background>
-        <Label x:Name="LblPlayerName" Content="Master66" HorizontalAlignment="Left" 
-               Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="30" 
-               FontSize="20" FontFamily="Lucida Console"/>
-        <Label x:Name="LblTime" Content="12:30" Grid.Column="2" HorizontalAlignment="Left" 
-               Margin="0.4,0,0,0" VerticalAlignment="Top" Width="80" Height="53" 
-               FontSize="30" Background="#FFFAF6F6"/>
-        <Image x:Name="ImgPlayer" HorizontalAlignment="Left" Height="100" 
-               Margin="10,40,0,0" VerticalAlignment="Top" Width="100" 
+        <Label x:Name="LblPlayerName" Content="PlayerName" FontSize="20"/>
+        <Image x:Name="ImgPlayer" Height="100" Width="100" Grid.Row="1"
                RenderTransformOrigin="1.225,1.898" Stretch="Fill" Grid.RowSpan="2"/>
-        <Label x:Name="LblPlayerXP" Content="99" HorizontalAlignment="Left" 
-               Margin="96,127,0,0" VerticalAlignment="Top" Width="34" Height="34" 
-               FontSize="20" Background="#FF2060CE"/>
-        <Label Content="Experience" HorizontalAlignment="Left" Margin="10,1,0,0" 
-               Grid.Row="2" VerticalAlignment="Top" Width="110" FontSize="15"/>
-        <ProgressBar HorizontalAlignment="Left" Height="20" Margin="10,30,0,0" 
-                     Grid.Row="2" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Stress Bar" HorizontalAlignment="Left" Margin="10,50,0,0" 
-               Grid.Row="2" VerticalAlignment="Top" Width="110" FontSize="15"/>
-        <ProgressBar HorizontalAlignment="Left" Height="18" Margin="10,81,0,0" 
-                     Grid.Row="2" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Money" HorizontalAlignment="Left" Margin="10,99,0,0" 
-               Grid.Row="2" VerticalAlignment="Top" Width="110" FontSize="15"/>
-        <Label Content="9999$" HorizontalAlignment="Left" Margin="10,127,0,0" 
-               Grid.Row="2" VerticalAlignment="Top" Width="110" 
-               Background="#FF099D10" FontSize="20" Height="33"/>
-        <local:GameCanvas x:Name="GameCanvas" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Width="auto" Height="auto" />
-        <local:MiniMapCanvas x:Name="MiniMapCanvas" Grid.Row="3" Grid.Column="1" Width="auto" Height="auto" Margin="0, 10, 0, 0"/>
+        <local:GameCanvas x:Name="GameCanvas"
+                          Grid.Row="2" Grid.Column="1"
+                          Grid.ColumnSpan="3" Grid.RowSpan="5"
+                          Width="auto" Height="auto" />
+        <local:MiniMapCanvas x:Name="MiniMapCanvas"
+                             Grid.Row="7" Grid.Column="1"
+                             Width="auto" Height="auto" Margin="0, 10, 0, 0"/>
     </Grid>
 </Window>

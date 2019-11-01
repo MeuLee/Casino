@@ -3,24 +3,66 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CasinoUI"
-        xmlns:view="clr-namespace:CasinoUI.View"
         mc:Ignorable="d"
-        Title="Menu Principal" Height="450" Width="800" Background="Black">
-    <Grid>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792" Source="/CasinoUI;component/Resources/bgMainMenu.jpg" Stretch="UniformToFill" Opacity="0.6">
+        Title="Menu Principal" 
+        Height="450" Width="800" Background="Black" WindowStartupLocation="CenterScreen"
+        FontFamily="Algerian" FontSize="18"
+        ResizeMode="NoResize">
+    <Grid x:Name="Grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="275"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Image Grid.ColumnSpan="5" Grid.RowSpan="9"
+               Source="/CasinoUI;component/Resources/bgMainMenu.jpg" 
+               Stretch="UniformToFill" Opacity="0.6">
             <Image.Effect>
                 <BlurEffect Radius="10"/>
             </Image.Effect>
         </Image>
-        <Button x:Name="button" Click="button_Click" Content="Jouer&#xA;" HorizontalAlignment="Left" Margin="338,200,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
-        <Button x:Name="button_Copy" Click="button_Options_Click" Content="Paramètres&#xA;" HorizontalAlignment="Left" Margin="338,250,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
-        <Button x:Name="button_Copy1" Content="Quitter&#xA;" HorizontalAlignment="Left" Margin="338,300,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
-        <Label x:Name="label" Content="CASINO" HorizontalAlignment="Left" Margin="264,42,0,0" VerticalAlignment="Top" Height="104" Width="270" FontSize="72" Background="#00000000" Opacity="0.99" Foreground="White">
-
-
-        </Label>
+        <TextBlock Grid.Column="1" Grid.Row="1"
+                   FontSize="72" Text="CASINO" TextAlignment="Center" Foreground="White"/>
+        <Button x:Name="BtnPlay" Style="{StaticResource Button.Hoverless}"
+                Click="BtnPlay_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
+                Grid.Column="1" Grid.Row="3"
+                HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip1" Height="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Jouer" Foreground="White"/>
+                <Image x:Name="ImgChip2" Height="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="BtnSettings" Style="{StaticResource Button.Hoverless}"
+                Click="BtnSettings_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
+                Grid.Column="1" Grid.Row="5"
+                HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip3" Height="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Paramètres" Foreground="White"/>
+                <Image x:Name="ImgChip4" Height="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="BtnClose" Style="{StaticResource Button.Hoverless}"
+                Click="BtnClose_Click" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave"
+                Grid.Column="1" Grid.Row="7"
+                HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgChip5" Height="25" Margin="0, 0, 10, 0"/>
+                <TextBlock Text="Quitter" Foreground="White" />
+                <Image x:Name="ImgChip6" Height="25" Margin="10, 0, 0, 0"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
-
-    <!--test-->
