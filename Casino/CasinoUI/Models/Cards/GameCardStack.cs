@@ -1,9 +1,10 @@
-﻿using CasinoUI.Utils;
+﻿using CasinoUI.Models.PlayerModel;
+using CasinoUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace CasinoUI.Model.Cards
+namespace CasinoUI.Models.Cards
 {
     public class GameCardStack : CardStack
     {

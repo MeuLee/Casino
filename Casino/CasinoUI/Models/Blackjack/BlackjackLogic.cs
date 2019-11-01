@@ -1,8 +1,8 @@
-﻿using CasinoUI.Model.Cards;
+﻿using CasinoUI.Models.Cards;
+using CasinoUI.Models.PlayerModel;
 using System.Collections.Generic;
-using CasinoUI.Models.Blackjack;
 
-namespace CasinoUI.Model.Blackjack
+namespace CasinoUI.Models.Blackjack
 {
     public class BlackjackLogic
     {
@@ -96,7 +96,16 @@ namespace CasinoUI.Model.Blackjack
         private void CheckHandValue(int handValue, Player player)
         {
             handValue = 0;
-            foreach (Card card in player.Cards)
+            List<Card> cards = null;
+            if (player is PlayerAI ai)
+            {
+                cards = ai.Hand;
+            }
+            else if (player is HumanPlayer hp)
+            {
+                cards = hp.CurrentProfile.Hand;
+            }
+            foreach (Card card in cards)
             {
                 if (card.Equals(Card.CardRank.Jack) || card.Equals(Card.CardRank.Queen) || card.Equals(Card.CardRank.King))
                 {

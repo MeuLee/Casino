@@ -1,4 +1,4 @@
-﻿using CasinoUI.Model.Cards;
+﻿using CasinoUI.Models.Cards;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;

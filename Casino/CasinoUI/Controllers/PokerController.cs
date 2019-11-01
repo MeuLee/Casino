@@ -1,5 +1,4 @@
-﻿using CasinoUI.Model.Poker;
-using CasinoUI.Models.Poker.PokerBrains;
+﻿using CasinoUI.Models.Poker.PokerBrains;
 using CasinoUI.View;
 
 namespace CasinoUI.Models.Poker

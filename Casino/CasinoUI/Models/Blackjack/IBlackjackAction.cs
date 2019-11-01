@@ -1,4 +1,4 @@
-﻿namespace CasinoUI.Model.Blackjack
+﻿namespace CasinoUI.Models.Blackjack
 {
     interface IBlackjackAction {
         void BlackjackHit();
