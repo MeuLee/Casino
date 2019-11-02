@@ -62,9 +62,9 @@ namespace CasinoUI.Models.Poker.PokerBrains
             }
         }
 
-        private void clearRoles() {
-            foreach (Player player in listPlayers) {
-                player.Hand.Clear();
+        private void ClearRoles() {
+            foreach (Player player in ListPlayers) {
+                player.GetHand().Clear();
             }
         }
 

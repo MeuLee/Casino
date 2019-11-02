@@ -1,4 +1,5 @@
 ﻿using CasinoUI.Controllers;
+using CasinoUI.Models;
 using CasinoUI.Utils;
 using CasinoUI.View;
 using CasinoUI.Views.Map;

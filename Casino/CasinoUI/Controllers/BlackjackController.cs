@@ -1,5 +1,5 @@
-﻿using CasinoUI.Model;
-using CasinoUI.Model.Blackjack;
+﻿using CasinoUI.Models;
+using CasinoUI.Models.Blackjack;
 using CasinoUI.Utils;
 using CasinoUI.Views;
 using System;
@@ -19,12 +19,12 @@ namespace CasinoUI.Controllers
         private static BitmapImage _blackjackTable = Properties.Resources.blackjackTable.ToBitmapImage();
         private static BitmapImage _greenTable = Properties.Resources.table.ToBitmapImage();
 
-        private BlackjackLogic _model;
-        private GameBlackjack _view;
+        private readonly BlackjackLogic _model;
+        private readonly GameBlackjack _view;
 
         public BlackjackController()
         {
-            _model = new BlackjackLogic(new HumanPlayer()); //TODO change new humanplayer, get the instance from somewhere else
+            _model = new BlackjackLogic(ApplicationSettings.HumanPlayer);
             _view = new GameBlackjack();
             _view.Show();
 
