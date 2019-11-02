@@ -35,6 +35,7 @@ namespace CasinoUI.Controllers
 
             SetImages();
             AddEvents();
+            TabControl_SelectionChanged(null, null); // The event doesn't fire when it's the first time
         }
 
         private void SetImages()
@@ -55,7 +56,6 @@ namespace CasinoUI.Controllers
                 header.MouseLeave += Header_MouseLeave;
             }
             _view.TabControl.SelectionChanged += TabControl_SelectionChanged;
-            TabControl_SelectionChanged(null, null);
         }
 
         private void BtnBack_MouseEnter(object sender, MouseEventArgs e)
@@ -92,11 +92,6 @@ namespace CasinoUI.Controllers
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //TabItem tabI = _view.TabControl.SelectedItem as TabItem;
-            //StackPanel sp = tabI.Header as StackPanel;
-            //sp.Children.OfType<TextBlock>().First().FontSize = 22;
-            //sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip2);
-
             foreach (var tab in _view.TabControl.Items.OfType<TabItem>())
             {
                 StackPanel sp = tab.Header as StackPanel;

@@ -25,11 +25,11 @@
                 <BlurEffect Radius="10"/>
             </Image.Effect>
         </Image>
-        
+
         <!-- List of settings -->
         <TabControl x:Name="TabControl" TabStripPlacement="Left" Background="Transparent"
                     Grid.Column="1" Grid.Row="1" BorderBrush="Transparent" BorderThickness="0">
-            
+
             <!-- Key Bindings-->
             <TabItem Background="Transparent" Style="{StaticResource TabItem.NoSelect}">
                 <TabItem.Header>
@@ -39,8 +39,26 @@
                         <Image Style="{StaticResource Image.Right}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
                     </StackPanel>
                 </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" 
+                                  Grid.Column="1" Grid.Row="1">
+                        <StackPanel Orientation="Vertical">
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
             </TabItem>
-            
+
             <!-- Game -->
             <TabItem Background="Transparent" Style="{StaticResource TabItem.NoSelect}">
                 <TabItem.Header>
@@ -61,6 +79,28 @@
                         <Image Style="{StaticResource Image.Right}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
                     </StackPanel>
                 </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="Language:" Foreground="white" 
+                               HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+
+                    <ComboBox Grid.Row="0" Grid.Column="1" 
+                              Foreground="Black" Width="175"
+                              VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="5">
+                        <ComboBoxItem Foreground="White" Content="Français" HorizontalAlignment="Stretch"/>
+                        <ComboBoxItem Content="English" Foreground="White" HorizontalAlignment="Stretch"/>
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="Transparent" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                </Grid>
             </TabItem>
 
             <!-- Audio -->
@@ -72,6 +112,30 @@
                         <Image Style="{StaticResource Image.Right}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
                     </StackPanel>
                 </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="Global sound:" Foreground="white" 
+                               HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+                    <Slider Style="{StaticResource Horizontal_Slider}" 
+                            Grid.Row="0" Grid.Column="1"
+                            VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0"
+                               Text="SFX:" Foreground="white" 
+                               HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+                    <Slider Style="{StaticResource Horizontal_Slider}" 
+                            Grid.Row="1" Grid.Column="1"
+                            VerticalAlignment="Center"/>
+                </Grid>
             </TabItem>
         </TabControl>
 
