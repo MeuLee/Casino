@@ -1,8 +1,4 @@
-﻿using CasinoUI.Utils;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+﻿using System.Windows;
 
 namespace CasinoUI.Views
 {

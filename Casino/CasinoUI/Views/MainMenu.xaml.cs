@@ -1,4 +1,5 @@
-﻿using CasinoUI.Models.Poker;
+﻿using CasinoUI.Controllers;
+using CasinoUI.Models.Poker;
 using CasinoUI.Utils;
 using CasinoUI.Views;
 using System.Linq;
@@ -18,33 +19,17 @@ namespace CasinoUI
         public MainWindow()
         {
             InitializeComponent();
-            SetImages();
-        }
-
-        // S/O answers did not work as you can see.
-        private void SetImages()
-        {
-            foreach (var btn in Grid.Children.OfType<Button>())
-            {
-                if (btn.Content is StackPanel sp)
-                {
-                    foreach (Image img in sp.Children.OfType<Image>())
-                    {
-                        img.Source = _casinoChip1;
-                    }
-                }
-            }
         }
 
         private void BtnPlay_Click(object sender, RoutedEventArgs e)
         {
-            new SelectGame(new CasinoGame(), 0, 0).Show();
+            new CasinoGame().Show();
             Close();
         }
 
         private void BtnSettings_Click(object sender, RoutedEventArgs e)
         {
-            new OptionMenu().Show();
+            new OptionsMenuController(this);
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)

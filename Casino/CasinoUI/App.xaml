@@ -48,5 +48,37 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <Style x:Key="TabItem.NoSelect" TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border Name="Border"
+                                Height="50" Width="235"
+                                Background="Transparent"
+                                BorderBrush="Transparent">
+                                <ContentPresenter x:Name="ContentSite"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"
+                                                  ContentSource="Header"
+                                                  Margin="12,2,12,2"/>
+                        </Border>
+                        
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Image.Left" TargetType="{x:Type Image}">
+            <Setter Property="Margin" Value="0, 0, 10, 0"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="25"/>
+        </Style>
+
+        <Style x:Key="Image.Right" TargetType="{x:Type Image}">
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="25"/>
+        </Style>
     </Application.Resources>
 </Application>

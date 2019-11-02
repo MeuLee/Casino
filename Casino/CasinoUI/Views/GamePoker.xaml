@@ -88,25 +88,25 @@
             <Button x:Name="BtnSeCoucher" Canvas.Left="10" Canvas.Top="540" Width="170" Height="35"
                     Style="{StaticResource Button.Hoverless}" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
                 <StackPanel Orientation="Horizontal">
-                    <Image x:Name="ImgChip1" Height="25" Margin="0, 0, 10, 0"/>
+                    <Image x:Name="ImgChip1" Style="{StaticResource Image.Left}"/>
                     <TextBlock Text="Coucher" Foreground="White"/>
-                    <Image x:Name="ImgChip2" Height="25" Margin="10, 0, 0, 0"/>
+                    <Image x:Name="ImgChip2" Style="{StaticResource Image.Right}"/>
                 </StackPanel>
             </Button>
             <Button x:Name ="BtnSuivre" Canvas.Left="160" Canvas.Top="600" Width="150" Height="35"
                     Style="{StaticResource Button.Hoverless}" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
                 <StackPanel Orientation="Horizontal">
-                    <Image x:Name="ImgChip3" Height="25" Margin="0, 0, 10, 0"/>
+                    <Image x:Name="ImgChip3" Style="{StaticResource Image.Left}"/>
                     <TextBlock Text="Suivre" Foreground="White"/>
-                    <Image x:Name="ImgChip4" Height="25" Margin="10, 0, 0, 0"/>
+                    <Image x:Name="ImgChip4" Style="{StaticResource Image.Right}"/>
                 </StackPanel>
             </Button>
             <Button x:Name ="BtnRelancer" Canvas.Left="290" Canvas.Top="540" Width="190" Height="35"
                     Style="{StaticResource Button.Hoverless}" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
                 <StackPanel Orientation="Horizontal">
-                    <Image x:Name="ImgChip5" Height="25" Margin="0, 0, 10, 0"/>
+                    <Image x:Name="ImgChip5" Style="{StaticResource Image.Left}"/>
                     <TextBlock Text="Relancer" Foreground="White"/>
-                    <Image x:Name="ImgChip6" Height="25" Margin="10, 0, 0, 0"/>
+                    <Image x:Name="ImgChip6" Style="{StaticResource Image.Right}"/>
                 </StackPanel>
             </Button>
 

@@ -1,43 +1,82 @@
-﻿<Window x:Class="CasinoUI.Views.OptionMenu"
+﻿<Window x:Class="CasinoUI.Views.OptionsMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="OptionsMenu" Height="350" Width="600">
-    <Grid>
-        <TabControl>
-            <TabItem Header="Audio" Width="196">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="40" />
-                    </Grid.ColumnDefinitions>
-                    <Grid  Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <CheckBox x:Name="BtnMuteSoundFx" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="100, 5, 0, 0"/>
-                        <Label x:Name="LblMuteSoundFx" Grid.Row="0" Grid.Column="1" Content="Mute sound effects" />
-                        <Slider x:Name="SldGameSound" Maximum="100" Grid.Row="1" TickPlacement="BottomRight" TickFrequency="5" />
-                        <Label x:Name="LblGameSound" Content="Game volume" Grid.Row="1" Grid.Column="1" />
-                    </Grid>
-                </Grid>
+        Title="Settings"
+        Height="450" Width="800"
+        FontFamily="Algerian" FontSize="18"
+        WindowStartupLocation="CenterScreen"  Background="Black"
+        ResizeMode="NoResize">
+    <Grid x:Name="Grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.ColumnSpan="7" Grid.RowSpan="7"
+               Source="/CasinoUI;component/Resources/bgMainMenu.jpg" 
+               Stretch="UniformToFill" Opacity="0.6">
+            <Image.Effect>
+                <BlurEffect Radius="10"/>
+            </Image.Effect>
+        </Image>
+        
+        <!-- List of settings -->
+        <TabControl x:Name="TabControl" TabStripPlacement="Left" Background="Transparent"
+                    Grid.Column="1" Grid.Row="1" BorderBrush="Transparent" BorderThickness="0">
+            
+            <!-- Key Bindings-->
+            <TabItem Background="Transparent" Style="{StaticResource TabItem.NoSelect}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <Image Style="{StaticResource Image.Left}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                        <TextBlock Text="Key Bindings" Foreground="White" VerticalAlignment="Center"/>
+                        <Image Style="{StaticResource Image.Right}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                    </StackPanel>
+                </TabItem.Header>
             </TabItem>
-            <TabItem Header="Hotkeys" Width="196"/>
-            <TabItem Header="Game" Width="196"/>
+            
+            <!-- Game -->
+            <TabItem Background="Transparent" Style="{StaticResource TabItem.NoSelect}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <Image Style="{StaticResource Image.Left}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                        <TextBlock Text="Game" Foreground="White" VerticalAlignment="Center"/>
+                        <Image Style="{StaticResource Image.Right}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+
+            <!-- Language -->
+            <TabItem Background="Transparent" Style="{StaticResource TabItem.NoSelect}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <Image Style="{StaticResource Image.Left}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                        <TextBlock Text="Language" Foreground="White" VerticalAlignment="Center"/>
+                        <Image Style="{StaticResource Image.Right}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+
+            <!-- Audio -->
+            <TabItem Background="Transparent" Style="{StaticResource TabItem.NoSelect}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <Image Style="{StaticResource Image.Left}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                        <TextBlock Text="Audio" Foreground="White" VerticalAlignment="Center"/>
+                        <Image Style="{StaticResource Image.Right}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
         </TabControl>
+
+        <Button x:Name="BtnBack" Style="{StaticResource Button.Hoverless}">
+            <Image x:Name="ImgBack" Margin="3" Stretch="UniformToFill"/>
+        </Button>
     </Grid>
 </Window>
