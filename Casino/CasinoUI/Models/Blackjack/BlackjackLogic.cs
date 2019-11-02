@@ -69,8 +69,11 @@ namespace CasinoUI.Models.Blackjack
 
         private void InitListPlayers()
         {
-            ListPlayers[0] = Human;
-            ListPlayers[1] = new BlackjackAI();
+            ListPlayers = new List<Player>
+            {
+                Human,
+                new BlackjackAI()
+            };
         }
 
         private void DistributeCards()

@@ -37,7 +37,7 @@ namespace CasinoUI.Models.Cards
                     var image = CasinoUI.Properties.Resources.ResourceManager.GetObject($"{value}{suitPrefix}") as Bitmap;
                     Cards.Add(new Card(rank, suit, image));
                 }
-                
+
             }
         }
 

@@ -9,7 +9,7 @@ namespace CasinoUI.Models.Poker.PokerBrains
         public List<Player> ListPlayers { get; set; }  // index 0 is always the human player
         public GameCardStack CardStack { get; set; }
 
-        public int[] PlayerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers                            
+        public int[] PlayerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers
                                                     //       idx[1] = BigBlind's index in ListPlayers
                                                     //       idx[2] = First player to play
         public int Pot { get; set; }
@@ -18,7 +18,7 @@ namespace CasinoUI.Models.Poker.PokerBrains
         public PokerLogic(HumanPlayer human) {
             InitListPlayers(human);
             SetInitialRoles();
-            CardStack = new GameCardStack();            
+            CardStack = new GameCardStack();
             Pot = 0;
             CurrentRaise = 2;
         }
@@ -62,9 +62,10 @@ namespace CasinoUI.Models.Poker.PokerBrains
             }
         }
 
-        private void ClearRoles()
-        {
-            
+        private void clearRoles() {
+            foreach (Player player in listPlayers) {
+                player.Hand.Clear();
+            }
         }
 
         private void PlayerPlaysTurn(PokerActionCode pokerActionCode, int playerIdx) {
@@ -91,7 +92,7 @@ namespace CasinoUI.Models.Poker.PokerBrains
 
 /// TODO: 1. make initial blinds randomly chosen
 ///       2. Restore deck and shuffle
-///       
+///
 
 // 1. Distribute cards to players
 // 2. small blind deposits

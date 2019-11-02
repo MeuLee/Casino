@@ -76,6 +76,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\ApplicationSettings.cs" />
+    <Compile Include="Controllers\BlackjackController.cs" />
     <Compile Include="Models\Blackjack\BlackjackActionCode.cs" />
     <Compile Include="Models\Blackjack\BlackjackLogic.cs" />
     <Compile Include="Models\Blackjack\IBlackjackAction.cs" />

@@ -54,7 +54,7 @@ namespace TestCasino
             //Arrange
             GameCardStack stack = new GameCardStack();
             HumanPlayer player = new HumanPlayer(0, 0, "");
-            int playerCardsBefore = player.Hand.Count, gameCardsBefore = stack.Cards.Count, 
+            int playerCardsBefore = player.Hand.Count, gameCardsBefore = stack.Cards.Count,
                 playerCardsAfter, gameCardsAfter;
 
             //Act
