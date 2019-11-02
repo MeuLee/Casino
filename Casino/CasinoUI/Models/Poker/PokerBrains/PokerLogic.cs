@@ -25,7 +25,6 @@ namespace CasinoUI.Models.Poker.PokerBrains
 
         private void InitListPlayers(HumanPlayer human)
         {
-            human.CurrentProfile = new PokerProfile(); // might wanna call this somewhere else, in humanplayer class? 
             ListPlayers = new List<Player> { human };
 
             for (int i = 0; i < 4; i++) {
@@ -68,7 +67,7 @@ namespace CasinoUI.Models.Poker.PokerBrains
             
         }
 
-        private void playerPlaysTurn(PokerActionCode pokerActionCode, int playerIdx) {
+        private void PlayerPlaysTurn(PokerActionCode pokerActionCode, int playerIdx) {
             IPokerAction player = ListPlayers[playerIdx].GetGameType<IPokerAction>();
             switch (pokerActionCode) {
                 case PokerActionCode.CALL:

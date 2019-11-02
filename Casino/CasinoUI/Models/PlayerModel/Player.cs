@@ -1,5 +1,6 @@
 ﻿using CasinoUI.Models.Blackjack;
 using CasinoUI.Models.Cards;
+using System;
 using System.Collections.Generic;
 
 namespace CasinoUI.Models.PlayerModel
@@ -8,6 +9,10 @@ namespace CasinoUI.Models.PlayerModel
     {
         public int Money { get; set; }
 
+        /// <summary>
+        /// Throws: System.Exception, if the current (this) player is not a HumanPlayer or a PlayerAI. 
+        /// </summary>
+        /// <returns>The current (this) player's hand. </returns>
         public List<Card> GetHand()
         {
             if (this is HumanPlayer hp)
@@ -18,25 +23,34 @@ namespace CasinoUI.Models.PlayerModel
             {
                 return ai.Hand;
             }
-            throw new System.Exception("\"this\" should be human or ai");
+            throw new InvalidCastException($"{"this"} should be human or ai");
         }
 
         /// <summary>
-        /// 
+        /// Usage: IPokerAction currentPlayer = humanPlayer.GetGameType<IPokerAction>();
         /// </summary>
-        /// <typeparam name="T">Must be of type GameType, such as IPokerAction, IBlackjackAction etc.</typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">Must be of type IGameType, such as IPokerAction, IBlackjackAction etc. Must be an interface</typeparam>
+        /// <returns>The current player as T</returns>
         public T GetGameType<T>() where T : IGameType
         {
-            if (this is HumanPlayer hp && hp.CurrentProfile is T type)
+            if (this is HumanPlayer hp)
             {
-                return type;
+                if (hp.CurrentProfile is T type)
+                {
+                    return type;
+                }
+                throw new InvalidCastException($"{"this"} is a HumanPlayer but is not of type T");
             }
-            else if (this is PlayerAI ai && ai is T aiType)
+            else if (this is PlayerAI ai)
             {
-                return aiType;
+                if (ai is T aiType)
+                {
+                    return aiType;
+                }
+                throw new InvalidCastException($"{"this"} is a PlayerAI but is not of type T");
             }
-            throw new System.Exception("see comment above method");
+            
+            throw new InvalidCastException($"{"this"} should be human or ai");
         }
     }
 }

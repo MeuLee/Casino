@@ -8,8 +8,9 @@ namespace CasinoUI.Models.Poker
         GamePoker jeuPoker;
 
         public PokerController() {
-            // pokerModel = new PokerLogic();
-// damienn est beau
+            //pokerModel = new PokerLogic(ApplicationSettings.HumanPlayer);
+            //jeuPoker = new GamePoker();
+            //jeuPoker.Show();
         }
     }
 }
