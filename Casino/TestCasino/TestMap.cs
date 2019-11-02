@@ -1,7 +1,6 @@
 ﻿using CasinoUI.Views.Map;
 using CasinoUI.Views.Map.Tiles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace TestCasino
 {

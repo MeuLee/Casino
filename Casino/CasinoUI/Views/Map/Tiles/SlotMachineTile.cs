@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Windows;
 
 namespace CasinoUI.Views.Map.Tiles
 {
@@ -14,17 +13,7 @@ namespace CasinoUI.Views.Map.Tiles
 
         private void MovedOver(object sender, OnMovedOverEventArgs e)
         {
-            var result = MessageBox.Show("Wanna play slot machine?", "nice title m8", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                MessageBox.Show("epic gamer slot machine simulation");
-            }
-            else if (result == MessageBoxResult.No)
-            {
-                MapRenderer.PlayerX = e.OldX;
-                MapRenderer.PlayerY = e.OldY;
-                (sender as CasinoGame).OnPlayerMoved(e.OldX, e.OldY);
-            }
+            
         }
     }
 }

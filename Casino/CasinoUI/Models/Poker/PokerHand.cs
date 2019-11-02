@@ -1,8 +1,8 @@
-﻿using CasinoUI.Model.Cards;
+﻿using CasinoUI.Models.Cards;
 using System;
 using System.Collections.Generic;
 
-namespace CasinoUI.Model.Poker
+namespace CasinoUI.Models.Poker
 {
     public class PokerHand
     {

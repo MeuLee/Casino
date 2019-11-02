@@ -1,32 +1,34 @@
-﻿using CasinoUI.Model;
-using CasinoUI.Model.Cards;
-using CasinoUI.Model.Poker;
-using System;
+﻿using CasinoUI.Models.Cards;
+using CasinoUI.Models.PlayerModel;
+using CasinoUI.Models.Profiles;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CasinoUI.Models.Poker.PokerBrains {
+namespace CasinoUI.Models.Poker.PokerBrains
+{
     public class TexasHoldemLogic : PokerLogic {
 
         public List<Card> TableCards { get; set; }
-        public TexasHoldemLogic(PokerPlayer Human) : base(Human) {
+        public TexasHoldemLogic(HumanPlayer Human) : base(Human) {
             TableCards = new List<Card>();
         }
 
-        private void playersDrawCards() {
-            for (int i = playerRoles[3]; i < listPlayers.Count; i++) {
-                listPlayers[i].Hand.Add(cardStack.DrawCard());
-                listPlayers[i].Hand.Add(cardStack.DrawCard());
+        private void PlayersDrawCards() {
+            foreach (var player in ListPlayers)
+            {
+                player.GetHand().Add(CardStack.DrawCard());
+                player.GetHand().Add(CardStack.DrawCard());
             }
 
-            if (playerRoles[3] > 0) {
-                for (int i = 0; i < playerRoles[3]; i++) {
-                    listPlayers[i].Hand.Add(cardStack.DrawCard());
-                    listPlayers[i].Hand.Add(cardStack.DrawCard());
+            if (PlayerRoles[3] > 0) // pas mal sur que ca va planter si playerroles.length <= 3
+                                    // en fait ca sert a quoi? le foreach en haut devrait pogner toute les playerroles
+            {
+                foreach (var player in ListPlayers)
+                {
+                    player.GetHand().Add(CardStack.DrawCard());
+                    player.GetHand().Add(CardStack.DrawCard());
                 }
             }
+
         }
 
     }

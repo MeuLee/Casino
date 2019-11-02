@@ -75,25 +75,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ApplicationSettings.cs" />
     <Compile Include="Models\Blackjack\BlackjackActionCode.cs" />
     <Compile Include="Models\Blackjack\BlackjackLogic.cs" />
     <Compile Include="Models\Blackjack\IBlackjackAction.cs" />
-    <Compile Include="Models\Blackjack\BlackjackAI.cs" />
+    <Compile Include="Models\IGameType.cs" />
+    <Compile Include="Models\PlayerModel\BlackjackAI.cs" />
     <Compile Include="Models\Cards\Card.cs" />
     <Compile Include="Models\Cards\CardStack.cs" />
     <Compile Include="Models\Cards\GameCardStack.cs" />
-    <Compile Include="Models\HumanPlayer.cs" />
-    <Compile Include="Models\Player.cs" />
-    <Compile Include="Models\PokerPlayer.cs" />
+    <Compile Include="Models\PlayerModel\PlayerAI.cs" />
+    <Compile Include="Models\PlayerModel\HumanPlayer.cs" />
+    <Compile Include="Models\PlayerModel\Player.cs" />
     <Compile Include="Models\Poker\IPokerAction.cs" />
     <Compile Include="Models\Poker\PokerActionCode.cs" />
-    <Compile Include="Models\Poker\PokerAI.cs" />
+    <Compile Include="Models\PlayerModel\PokerAI.cs" />
     <Compile Include="Controllers\PokerController.cs" />
     <Compile Include="Models\Poker\PokerHand.cs" />
     <Compile Include="Models\Poker\PokerBrains\FiveCardDrawLogic.cs" />
     <Compile Include="Models\Poker\PokerBrains\PokerLogic.cs" />
     <Compile Include="Models\Poker\PokerPlayerState.cs" />
     <Compile Include="Models\Poker\PokerBrains\TexasHoldemLogic.cs" />
+    <Compile Include="Models\Profiles\PokerProfile.cs" />
+    <Compile Include="Models\Profiles\Profile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

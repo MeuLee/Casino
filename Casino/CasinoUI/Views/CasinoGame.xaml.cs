@@ -1,4 +1,6 @@
-﻿using CasinoUI.Utils;
+﻿using CasinoUI.Models;
+using CasinoUI.Models.PlayerModel;
+using CasinoUI.Utils;
 using CasinoUI.Views.Map;
 using CasinoUI.Views.Map.Tiles;
 using System.Windows;
@@ -25,49 +27,51 @@ namespace CasinoUI.Views
 
         private void Grid_KeyDown(object sender, KeyEventArgs e)
         {
-            int oldPlayerX = MapRenderer.PlayerX,
-                oldPlayerY = MapRenderer.PlayerY;
+            HumanPlayer player = ApplicationSettings.HumanPlayer;
+            var map = ApplicationSettings.Map;
+            int oldPlayerX = player.X,
+                oldPlayerY = player.Y;
             switch (e.Key)
             {
                 case Key.A:
-                    if (MapRenderer.PlayerX > 0)
+                    if (player.X > 0)
                     {
-                        MapRenderer.PlayerX--;
+                        player.X--;
                     }
                     break;
                 case Key.W:
-                    if (MapRenderer.PlayerY > 0)
+                    if (player.Y > 0)
                     {
-                        MapRenderer.PlayerY--;
+                        player.Y--;
                     }
                     break;
                 case Key.S:
-                    if (MapRenderer.Map.GetLength(1) - 1 > MapRenderer.PlayerY)
+                    if (map.GetLength(1) - 1 > player.Y)
                     {
-                        MapRenderer.PlayerY++;
+                        player.Y++;
                     }
                     break;
                 case Key.D:
-                    if (MapRenderer.Map.GetLength(0) - 1 > MapRenderer.PlayerX)
+                    if (map.GetLength(0) - 1 > player.X)
                     {
-                        MapRenderer.PlayerX++;
+                        player.X++;
                     }
                     break;
                 default:
                     return;
             }
 
-            // could be called in set property
             OnPlayerMoved(oldPlayerX, oldPlayerY);
         }
 
         public void OnPlayerMoved(int oldPlayerX, int oldPlayerY)
         {
+            var player = ApplicationSettings.HumanPlayer;
             GameCanvas.InvalidateVisual();
             MiniMapCanvas.InvalidateVisual();
-            MapRenderer.Map[MapRenderer.PlayerX, MapRenderer.PlayerY]
-                       .OnMovedOver?
-                       .Invoke(this, new OnMovedOverEventArgs(oldPlayerX, oldPlayerY));
+            ApplicationSettings.Map[player.X, player.Y]
+                               .OnMovedOver?
+                               .Invoke(this, new OnMovedOverEventArgs(oldPlayerX, oldPlayerY));
         }
     }
 }
