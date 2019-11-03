@@ -124,15 +124,15 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0"
-                               Text="Global sound:" Foreground="white" 
+                               Text="Song volume:" Foreground="white" 
                                HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
-                    <Slider Style="{StaticResource Horizontal_Slider}" 
+                    <Slider x:Name="SldSong" Style="{StaticResource Horizontal_Slider}" 
                             Grid.Row="0" Grid.Column="1"
                             VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="1" Grid.Column="0"
                                Text="SFX:" Foreground="white" 
                                HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
-                    <Slider Style="{StaticResource Horizontal_Slider}" 
+                    <Slider x:Name="SldSFX" Style="{StaticResource Horizontal_Slider}" 
                             Grid.Row="1" Grid.Column="1"
                             VerticalAlignment="Center"/>
                 </Grid>

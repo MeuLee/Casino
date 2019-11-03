@@ -1,4 +1,5 @@
-﻿using CasinoUI.Models.WindowModels;
+﻿using CasinoUI.Models;
+using CasinoUI.Models.WindowModels;
 using CasinoUI.Utils;
 using CasinoUI.Views;
 using System;
@@ -35,6 +36,7 @@ namespace CasinoUI.Controllers
 
             SetImages();
             AddEvents();
+            ModifySlidersValue();
             TabControl_SelectionChanged(null, null); // The event doesn't fire when it's the first time
         }
 
@@ -56,6 +58,20 @@ namespace CasinoUI.Controllers
                 header.MouseLeave += Header_MouseLeave;
             }
             _view.TabControl.SelectionChanged += TabControl_SelectionChanged;
+            _view.SldSong.ValueChanged += SldSong_ValueChanged;
+            _view.SldSFX.ValueChanged += SldSFX_ValueChanged;
+        }
+
+        private void SldSong_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Slider sld = sender as Slider;
+            _model.ModifySongVolume(sld.Value);
+        }
+
+        private void SldSFX_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Slider sld = sender as Slider;
+            _model.ModifySFXVolume(sld.Value);
         }
 
         private void BtnBack_MouseEnter(object sender, MouseEventArgs e)
@@ -106,6 +122,12 @@ namespace CasinoUI.Controllers
                     sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip1);
                 }
             }
+        }
+
+        private void ModifySlidersValue()
+        {
+            _view.SldSong.Value = ApplicationSettings.SoundPlayer.SongVolume;
+            _view.SldSFX.Value = ApplicationSettings.SoundPlayer.SFXVolume;
         }
     }
 }
