@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Runtime.InteropServices;
@@ -11,9 +12,8 @@ namespace CasinoUI.Models
 {
     public class SoundManager
     {
-        public MediaPlayer CurrentSong { get; set; }
+        public MediaPlayer CurrentSong { get; private set; }
 
-        private double _songVolume;
         public double SongVolume
         {
             get { return _songVolume; }
@@ -24,7 +24,6 @@ namespace CasinoUI.Models
             }
         }
 
-        private double _sfxVolume;
         public double SFXVolume
         {
             get { return _sfxVolume; }
@@ -35,19 +34,62 @@ namespace CasinoUI.Models
             }
         }
 
+        private static List<Uri> _songUris;
+        private double _songVolume;
+        private double _sfxVolume;
+        private int _songIndex = 0;
+
+        static SoundManager()
+        {
+            LoadSongs();
+        }
+
+        private static void LoadSongs()
+        {
+            _songUris = new List<Uri>();
+            string[] paths = Directory.GetFiles("Resources", "*.wav", SearchOption.TopDirectoryOnly);
+            foreach (var path in paths)
+            {
+                _songUris.Add(new Uri(path, UriKind.Relative));
+            }
+        }
+
         public SoundManager()
         {
             CurrentSong = new MediaPlayer();
         }
 
-        public void ChangeSong()
+        private void CurrentSong_MediaEnded(object sender, EventArgs e)
         {
-            CurrentSong.Volume = 50;
-            CurrentSong.Open(new Uri(@"C:\crash.wav", UriKind.Absolute));
-            CurrentSong.Play();
+            PlaySong();
         }
 
-        [DllImport("winmm.dll")]
-        public static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
+        public void Start()
+        {
+            CurrentSong.MediaEnded += CurrentSong_MediaEnded;
+            PlaySong();
+        }
+
+        public void Stop()
+        {
+            CurrentSong.MediaEnded -= CurrentSong_MediaEnded;
+            CurrentSong.Stop();
+        }
+
+        private void PlaySong()
+        {
+            CurrentSong.Open(_songUris[_songIndex]);
+            CurrentSong.Play();
+            SetIndex();
+        }
+
+        private void SetIndex()
+        {
+            _songIndex++;
+            if (_songIndex > _songUris.Count - 1)
+            {
+                _songIndex = 0;
+            }
+        }
     }
 }

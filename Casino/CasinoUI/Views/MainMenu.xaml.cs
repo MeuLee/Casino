@@ -20,12 +20,14 @@ namespace CasinoUI
         public MainWindow()
         {
             InitializeComponent();
+            ApplicationSettings.Load();
         }
 
         private void BtnPlay_Click(object sender, RoutedEventArgs e)
         {
             new CasinoGame().Show();
             Close();
+            ApplicationSettings.SoundPlayer.Start();
         }
 
         private void BtnSettings_Click(object sender, RoutedEventArgs e)
@@ -35,8 +37,8 @@ namespace CasinoUI
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            //Application.Current.Shutdown();
-            ApplicationSettings.SoundPlayer.ChangeSong();
+            Application.Current.Shutdown();
+            
         }
 
         private void Btn_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

@@ -12,13 +12,22 @@ namespace CasinoUI.Models
 
         static ApplicationSettings()
         {
-            //Map = MapGenerator.LoadMapFromFile(Properties.Resources.map);
-            //HumanPlayer = new HumanPlayer(10, 4, "");
+            Map = MapGenerator.LoadMapFromFile(Properties.Resources.map);
+            HumanPlayer = new HumanPlayer(10, 4, "");
             SoundPlayer = new SoundManager
             {
                 SongVolume = 50,
                 SFXVolume = 50
             };
+        }
+
+        /// <summary>
+        /// This method might seem useless but it calls the static constructor. 
+        /// Big brain time
+        /// </summary>
+        public static void Load()
+        {
+
         }
 
     }

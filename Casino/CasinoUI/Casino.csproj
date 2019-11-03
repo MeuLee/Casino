@@ -466,5 +466,19 @@
     <Resource Include="Resources\DEALER.jpg" />
     <Resource Include="Resources\SMALL_BLIND.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\song2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\song1.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>
