@@ -1,10 +1,5 @@
-﻿using CasinoUI.Models.Cards;
-using CasinoUI.Models.Poker;
+﻿using CasinoUI.Models.Poker;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CasinoUI.Models.Profiles
 {

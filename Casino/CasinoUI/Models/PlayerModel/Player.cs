@@ -1,5 +1,4 @@
-﻿using CasinoUI.Models.Blackjack;
-using CasinoUI.Models.Cards;
+﻿using CasinoUI.Models.Cards;
 using System;
 using System.Collections.Generic;
 

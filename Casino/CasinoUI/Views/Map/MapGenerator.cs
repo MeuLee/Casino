@@ -46,8 +46,6 @@ namespace CasinoUI.Views.Map
         private static void FillMap(XElement topElem, MapTile[,] map)
         {
             var tilesArr = topElem.Elements().First(e => e.Name == "Tiles").Descendants().ToList();
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
             for (int i = 0; i < tilesArr.Count; i++)
             {
                 var tile = tilesArr[i];
@@ -55,14 +53,8 @@ namespace CasinoUI.Views.Map
                 int y = tile.Attribute("Y").Value.ToInteger();
                 string floorType = tile.Attribute("Terrain").Value;
                 bool rotate = tile.Attribute("Rotate").Value.ToBoolean();
-                Stopwatch sw1 = new Stopwatch();
-                sw1.Start();
                 map[x, y] = MapTile.CreateMapTile(x, y, floorType, rotate);
-                sw1.Stop();
-                System.Console.WriteLine($"CreateMapTile: {sw1.ElapsedMilliseconds} ms. Type: {map[x, y].GetType()}");
             }
-            sw.Stop();
-            System.Console.WriteLine($"For loop: {sw.ElapsedMilliseconds / (double)1000} seconds");
         }
     }
 }

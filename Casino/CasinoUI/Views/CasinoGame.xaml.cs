@@ -16,13 +16,6 @@ namespace CasinoUI.Views
         public CasinoGame()
         {
             InitializeComponent();
-            InitializeImage();
-        }
-
-        private void InitializeImage()
-        {
-            ImgPlayer.Source = Properties.Resources.panda.ToBitmapImage();
-            TableBackground.ImageSource = Properties.Resources.table.ToBitmapImage();
         }
 
         private void Grid_KeyDown(object sender, KeyEventArgs e)

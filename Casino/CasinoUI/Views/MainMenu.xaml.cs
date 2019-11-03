@@ -1,6 +1,5 @@
 ﻿using CasinoUI.Controllers;
 using CasinoUI.Models;
-using CasinoUI.Models.Poker;
 using CasinoUI.Utils;
 using CasinoUI.Views;
 using System.Linq;
@@ -38,7 +37,6 @@ namespace CasinoUI
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-            
         }
 
         private void Btn_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

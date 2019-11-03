@@ -1,6 +1,5 @@
 ﻿using CasinoUI.Models.Cards;
 using CasinoUI.Models.PlayerModel;
-using CasinoUI.Models.Profiles;
 using System.Collections.Generic;
 
 namespace CasinoUI.Models.Poker.PokerBrains

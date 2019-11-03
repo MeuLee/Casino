@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:CasinoUI"
              StartupUri="Views/MainMenu.xaml">
     <Application.Resources>
+        <!-- No Hover animation Button -->
         <Style x:Key="Button.Hoverless" TargetType="{x:Type ButtonBase}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -69,12 +70,14 @@
             </Setter>
         </Style>
 
+        <!-- Left image in Button -->
         <Style x:Key="Image.Left" TargetType="{x:Type Image}">
             <Setter Property="Margin" Value="0, 0, 10, 0"/>
             <Setter Property="Height" Value="25"/>
             <Setter Property="Width" Value="25"/>
         </Style>
 
+        <!-- Right image in Button -->
         <Style x:Key="Image.Right" TargetType="{x:Type Image}">
             <Setter Property="Margin" Value="10, 0, 0, 0"/>
             <Setter Property="Height" Value="25"/>
@@ -140,6 +143,7 @@
             </Grid>
         </ControlTemplate>
 
+        <!-- Custom Slider -->        
         <Style x:Key="Horizontal_Slider" TargetType="Slider">
             <Setter Property="Focusable" Value="False"/>
             <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -154,5 +158,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
     </Application.Resources>
 </Application>

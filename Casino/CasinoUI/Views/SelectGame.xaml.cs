@@ -2,7 +2,6 @@
 using CasinoUI.Models;
 using CasinoUI.Utils;
 using CasinoUI.View;
-using CasinoUI.Views.Map;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;

@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Media;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace CasinoUI.Models
@@ -48,6 +43,11 @@ namespace CasinoUI.Models
         {
             _songUris = new List<Uri>();
             string[] paths = Directory.GetFiles("Resources", "*.wav", SearchOption.TopDirectoryOnly);
+            if (paths.Length == 0)
+            {
+                throw new FileNotFoundException("No songs found =(");
+            }
+
             foreach (var path in paths)
             {
                 _songUris.Add(new Uri(path, UriKind.Relative));

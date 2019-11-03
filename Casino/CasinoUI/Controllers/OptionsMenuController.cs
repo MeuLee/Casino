@@ -2,11 +2,7 @@
 using CasinoUI.Models.WindowModels;
 using CasinoUI.Utils;
 using CasinoUI.Views;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -34,15 +30,9 @@ namespace CasinoUI.Controllers
             _parent.Hide();
             _view.Show();
 
-            SetImages();
             AddEvents();
             ModifySlidersValue();
-            TabControl_SelectionChanged(null, null); // The event doesn't fire when it's the first time
-        }
-
-        private void SetImages()
-        {
-            _view.ImgBack.Source = _backImg;
+            TabControl_SelectionChanged(null, null); // The event doesn't fire when it's the first time, has to be called manually
         }
 
         private void AddEvents()

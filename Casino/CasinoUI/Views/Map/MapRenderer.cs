@@ -14,10 +14,9 @@ namespace CasinoUI.Views.Map
         public static int TilesAroundPlayerY { get; set; } = 3;
 
         private static int _cameraCenterX, _cameraCenterY;
-        private static HumanPlayer _player = ApplicationSettings.HumanPlayer;
-        private static MapTile[,] _map = ApplicationSettings.Map;
-
-
+        private static readonly HumanPlayer _player = ApplicationSettings.HumanPlayer;
+        private static readonly MapTile[,] _map = ApplicationSettings.Map;
+        
         #region RenderMap
         public static void RenderMap(DrawingContext dc, float canvasWidth, float canvasHeight)
         {

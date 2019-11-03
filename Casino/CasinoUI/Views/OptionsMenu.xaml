@@ -140,7 +140,7 @@
         </TabControl>
 
         <Button x:Name="BtnBack" Style="{StaticResource Button.Hoverless}">
-            <Image x:Name="ImgBack" Margin="3" Stretch="UniformToFill"/>
+            <Image x:Name="ImgBack" Margin="3" Source="pack://siteoforigin:,,,/Resources/backArrow.png"/>
         </Button>
     </Grid>
 </Window>
