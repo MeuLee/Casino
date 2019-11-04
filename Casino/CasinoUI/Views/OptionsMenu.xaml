@@ -39,24 +39,24 @@
                         <Image Style="{StaticResource Image.Right}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" 
-                                  Grid.Column="1" Grid.Row="1">
-                        <StackPanel Orientation="Vertical">
-
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
+                <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Margin="10">
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="10"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
 
             <!-- Game -->
@@ -135,6 +135,35 @@
                     <Slider x:Name="SldSFX" Style="{StaticResource Horizontal_Slider}" 
                             Grid.Row="1" Grid.Column="1"
                             VerticalAlignment="Center"/>
+                </Grid>
+            </TabItem>
+            
+            <!-- Appearance -->
+            <TabItem Background="Transparent" Style="{StaticResource TabItem.NoSelect}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <Image Style="{StaticResource Image.Left}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                        <TextBlock Text="Appearance" Foreground="White" VerticalAlignment="Center"/>
+                        <Image Style="{StaticResource Image.Right}" Source="/CasinoUI;component/Resources/PokerEntrer.png"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" 
+                                  Grid.Column="1" Grid.Row="1">
+                        <StackPanel Orientation="Vertical">
+
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
         </TabControl>

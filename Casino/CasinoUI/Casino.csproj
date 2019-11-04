@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\CasinoGameController.cs" />
     <Compile Include="Controllers\OptionsMenuController.cs" />
     <Compile Include="Models\ApplicationSettings.cs" />
     <Compile Include="Controllers\BlackjackController.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Models\Blackjack\IBlackjackAction.cs" />
     <Compile Include="Models\IGameType.cs" />
     <Compile Include="Models\SoundManager.cs" />
+    <Compile Include="Models\WindowModels\CasinoGameModel.cs" />
     <Compile Include="Models\WindowModels\OptionsMenuModel.cs" />
     <Compile Include="Models\PlayerModel\BlackjackAI.cs" />
     <Compile Include="Models\Cards\Card.cs" />

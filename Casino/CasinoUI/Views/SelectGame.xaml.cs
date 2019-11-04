@@ -18,11 +18,11 @@ namespace CasinoUI.Views
         private static readonly BitmapImage _casinoChip1 = Properties.Resources.PokerEntrer.ToBitmapImage();
         private static readonly BitmapImage _casinoChip2 = Properties.Resources.redChip.ToBitmapImage();
         private static readonly BitmapImage _backArrow = Properties.Resources.backArrow.ToBitmapImage();
-        private readonly CasinoGame _cg;
+        private readonly CasinoGameController _cg;
         private readonly int _oldPlayerX;
         private readonly int _oldPlayerY;
 
-        public SelectGame(CasinoGame cg, int oldPlayerX, int oldPlayerY)
+        public SelectGame(CasinoGameController cg, int oldPlayerX, int oldPlayerY)
         {
             InitializeComponent();
             SetImages();
@@ -80,7 +80,7 @@ namespace CasinoUI.Views
             player.Y = _oldPlayerY;
             _cg.OnPlayerMoved(_oldPlayerX, _oldPlayerY);
             Close();
-            _cg.Show();
+            _cg.View.Show();
         }
 
         private void BtnPoker_Click(object sender, RoutedEventArgs e)

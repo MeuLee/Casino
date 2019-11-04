@@ -24,9 +24,7 @@ namespace CasinoUI
 
         private void BtnPlay_Click(object sender, RoutedEventArgs e)
         {
-            new CasinoGame().Show();
-            Close();
-            ApplicationSettings.SoundPlayer.Start();
+            new CasinoGameController(this);
         }
 
         private void BtnSettings_Click(object sender, RoutedEventArgs e)

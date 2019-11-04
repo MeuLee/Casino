@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="CasinoGame" Height="700" Width="950"
         ResizeMode="NoResize"
-        KeyDown="Grid_KeyDown" 
         WindowStartupLocation="CenterScreen"
         FontFamily="Algerian"
         Background="Black" Foreground="White" FontSize="18">
@@ -32,9 +31,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="/CasinoUI;component/Resources/bgMainMenu.jpg"
-                           Stretch="UniformToFill" Opacity="0.6">
-            </ImageBrush>
+            <ImageBrush Stretch="UniformToFill" Opacity="0.6" 
+                        ImageSource="/CasinoUI;component/Resources/bgMainMenu.jpg"/>
         </Grid.Background>
         <Button x:Name="BtnBack" Style="{StaticResource Button.Hoverless}">
             <Image x:Name="ImgBack" Margin="3" Source="pack://siteoforigin:,,,/Resources/backArrow.png"/>

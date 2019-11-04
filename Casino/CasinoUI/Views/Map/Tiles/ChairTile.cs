@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using CasinoUI.Controllers;
+using System.Drawing;
 
 namespace CasinoUI.Views.Map.Tiles
 {
@@ -13,8 +14,8 @@ namespace CasinoUI.Views.Map.Tiles
 
         private void MovedOver(object sender, OnMovedOverEventArgs e)
         {
-            CasinoGame cg = sender as CasinoGame;
-            cg.Hide();
+            CasinoGameController cg = sender as CasinoGameController;
+            cg.View.Hide();
             new SelectGame(cg, e.OldX, e.OldY).Show();
         }
     }
