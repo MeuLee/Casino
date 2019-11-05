@@ -22,15 +22,15 @@ namespace CasinoUI.Views.Map.Tiles
         /// <param name="x">X coordinate on the map</param>
         /// <param name="y">Y coordinate on the map</param>
         /// <param name="image">Bitmap to be printed on screen representing this tile</param>
-        protected MapTile(int x, int y , Bitmap image, bool rotate) // change rotate type to int (angle) ? or create child class to bitmap + rotate property?
+        protected MapTile(int x, int y , BitmapImage image, bool rotate) // change rotate type to int (angle) ? or create child class to bitmap + rotate property?
         {
             X = x;
             Y = y;
             if (rotate)
             {
-                image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                
             }
-            Sprite = image.ToBitmapImage();
+            Sprite = image;
         }
 
         public int X { get; private set; }
@@ -44,20 +44,42 @@ namespace CasinoUI.Views.Map.Tiles
             switch (tileType)
             {
                 case "Floor1":
-                    return new RedFloorTile(x, y , Properties.Resources.redfloor, rotate);
+                    return new RedFloorTile(x, y);
                 case "Floor2":
-                    return new BlackFloorTile(x, y, Properties.Resources.blackfloor, rotate);
+                    return new BlackFloorTile(x, y);
                 case "SlotMachine":
-                    return new SlotMachineTile(x, y, Properties.Resources.slotmachinetemp, rotate);
+                    return new SlotMachineTile(x, y);
                 case "Bar":
-                    return new BarTile(x, y, Properties.Resources.bartemp, rotate);
+                    return new BarTile(x, y);
                 case string str when IsChairTile(str):
                     return CreateChairTile(x, y, tileType, rotate);
                 case string str when IsTableTile(str):
                     return CreateTableTile(x, y, tileType, rotate);
-                default:
-                    throw new ArgumentException($"Argument {tileType} is not valid");
             }
+            throw new ArgumentException($"{tileType} argument is invalid");
+        }
+
+        private static MapTile CreateChairTile(int x, int y, string tileType, bool rotate)
+        {
+            FirstCharToLower(ref tileType);
+            int index = int.Parse(tileType[5].ToString());
+            BitmapImage image = rotate ? Tiles.GetRotatedTableBitmapImage(index) :
+                                         Tiles.GetTableBitmapImage(index);
+            return new ChairTile(x, y , image, rotate);
+        }
+
+        private static void FirstCharToLower(ref string str)
+        {
+            str = char.ToLower(str[0]) + str.Substring(1);
+        }
+
+        private static MapTile CreateTableTile(int x, int y, string tileType, bool rotate)
+        {
+            FirstCharToLower(ref tileType);
+            int index = int.Parse(tileType[5].ToString());
+            BitmapImage image = rotate ? Tiles.GetRotatedTableBitmapImage(index) :
+                                         Tiles.GetTableBitmapImage(index);
+            return new TableTile(x, y, image, rotate);
         }
 
         private static bool IsChairTile(string str)
@@ -66,28 +88,9 @@ namespace CasinoUI.Views.Map.Tiles
                    str[5] != '6' && str[5] != '7';
         }
 
-        private static MapTile CreateChairTile(int x, int y, string tileType, bool rotate)
-        {
-            FirstCharToUpper(ref tileType);
-            Bitmap image = Properties.Resources.ResourceManager.GetObject(tileType) as Bitmap;
-            return new ChairTile(x, y , image, rotate);
-        }
-
-        private static void FirstCharToUpper(ref string str)
-        {
-            str = char.ToLower(str[0]) + str.Substring(1);
-        }
-
         private static bool IsTableTile(string str)
         {
             return str == "Table6" || str == "Table7";
-        }
-
-        private static MapTile CreateTableTile(int x, int y, string tileType, bool rotate)
-        {
-            FirstCharToUpper(ref tileType);
-            Bitmap image = Properties.Resources.ResourceManager.GetObject(tileType) as Bitmap;
-            return new TableTile(x, y, image, rotate);
         }
     }
 }

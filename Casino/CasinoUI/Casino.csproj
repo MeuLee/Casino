@@ -135,6 +135,7 @@
     <Compile Include="Views\Map\Tiles\RedFloorTile.cs" />
     <Compile Include="Views\Map\Tiles\SlotMachineTile.cs" />
     <Compile Include="Views\Map\Tiles\TableTile.cs" />
+    <Compile Include="Views\Map\Tiles\Tiles.cs" />
     <Compile Include="Views\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>

@@ -1,15 +1,16 @@
 ﻿using CasinoUI.Controllers;
-using System.Drawing;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace CasinoUI.Views.Map.Tiles
 {
     public class ChairTile : MapTile
     {
-        public ChairTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
+        internal ChairTile(int x, int y, BitmapImage image, bool rotate) : base(x, y, image, rotate)
         {
             OnMovedOver += MovedOver;
             MiniMapBrush = System.Windows.Media.Brushes.Brown;
-            MiniMapPen = new System.Windows.Media.Pen(MiniMapBrush, PEN_WIDTH);
+            MiniMapPen = new Pen(MiniMapBrush, PEN_WIDTH);
         }
 
         private void MovedOver(object sender, OnMovedOverEventArgs e)

@@ -45,6 +45,8 @@ namespace CasinoUI.Views.Map
         /// <param name="map">The 2d array to be filled.</param>
         private static void FillMap(XElement topElem, MapTile[,] map)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             var tilesArr = topElem.Elements().First(e => e.Name == "Tiles").Descendants().ToList();
             for (int i = 0; i < tilesArr.Count; i++)
             {
@@ -55,6 +57,8 @@ namespace CasinoUI.Views.Map
                 bool rotate = tile.Attribute("Rotate").Value.ToBoolean();
                 map[x, y] = MapTile.CreateMapTile(x, y, floorType, rotate);
             }
+            sw.Stop();
+            System.Console.WriteLine($"Load map in memory: {sw.ElapsedMilliseconds / 1000.0} seconds");
         }
     }
 }
