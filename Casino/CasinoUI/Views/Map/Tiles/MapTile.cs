@@ -22,14 +22,10 @@ namespace CasinoUI.Views.Map.Tiles
         /// <param name="x">X coordinate on the map</param>
         /// <param name="y">Y coordinate on the map</param>
         /// <param name="image">Bitmap to be printed on screen representing this tile</param>
-        protected MapTile(int x, int y , BitmapImage image, bool rotate) // change rotate type to int (angle) ? or create child class to bitmap + rotate property?
+        protected MapTile(int x, int y , BitmapImage image)
         {
             X = x;
             Y = y;
-            if (rotate)
-            {
-                
-            }
             Sprite = image;
         }
 
@@ -59,13 +55,23 @@ namespace CasinoUI.Views.Map.Tiles
             throw new ArgumentException($"{tileType} argument is invalid");
         }
 
+        private static bool IsChairTile(string str)
+        {
+            return new string(str.Take(5).ToArray()) == "Table" &&
+                   str[5] != '6' && str[5] != '7';
+        }
+
         private static MapTile CreateChairTile(int x, int y, string tileType, bool rotate)
         {
+            return new ChairTile(x, y , GetChairOrTableImage(tileType, rotate));
+        }
+
+        private static BitmapImage GetChairOrTableImage(string tileType, bool rotate)
+        {
             FirstCharToLower(ref tileType);
-            int index = int.Parse(tileType[5].ToString());
-            BitmapImage image = rotate ? Tiles.GetRotatedTableBitmapImage(index) :
+            int index = int.Parse(tileType.Substring(5)) - 1;
+            return rotate ? Tiles.GetRotatedTableBitmapImage(index) :
                                          Tiles.GetTableBitmapImage(index);
-            return new ChairTile(x, y , image, rotate);
         }
 
         private static void FirstCharToLower(ref string str)
@@ -73,24 +79,14 @@ namespace CasinoUI.Views.Map.Tiles
             str = char.ToLower(str[0]) + str.Substring(1);
         }
 
-        private static MapTile CreateTableTile(int x, int y, string tileType, bool rotate)
-        {
-            FirstCharToLower(ref tileType);
-            int index = int.Parse(tileType[5].ToString());
-            BitmapImage image = rotate ? Tiles.GetRotatedTableBitmapImage(index) :
-                                         Tiles.GetTableBitmapImage(index);
-            return new TableTile(x, y, image, rotate);
-        }
-
-        private static bool IsChairTile(string str)
-        {
-            return new string(str.Take(5).ToArray()) == "Table" &&
-                   str[5] != '6' && str[5] != '7';
-        }
-
         private static bool IsTableTile(string str)
         {
             return str == "Table6" || str == "Table7";
+        }
+
+        private static MapTile CreateTableTile(int x, int y, string tileType, bool rotate)
+        {
+            return new TableTile(x, y, GetChairOrTableImage(tileType, rotate));
         }
     }
 }

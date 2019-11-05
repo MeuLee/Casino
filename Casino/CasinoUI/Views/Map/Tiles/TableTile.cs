@@ -5,7 +5,7 @@ namespace CasinoUI.Views.Map.Tiles
 {
     public class TableTile : MapTile
     {
-        internal TableTile(int x, int y, BitmapImage image, bool rotate) : base(x, y, image, rotate)
+        internal TableTile(int x, int y, BitmapImage image) : base(x, y, image)
         {
             MiniMapBrush = Brushes.Green;
             MiniMapPen = new Pen(MiniMapBrush, PEN_WIDTH);

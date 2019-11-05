@@ -5,7 +5,7 @@ namespace CasinoUI.Views.Map.Tiles
 {
     public class SlotMachineTile : MapTile 
     {
-        internal SlotMachineTile(int x, int y) : base(x, y, Tiles.GetBitmapImage(Tiles.TileType.SlotMachine), false)
+        internal SlotMachineTile(int x, int y) : base(x, y, Tiles.GetBitmapImage(Tiles.TileType.SlotMachine))
         {
             OnMovedOver += MovedOver;
             MiniMapBrush = Brushes.Yellow;
