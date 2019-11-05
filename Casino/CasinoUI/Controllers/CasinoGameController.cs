@@ -9,7 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace CasinoUI.Controllers
 {
@@ -30,6 +32,7 @@ namespace CasinoUI.Controllers
             _parent.Hide();
             ApplicationSettings.SoundPlayer.Start();
             AddEvents();
+            RaiseEvents();
         }
 
         private void AddEvents()
@@ -38,7 +41,9 @@ namespace CasinoUI.Controllers
             View.BtnBack.MouseLeave += BtnBack_MouseLeave;
             View.BtnBack.Click += BtnBack_Click;
             View.Closed += View_Closed;
-            View.KeyDown += Grid_KeyDown;
+            View.KeyDown += View_KeyDown;
+            View.PgBarAlcohol.ValueChanged += ProgressBar_ValueChanged;
+            View.PgBarStress.ValueChanged += ProgressBar_ValueChanged;
         }
 
         private void View_Closed(object sender, EventArgs e)
@@ -62,7 +67,7 @@ namespace CasinoUI.Controllers
             View.Close();
         }
 
-        private void Grid_KeyDown(object sender, KeyEventArgs e)
+        private void View_KeyDown(object sender, KeyEventArgs e)
         {
             HumanPlayer player = ApplicationSettings.HumanPlayer;
             var map = ApplicationSettings.Map;
@@ -94,6 +99,14 @@ namespace CasinoUI.Controllers
                         player.X++;
                     }
                     break;
+                case Key.H:
+                    View.PgBarAlcohol.Value--;
+                    View.PgBarStress.Value--;
+                    return;
+                case Key.J:
+                    View.PgBarAlcohol.Value++;
+                    View.PgBarStress.Value++;
+                    return;
                 default:
                     return;
             }
@@ -109,6 +122,19 @@ namespace CasinoUI.Controllers
             ApplicationSettings.Map[player.X, player.Y]
                                .OnMovedOver?
                                .Invoke(this, new OnMovedOverEventArgs(oldPlayerX, oldPlayerY));
+        }
+
+        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ProgressBar pgBar = sender as ProgressBar;
+            Color c = Models.ColorConverter.ColorFromHSL((100 - pgBar.Value), 1, 0.5);
+            pgBar.Foreground = new SolidColorBrush(c);
+        }
+
+        private void RaiseEvents()
+        {
+            ProgressBar_ValueChanged(View.PgBarAlcohol, null);
+            ProgressBar_ValueChanged(View.PgBarStress, null);
         }
     }
 }

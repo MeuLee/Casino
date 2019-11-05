@@ -9,28 +9,28 @@ namespace CasinoUI.Views.Map.Tiles
 {
     public abstract class MapTile
     {
-        public Action<object, OnMovedOverEventArgs> OnMovedOver { get; set; } 
+        public Action<object, OnMovedOverEventArgs> OnMovedOver { get; protected set; } 
         public BitmapImage Sprite { get; private set; }
         public System.Windows.Media.Pen MiniMapPen { get; protected set; }
         public SolidColorBrush MiniMapBrush { get; protected set; }
 
+        public int X { get; private set; }
+        public int Y { get; private set; }
+
         protected const double PEN_WIDTH = 0.75;
 
         /// <summary>
-        /// Child classes call this ctor. Initializes properties and rotates the image if needed
+        /// Child classes call this ctor. Initializes properties
         /// </summary>
         /// <param name="x">X coordinate on the map</param>
         /// <param name="y">Y coordinate on the map</param>
-        /// <param name="image">Bitmap to be printed on screen representing this tile</param>
+        /// <param name="image">BitmapImage to be printed on screen representing this tile</param>
         protected MapTile(int x, int y , BitmapImage image)
         {
             X = x;
             Y = y;
             Sprite = image;
         }
-
-        public int X { get; private set; }
-        public int Y { get; private set; }
 
         /// <summary>
         /// MapTile Factory method
