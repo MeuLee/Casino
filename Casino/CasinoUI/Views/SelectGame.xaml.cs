@@ -1,5 +1,6 @@
 ﻿using CasinoUI.Controllers;
 using CasinoUI.Models;
+using CasinoUI.Models.Settings;
 using CasinoUI.Utils;
 using CasinoUI.View;
 using System.Linq;
@@ -50,6 +51,7 @@ namespace CasinoUI.Views
             StackPanel sp = btn.Content as StackPanel;
             (sp.Children[0] as Image).Source = _casinoChip2;
             (sp.Children[2] as Image).Source = _casinoChip2;
+            btn.Cursor = Cursors.Hand;
         }
 
         private void Btn_MouseLeave(object sender, MouseEventArgs e)
@@ -59,18 +61,21 @@ namespace CasinoUI.Views
             StackPanel sp = btn.Content as StackPanel;
             (sp.Children[0] as Image).Source = _casinoChip1;
             (sp.Children[2] as Image).Source = _casinoChip1;
+            btn.Cursor = Cursors.Arrow;
         }
 
         private void BtnMap_MouseEnter(object sender, MouseEventArgs e)
         {
             Button btn = sender as Button;
             btn.FontSize += 2;
+            btn.Cursor = Cursors.Hand;
         }
 
         private void BtnMap_MouseLeave(object sender, MouseEventArgs e)
         {
             Button btn = sender as Button;
             btn.FontSize -= 2;
+            btn.Cursor = Cursors.Arrow;
         }
 
         private void BtnMap_Click(object sender, RoutedEventArgs e)

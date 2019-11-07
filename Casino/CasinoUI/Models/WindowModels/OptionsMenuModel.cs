@@ -1,4 +1,6 @@
-﻿namespace CasinoUI.Models.WindowModels
+﻿using CasinoUI.Models.Settings;
+
+namespace CasinoUI.Models.WindowModels
 {
     public class OptionsMenuModel
     {

@@ -1,4 +1,4 @@
-﻿using CasinoUI.Models;
+﻿using CasinoUI.Models.Settings;
 using CasinoUI.Models.PlayerModel;
 using CasinoUI.Models.WindowModels;
 using CasinoUI.Views;
@@ -127,7 +127,7 @@ namespace CasinoUI.Controllers
         private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ProgressBar pgBar = sender as ProgressBar;
-            Color c = Models.ColorConverter.ColorFromHSL((100 - pgBar.Value), 1, 0.5);
+            Color c = Utils.ColorConverter.ColorFromHSL((100 - pgBar.Value), 1, 0.5);
             pgBar.Foreground = new SolidColorBrush(c);
         }
 

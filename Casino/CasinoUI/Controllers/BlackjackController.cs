@@ -1,4 +1,4 @@
-﻿using CasinoUI.Models;
+﻿using CasinoUI.Models.Settings;
 using CasinoUI.Models.Blackjack;
 using CasinoUI.Utils;
 using CasinoUI.Views;

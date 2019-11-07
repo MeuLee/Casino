@@ -1,5 +1,6 @@
 ﻿using CasinoUI.Models;
 using CasinoUI.Models.PlayerModel;
+using CasinoUI.Models.Settings;
 using CasinoUI.Views.Map.Tiles;
 using System;
 using System.Windows;

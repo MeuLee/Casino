@@ -2,7 +2,7 @@
 using CasinoUI.Views.Map;
 using CasinoUI.Views.Map.Tiles;
 
-namespace CasinoUI.Models
+namespace CasinoUI.Models.Settings
 {
     public static class ApplicationSettings
     {

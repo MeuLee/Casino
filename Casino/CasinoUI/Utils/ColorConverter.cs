@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 
-namespace CasinoUI.Models
+namespace CasinoUI.Utils
 {
     public static class ColorConverter
     {
@@ -30,7 +30,6 @@ namespace CasinoUI.Models
             byte r = (byte)(double_r * 255.0);
             byte g = (byte)(double_g * 255.0);
             byte b = (byte)(double_b * 255.0);
-            Console.WriteLine($"R: {r} G: {g} B: {b}");
             return Color.FromArgb(123, r, g, b);
         }
 

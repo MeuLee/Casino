@@ -77,12 +77,12 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\CasinoGameController.cs" />
     <Compile Include="Controllers\OptionsMenuController.cs" />
-    <Compile Include="Models\ApplicationSettings.cs" />
+    <Compile Include="Models\Settings\ApplicationSettings.cs" />
     <Compile Include="Controllers\BlackjackController.cs" />
     <Compile Include="Models\Blackjack\BlackjackActionCode.cs" />
     <Compile Include="Models\Blackjack\BlackjackLogic.cs" />
     <Compile Include="Models\Blackjack\IBlackjackAction.cs" />
-    <Compile Include="Models\ColorConverter.cs" />
+    <Compile Include="Utils\ColorConverter.cs" />
     <Compile Include="Models\IGameType.cs" />
     <Compile Include="Models\SoundManager.cs" />
     <Compile Include="Models\WindowModels\CasinoGameModel.cs" />
