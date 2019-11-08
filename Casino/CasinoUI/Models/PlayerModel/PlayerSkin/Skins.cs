@@ -16,6 +16,6 @@ namespace CasinoUI.Models.PlayerModel.PlayerSkin
         BalloonHead,
         Karen,
         TreeHair,
-        Janitor
+        HatBoomer
     }
 }

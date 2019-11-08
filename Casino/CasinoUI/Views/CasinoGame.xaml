@@ -38,12 +38,11 @@
             <Image x:Name="ImgBack" Margin="3" Source="pack://siteoforigin:,,,/Resources/backArrow.png"/>
         </Button>
         <TextBlock x:Name="LblPlayerName"
-                   Grid.Row="1" Grid.Column="1"
-                   Text="PlayerName" FontSize="18"
+                   Grid.Row="1" Grid.Column="1" FontSize="18"
                    HorizontalAlignment="Center" Margin="5"/>
-        <Image Grid.Row="2" Grid.Column="1"
-               Height="100" Width="100"
-               Source="pack://siteoforigin:,,,/Resources/panda.png"/>
+        <Image x:Name="ImgPlayer"
+               Grid.Row="2" Grid.Column="1"
+               Height="100" Width="100"/>
         <TextBlock x:Name="TblkMoney"
                    Grid.Row="3" Grid.Column="1"
                    Text="820$"

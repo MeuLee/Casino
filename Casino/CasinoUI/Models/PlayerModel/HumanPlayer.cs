@@ -8,7 +8,7 @@ namespace CasinoUI.Models.PlayerModel
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public string Name { get; set; }
+        public string Name { get { return CurrentSkin.Name; } }
         public int AlcoholLevel { get; set; } = 0;
         public int StressLevel { get; set; } = 0;
 
@@ -16,11 +16,10 @@ namespace CasinoUI.Models.PlayerModel
 
         public Skin CurrentSkin { get; set; }
 
-        public HumanPlayer(int x, int y, string name)
+        public HumanPlayer(int x, int y)
         {
             X = x;
             Y = y;
-            Name = name;
             CurrentSkin = SkinManager.Instance[Skins.GreenMan];
         }
     }

@@ -14,7 +14,7 @@ namespace CasinoUI.Models.Settings
         public static void Load()
         {
             Map = MapGenerator.LoadMapFromFile(Properties.Resources.map);
-            HumanPlayer = new HumanPlayer(10, 4, "");
+            HumanPlayer = new HumanPlayer(10, 4);
             SoundPlayer = new SoundManager
             {
                 SongVolume = 50,

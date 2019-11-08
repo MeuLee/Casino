@@ -29,6 +29,14 @@ namespace CasinoUI.Controllers
             ApplicationSettings.SoundPlayer.Start();
             AddEvents();
             RaiseEvents();
+            ModifyUIElementsWithSkin();
+        }
+
+        private void ModifyUIElementsWithSkin()
+        {
+            var human = ApplicationSettings.HumanPlayer;
+            View.LblPlayerName.Text = human.Name;
+            View.ImgPlayer.Source = human.CurrentSkin.DownImages[0];
         }
 
         private void AddEvents()
