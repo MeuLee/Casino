@@ -100,12 +100,11 @@ namespace CasinoUI.Views.Map
         {
             int uiPlayerX = PlayerCoordOnUI(_cameraCenterX, _player.X, _map.GetLength(0), TilesAroundPlayerX),
                 uiPlayerY = PlayerCoordOnUI(_cameraCenterY, _player.Y, _map.GetLength(1), TilesAroundPlayerY);
-            dc.DrawEllipse(Brushes.Green,
-                           new Pen(Brushes.Green, 1.0),
-                           new Point(uiPlayerX * tileWidth + tileWidth / 2,
-                                     uiPlayerY * tileWidth + tileWidth / 2),
-                           tileWidth / 3,
-                           tileWidth / 3);
+            dc.DrawImage(ApplicationSettings.HumanPlayer.CurrentSkin.DownImages[0], 
+                         new Rect(uiPlayerX * tileWidth,
+                                  uiPlayerY * tileWidth, 
+                                  tileWidth, 
+                                  tileWidth));
         }
 
         public static int PlayerCoordOnUI(

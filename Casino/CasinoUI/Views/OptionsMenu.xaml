@@ -172,14 +172,14 @@
                     <TextBlock x:Name="TbCharacterName"
                                Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="5"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Text="Bob" Foreground="White" FontSize="24"/>
+                               Foreground="White" FontSize="24"/>
                     <Button x:Name="BtnLeft" Style="{StaticResource Btn.LeftArrow}"
                             Grid.Column="1" Grid.Row="4"/>
-                    <Image x:Name="ImgLeftCharacter" Source="/CasinoUI;component/Resources/gauche1.gif"
+                    <Image x:Name="ImgLeftCharacter"
                            Grid.Column="2" Grid.Row="4"/>
-                    <Image x:Name="ImgCenterCharacter" Source="/CasinoUI;component/Resources/bas1.gif"
+                    <Image x:Name="ImgCenterCharacter"
                            Grid.Column="4" Grid.Row="3" Grid.RowSpan="3"/>
-                    <Image x:Name="ImgRightCharacter" Source="/CasinoUI;component/Resources/droite1.gif"
+                    <Image x:Name="ImgRightCharacter"
                            Grid.Column="6" Grid.Row="4"/>
                     <Button x:Name="BtnRight" Style="{StaticResource Btn.RightArrow}"
                             Grid.Column="7" Grid.Row="4" Background="Transparent"/>

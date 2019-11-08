@@ -30,6 +30,11 @@ namespace CasinoUI.Models.PlayerModel.PlayerSkin
             get { return Skins[key]; }
         }
 
+        public List<Skin> SkinsList
+        {
+            get { return Skins.Select(kvp => kvp.Value).ToList(); }
+        }
+
         public static SkinManager Instance
         {
             get

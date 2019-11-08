@@ -3,6 +3,8 @@ using CasinoUI.Models.Settings;
 using CasinoUI.Models.WindowModels;
 using CasinoUI.Utils;
 using CasinoUI.Views;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +27,9 @@ namespace CasinoUI.Controllers
         private OptionsMenuModel _model;
         private OptionsMenu _view;
         private Window _parent;
+        private List<Skin> _skins = SkinManager.Instance.SkinsList;
+        private int _skinIndex = 0;
+        private static int _skinCount = SkinsGenerator.SKIN_COUNT;
 
         public OptionsMenuController(Window parent)
         {
@@ -33,10 +38,29 @@ namespace CasinoUI.Controllers
             _parent = parent;
             _parent.Hide();
             _view.Show();
+            _skinIndex = 0;
 
             AddEvents();
             ModifySlidersValue();
             TabControl_SelectionChanged(null, null); // The event doesn't fire when it's the first time, has to be called manually
+            ModifySkinsTab();
+        }
+
+        private void ModifySkinsTab()
+        {
+            SetPictureIndexes(out int leftIndex, out int centerIndex, out int rightIndex);
+            _view.TbCharacterName.Text = _skins[centerIndex].Name;
+            _view.ImgLeftCharacter.Source = _skins[leftIndex].DownImages[0];
+            _view.ImgCenterCharacter.Source = _skins[centerIndex].DownImages[0];
+            _view.ImgRightCharacter.Source = _skins[rightIndex].DownImages[0];
+            ApplicationSettings.HumanPlayer.CurrentSkin = _skins[centerIndex];
+        }
+
+        private void SetPictureIndexes(out int leftIndex, out int centerIndex, out int rightIndex)
+        {
+            leftIndex = 0 > _skinIndex - 1 ? _skinCount - 1 :_skinIndex - 1;
+            centerIndex = _skinIndex;
+            rightIndex = _skinIndex + 1 >= _skinCount ? 0 : _skinIndex + 1;
         }
 
         private void AddEvents()
@@ -64,13 +88,25 @@ namespace CasinoUI.Controllers
             _view.SldSong.MouseEnter += Slider_MouseEnter;
             _view.SldSFX.MouseLeave += Slider_MouseLeave;
             _view.SldSong.MouseLeave += Slider_MouseLeave;
-
             _view.BtnLeft.Click += BtnLeft_Click;
+            _view.BtnRight.Click += BtnRight_Click;
+        }
+
+        private void BtnRight_Click(object sender, RoutedEventArgs e)
+        {
+            _skinIndex = (_skinIndex + 1) % _skinCount;
+            ModifySkinsTab();
+
         }
 
         private void BtnLeft_Click(object sender, RoutedEventArgs e)
         {
-            var i = SkinManager.Instance[Skins.BaldBoomer];
+            _skinIndex = (_skinIndex - 1) % _skinCount;
+            if (0 > _skinIndex)
+            {
+                _skinIndex += _skinCount;
+            }
+            ModifySkinsTab();
         }
 
         private void Slider_MouseLeave(object sender, MouseEventArgs e)

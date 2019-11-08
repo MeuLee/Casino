@@ -480,6 +480,9 @@
   <ItemGroup>
     <None Include="Resources\song1.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\personnages.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y /I /E "$(ProjectDir)Resources" "Resources"</PostBuildEvent>

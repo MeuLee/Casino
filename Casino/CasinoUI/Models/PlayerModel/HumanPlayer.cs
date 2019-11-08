@@ -1,4 +1,5 @@
-﻿using CasinoUI.Models.Profiles;
+﻿using CasinoUI.Models.PlayerModel.PlayerSkin;
+using CasinoUI.Models.Profiles;
 using System.Windows;
 
 namespace CasinoUI.Models.PlayerModel
@@ -13,11 +14,14 @@ namespace CasinoUI.Models.PlayerModel
 
         public Profile CurrentProfile { get; set; }
 
+        public Skin CurrentSkin { get; set; }
+
         public HumanPlayer(int x, int y, string name)
         {
             X = x;
             Y = y;
             Name = name;
+            CurrentSkin = SkinManager.Instance[Skins.GreenMan];
         }
     }
 }
