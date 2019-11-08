@@ -1,12 +1,13 @@
 ﻿using CasinoUI.Models.Cards;
 using CasinoUI.Models.PlayerModel;
+using CasinoUI.Models.Profiles;
 using System.Collections.Generic;
 
 namespace CasinoUI.Models.Blackjack
 {
     public class BlackjackLogic
     {
-        private BlackjackPlayer Human;
+        private HumanPlayer Human;
         public List<Player> ListPlayers { get; set; }
         public GameCardStack CardStack { get; set; }
 
@@ -20,7 +21,7 @@ namespace CasinoUI.Models.Blackjack
 
         public bool RoundEnd { get; set; }
 
-        public BlackjackLogic(BlackjackPlayer Human)
+        public BlackjackLogic(HumanPlayer Human)
         {
             this.Human = Human;
             InitListPlayers();
@@ -136,7 +137,7 @@ namespace CasinoUI.Models.Blackjack
             DealerHandValue = 0;
         }
 
-        private void CurrentPlayerPlay(BlackjackActionCode Action, BlackjackPlayer CurrentPlayer)
+        private void CurrentPlayerPlay(BlackjackActionCode Action, HumanPlayer CurrentPlayer)
         {
             switch (Action)
             {
@@ -172,7 +173,7 @@ namespace CasinoUI.Models.Blackjack
                     break;
                 case BlackjackActionCode.DOUBLEDOWN:
                     CardStack.PlayerDrawCard(CurrentPlayer);
-                    CurrentPlayer.BlackjackDoubleDown(Bet);
+                    CurrentPlayer.GetGameType<IBlackjackAction>().BlackjackDoubleDown(Bet);
                     //Double init bet
                     break;
             }
