@@ -36,10 +36,10 @@ namespace CasinoUI.Controllers
                 btn.MouseEnter += Btn_MouseEnter;
                 btn.MouseLeave += Btn_MouseLeave;
             }
-            _view.BtnAction1.Click += BtnAction1_Click;
-            _view.BtnAction2.Click += BtnAction2_Click;
-            _view.BtnAction3.Click += BtnAction3_Click;
-            _view.BtnAction4.Click += BtnAction4_Click;
+            _view.BtnHit.Click += Hit_Click;
+            _view.BtnInsurance.Click += Insurance_Click;
+            _view.BtnDoubleDown.Click += DoubleDown_Click;
+            _view.BtnStand.Click += Stand_Click;
         }
 
         private void Btn_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -62,24 +62,24 @@ namespace CasinoUI.Controllers
             }
         }
 
-        private void BtnAction1_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Hit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             //call method in model
             //either the method returns something to this method or calls another method from this class
             //call method in view (refresh ui)
         }
 
-        private void BtnAction2_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Insurance_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 
         }
 
-        private void BtnAction3_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void DoubleDown_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 
         }
 
-        private void BtnAction4_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Stand_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 
         }

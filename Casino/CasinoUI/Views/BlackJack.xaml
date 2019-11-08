@@ -34,35 +34,35 @@
                Source="/CasinoUI;component/Resources/blackjackTable.png" 
                VerticalAlignment="Top"
                Grid.Column="1" Grid.ColumnSpan="4"/>
-        <Button x:Name="BtnAction1" Style="{StaticResource Button.Hoverless}"
+        <Button x:Name="BtnHit" Style="{StaticResource Button.Hoverless}"
                 Grid.Row="2" Grid.Column="2">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip1" Style="{StaticResource Image.Left}"/>
-                <TextBlock Text="Action1" Foreground="White"/>
+                <TextBlock Text="Hit" Foreground="White"/>
                 <Image x:Name="ImgChip2" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
-        <Button x:Name="BtnAction2" Style="{StaticResource Button.Hoverless}"
-                Grid.Row="2" Grid.Column="3">
+        <Button x:Name="BtnInsurance" Style="{StaticResource Button.Hoverless}"
+                Grid.Row="4" Grid.Column="3">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip3" Style="{StaticResource Image.Left}"/>
-                <TextBlock Text="Action2" Foreground="White"/>
+                <TextBlock Text="Insurance" Foreground="White"/>
                 <Image x:Name="ImgChip4" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
-        <Button x:Name="BtnAction3" Style="{StaticResource Button.Hoverless}"
+        <Button x:Name="BtnDoubleDown" Style="{StaticResource Button.Hoverless}"
                 Grid.Row="4" Grid.Column="2">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip5" Style="{StaticResource Image.Left}"/>
-                <TextBlock Text="Action3" Foreground="White"/>
+                <TextBlock Text="Double Down" Foreground="White"/>
                 <Image x:Name="ImgChip6" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
-        <Button x:Name="BtnAction4" Style="{StaticResource Button.Hoverless}"
-                Grid.Row="4" Grid.Column="3">
+        <Button x:Name="BtnStand" Style="{StaticResource Button.Hoverless}"
+                Grid.Row="2" Grid.Column="3">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip7" Style="{StaticResource Image.Left}"/>
-                <TextBlock Text="Action4" Foreground="White"/>
+                <TextBlock Text="Stand" Foreground="White"/>
                 <Image x:Name="ImgChip8" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
