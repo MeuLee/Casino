@@ -2,104 +2,62 @@
 using CasinoUI.Models.PlayerModel;
 using CasinoUI.Models.Profiles;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CasinoUI.Models.Blackjack
 {
     public class BlackjackLogic
     {
-        private HumanPlayer Human;
-        public List<Player> ListPlayers { get; set; }
+        private List<Player> _players;
         public GameCardStack CardStack { get; set; }
 
         public int Bet { get; set; }
-
-        public int PlayerHandValue { get; set; }
-        public int DealerHandValue { get; set; }
 
         public bool PlayerStand { get; set; }
         public bool DealerStand { get; set; }
 
         public bool RoundEnd { get; set; }
 
-        public BlackjackLogic(HumanPlayer Human)
+        public BlackjackLogic(HumanPlayer human)
         {
-            this.Human = Human;
-            InitListPlayers();
             CardStack = new GameCardStack();
             Bet = 0;
-            PlayerHandValue = 0;
-            DealerHandValue = 0;
+            _players = new List<Player>() { human, new BlackjackAI() };
         }
 
         private void GameFlow()
         {
             DistributeCards();
 
-            foreach (Player player in ListPlayers)
+            foreach (var player in _players)
             {
-                if (player is HumanPlayer)
-                {
-                    CheckHandValue(PlayerHandValue, player);
-
-                }
-                else
-                {
-                    CheckHandValue(DealerHandValue, player);
-                }
+                SetHandValue(player);
             }
 
             CheckForBlackjack();
+
             if (RoundEnd)
             {
                 ProceedNextTurn();
             }
         }
 
-        private void CheckForBlackjack()
-        {
-            if (PlayerHandValue == 21 && DealerHandValue != 21)
-            {
-                //Player wins bet 3:2
-                RoundEnd = true;
-            } else if (PlayerHandValue == 21 && DealerHandValue == 21)
-            {
-                //There is a tie. Return bet to player.
-                RoundEnd = true;
-            }
-        }
-
-        private void InitListPlayers()
-        {
-            ListPlayers = new List<Player>
-            {
-                Human,
-                new BlackjackAI()
-            };
-        }
-
         private void DistributeCards()
         {
             PlayerStand = false;
             DealerStand = false;
-            foreach (Player player in ListPlayers)
+            foreach (Player player in _players)
             {
                 CardStack.PlayerDrawCard(player);
                 CardStack.PlayerDrawCard(player);
-                if(player is HumanPlayer)
-                {
-                    CheckHandValue(PlayerHandValue, player);
-
-                } else
-                {
-                    CheckHandValue(DealerHandValue, player);
-                }
+                SetHandValue(player);
             }
             RoundEnd = false;
         }
 
-        private void CheckHandValue(int handValue, Player player)
+        private void SetHandValue(Player player)
         {
-            handValue = 0;
+            int handValue = 0;
             foreach (Card card in player.GetHand())
             {
                 if (card.Equals(Card.CardRank.Jack) || card.Equals(Card.CardRank.Queen) || card.Equals(Card.CardRank.King))
@@ -119,6 +77,24 @@ namespace CasinoUI.Models.Blackjack
                     handValue += (int)card.Value;
                 }
             }
+            player.GetGameType<IBlackjackAction>().PlayerHandValue = handValue;
+        }
+
+        private void CheckForBlackjack()
+        {
+            IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
+                             ai = _players.OfType<BlackjackAI>().First().GetGameType<IBlackjackAction>();
+            
+            if (human.PlayerHandValue == 21 && ai.PlayerHandValue != 21)
+            {
+                //Player wins bet 3:2
+                RoundEnd = true;
+            }
+            else if (human.PlayerHandValue == 21 && ai.PlayerHandValue == 21)
+            {
+                //There is a tie. Return bet to player.
+                RoundEnd = true;
+            }
         }
 
         private void ProceedNextTurn()
@@ -129,12 +105,11 @@ namespace CasinoUI.Models.Blackjack
 
         private void ClearHands()
         {
-            foreach (Player player in ListPlayers)
+            foreach (Player player in _players)
             {
                 player.GetHand().Clear();
+                player.GetGameType<IBlackjackAction>().PlayerHandValue = 0;
             }
-            PlayerHandValue = 0;
-            DealerHandValue = 0;
         }
 
         private void CurrentPlayerPlay(BlackjackActionCode Action, HumanPlayer CurrentPlayer)
@@ -145,11 +120,11 @@ namespace CasinoUI.Models.Blackjack
                     CardStack.PlayerDrawCard(CurrentPlayer);
                     if (CurrentPlayer is HumanPlayer)
                     {
-                        CheckHandValue(PlayerHandValue, CurrentPlayer);
+                        //CheckHandValue(PlayerHandValue, CurrentPlayer); TODO @Motoki
                     }
                     else
                     {
-                        CheckHandValue(DealerHandValue, CurrentPlayer);
+                        //CheckHandValue(DealerHandValue, CurrentPlayer); TODO @Motoki
                     }
                     break;
                 case BlackjackActionCode.STAND:

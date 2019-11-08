@@ -7,5 +7,7 @@
         void BlackjackInsurance();
         int BlackjackDoubleDown(int currentBet);
 
+        int PlayerHandValue { get; set; }
+
     }
 }

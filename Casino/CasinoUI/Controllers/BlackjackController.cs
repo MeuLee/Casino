@@ -64,9 +64,7 @@ namespace CasinoUI.Controllers
 
         private void Hit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            //call method in model
-            //either the method returns something to this method or calls another method from this class
-            //call method in view (refresh ui)
+
         }
 
         private void Insurance_Click(object sender, System.Windows.RoutedEventArgs e)
