@@ -6,11 +6,11 @@ namespace CasinoUI.Models.Blackjack
 {
     public class BlackjackLogic
     {
-        private HumanPlayer Human;
+        private BlackjackPlayer Human;
         public List<Player> ListPlayers { get; set; }
         public GameCardStack CardStack { get; set; }
 
-        public int Pot { get; set; }
+        public int Bet { get; set; }
 
         public int PlayerHandValue { get; set; }
         public int DealerHandValue { get; set; }
@@ -20,12 +20,12 @@ namespace CasinoUI.Models.Blackjack
 
         public bool RoundEnd { get; set; }
 
-        public BlackjackLogic(HumanPlayer Human)
+        public BlackjackLogic(BlackjackPlayer Human)
         {
             this.Human = Human;
             InitListPlayers();
             CardStack = new GameCardStack();
-            Pot = 0;
+            Bet = 0;
             PlayerHandValue = 0;
             DealerHandValue = 0;
         }
@@ -123,7 +123,7 @@ namespace CasinoUI.Models.Blackjack
         private void ProceedNextTurn()
         {
             ClearHands();
-            Pot = 0;
+            Bet = 0;
         }
 
         private void ClearHands()
@@ -136,7 +136,7 @@ namespace CasinoUI.Models.Blackjack
             DealerHandValue = 0;
         }
 
-        private void CurrentPlayerPlay(BlackjackActionCode Action, Player CurrentPlayer)
+        private void CurrentPlayerPlay(BlackjackActionCode Action, BlackjackPlayer CurrentPlayer)
         {
             switch (Action)
             {
@@ -172,16 +172,7 @@ namespace CasinoUI.Models.Blackjack
                     break;
                 case BlackjackActionCode.DOUBLEDOWN:
                     CardStack.PlayerDrawCard(CurrentPlayer);
-                    if (CurrentPlayer is HumanPlayer)
-                    {
-                        CheckHandValue(PlayerHandValue, CurrentPlayer);
-
-                    }
-                    else
-                    {
-                        CheckHandValue(DealerHandValue, CurrentPlayer);
-                    }
-                    PlayerStand = true;
+                    CurrentPlayer.BlackjackDoubleDown(Bet);
                     //Double init bet
                     break;
             }
