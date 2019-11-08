@@ -1,5 +1,4 @@
-﻿using CasinoUI.Model.Poker;
-using CasinoUI.Models.Poker.PokerBrains;
+﻿using CasinoUI.Models.Poker.PokerBrains;
 using CasinoUI.View;
 
 namespace CasinoUI.Models.Poker
@@ -9,8 +8,9 @@ namespace CasinoUI.Models.Poker
         GamePoker jeuPoker;
 
         public PokerController() {
-            // pokerModel = new PokerLogic();
-// damienn est beau
+            //pokerModel = new PokerLogic(ApplicationSettings.HumanPlayer);
+            //jeuPoker = new GamePoker();
+            //jeuPoker.Show();
         }
     }
 }

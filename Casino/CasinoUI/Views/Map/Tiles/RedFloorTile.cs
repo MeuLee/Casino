@@ -1,13 +1,13 @@
-﻿using System.Drawing;
+﻿using System.Windows.Media;
 
 namespace CasinoUI.Views.Map.Tiles
 {
     public class RedFloorTile : MapTile
     {
-        public RedFloorTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
+        internal RedFloorTile(int x, int y) : base(x, y, Tiles.GetBitmapImage(Tiles.TileType.RedFloor))
         {
-            MiniMapBrush = System.Windows.Media.Brushes.Red;
-            MiniMapPen = new System.Windows.Media.Pen(MiniMapBrush, PEN_WIDTH);
+            MiniMapBrush = Brushes.Red;
+            MiniMapPen = new Pen(MiniMapBrush, PEN_WIDTH);
         }
     }
 }

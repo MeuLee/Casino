@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Windows;
 
 namespace CasinoUI.Views.Map.Tiles
 {
     public class OnMovedOverEventArgs : EventArgs
     {
-        public int OldX { get; private set; }
-        public int OldY { get; private set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
 
-        public OnMovedOverEventArgs(int oldX, int oldY)
+        public OnMovedOverEventArgs(int x, int y)
         {
-            OldX = oldX;
-            OldY = oldY;
+            X = x;
+            Y = y;
         }
     }
 }

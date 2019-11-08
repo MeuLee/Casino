@@ -1,13 +1,13 @@
-﻿using System.Drawing;
+﻿using System.Windows.Media;
 
 namespace CasinoUI.Views.Map.Tiles
 {
     public class BarTile : MapTile
     {
-        public BarTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
+        internal BarTile(int x, int y) : base(x, y, Tiles.GetBitmapImage(Tiles.TileType.BarTile))
         {
-            MiniMapBrush = System.Windows.Media.Brushes.DeepSkyBlue;
-            MiniMapPen = new System.Windows.Media.Pen(MiniMapBrush, PEN_WIDTH);
+            MiniMapBrush = Brushes.DeepSkyBlue;
+            MiniMapPen = new Pen(MiniMapBrush, PEN_WIDTH);
         }
     }
 }

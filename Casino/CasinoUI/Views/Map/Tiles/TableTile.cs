@@ -1,13 +1,14 @@
-﻿using System.Drawing;
+﻿using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace CasinoUI.Views.Map.Tiles
 {
     public class TableTile : MapTile
     {
-        public TableTile(int x, int y, Bitmap image, bool rotate) : base(x, y, image, rotate)
+        internal TableTile(int x, int y, BitmapImage image) : base(x, y, image)
         {
-            MiniMapBrush = System.Windows.Media.Brushes.Green;
-            MiniMapPen = new System.Windows.Media.Pen(MiniMapBrush, PEN_WIDTH);
+            MiniMapBrush = Brushes.Green;
+            MiniMapPen = new Pen(MiniMapBrush, PEN_WIDTH);
         }
     }
 }

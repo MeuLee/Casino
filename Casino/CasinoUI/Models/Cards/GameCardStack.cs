@@ -1,9 +1,10 @@
-﻿using CasinoUI.Utils;
+﻿using CasinoUI.Models.PlayerModel;
+using CasinoUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace CasinoUI.Model.Cards
+namespace CasinoUI.Models.Cards
 {
     public class GameCardStack : CardStack
     {
@@ -33,17 +34,17 @@ namespace CasinoUI.Model.Cards
                 foreach (var suit in Extensions.GetValues<Card.CardSuit>())
                 {
                     string suitPrefix = suit.ToString()[0].ToString();
-                    var image = CasinoUI.Properties.Resources.ResourceManager.GetObject($"{value}{suitPrefix}") as Bitmap;
+                    var image = Properties.Resources.ResourceManager.GetObject($"{value}{suitPrefix}") as Bitmap;
                     Cards.Add(new Card(rank, suit, image));
                 }
-                
+
             }
         }
 
         public void PlayerDrawCard(Player current)
         {
             Card card = Cards[0];
-            current.Hand.Add(card);
+            current.GetHand().Add(card);
             Cards.Remove(card);
         }
 

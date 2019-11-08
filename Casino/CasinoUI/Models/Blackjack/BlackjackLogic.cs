@@ -1,8 +1,8 @@
-﻿using CasinoUI.Model.Cards;
+﻿using CasinoUI.Models.Cards;
+using CasinoUI.Models.PlayerModel;
 using System.Collections.Generic;
-using CasinoUI.Models.Blackjack;
 
-namespace CasinoUI.Model.Blackjack
+namespace CasinoUI.Models.Blackjack
 {
     public class BlackjackLogic
     {
@@ -27,7 +27,7 @@ namespace CasinoUI.Model.Blackjack
             CardStack = new GameCardStack();
             Pot = 0;
             PlayerHandValue = 0;
-            DealerHandValue = 0;            
+            DealerHandValue = 0;
         }
 
         private void GameFlow()
@@ -69,8 +69,11 @@ namespace CasinoUI.Model.Blackjack
 
         private void InitListPlayers()
         {
-            ListPlayers[0] = Human;
-            ListPlayers[1] = new BlackjackAI();
+            ListPlayers = new List<Player>
+            {
+                Human,
+                new BlackjackAI()
+            };
         }
 
         private void DistributeCards()
@@ -84,7 +87,7 @@ namespace CasinoUI.Model.Blackjack
                 if(player is HumanPlayer)
                 {
                     CheckHandValue(PlayerHandValue, player);
-                    
+
                 } else
                 {
                     CheckHandValue(DealerHandValue, player);
@@ -96,7 +99,7 @@ namespace CasinoUI.Model.Blackjack
         private void CheckHandValue(int handValue, Player player)
         {
             handValue = 0;
-            foreach (Card card in player.Hand)
+            foreach (Card card in player.GetHand())
             {
                 if (card.Equals(Card.CardRank.Jack) || card.Equals(Card.CardRank.Queen) || card.Equals(Card.CardRank.King))
                 {
@@ -127,7 +130,7 @@ namespace CasinoUI.Model.Blackjack
         {
             foreach (Player player in ListPlayers)
             {
-                player.Hand.Clear();
+                player.GetHand().Clear();
             }
             PlayerHandValue = 0;
             DealerHandValue = 0;
@@ -146,7 +149,7 @@ namespace CasinoUI.Model.Blackjack
                     else
                     {
                         CheckHandValue(DealerHandValue, CurrentPlayer);
-                    }                    
+                    }
                     break;
                 case BlackjackActionCode.STAND:
                     if(CurrentPlayer is HumanPlayer)
@@ -160,7 +163,7 @@ namespace CasinoUI.Model.Blackjack
                 case BlackjackActionCode.INSURANCE:
                     //only available if dealer face up card is ACE
                     //first turn only
-                    //put side bet = to 1/2 initial bet. 
+                    //put side bet = to 1/2 initial bet.
                     //If dealer has 21 on first 2 cards, dealer pays 2:1 the side bet but you lose the init bet
                     //If dealer has 21 on first 2 cards and so does player, dealer pays 2:1 the side bet and you take back init bet
                     //If dealer does not have 21 on first 2 cards, player loses side bet and continue playing until end
