@@ -4,10 +4,6 @@ using CasinoUI.Models.WindowModels;
 using CasinoUI.Views;
 using CasinoUI.Views.Map.Tiles;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -111,14 +107,14 @@ namespace CasinoUI.Controllers
                     return;
             }
 
-            OnPlayerMoved(oldPlayerX, oldPlayerY);
+            OnPlayerMoved(oldPlayerX, oldPlayerY); // TODO move this to set. See comment in method
         }
 
         public void OnPlayerMoved(int oldPlayerX, int oldPlayerY)
         {
-            var player = ApplicationSettings.HumanPlayer;
-            View.GameCanvas.InvalidateVisual();
-            View.MiniMapCanvas.InvalidateVisual();
+            HumanPlayer player = ApplicationSettings.HumanPlayer;
+            View.GameCanvas.InvalidateVisual(); // Can't call this in HumanPlayer class as it doesn't have View reference. ouate do 
+            View.MiniMapCanvas.InvalidateVisual(); // Also HumanPlayer would need to store old location somewhere. and instead of playerLoc.X++, do player.MoveRight()
             ApplicationSettings.Map[player.X, player.Y]
                                .OnMovedOver?
                                .Invoke(this, new OnMovedOverEventArgs(oldPlayerX, oldPlayerY));

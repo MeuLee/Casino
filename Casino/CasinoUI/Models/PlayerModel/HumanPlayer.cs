@@ -1,4 +1,5 @@
 ﻿using CasinoUI.Models.Profiles;
+using System.Windows;
 
 namespace CasinoUI.Models.PlayerModel
 {

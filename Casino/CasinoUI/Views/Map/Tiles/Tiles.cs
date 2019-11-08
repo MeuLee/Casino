@@ -1,7 +1,6 @@
 ﻿using CasinoUI.Utils;
 using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Media.Imaging;
 
 namespace CasinoUI.Views.Map.Tiles

@@ -17,7 +17,7 @@ namespace CasinoUI.Views.Map.Tiles
         {
             CasinoGameController cg = sender as CasinoGameController;
             cg.View.Hide();
-            new SelectGame(cg, e.OldX, e.OldY).Show();
+            new SelectGame(cg, e.X, e.Y).Show();
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using CasinoUI.Controllers;
-using CasinoUI.Models;
 using CasinoUI.Models.Settings;
 using CasinoUI.Utils;
-using CasinoUI.Views;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;

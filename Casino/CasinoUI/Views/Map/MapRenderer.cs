@@ -1,5 +1,4 @@
-﻿using CasinoUI.Models;
-using CasinoUI.Models.PlayerModel;
+﻿using CasinoUI.Models.PlayerModel;
 using CasinoUI.Models.Settings;
 using CasinoUI.Views.Map.Tiles;
 using System;
@@ -41,7 +40,6 @@ namespace CasinoUI.Views.Map
         /// </summary>
         /// <param name="playerCoord">Player's X or Y</param>
         /// <param name="tilesAroundPlayer">Tiles around player, x or y</param>
-        /// <param name="dimension">Should be 0 or 1 as the map is 2d. 0 for horizontal (x), 1 for vertical (y)</param>
         /// <returns>
         /// Most of the time, playerCoord will be returned.
         /// However, if playerCoord is closer to the edge than tilesAroundPlayer, 

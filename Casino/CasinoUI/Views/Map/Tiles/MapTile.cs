@@ -1,6 +1,4 @@
-﻿using CasinoUI.Utils;
-using System;
-using System.Drawing;
+﻿using System;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -11,7 +9,7 @@ namespace CasinoUI.Views.Map.Tiles
     {
         public Action<object, OnMovedOverEventArgs> OnMovedOver { get; protected set; } 
         public BitmapImage Sprite { get; private set; }
-        public System.Windows.Media.Pen MiniMapPen { get; protected set; }
+        public Pen MiniMapPen { get; protected set; }
         public SolidColorBrush MiniMapBrush { get; protected set; }
 
         public int X { get; private set; }
@@ -68,15 +66,9 @@ namespace CasinoUI.Views.Map.Tiles
 
         private static BitmapImage GetChairOrTableImage(string tileType, bool rotate)
         {
-            FirstCharToLower(ref tileType);
             int index = int.Parse(tileType.Substring(5)) - 1;
             return rotate ? Tiles.GetRotatedTableBitmapImage(index) :
                                          Tiles.GetTableBitmapImage(index);
-        }
-
-        private static void FirstCharToLower(ref string str)
-        {
-            str = char.ToLower(str[0]) + str.Substring(1);
         }
 
         private static bool IsTableTile(string str)

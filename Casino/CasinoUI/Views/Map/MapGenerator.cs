@@ -6,9 +6,8 @@ using System.Xml.Linq;
 
 namespace CasinoUI.Views.Map
 {
-    public class MapGenerator
+    public static class MapGenerator
     {
-
         public static MapTile[,] LoadMapFromFile(string content)
         {
             XElement topElem = XElement.Parse(content);
@@ -38,8 +37,6 @@ namespace CasinoUI.Views.Map
 
         /// <summary>
         /// Fills the 2d array passed in argument with the XML file content
-        /// This method is slow as fuck.
-        /// Either optimize it (not sure how tbh) or add a loading screen 
         /// </summary>
         /// <param name="topElem">XML file root element</param>
         /// <param name="map">The 2d array to be filled.</param>

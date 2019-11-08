@@ -1,4 +1,5 @@
-﻿using CasinoUI.Models.Settings;
+﻿using CasinoUI.Models.PlayerModel.PlayerSkin;
+using CasinoUI.Models.Settings;
 using CasinoUI.Models.WindowModels;
 using CasinoUI.Utils;
 using CasinoUI.Views;
@@ -63,6 +64,13 @@ namespace CasinoUI.Controllers
             _view.SldSong.MouseEnter += Slider_MouseEnter;
             _view.SldSFX.MouseLeave += Slider_MouseLeave;
             _view.SldSong.MouseLeave += Slider_MouseLeave;
+
+            _view.BtnLeft.Click += BtnLeft_Click;
+        }
+
+        private void BtnLeft_Click(object sender, RoutedEventArgs e)
+        {
+            var i = SkinManager.Instance[Skins.BaldBoomer];
         }
 
         private void Slider_MouseLeave(object sender, MouseEventArgs e)

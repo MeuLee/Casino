@@ -1,10 +1,4 @@
-﻿using CasinoUI.Models;
-using CasinoUI.Models.PlayerModel;
-using CasinoUI.Utils;
-using CasinoUI.Views.Map;
-using CasinoUI.Views.Map.Tiles;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows;
 
 namespace CasinoUI.Views
 {

@@ -1,5 +1,4 @@
 ﻿using CasinoUI.Controllers;
-using CasinoUI.Models;
 using CasinoUI.Models.Settings;
 using CasinoUI.Utils;
 using CasinoUI.View;
@@ -23,13 +22,13 @@ namespace CasinoUI.Views
         private readonly int _oldPlayerX;
         private readonly int _oldPlayerY;
 
-        public SelectGame(CasinoGameController cg, int oldPlayerX, int oldPlayerY)
+        public SelectGame(CasinoGameController cg, int oldX, int oldY)
         {
             InitializeComponent();
             SetImages();
             _cg = cg;
-            _oldPlayerX = oldPlayerX;
-            _oldPlayerY = oldPlayerY;
+            _oldPlayerX = oldX;
+            _oldPlayerY = oldY;
         }
 
         private void SetImages()
@@ -80,9 +79,8 @@ namespace CasinoUI.Views
 
         private void BtnMap_Click(object sender, RoutedEventArgs e)
         {
-            var player = ApplicationSettings.HumanPlayer;
-            player.X = _oldPlayerX;
-            player.Y = _oldPlayerY;
+            ApplicationSettings.HumanPlayer.X = _oldPlayerX;
+            ApplicationSettings.HumanPlayer.Y = _oldPlayerY;
             _cg.OnPlayerMoved(_oldPlayerX, _oldPlayerY);
             Close();
             _cg.View.Show();

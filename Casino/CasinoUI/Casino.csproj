@@ -77,6 +77,10 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\CasinoGameController.cs" />
     <Compile Include="Controllers\OptionsMenuController.cs" />
+    <Compile Include="Models\PlayerModel\PlayerSkin\Skin.cs" />
+    <Compile Include="Models\PlayerModel\PlayerSkin\SkinManager.cs" />
+    <Compile Include="Models\PlayerModel\PlayerSkin\Skins.cs" />
+    <Compile Include="Models\PlayerModel\PlayerSkin\SkinsGenerator.cs" />
     <Compile Include="Models\Settings\ApplicationSettings.cs" />
     <Compile Include="Controllers\BlackjackController.cs" />
     <Compile Include="Models\Blackjack\BlackjackActionCode.cs" />
