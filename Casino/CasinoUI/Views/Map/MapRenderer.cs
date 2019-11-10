@@ -100,7 +100,7 @@ namespace CasinoUI.Views.Map
         {
             int uiPlayerX = PlayerCoordOnUI(_cameraCenterX, _player.X, _map.GetLength(0), TilesAroundPlayerX),
                 uiPlayerY = PlayerCoordOnUI(_cameraCenterY, _player.Y, _map.GetLength(1), TilesAroundPlayerY);
-            dc.DrawImage(ApplicationSettings.HumanPlayer.CurrentSkin.DownImages[0], 
+            dc.DrawImage(ApplicationSettings.HumanPlayer.CurrentImage, 
                          new Rect(uiPlayerX * tileWidth,
                                   uiPlayerY * tileWidth, 
                                   tileWidth, 

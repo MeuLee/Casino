@@ -7,10 +7,68 @@ namespace CasinoUI.Models.PlayerModel.PlayerSkin
     public class Skin
     {
         public string Name { get; private set; }
-        public List<BitmapImage> DownImages { get; private set; }
-        public List<BitmapImage> LeftImages { get; private set; }
-        public List<BitmapImage> UpImages { get; private set; }
-        public List<BitmapImage> RightImages { get; private set; }
+        private List<BitmapImage> _downImages;
+        private List<BitmapImage> _leftImages;
+        private List<BitmapImage> _upImages;
+        private List<BitmapImage> _rightImages;
+        private int _downIndex = 0;
+        private int _leftIndex = 0;
+        private int _upIndex = 0;
+        private int _rightIndex = 0;
+
+        public BitmapImage BaseDownImage
+        {
+            get { return _downImages[0]; }
+        }
+
+        public BitmapImage NextDownImage
+        {
+            get
+            {
+                BitmapImage img = _downImages[_downIndex];
+                SetIndex(ref _downIndex, _downImages.Count);
+                return img;
+            }
+        }
+
+        public BitmapImage NextLeftImage
+        {
+            get
+            {
+                BitmapImage img = _leftImages[_leftIndex];
+                SetIndex(ref _leftIndex, _leftImages.Count);
+                return img;
+            }
+        }
+
+        public BitmapImage NextUpImage
+        {
+            get
+            {
+                BitmapImage img = _upImages[_upIndex];
+                SetIndex(ref _upIndex, _upImages.Count);
+                return img;
+            }
+        }
+
+        public BitmapImage NextRightImage
+        {
+            get
+            {
+                BitmapImage img = _rightImages[_rightIndex];
+                SetIndex(ref _rightIndex, _rightImages.Count);
+                return img;
+            }
+        }
+
+        private void SetIndex(ref int index, int count)
+        {
+            index++;
+            if (index >= count)
+            {
+                index = 0;
+            }
+        }
 
         public Skin(BitmapImage[] bmps, string name)
         {
@@ -20,16 +78,16 @@ namespace CasinoUI.Models.PlayerModel.PlayerSkin
 
         private void AddImages(BitmapImage[] bmps)
         {
-            DownImages = new List<BitmapImage>()
+            _downImages = new List<BitmapImage>()
                          { bmps[0], bmps[3] };
 
-            LeftImages = new List<BitmapImage>()
+            _leftImages = new List<BitmapImage>()
                          { bmps[2], bmps[5],  bmps[6] };
 
-            UpImages = new List<BitmapImage>()
+            _upImages = new List<BitmapImage>()
                        { bmps[1], bmps[4] };
 
-            RightImages = new List<BitmapImage>()
+            _rightImages = new List<BitmapImage>()
                           { bmps[7],  bmps[8], bmps[9] };
         }
     }

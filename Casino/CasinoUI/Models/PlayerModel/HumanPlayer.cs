@@ -1,6 +1,9 @@
 ﻿using CasinoUI.Models.PlayerModel.PlayerSkin;
 using CasinoUI.Models.Profiles;
+using CasinoUI.Models.Settings;
+using System;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace CasinoUI.Models.PlayerModel
 {
@@ -14,13 +17,63 @@ namespace CasinoUI.Models.PlayerModel
 
         public Profile CurrentProfile { get; set; }
 
-        public Skin CurrentSkin { get; set; }
+
+        private Skin _currentSkin;
+        public Skin CurrentSkin
+        {
+            get { return _currentSkin; }
+            set
+            {
+                _currentSkin = value;
+                CurrentImage = value.BaseDownImage;
+            }
+        }
+
+        public BitmapImage CurrentImage { get; set; }
 
         public HumanPlayer(int x, int y)
         {
             X = x;
             Y = y;
             CurrentSkin = SkinManager.Instance[Skins.GreenMan];
+        }
+
+        internal void MoveLeft()
+        {
+            if (X > 0)
+            {
+                X--;
+                CurrentImage = CurrentSkin.NextLeftImage;
+            }
+        }
+
+        internal void MoveUp()
+        {
+            if (Y > 0)
+            {
+                Y--;
+                CurrentImage = CurrentSkin.NextUpImage;
+            }
+        }
+
+        internal void MoveDown()
+        {
+            var mapLength = ApplicationSettings.Map.GetLength(1);
+            if (mapLength - 1 > Y)
+            {
+                Y++;
+                CurrentImage = CurrentSkin.NextDownImage;
+            }
+        }
+
+        internal void MoveRight()
+        {
+            var mapLength = ApplicationSettings.Map.GetLength(0);
+            if (mapLength - 1 > X)
+            {
+                X++;
+                CurrentImage = CurrentSkin.NextRightImage;
+            }
         }
     }
 }
