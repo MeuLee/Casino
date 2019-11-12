@@ -47,5 +47,11 @@ namespace CasinoUI.Utils
         {
             return bool.Parse(str);
         }
+
+        public static Bitmap Rotate90(this Bitmap bmp)
+        {
+            bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            return bmp;
+        }
     }
 }

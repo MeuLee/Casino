@@ -1,5 +1,4 @@
 ﻿using CasinoUI.Utils;
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,8 +38,6 @@ namespace CasinoUI.View
         /// </summary>
         private void InitilizeCarte()
         {
-            CarteRetourne.Source = Properties.Resources.Carte_Dos.ToBitmapImage();
-
             CarteJoueur1.Source = Properties.Resources._13S.ToBitmapImage();
             CarteJoueur5.Source = Properties.Resources._13H.ToBitmapImage();
 
@@ -64,13 +61,6 @@ namespace CasinoUI.View
         /// </summary>
         private void InitilizeForm()
         {
-            TableBlueBackground.ImageSource = Properties.Resources.TableNeuve.ToBitmapImage();
-
-            ImageBrush imgBrush = new ImageBrush();
-            imgBrush.ImageSource = Properties.Resources.table.ToBitmapImage();
-            RightRectangle.Fill = imgBrush;
-            LeftRectangle.Fill = imgBrush;
-
             ImageBrush dealer = new ImageBrush();
             dealer.ImageSource = Properties.Resources.DEALER.ToBitmapImage();
             EllipseDealer.Fill = dealer;

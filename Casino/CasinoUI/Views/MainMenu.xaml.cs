@@ -1,8 +1,10 @@
-﻿using CasinoUI.Utils;
-using CasinoUI.Views;
+﻿using CasinoUI.Controllers;
+using CasinoUI.Models.Settings;
+using CasinoUI.Utils;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace CasinoUI
@@ -17,33 +19,17 @@ namespace CasinoUI
         public MainWindow()
         {
             InitializeComponent();
-            SetImages();
-        }
-
-        // S/O answers did not work as you can see.
-        private void SetImages()
-        {
-            foreach (var btn in Grid.Children.OfType<Button>())
-            {
-                if (btn.Content is StackPanel sp)
-                {
-                    foreach (Image img in sp.Children.OfType<Image>())
-                    {
-                        img.Source = _casinoChip1;
-                    }
-                }
-            }
+            ApplicationSettings.Load();
         }
 
         private void BtnPlay_Click(object sender, RoutedEventArgs e)
         {
-            new CasinoGame().Show();
-            Close();
+            new CasinoGameController(this);
         }
 
         private void BtnSettings_Click(object sender, RoutedEventArgs e)
         {
-            new OptionMenu().Show();
+            new OptionsMenuController(this);
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -59,6 +45,7 @@ namespace CasinoUI
             {
                 sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip2);
             }
+            btn.Cursor = Cursors.Hand;
         }
 
         private void Btn_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
@@ -69,6 +56,7 @@ namespace CasinoUI
             {
                 sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip1);
             }
+            btn.Cursor = Cursors.Arrow;
         }
     }
 }

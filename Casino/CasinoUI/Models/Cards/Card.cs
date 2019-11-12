@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace CasinoUI.Model.Cards
+namespace CasinoUI.Models.Cards
 {
     public class Card
     {

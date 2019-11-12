@@ -1,9 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CasinoUI.Model.Poker;
-using CasinoUI.Model.Cards;
+using CasinoUI.Models.Poker;
+using CasinoUI.Models.Cards;
 using System.Drawing;
 
 namespace TestCasino
