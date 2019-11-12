@@ -5,6 +5,7 @@ using CasinoUI.Views;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Input;
 
 namespace CasinoUI.Controllers
 {
@@ -50,6 +51,7 @@ namespace CasinoUI.Controllers
             {
                 sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip2);
             }
+            btn.Cursor = Cursors.Hand;
         }
 
         private void Btn_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
@@ -60,6 +62,7 @@ namespace CasinoUI.Controllers
             {
                 sp.Children.OfType<Image>().ToList().ForEach(i => i.Source = _casinoChip1);
             }
+            btn.Cursor = Cursors.Arrow;
         }
 
         private void Hit_Click(object sender, System.Windows.RoutedEventArgs e)
