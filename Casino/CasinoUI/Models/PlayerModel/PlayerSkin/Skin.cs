@@ -27,6 +27,9 @@ namespace CasinoUI.Models.PlayerModel.PlayerSkin
             {
                 BitmapImage img = _downImages[_downIndex];
                 SetIndex(ref _downIndex, _downImages.Count);
+                _leftIndex = 0;
+                _upIndex = 0;
+                _rightIndex = 0;
                 return img;
             }
         }
@@ -37,6 +40,9 @@ namespace CasinoUI.Models.PlayerModel.PlayerSkin
             {
                 BitmapImage img = _leftImages[_leftIndex];
                 SetIndex(ref _leftIndex, _leftImages.Count);
+                _downIndex = 0;
+                _upIndex = 0;
+                _rightIndex = 0;
                 return img;
             }
         }
@@ -47,6 +53,9 @@ namespace CasinoUI.Models.PlayerModel.PlayerSkin
             {
                 BitmapImage img = _upImages[_upIndex];
                 SetIndex(ref _upIndex, _upImages.Count);
+                _downIndex = 0;
+                _leftIndex = 0;
+                _rightIndex = 0;
                 return img;
             }
         }
@@ -57,6 +66,9 @@ namespace CasinoUI.Models.PlayerModel.PlayerSkin
             {
                 BitmapImage img = _rightImages[_rightIndex];
                 SetIndex(ref _rightIndex, _rightImages.Count);
+                _downIndex = 0;
+                _leftIndex = 0;
+                _upIndex = 0;
                 return img;
             }
         }
@@ -88,7 +100,7 @@ namespace CasinoUI.Models.PlayerModel.PlayerSkin
                        { bmps[1], bmps[4] };
 
             _rightImages = new List<BitmapImage>()
-                          { bmps[7],  bmps[8], bmps[9] };
+                          { bmps[9],  bmps[7], bmps[8] };
         }
     }
 }
