@@ -27,16 +27,16 @@ namespace CasinoUI.Controllers
             View.Show();
             _parent.Hide();
             ApplicationSettings.SoundPlayer.Start();
+            ModifyUIElementsWithSkin();
             AddEvents();
             RaiseEvents();
-            ModifyUIElementsWithSkin();
         }
 
         private void ModifyUIElementsWithSkin()
         {
             var human = ApplicationSettings.HumanPlayer;
             View.LblPlayerName.Text = human.Name;
-            View.ImgPlayer.Source = human.CurrentSkin.DownImages[0];
+            View.ImgPlayer.Source = human.CurrentImage;
         }
 
         private void AddEvents()
@@ -74,34 +74,21 @@ namespace CasinoUI.Controllers
         private void View_KeyDown(object sender, KeyEventArgs e)
         {
             HumanPlayer player = ApplicationSettings.HumanPlayer;
-            var map = ApplicationSettings.Map;
             int oldPlayerX = player.X,
                 oldPlayerY = player.Y;
             switch (e.Key)
             {
                 case Key.A:
-                    if (player.X > 0)
-                    {
-                        player.X--;
-                    }
+                    player.MoveLeft();
                     break;
                 case Key.W:
-                    if (player.Y > 0)
-                    {
-                        player.Y--;
-                    }
+                    player.MoveUp();
                     break;
                 case Key.S:
-                    if (map.GetLength(1) - 1 > player.Y)
-                    {
-                        player.Y++;
-                    }
+                    player.MoveDown();                    
                     break;
                 case Key.D:
-                    if (map.GetLength(0) - 1 > player.X)
-                    {
-                        player.X++;
-                    }
+                    player.MoveRight();                    
                     break;
                 case Key.H:
                     View.PgBarAlcohol.Value--;
@@ -115,14 +102,14 @@ namespace CasinoUI.Controllers
                     return;
             }
 
-            OnPlayerMoved(oldPlayerX, oldPlayerY); // TODO move this to set. See comment in method
+            OnPlayerMoved(oldPlayerX, oldPlayerY); // TODO move this to set
         }
 
         public void OnPlayerMoved(int oldPlayerX, int oldPlayerY)
         {
             HumanPlayer player = ApplicationSettings.HumanPlayer;
-            View.GameCanvas.InvalidateVisual(); // Can't call this in HumanPlayer class as it doesn't have View reference. ouate do 
-            View.MiniMapCanvas.InvalidateVisual(); // Also HumanPlayer would need to store old location somewhere. and instead of playerLoc.X++, do player.MoveRight()
+            View.GameCanvas.InvalidateVisual();
+            View.MiniMapCanvas.InvalidateVisual();
             ApplicationSettings.Map[player.X, player.Y]
                                .OnMovedOver?
                                .Invoke(this, new OnMovedOverEventArgs(oldPlayerX, oldPlayerY));
