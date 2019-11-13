@@ -39,5 +39,10 @@ namespace CasinoUI.Models.Cards
             Suit = suit;
             Image = image;
         }
+
+        public Card()
+        {
+
+        }
     }
 }
