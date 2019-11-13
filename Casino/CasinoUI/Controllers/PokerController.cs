@@ -8,34 +8,35 @@ namespace CasinoUI.Models.Poker
 {
     class PokerController {
         PokerLogic pokerModel;
-        GamePoker jeuPoker;
+        GamePoker pokerView;
+        int playerIdx;
 
         public PokerController() {
             pokerModel = new PokerLogic(ApplicationSettings.HumanPlayer);
-            jeuPoker = new GamePoker();
-            jeuPoker.Show();
+            pokerView = new GamePoker();
+            pokerView.Show();
 
 
         }
 
         private void addEvent()
         {
-            jeuPoker.BtnSeCoucher.Click += BtnSeCoucher_Click;
-            jeuPoker.BtnRelancer.Click += BtnRelancer_Click;
-            jeuPoker.BtnSuivre.Click += BtnSuivre_Click;
+            pokerView.BtnSeCoucher.Click += BtnFold_Click;
+            pokerView.BtnRelancer.Click += BtnRaise_Click;
+            pokerView.BtnSuivre.Click += BtnCall_Click;
         }
 
-        private void BtnSuivre_Click(object sender, RoutedEventArgs e)
+        private void BtnCall_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void BtnRaise_Click(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
 
-        private void BtnRelancer_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void BtnSeCoucher_Click(object sender, RoutedEventArgs e)
+        private void BtnFold_Click(object sender, RoutedEventArgs e)
         {
 
             throw new NotImplementedException();
