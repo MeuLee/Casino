@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CasinoUI.Models.Poker
 {
     //Auteur : Damien Dussurget
-    // Fortement inspirer de la video suivante : https://www.youtube.com/watch?v=gkJKqVo30LA
+    //Fortement inspirer de la video suivante : https://www.youtube.com/watch?v=gkJKqVo30LA
     public enum Hand
     {
         Nothing = 1,
@@ -29,7 +29,7 @@ namespace CasinoUI.Models.Poker
         public int HighCard { get; set; }
     }
 
-    class HandEvaluator : Card
+    public class HandEvaluator : Card
     {
         private int heartsSum;
         private int diamondSum;
@@ -38,13 +38,14 @@ namespace CasinoUI.Models.Poker
         private Card[] cards;
         private HandStrength handStrength;
 
-        public HandEvaluator(Card[] sortedHand)
+        public HandEvaluator(Card[] HandPlayer)
         {
             heartsSum = 0;
             diamondSum = 0;
             clubSum = 0;
             spadesSum = 0;
             cards = new Card[7];
+            cards = HandPlayer;
             handStrength = new HandStrength();
         }
 
@@ -479,9 +480,16 @@ namespace CasinoUI.Models.Poker
 
         private void sortCards()
         {
-            var queryPlayer = from hand in Cards
-                              orderby hand.Value
-                              select hand;            
+            var queryPlayer = from hand in cards
+                              orderby hand.Value ascending
+                              select hand;
+
+            var indexElement = 0;
+            foreach (var element in queryPlayer.ToList())
+            {
+                cards[indexElement] = element;
+                indexElement++;
+            }
         }
 
         private bool checkCardsFlush(Card suiteCards, CardSuit suit)
