@@ -40,6 +40,12 @@ namespace CasinoUI.Models.Cards
             Image = image;
         }
 
+        public Card(CardRank value, CardSuit suit)
+        {
+            Value = value;
+            Suit = suit;
+        }
+
         public Card()
         {
 
