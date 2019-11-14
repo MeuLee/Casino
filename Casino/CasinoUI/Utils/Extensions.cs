@@ -10,7 +10,7 @@ namespace CasinoUI.Utils
 {
     public static class Extensions
     {
-        public static List<T> GetValues<T>()
+        public static List<T> GetValues<T>() where T : Enum
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToList();
         }

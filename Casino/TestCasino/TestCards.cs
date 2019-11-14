@@ -12,26 +12,14 @@ namespace TestCasino
         [TestMethod]
         public void Generated52Cards()
         {
-            //Arrange
-            int cardNb;
-
-            //Act
-            cardNb = _stack.Cards.Count;
-
-            //Assert
-            Assert.AreEqual(52, cardNb);
+            Assert.AreEqual(52, _stack.Cards.Count);
         }
 
         [TestMethod]
         public void NoImageNull()
         {
-            //Arrange
-            int nbImageNull;
+            int nbImageNull = _stack.Cards.Count(c => c.Image == null);
 
-            //Act
-            nbImageNull = _stack.Cards.Count(c => c.Image == null);
-
-            //Assert
             Assert.AreEqual(0, nbImageNull);
         }
 

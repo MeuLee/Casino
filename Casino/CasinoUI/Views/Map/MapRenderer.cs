@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace CasinoUI.Views.Map
 {
-    public class MapRenderer
+    public static class MapRenderer
     {
 
         public static int TilesAroundPlayerX { get; set; } = 5;
@@ -107,7 +107,7 @@ namespace CasinoUI.Views.Map
                                   tileWidth));
         }
 
-        public static int PlayerCoordOnUI(
+        private static int PlayerCoordOnUI(
             int cameraCenterCoord, 
             int playerCoord, 
             int mapLength, 
@@ -140,7 +140,8 @@ namespace CasinoUI.Views.Map
 
         private static float SetMiniMapTileSize(float canvasWidth, float canvasHeight)
         {
-            return Math.Min(canvasWidth / _map.GetLength(0), canvasHeight / _map.GetLength(1));
+            return Math.Min(canvasWidth / _map.GetLength(0),
+                            canvasHeight / _map.GetLength(1));
         }
 
         private static void DrawMiniMapTiles(DrawingContext dc, float tileWidth)
