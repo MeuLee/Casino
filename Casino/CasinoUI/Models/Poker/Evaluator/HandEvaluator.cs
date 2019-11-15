@@ -125,7 +125,9 @@ namespace CasinoUI.Models.Poker
             {
                 if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
                 {
-                    handStrength.Total = (int)Hand.RoyalFlush + (int)cards[6].Value;
+                    handStrength.Total = 
+                        (int)cards[6].Value + (int)cards[5].Value + (int)cards[4].Value + (int)cards[3].Value + (int)cards[2].Value;
+                    handStrength.HighCard = (int)cards[6].Value;
                     return true;
                 }
             }
@@ -134,7 +136,40 @@ namespace CasinoUI.Models.Poker
 
         private bool StraightFlush()
         {
-            return Flush() && Straight();
+            if (cards[0].Value + 1 == cards[1].Value &&
+                cards[1].Value + 1 == cards[2].Value &&
+                cards[2].Value + 1 == cards[3].Value &&
+                    cards[3].Value + 1 == cards[4].Value)
+            {
+                handStrength.Total = 
+                    (int)cards[4].Value + (int)cards[3].Value + (int)cards[2].Value + (int)cards[1].Value + (int)cards[0].Value;
+                handStrength.HighCard = (int)cards[4].Value;
+                return true;
+            }
+            else if
+            (cards[1].Value + 1 == cards[2].Value &&
+            cards[2].Value + 1 == cards[3].Value &&
+            cards[3].Value + 1 == cards[4].Value &&
+            cards[4].Value + 1 == cards[5].Value)
+            {
+                handStrength.Total = 
+                    (int)cards[5].Value + (int)cards[4].Value + (int)cards[3].Value + (int)cards[2].Value + (int)cards[1].Value;
+                handStrength.HighCard = (int)cards[5].Value;
+                return true;
+            }
+            else if (cards[2].Value + 1 == cards[3].Value &&
+                cards[3].Value + 1 == cards[4].Value &&
+                cards[4].Value + 1 == cards[5].Value &&
+                cards[5].Value + 1 == cards[6].Value)
+            {
+                handStrength.Total = 
+                    (int)cards[6].Value + (int)cards[5].Value + (int)cards[4].Value + (int)cards[3].Value + (int)cards[2].Value;
+                handStrength.HighCard = (int)cards[6].Value;
+                return true;
+            }
+
+            return false;
+            //return Flush() && Straight();
         }
 
         private bool FourOfKind()
@@ -156,7 +191,7 @@ namespace CasinoUI.Models.Poker
 
         public bool FullHouse()
         {
-            return HandHasPairs(2, 2) && HandHasPairs(1, 3);
+            return HandHasPairs(1, 2) && HandHasPairs(1, 3);
         }
 
         private bool Flush()
@@ -237,7 +272,7 @@ namespace CasinoUI.Models.Poker
             }
             if (occurences.Values.Count(v => v >= nbSameValue) >= numPairs)
             {
-                handStrength.Total = occurences.Last(v => v.Value >= numPairs).Key;
+                handStrength.Total += occurences.Last(v => v.Value >= numPairs).Key * nbSameValue;
                 return true;
             }
             else
@@ -261,38 +296,7 @@ namespace CasinoUI.Models.Poker
             }
             return false;
         }
-
-        private bool CheckCardsStraightFlush(CardSuit suit)
-        {
-            if (cards[0].Value + 1 == cards[1].Value &&
-                cards[1].Value + 1 == cards[2].Value &&
-                cards[2].Value + 1 == cards[3].Value &&
-                    cards[3].Value + 1 == cards[4].Value)
-            {
-                    handStrength.Total = (int)cards[4].Value + (int)Hand.StraightFlush;
-                return true;
-            }
-            else if
-            (cards[1].Value + 1 == cards[2].Value &&
-            cards[2].Value + 1 == cards[3].Value &&
-            cards[3].Value + 1 == cards[4].Value &&
-            cards[4].Value + 1 == cards[5].Value)
-            {
-                    handStrength.Total = (int)cards[5].Value + (int)Hand.StraightFlush;
-                return true;
-            }
-            else if (cards[2].Value + 1 == cards[3].Value &&
-                cards[3].Value + 1 == cards[4].Value &&
-                cards[4].Value + 1 == cards[5].Value &&
-                cards[5].Value + 1 == cards[6].Value)
-            {
-                handStrength.Total = (int)cards[6].Value + (int)Hand.StraightFlush;
-                return true;
-            }
-
-            return false;
-        }
-
+        
         private bool isRoyal()
         {
             if (cards[6].Value == Card.CardRank.Ace &&

@@ -19,7 +19,7 @@ namespace TestCasino
         }
 
         [TestMethod]
-        public void isRoyalFlush()
+        public void TestRoyalFlush()
         {
             jeuDeCarte[0] = new Card(Card.CardRank.Ace, Card.CardSuit.Hearts);
             jeuDeCarte[1] = new Card(Card.CardRank.King, Card.CardSuit.Hearts);
@@ -34,11 +34,12 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.RoyalFlush, player);
-            Assert.AreEqual(24, evaluationCard.HandStrengths.Total);
+            Assert.AreEqual(60, evaluationCard.HandStrengths.Total);
+            Assert.AreEqual(14, evaluationCard.HandStrengths.HighCard);
         }
 
         [TestMethod]
-        public void isRoyalFlushAleatoire()
+        public void TestRoyalFlushAleatoire()
         {
             jeuDeCarte[5] = new Card(Card.CardRank.Ace, Card.CardSuit.Spades);
             jeuDeCarte[0] = new Card(Card.CardRank.King, Card.CardSuit.Spades);
@@ -53,11 +54,12 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.RoyalFlush, player);
-            Assert.AreEqual(24, evaluationCard.HandStrengths.Total);
+            Assert.AreEqual(60, evaluationCard.HandStrengths.Total);
+            Assert.AreEqual(14, evaluationCard.HandStrengths.HighCard);
         }
 
         [TestMethod]
-        public void isStraightFlushPosFin()
+        public void TestStraightFlushPosFin()
         {
             jeuDeCarte[0] = new Card(Card.CardRank.King, Card.CardSuit.Hearts);
             jeuDeCarte[1] = new Card(Card.CardRank.Queen, Card.CardSuit.Hearts);
@@ -72,11 +74,12 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.StraightFlush, player);
-            Assert.AreEqual(22, evaluationCard.HandStrengths.Total);
+            Assert.AreEqual(55, evaluationCard.HandStrengths.Total);
+            Assert.AreEqual(13, evaluationCard.HandStrengths.HighCard);
         }
 
         [TestMethod]
-        public void isStraightFlushPosMilieu()
+        public void TestStraightFlushPosMilieu()
         {
             jeuDeCarte[0] = new Card(Card.CardRank.Ten, Card.CardSuit.Hearts);
             jeuDeCarte[1] = new Card(Card.CardRank.Nine, Card.CardSuit.Hearts);
@@ -91,11 +94,12 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.StraightFlush, player);
-            Assert.AreEqual(22, evaluationCard.HandStrengths.Total);
+            Assert.AreEqual(40, evaluationCard.HandStrengths.Total);
+            Assert.AreEqual(10, evaluationCard.HandStrengths.HighCard);
         }
 
         [TestMethod]
-        public void isStraightFlushPosDebut()
+        public void TestStraightFlushPosDebut()
         {
             jeuDeCarte[0] = new Card(Card.CardRank.Two, Card.CardSuit.Spades);
             jeuDeCarte[1] = new Card(Card.CardRank.King, Card.CardSuit.Diamonds);
@@ -110,6 +114,26 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.StraightFlush, player);
+            Assert.AreEqual(55, evaluationCard.HandStrengths.Total);
+            Assert.AreEqual(13, evaluationCard.HandStrengths.HighCard);
+        }
+
+        [TestMethod]
+        public void TestFourOfKind()
+        {
+            jeuDeCarte[0] = new Card(Card.CardRank.Ace, Card.CardSuit.Spades);
+            jeuDeCarte[1] = new Card(Card.CardRank.Ace, Card.CardSuit.Clubs);
+            jeuDeCarte[2] = new Card(Card.CardRank.Ace, Card.CardSuit.Diamonds);
+            jeuDeCarte[3] = new Card(Card.CardRank.Ace, Card.CardSuit.Hearts);
+            jeuDeCarte[4] = new Card(Card.CardRank.Ten, Card.CardSuit.Diamonds);
+            jeuDeCarte[5] = new Card(Card.CardRank.Nine, Card.CardSuit.Diamonds);
+            jeuDeCarte[6] = new Card(Card.CardRank.Five, Card.CardSuit.Clubs);
+
+            evaluationCard = new HandEvaluator(jeuDeCarte);
+
+            Hand player = evaluationCard.EvaluateHand();
+
+            Assert.AreEqual(Hand.FourKind, player);
             Assert.AreEqual(22, evaluationCard.HandStrengths.Total);
         }
 
