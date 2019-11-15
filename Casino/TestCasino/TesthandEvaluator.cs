@@ -137,11 +137,7 @@ namespace TestCasino
         /// <returns>The newly created Card array.</returns>
         private Card[] InitializeCardArr(Card.CardSuit suit, params int[] values)
         {
-            if (values.Length != 7)
-            {
-                throw new IndexOutOfRangeException("values.Length must be equal to 7");
-            }
-            var arr = new Card[7];
+            var arr = new Card[values.Length];
             for (int i = 0; i < values.Length; i++)
             {
                 arr[i] = new Card((Card.CardRank)values[i], suit, null);
