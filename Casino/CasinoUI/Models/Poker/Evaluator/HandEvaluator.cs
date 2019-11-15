@@ -55,7 +55,7 @@ namespace CasinoUI.Models.Poker
 
         public Hand EvaluateHand()
         {
-            sortCards();
+            SortCards();
             getNumberOfSuit();
             if (RoyalFlush())
             {
@@ -65,7 +65,7 @@ namespace CasinoUI.Models.Poker
             {
                 return Hand.StraightFlush;
             }
-            else if (FourOfKind())
+            else if (HandHasPairs(1, 4))
             {
                 return Hand.FourKind;
             }
@@ -81,15 +81,15 @@ namespace CasinoUI.Models.Poker
             {
                 return Hand.Straight;
             }
-            else if (ThreeKind())
+            else if (HandHasPairs(1, 3))
             {
                 return Hand.ThreeKind;
             }
-            else if (TwoPairs())
+            else if (HandHasPairs(2, 2))
             {
                 return Hand.TwoPairs;
             }
-            else if (OnePair())
+            else if (HandHasPairs(1, 2))
             {
                 return Hand.OnePair;
             }
@@ -123,60 +123,18 @@ namespace CasinoUI.Models.Poker
         {
             if (isRoyal())
             {
-                if (heartsSum == 5)
-                {
-                    handStrength.Total = (int)Hand.RoyalFlush + (int)cards[6].Value;
-                    return true;
-                }
-                else if (diamondSum == 5)
-                {
-                    handStrength.Total = (int)Hand.RoyalFlush + (int)cards[6].Value;
-                    return true;
-                }
-                else if (clubSum == 5)
-                {
-                    handStrength.Total = (int)Hand.RoyalFlush + (int)cards[6].Value;
-                    return true;
-                }
-                else if (spadesSum == 5)
+                if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
                 {
                     handStrength.Total = (int)Hand.RoyalFlush + (int)cards[6].Value;
                     return true;
                 }
             }
             return false;
-
         }
 
         private bool StraightFlush()
         {
-            CardSuit flush;
-
-            if (heartsSum == 5)
-            {
-                flush = Card.CardSuit.Hearts;
-
-            }
-            else if (diamondSum == 5)
-            {
-                flush = Card.CardSuit.Diamonds;
-
-            }
-            else if (clubSum == 5)
-            {
-                flush = Card.CardSuit.Clubs;
-
-            }
-            else if (spadesSum == 5)
-            {
-                flush = Card.CardSuit.Spades;
-            }
-            else return false;
-
-            checkCard = checkCardsStraightFlush(suiteCards, flush);
-
-            return checkCard;
-
+            return Flush() && Straight();
         }
 
         private bool FourOfKind()
@@ -196,74 +154,9 @@ namespace CasinoUI.Models.Poker
             return false;
         }
 
-        private bool FullHouse()
+        public bool FullHouse()
         {
-            if (cards[0].Value == cards[1].Value && cards[0].Value == cards[2].Value && cards[5].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[0].Value;
-                return true;
-            }
-            else if
-              (cards[0].Value == cards[1].Value && cards[0].Value == cards[2].Value && cards[4].Value == cards[5].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[0].Value;
-                return true;
-            }
-            else if
-              (cards[0].Value == cards[1].Value && cards[0].Value == cards[2].Value && cards[3].Value == cards[4].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[0].Value;
-                return true;
-            }
-            else if
-              (cards[1].Value == cards[2].Value && cards[1].Value == cards[3].Value && cards[4].Value == cards[5].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[1].Value;
-                return true;
-            }
-            else if
-              (cards[1].Value == cards[2].Value && cards[1].Value == cards[3].Value && cards[5].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[1].Value;
-                return true;
-            }
-            else if
-              (cards[2].Value == cards[3].Value && cards[2].Value == cards[4].Value && cards[5].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[2].Value;
-                return true;
-            }
-            else if
-              (cards[2].Value == cards[3].Value && cards[2].Value == cards[4].Value && cards[0].Value == cards[1].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[2].Value;
-                return true;
-            }
-            else if
-              (cards[3].Value == cards[4].Value && cards[3].Value == cards[5].Value && cards[0].Value == cards[1].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[3].Value;
-                return true;
-            }
-            else if
-              (cards[4].Value == cards[5].Value && cards[4].Value == cards[6].Value && cards[0].Value == cards[1].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[4].Value;
-                return true;
-            }
-            else if
-              (cards[4].Value == cards[5].Value && cards[4].Value == cards[6].Value && cards[1].Value == cards[2].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[4].Value;
-                return true;
-            }
-            else if
-              (cards[4].Value == cards[5].Value && cards[4].Value == cards[6].Value && cards[2].Value == cards[3].Value)
-            {
-                handStrength.Total = (int)Hand.FullHouse + (int)cards[4].Value;
-                return true;
-            }
-            return false;
+            return HandHasPairs(2, 2) && HandHasPairs(1, 3);
         }
 
         private bool Flush()
@@ -273,27 +166,26 @@ namespace CasinoUI.Models.Poker
             {
                 if (heartsSum == 5)
                 {
-                    checkCard = checkCardsFlush(suiteCards, Card.CardSuit.Hearts);
+                    checkCard = CheckCardsFlush(suiteCards, Card.CardSuit.Hearts);
 
                 }
                 else if (diamondSum == 5)
                 {
-                    checkCard = checkCardsFlush(suiteCards, Card.CardSuit.Diamonds);
+                    checkCard = CheckCardsFlush(suiteCards, Card.CardSuit.Diamonds);
 
                 }
                 else if (clubSum == 5)
                 {
-                    checkCard = checkCardsFlush(suiteCards, Card.CardSuit.Clubs);
+                    checkCard = CheckCardsFlush(suiteCards, Card.CardSuit.Clubs);
 
                 }
                 else if (spadesSum == 5)
                 {
-                    checkCard = checkCardsFlush(suiteCards, Card.CardSuit.Spades);
+                    checkCard = CheckCardsFlush(suiteCards, Card.CardSuit.Spades);
 
                 }
             }
             return checkCard;
-
         }
 
         private bool Straight()
@@ -329,156 +221,37 @@ namespace CasinoUI.Models.Poker
 
         }
 
-        private bool ThreeKind()
+        public bool HandHasPairs(int numPairs, int nbSameValue)
         {
-            if (cards[0].Value == cards[1].Value && cards[0].Value == cards[2].Value)
+            Dictionary<int, int> occurences = new Dictionary<int, int>();
+            foreach (var card in cards)
             {
-                handStrength.Total = (int)Hand.ThreeKind + (int)cards[0].Value;
+                if (!occurences.ContainsKey((int)card.Value))
+                {
+                    occurences.Add((int)card.Value, 1);
+                }
+                else
+                {
+                    occurences[(int)card.Value]++;
+                }
+            }
+            if (occurences.Values.Count(v => v >= nbSameValue) >= numPairs)
+            {
+                handStrength.Total = occurences.Last(v => v.Value >= numPairs).Key;
                 return true;
             }
-            else if (cards[1].Value == cards[2].Value && cards[1].Value == cards[3].Value)
+            else
             {
-                handStrength.Total = (int)Hand.ThreeKind + (int)cards[1].Value;
-                return true;
-            }
-            else if (cards[2].Value == cards[3].Value && cards[2].Value == cards[4].Value)
-            {
-                handStrength.Total = (int)Hand.ThreeKind + (int)cards[2].Value;
-                return true;
-            }
-            else if (cards[3].Value == cards[4].Value && cards[3].Value == cards[5].Value)
-            {
-                handStrength.Total = (int)Hand.ThreeKind + (int)cards[3].Value;
-                return true;
-            }
-            else if (cards[4].Value == cards[5].Value && cards[4].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.ThreeKind + (int)cards[4].Value;
-                return true;
-            }
-
-            return false;
-
-        }
-
-        private bool TwoPairs()
-        {
-            if (cards[0].Value == cards[1].Value &&
-                cards[2].Value == cards[3].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[3].Value;
-                return true;
-            }
-            else if (cards[0].Value == cards[1].Value &&
-                cards[3].Value == cards[4].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[4].Value;
-                return true;
-            }
-            else if (cards[0].Value == cards[1].Value &&
-                cards[4].Value == cards[5].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[5].Value;
-                return true;
-            }
-            else if (cards[0].Value == cards[1].Value &&
-                cards[5].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[6].Value;
-                return true;
-            }
-            else if (cards[1].Value == cards[2].Value &&
-                cards[3].Value == cards[4].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[4].Value;
-                return true;
-            }
-            else if (cards[1].Value == cards[2].Value &&
-                cards[4].Value == cards[5].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[5].Value;
-                return true;
-            }
-            else if (cards[1].Value == cards[2].Value &&
-                cards[5].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[6].Value;
-                return true;
-            }
-            else if (cards[2].Value == cards[3].Value &&
-                cards[4].Value == cards[5].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[5].Value;
-                return true;
-            }
-            else if (cards[2].Value == cards[3].Value &&
-                cards[5].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[6].Value;
-                return true;
-            }
-            else if (cards[3].Value == cards[4].Value &&
-                cards[5].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.TwoPairs + (int)cards[6].Value;
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool OnePair()
-        {
-            if (cards[0].Value == cards[1].Value)
-            {
-                handStrength.Total = (int)Hand.OnePair + (int)cards[0].Value;
-                return true;
-            }
-            else if (cards[1].Value == cards[2].Value)
-            {
-                handStrength.Total = (int)Hand.OnePair + (int)cards[1].Value;
-                return true;
-            }
-            else if (cards[2].Value == cards[3].Value)
-            {
-                handStrength.Total = (int)Hand.OnePair + (int)cards[2].Value;
-                return true;
-            }
-            else if (cards[3].Value == cards[4].Value)
-            {
-                handStrength.Total = (int)Hand.OnePair + (int)cards[3].Value;
-                return true;
-            }
-            else if (cards[4].Value == cards[5].Value)
-            {
-                handStrength.Total = (int)Hand.OnePair + (int)cards[4].Value;
-                return true;
-            }
-            else if (cards[5].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.OnePair + (int)cards[5].Value;
-                return true;
-            }
-
-            return false;
-
-        }
-
-        private void sortCards()
-        {
-            var queryPlayer = from Hand in cards
-                              orderby Hand.Value ascending
-                              select Hand;
-
-            var indexElement = 0;
-            foreach (var element in queryPlayer.ToList())
-            {
-                cards[indexElement] = element;
-                indexElement++;
+                return false;
             }
         }
 
-        private bool checkCardsFlush(Card suiteCards, CardSuit suit)
+        private void SortCards()
+        {
+            cards = cards.OrderBy(c => (int)c.Value).ToArray();
+        }
+
+        private bool CheckCardsFlush(Card suiteCards, CardSuit suit)
         {
             if (suiteCards.Suit == suit)
             {
@@ -489,7 +262,7 @@ namespace CasinoUI.Models.Poker
             return false;
         }
 
-        private bool checkCardsStraightFlush(CardSuit suit)
+        private bool CheckCardsStraightFlush(CardSuit suit)
         {
             if (cards[0].Value + 1 == cards[1].Value &&
                 cards[1].Value + 1 == cards[2].Value &&

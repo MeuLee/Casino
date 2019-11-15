@@ -2,6 +2,7 @@
 using CasinoUI.Models.Cards;
 using CasinoUI.Models.Poker;
 using CasinoUI.Models.Poker.Evaluator;
+using System;
 
 namespace TestCasino
 {
@@ -112,6 +113,40 @@ namespace TestCasino
             Assert.AreEqual(22, evaluationCard.HandStrengths.Total);
         }
 
+        [TestMethod]
+        public void TestTwoPairs()
+        {
+            jeuDeCarte = InitializeCardArr(Card.CardSuit.Clubs, 9, 9, 8, 3, 8, 5, 4);
+            evaluationCard = new HandEvaluator(jeuDeCarte);
+            Assert.IsTrue(evaluationCard.HandHasPairs(2, 2));
+        }
 
+        [TestMethod]
+        public void TestFullHouse()
+        {
+            jeuDeCarte = InitializeCardArr(Card.CardSuit.Clubs, 14, 14, 13, 13, 13, 10, 9);
+            evaluationCard = new HandEvaluator(jeuDeCarte);
+            Assert.IsTrue(evaluationCard.FullHouse());
+        }
+
+        /// <summary>
+        /// Creates a Card array with the specified suit and specified values.
+        /// </summary>
+        /// <param name="suit">Suit to be assigned to all cards</param>
+        /// <param name="values">Array of values to be assigned to all cards.</param>
+        /// <returns>The newly created Card array.</returns>
+        private Card[] InitializeCardArr(Card.CardSuit suit, params int[] values)
+        {
+            if (values.Length != 7)
+            {
+                throw new IndexOutOfRangeException("values.Length must be equal to 7");
+            }
+            var arr = new Card[7];
+            for (int i = 0; i < values.Length; i++)
+            {
+                arr[i] = new Card((Card.CardRank)values[i], suit, null);
+            }
+            return arr;
+        }
     }
 }
