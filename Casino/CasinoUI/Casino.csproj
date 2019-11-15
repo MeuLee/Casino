@@ -81,7 +81,9 @@
     <Compile Include="Models\PlayerModel\PlayerSkin\SkinManager.cs" />
     <Compile Include="Models\PlayerModel\PlayerSkin\Skins.cs" />
     <Compile Include="Models\PlayerModel\PlayerSkin\SkinsGenerator.cs" />
-    <Compile Include="Models\Poker\HandEvaluator.cs" />
+    <Compile Include="Models\Poker\Evaluator\Hand.cs" />
+    <Compile Include="Models\Poker\Evaluator\HandEvaluator.cs" />
+    <Compile Include="Models\Poker\Evaluator\HandStrength.cs" />
     <Compile Include="Models\Profiles\BlackjackProfile.cs" />
     <Compile Include="Models\Settings\ApplicationSettings.cs" />
     <Compile Include="Controllers\BlackjackController.cs" />
