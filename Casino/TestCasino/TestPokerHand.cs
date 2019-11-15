@@ -25,7 +25,8 @@ namespace TestCasino
         public TestPokerHand()
         {
             list = new List<Card>();
-            pokerCombo = new PokerHand(list);
+            pokerCombo = new PokerHand();
+            pokerCombo.ListCardInGame = list;
             pokerTest = new PrivateObject(pokerCombo, new PrivateType(typeof(PokerHand)));
 
             cardRank = Card.CardRank.Two;
@@ -173,7 +174,7 @@ namespace TestCasino
         private void AsserCreateList()
         {
             int[] tab = {14, 13, 12, 11, 10, 9};
-            List<int> list =(List<int>) pokerTest.GetFieldOrProperty("ListTempCombo");
+            List<int> list = pokerCombo.ListSraightCombo;
             for(int i = 0; i < list.Count; i++)
             {
                 Assert.AreEqual(tab[i],list[i]);
@@ -195,7 +196,7 @@ namespace TestCasino
         }
         private void AssertRemoveCard(int[] tab)
         {
-            List<int> list = (List<int>)pokerTest.GetFieldOrProperty("ListTempCombo");
+            List<int> list = pokerCombo.ListSraightCombo;
             for (int i = 0; i < list.Count; i++)
             {
                 Assert.AreEqual(tab[i], list[i]);
