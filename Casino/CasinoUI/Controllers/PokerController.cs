@@ -4,8 +4,7 @@ using CasinoUI.Models.Poker.PokerBrains;
 using CasinoUI.Models.Settings;
 using CasinoUI.View;
 
-namespace CasinoUI.Models.Poker
-{
+namespace CasinoUI.Models.Poker {
     class PokerController {
         PokerLogic pokerModel;
         GamePoker pokerView;
@@ -16,30 +15,33 @@ namespace CasinoUI.Models.Poker
             pokerView = new GamePoker();
             pokerView.Show();
 
-
+            // if not human
+            if (pokerModel.currentPlayerTurnIdx != 0) { 
+            
+            }
         }
 
-        private void addEvent()
-        {
+        private void addEvent() {
             pokerView.BtnSeCoucher.Click += BtnFold_Click;
             pokerView.BtnRelancer.Click += BtnRaise_Click;
             pokerView.BtnSuivre.Click += BtnCall_Click;
         }
 
-        private void BtnCall_Click(object sender, RoutedEventArgs e)
-        {
-            
+        private void BtnCall_Click(object sender, RoutedEventArgs e) {
+            pokerModel.PlayerPlaysTurn(PokerActionCode.CALL, -1);
+            pokerModel.incCurrentPlayerTurn();
+
+
         }
 
-        private void BtnRaise_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+        private void BtnRaise_Click(object sender, RoutedEventArgs e) {
+            pokerModel.PlayerPlaysTurn(PokerActionCode.RAISE, 22);
+            pokerModel.incCurrentPlayerTurn();
         }
 
-        private void BtnFold_Click(object sender, RoutedEventArgs e)
-        {
-
-            throw new NotImplementedException();
+        private void BtnFold_Click(object sender, RoutedEventArgs e) {
+            pokerModel.PlayerPlaysTurn(PokerActionCode.FOLD, -1);
+            pokerModel.incCurrentPlayerTurn();
         }
     }
 }
