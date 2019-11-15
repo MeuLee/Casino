@@ -5,6 +5,11 @@ namespace CasinoUI.Models.Profiles
 {
     public class PokerProfile : Profile, IPokerAction
     {
+        public bool hasPlayed { get; set; }
+
+        public PokerProfile() {
+            hasPlayed = false;
+        }
 
         public int PokerCall(int currentRaise)
         {
