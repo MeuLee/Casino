@@ -85,11 +85,16 @@
     <Compile Include="Models\Poker\Evaluator\HandEvaluator.cs" />
     <Compile Include="Models\Poker\Evaluator\HandStrength.cs" />
     <Compile Include="Models\Profiles\BlackjackProfile.cs" />
+    <Compile Include="Models\Profiles\SlotMachineProfile.cs" />
     <Compile Include="Models\Settings\ApplicationSettings.cs" />
     <Compile Include="Controllers\BlackjackController.cs" />
     <Compile Include="Models\Blackjack\BlackjackActionCode.cs" />
     <Compile Include="Models\Blackjack\BlackjackLogic.cs" />
     <Compile Include="Models\Blackjack\IBlackjackAction.cs" />
+    <Compile Include="Models\SlotMachine\ISlotMachineAction.cs" />
+    <Compile Include="Models\SlotMachine\SlotMachineIcon.cs" />
+    <Compile Include="Models\SlotMachine\SlotMachineIcons.cs" />
+    <Compile Include="Models\SlotMachine\SlotMachineLogic.cs" />
     <Compile Include="Utils\ColorConverter.cs" />
     <Compile Include="Models\IGameType.cs" />
     <Compile Include="Models\SoundManager.cs" />

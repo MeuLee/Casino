@@ -9,7 +9,7 @@ namespace CasinoUI.Models.PlayerModel
         public int Money { get; set; }
 
         /// <summary>
-        /// Throws: System.Exception, if the current (this) player is not a HumanPlayer or a PlayerAI. 
+        /// Throws: InvalidCastException, if the current (this) player is not a HumanPlayer or a PlayerAI. 
         /// </summary>
         /// <returns>The current (this) player's hand. </returns>
         public List<Card> GetHand()
@@ -27,6 +27,7 @@ namespace CasinoUI.Models.PlayerModel
 
         /// <summary>
         /// Usage: IPokerAction currentPlayer = humanPlayer.GetGameType<IPokerAction>();
+        /// Throws: InvalidCastException, if the current (this) player is not a HumanPlayer or a PlayerAI. 
         /// </summary>
         /// <typeparam name="T">Must be of type IGameType, such as IPokerAction, IBlackjackAction etc. Must be an interface</typeparam>
         /// <returns>The current player as T</returns>
