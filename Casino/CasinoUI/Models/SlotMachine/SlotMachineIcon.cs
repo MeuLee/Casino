@@ -13,16 +13,16 @@ namespace CasinoUI.Models.SlotMachine
         private static Dictionary<SlotMachineIcons, double> _odds
             = new Dictionary<SlotMachineIcons, double>
             {
-                { SlotMachineIcons.Cherry, 0.16 },
-                { SlotMachineIcons.Watermelon, 0.16 },
-                { SlotMachineIcons.Pear, 0.16 },
-                { SlotMachineIcons.Banana, 0.16 },
-                { SlotMachineIcons.Heart, 0.08 },
-                { SlotMachineIcons.Diamond, 0.08 },
-                { SlotMachineIcons.Clubs, 0.08 },
-                { SlotMachineIcons.Spades, 0.08 },
-                { SlotMachineIcons.Bell, 0.03 },
-                { SlotMachineIcons.Seven, 0.01 }
+                { SlotMachineIcons.Cherry, 0.125 },
+                { SlotMachineIcons.Watermelon, 0.125 },
+                { SlotMachineIcons.Pear, 0.125 },
+                { SlotMachineIcons.Banana, 0.125 },
+                { SlotMachineIcons.Heart, 0.1 },
+                { SlotMachineIcons.Diamond, 0.1 },
+                { SlotMachineIcons.Clubs, 0.1 },
+                { SlotMachineIcons.Spades, 0.1 },
+                { SlotMachineIcons.Bell, 0.0625 },
+                { SlotMachineIcons.Seven, 0.0375 }
             };
 
         private SlotMachineIcon(SlotMachineIcons icon)
