@@ -4,6 +4,7 @@
     {
         void PokerCheck();
         void PokerFold();
+        void PokerAllIn();
         int PokerRaise(int moneyRaised);
         int PokerCall(int currentRaise);
     }

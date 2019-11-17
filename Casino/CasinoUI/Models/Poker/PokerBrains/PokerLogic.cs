@@ -82,6 +82,9 @@ namespace CasinoUI.Models.Poker.PokerBrains
                 case PokerActionCode.RAISE:
                     Pot += player.PokerRaise(22); // should take in amount from UI
                     break;
+                case PokerActionCode.ALLIN:
+                    player.PokerAllIn();
+                    break;
             }
 
         }

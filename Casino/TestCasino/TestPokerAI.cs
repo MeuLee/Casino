@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CasinoUI.Models.Poker;
 using CasinoUI.Models.Cards;
 using System.Drawing;
+using System;
 
 namespace TestCasino
 {
@@ -24,7 +25,7 @@ namespace TestCasino
         {
             list = new List<Card>();
             pokerCombo = new PokerAI();
-            pokerCombo.ListCardInGame = list;
+            pokerCombo.CardsOnBoard = list;
             pokerTest = new PrivateObject(pokerCombo, new PrivateType(typeof(PokerAI)));
 
             cardRank = Card.CardRank.Two;
@@ -517,18 +518,18 @@ namespace TestCasino
 
             pokerTest.Invoke("DescendSuitList");
 
-            for (int i = 0; i < pokerCombo.ListCardInGame.Count; i++)
+            for (int i = 0; i < pokerCombo.CardsOnBoard.Count; i++)
             {
                 switch (i)
                 {
                     case 0:
-                        Assert.AreEqual(Card.CardSuit.Hearts, pokerCombo.ListCardInGame[i].Suit);
+                        Assert.AreEqual(Card.CardSuit.Hearts, pokerCombo.CardsOnBoard[i].Suit);
                         break;
                     case 1:
-                        Assert.AreEqual(Card.CardSuit.Clubs, pokerCombo.ListCardInGame[i].Suit);
+                        Assert.AreEqual(Card.CardSuit.Clubs, pokerCombo.CardsOnBoard[i].Suit);
                         break;
                     case 2:
-                        Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.ListCardInGame[i].Suit);
+                        Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.CardsOnBoard[i].Suit);
                         break;
                 }
             }

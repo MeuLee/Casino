@@ -13,7 +13,6 @@ namespace CasinoUI.Models.Poker
         private List<Tuple<int, int>> comboValuePoss;
         private Card.CardSuit flushCombo;
 
-        private List<Tuple<Player, int>> listGagnants;
 
         private bool isStraight = false;
         private bool isFlush = false;
