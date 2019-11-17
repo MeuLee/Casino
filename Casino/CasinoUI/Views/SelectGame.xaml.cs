@@ -1,4 +1,5 @@
-﻿using CasinoUI.Utils;
+﻿using CasinoUI.Models;
+using CasinoUI.Utils;
 using CasinoUI.View;
 using CasinoUI.Views.Map;
 using System.Windows;
@@ -74,8 +75,9 @@ namespace CasinoUI.Views
 
         private void BtnMap_Click(object sender, RoutedEventArgs e)
         {
-            MapRenderer.PlayerX = _oldPlayerX;
-            MapRenderer.PlayerY = _oldPlayerY;
+            var player = ApplicationSettings.HumanPlayer;
+            player.X = _oldPlayerX;
+            player.Y = _oldPlayerY;
             _cg.OnPlayerMoved(_oldPlayerX, _oldPlayerY);
             Close();
             _cg.Show();

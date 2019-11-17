@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using CasinoUI.Model;
-using CasinoUI.Model.Cards;
+using CasinoUI.Models.Cards;
+using CasinoUI.Models.PlayerModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestCasino
@@ -53,13 +53,13 @@ namespace TestCasino
         {
             //Arrange
             GameCardStack stack = new GameCardStack();
-            HumanPlayer player = new HumanPlayer();
-            int playerCardsBefore = player.Hand.Count, gameCardsBefore = stack.Cards.Count, 
+            HumanPlayer player = new HumanPlayer(0, 0, "");
+            int playerCardsBefore = player.GetHand().Count, gameCardsBefore = stack.Cards.Count, 
                 playerCardsAfter, gameCardsAfter;
 
             //Act
             stack.PlayerDrawCard(player);
-            playerCardsAfter = player.Hand.Count;
+            playerCardsAfter = player.GetHand().Count;
             gameCardsAfter = stack.Cards.Count;
 
             //Assert

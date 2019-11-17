@@ -1,4 +1,6 @@
-﻿using CasinoUI.Views.Map.Tiles;
+﻿using CasinoUI.Models;
+using CasinoUI.Models.PlayerModel;
+using CasinoUI.Views.Map.Tiles;
 using System;
 using System.Windows;
 using System.Windows.Media;
@@ -7,16 +9,14 @@ namespace CasinoUI.Views.Map
 {
     public class MapRenderer
     {
-        public static MapTile[,] Map { get; private set; } = MapGenerator.LoadMapFromFile(Properties.Resources.map);
 
         public static int TilesAroundPlayerX { get; set; } = 5;
         public static int TilesAroundPlayerY { get; set; } = 3;
 
         private static int _cameraCenterX, _cameraCenterY;
+        private static HumanPlayer _player = ApplicationSettings.HumanPlayer;
+        private static MapTile[,] _map = ApplicationSettings.Map;
 
-        // Will be removed once the HumanPlayer instance can be accesssed.
-        public static int PlayerX { get; set; } = 10;
-        public static int PlayerY { get; set; } = 4;
 
         #region RenderMap
         public static void RenderMap(DrawingContext dc, float canvasWidth, float canvasHeight)
@@ -32,8 +32,8 @@ namespace CasinoUI.Views.Map
         /// </summary>
         private static void SetCameraCenterValues()
         {
-            _cameraCenterX = SetCameraCenterValue(PlayerX, TilesAroundPlayerX, Map.GetLength(0));
-            _cameraCenterY = SetCameraCenterValue(PlayerY, TilesAroundPlayerY, Map.GetLength(1));
+            _cameraCenterX = SetCameraCenterValue(_player.X, TilesAroundPlayerX, _map.GetLength(0));
+            _cameraCenterY = SetCameraCenterValue(_player.Y, TilesAroundPlayerY, _map.GetLength(1));
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace CasinoUI.Views.Map
                      j <= _cameraCenterY + TilesAroundPlayerY;
                      j++, jndex++)
                 {
-                    MapTile tile = Map[i, j];
+                    MapTile tile = _map[i, j];
                     dc.DrawImage(tile.Sprite, new Rect(index * tileWidth, jndex * tileWidth, tileWidth, tileWidth));
                 }
             }
@@ -100,8 +100,8 @@ namespace CasinoUI.Views.Map
 
         private static void DrawPlayer(DrawingContext dc, float tileWidth)
         {
-            int uiPlayerX = PlayerCoordOnUI(_cameraCenterX, PlayerX, Map.GetLength(0), TilesAroundPlayerX),
-                uiPlayerY = PlayerCoordOnUI(_cameraCenterY, PlayerY, Map.GetLength(1), TilesAroundPlayerY);
+            int uiPlayerX = PlayerCoordOnUI(_cameraCenterX, _player.X, _map.GetLength(0), TilesAroundPlayerX),
+                uiPlayerY = PlayerCoordOnUI(_cameraCenterY, _player.Y, _map.GetLength(1), TilesAroundPlayerY);
             dc.DrawEllipse(Brushes.Green,
                            new Pen(Brushes.Green, 1.0),
                            new Point(uiPlayerX * tileWidth + tileWidth / 2,
@@ -143,16 +143,16 @@ namespace CasinoUI.Views.Map
 
         private static float SetMiniMapTileSize(float canvasWidth, float canvasHeight)
         {
-            return Math.Min(canvasWidth / Map.GetLength(0), canvasHeight / Map.GetLength(1));
+            return Math.Min(canvasWidth / _map.GetLength(0), canvasHeight / _map.GetLength(1));
         }
 
         private static void DrawMiniMapTiles(DrawingContext dc, float tileWidth)
         {
-            for (int i = 0; i < Map.GetLength(0); i++)
+            for (int i = 0; i < _map.GetLength(0); i++)
             {
-                for (int j = 0; j < Map.GetLength(1); j++)
+                for (int j = 0; j < _map.GetLength(1); j++)
                 {
-                    MapTile t = Map[i, j];
+                    MapTile t = _map[i, j];
                     dc.DrawRectangle(t.MiniMapBrush, t.MiniMapPen, new Rect(i * tileWidth, j * tileWidth, tileWidth, tileWidth));
                 }
             }
@@ -162,8 +162,8 @@ namespace CasinoUI.Views.Map
         {
             dc.DrawEllipse(Brushes.Green,
                             new Pen(Brushes.Green, 1.0),
-                            new Point(PlayerX * tileWidth + tileWidth / 2,
-                                      PlayerY * tileWidth + tileWidth / 2),
+                            new Point(_player.X * tileWidth + tileWidth / 2,
+                                      _player.Y * tileWidth + tileWidth / 2),
                             tileWidth / 3,
                             tileWidth / 3);
         }

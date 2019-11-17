@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CasinoUI.Model.Cards
+namespace CasinoUI.Models.Cards
 {
     public class CardStack
     {

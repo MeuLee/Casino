@@ -1,92 +1,86 @@
-﻿using CasinoUI.Model;
-using CasinoUI.Model.Cards;
-using CasinoUI.Model.Poker;
-using CasinoUI.Models;
-using CasinoUI.Models.Poker;
-using System;
+﻿using CasinoUI.Models.Cards;
+using CasinoUI.Models.PlayerModel;
+using CasinoUI.Models.Profiles;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CasinoUI.Models.Poker.PokerBrains {
+namespace CasinoUI.Models.Poker.PokerBrains
+{
     public class PokerLogic {
-        public List<PokerPlayer> listPlayers { get; set; }  // index 0 is always the human player
-        public GameCardStack cardStack { get; set; }
+        public List<Player> ListPlayers { get; set; }  // index 0 is always the human player
+        public GameCardStack CardStack { get; set; }
 
-        public int[] playerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers                            
+        public int[] PlayerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers                            
                                                     //       idx[1] = BigBlind's index in ListPlayers
                                                     //       idx[2] = First player to play
-        public int pot { get; set; }
-        public int currentRaise { get; set; }
+        public int Pot { get; set; }
+        public int CurrentRaise { get; set; }
 
-        public PokerLogic(PokerPlayer human) {
-            initListPlayers(human);
-            setInitialRoles();
-            cardStack = new GameCardStack();            
-            pot = 0;
-            currentRaise = 2;
+        public PokerLogic(HumanPlayer human) {
+            InitListPlayers(human);
+            SetInitialRoles();
+            CardStack = new GameCardStack();            
+            Pot = 0;
+            CurrentRaise = 2;
         }
 
-        private void initListPlayers(PokerPlayer human) {
-            listPlayers = new List<PokerPlayer>();
-
-            listPlayers.Add(human);
+        private void InitListPlayers(HumanPlayer human)
+        {
+            ListPlayers = new List<Player> { human };
 
             for (int i = 0; i < 4; i++) {
-                listPlayers.Add(new PokerAI());
+                ListPlayers.Add(new PokerAI());
             }
         }
 
-        private void setInitialRoles() {
-            playerRoles = new int[3];
+        private void SetInitialRoles() {
+            PlayerRoles = new int[3];
 
-            playerRoles[0] = 0;
-            playerRoles[1] = 1;
-            playerRoles[2] = 2;
+            PlayerRoles[0] = 0;
+            PlayerRoles[1] = 1;
+            PlayerRoles[2] = 2;
 
             // draw high card for dealer
         }
 
-        private void proceedNextTurn() {
-            rotateRoles();
-            clearRoles();
-            pot = 0;
+        private void ProceedNextTurn() {
+            RotateRoles();
+            ClearRoles();
+            Pot = 0;
             // restore deck and shuffle
             // check if everyone has enough money
         }
 
-        private void rotateRoles() {
-            int listLength = listPlayers.Count;
+        private void RotateRoles() {
+            int listLength = ListPlayers.Count;
 
-            for (int i = 0; i < playerRoles.Length; i++) {
-                playerRoles[i]++;
+            for (int i = 0; i < PlayerRoles.Length; i++) {
+                PlayerRoles[i]++;
 
-                if (playerRoles[i] == listLength) {
-                    playerRoles[i] = 0;
+                if (PlayerRoles[i] == listLength) {
+                    PlayerRoles[i] = 0;
                 }
             }
         }
 
-        private void clearRoles() {
-            foreach (Player player in listPlayers) {
-                player.Hand.Clear();
-            }
+        private void ClearRoles()
+        {
+            
         }
 
-        private void playerPlaysTurn(PokerActionCode pokerActionCode, int playerIdx) {
+        private void PlayerPlaysTurn(PokerActionCode pokerActionCode, int playerIdx) {
+            IPokerAction player = ListPlayers[playerIdx].GetGameType<IPokerAction>();
             switch (pokerActionCode) {
                 case PokerActionCode.CALL:
-                    pot += listPlayers[playerIdx].PokerCall(currentRaise);
+                    Pot += player.PokerCall(CurrentRaise);
                     break;
                 case PokerActionCode.CHECK:
-                    listPlayers[playerIdx].PokerCheck();
+                    player.PokerCheck();
                     break;
                 case PokerActionCode.FOLD:
-                    listPlayers[playerIdx].PokerFold();
+                    player.PokerFold();
                     break;
                 case PokerActionCode.RAISE:
-                    pot += listPlayers[playerIdx].PokerRaise(22); // should take in amount from UI
+                    Pot += player.PokerRaise(22); // should take in amount from UI
                     break;
             }
 

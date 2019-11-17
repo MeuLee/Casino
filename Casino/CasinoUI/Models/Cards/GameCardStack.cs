@@ -1,9 +1,10 @@
-﻿using CasinoUI.Utils;
+﻿using CasinoUI.Models.PlayerModel;
+using CasinoUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace CasinoUI.Model.Cards
+namespace CasinoUI.Models.Cards
 {
     public class GameCardStack : CardStack
     {
@@ -43,7 +44,7 @@ namespace CasinoUI.Model.Cards
         public void PlayerDrawCard(Player current)
         {
             Card card = Cards[0];
-            current.Hand.Add(card);
+            current.GetHand().Add(card);
             Cards.Remove(card);
         }
 

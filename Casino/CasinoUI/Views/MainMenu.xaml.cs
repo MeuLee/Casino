@@ -1,4 +1,5 @@
-﻿using CasinoUI.Utils;
+﻿using CasinoUI.Models.Poker;
+using CasinoUI.Utils;
 using CasinoUI.Views;
 using System.Linq;
 using System.Windows;
