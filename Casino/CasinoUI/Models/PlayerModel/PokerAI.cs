@@ -8,7 +8,7 @@ namespace CasinoUI.Models.Poker
     public class PokerAI : PlayerAI, IPokerAction
     {
 
-        private List<Card> LisCardtOnBoard;
+        private List<Card> LisCardOnBoard;
         private List<Card> ListValue;
 
         private List<int> ListStraightCombo;
@@ -22,7 +22,7 @@ namespace CasinoUI.Models.Poker
         {
             Money = 1000;
 
-            this.LisCardtOnBoard = new List<Card>();
+            this.LisCardOnBoard = new List<Card>();
             this.ListStraightCombo = new List<int>();
             this.ListValue = new List<Card>();
             this.ComboValuePoss = new List<Tuple<int, int>>();
@@ -31,8 +31,8 @@ namespace CasinoUI.Models.Poker
 
         public List<Card> CardsOnBoard
         {
-            get { return LisCardtOnBoard; }
-            set { this.LisCardtOnBoard = value; }
+            get { return LisCardOnBoard; }
+            set { this.LisCardOnBoard = value; }
         }
 
         public int MakeDecision()
@@ -43,9 +43,9 @@ namespace CasinoUI.Models.Poker
             return (int) PokerActionCode.FOLD;
         }
 
-        public void CreateAllCPoss(List<Card> LisCardtOnBoard)
+        public void CreateAllPoss(List<Card> LisCardtOnBoard)
         {
-            this.LisCardtOnBoard = LisCardtOnBoard;
+            this.LisCardOnBoard = LisCardtOnBoard;
 
             DescendValueList();
             CreateListValue();
@@ -79,7 +79,7 @@ namespace CasinoUI.Models.Poker
             bool firstTime = true;
             Card.CardRank CardBefore = 0;
 
-            foreach (Card card in LisCardtOnBoard)
+            foreach (Card card in LisCardOnBoard)
             {
 
                 if (firstTime)
@@ -101,9 +101,9 @@ namespace CasinoUI.Models.Poker
 
         private void ComboFlush()
         {
-            double nbr = LisCardtOnBoard.Count / 2.0;
+            double nbr = LisCardOnBoard.Count / 2.0;
             int Middle = (int)Math.Ceiling(nbr);
-            FlushCombo = LisCardtOnBoard[Middle].Suit;
+            FlushCombo = LisCardOnBoard[Middle].Suit;
         }
 
         private void StraightCombo()
@@ -270,9 +270,9 @@ namespace CasinoUI.Models.Poker
         private void CreateList()
         {
             ListStraightCombo = new List<int>();
-            int itemStraight = (int)LisCardtOnBoard[0].Value + 2;
+            int itemStraight = (int)LisCardOnBoard[0].Value + 2;
 
-            for (int i = 0; i < LisCardtOnBoard.Count + 4; i++)
+            for (int i = 0; i < LisCardOnBoard.Count + 4; i++)
             {
                 if (itemStraight < 15 && itemStraight > 1)
                 {
@@ -283,7 +283,7 @@ namespace CasinoUI.Models.Poker
         }
         private void DescendSuitList()
         {
-            LisCardtOnBoard.Sort((a, b) => b.Suit.CompareTo(a.Suit));
+            LisCardOnBoard.Sort((a, b) => b.Suit.CompareTo(a.Suit));
         }
 
         private void isFlushCombo()
@@ -292,7 +292,7 @@ namespace CasinoUI.Models.Poker
             int cardBefore = 0;
             int compt = 0;
 
-            foreach (Card card in LisCardtOnBoard)
+            foreach (Card card in LisCardOnBoard)
             {
                 if (firstTime)
                 {
@@ -329,7 +329,7 @@ namespace CasinoUI.Models.Poker
             int cardBefore = 0;
             int comptStraight = 0;
 
-            foreach (Card card in LisCardtOnBoard)
+            foreach (Card card in LisCardOnBoard)
             {
 
                 int actuelCard = (int)card.Value;
@@ -349,7 +349,7 @@ namespace CasinoUI.Models.Poker
                     cardBefore -= 2;
                     comptStraight++;
 
-                    if (LisCardtOnBoard.Count < 4)
+                    if (LisCardOnBoard.Count < 4)
                     {
                         blockCombo = true;
                     }
@@ -359,7 +359,7 @@ namespace CasinoUI.Models.Poker
                     cardBefore -= 3;
                     comptStraight++;
 
-                    if (LisCardtOnBoard.Count < 4)
+                    if (LisCardOnBoard.Count < 4)
                     {
                         blockCombo = true;
                     }
@@ -409,7 +409,7 @@ namespace CasinoUI.Models.Poker
         }
         private void DescendValueList()
         {
-            LisCardtOnBoard.Sort((a, b) => b.Value.CompareTo(a.Value));
+            LisCardOnBoard.Sort((a, b) => b.Value.CompareTo(a.Value));
         }
 
         public void PokerAllIn()
