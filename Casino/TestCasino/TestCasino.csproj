@@ -61,7 +61,7 @@
     <Compile Include="TestCards.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestMap.cs" />
-    <Compile Include="TestPokerHand.cs" />
+    <Compile Include="TestPokerAI.cs" />
     <Compile Include="TestPokerLogic.cs" />
   </ItemGroup>
   <ItemGroup>
