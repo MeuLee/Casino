@@ -64,6 +64,7 @@
     <Compile Include="TestPokerHand.cs" />
     <Compile Include="TestPokerLogic.cs" />
     <Compile Include="TesthandEvaluator.cs" />
+    <Compile Include="TestSlotMachine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

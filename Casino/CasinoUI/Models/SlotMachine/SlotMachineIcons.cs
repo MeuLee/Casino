@@ -10,7 +10,7 @@
         Diamond,
         Clubs,
         Spades,
-        Seven,
-        Bell
+        Bell,
+        Seven
     }
 }

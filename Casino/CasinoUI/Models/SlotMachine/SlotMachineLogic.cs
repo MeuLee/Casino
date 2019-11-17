@@ -7,8 +7,8 @@ namespace CasinoUI.Models.SlotMachine
 {
     public class SlotMachineLogic
     {
-        private HumanPlayer _human;
-        private static Random _r;
+        private readonly HumanPlayer _human;
+        private static readonly Random _r;
         private static List<Point>[] _payLines;
         private static readonly int SCREEN_HEIGHT = 3;
         private static readonly int SCREEN_WIDTH = 5;
@@ -16,7 +16,6 @@ namespace CasinoUI.Models.SlotMachine
 
         static SlotMachineLogic()
         {
-            _r = new Random();
             InitPayLines();
         }
 
@@ -36,6 +35,19 @@ namespace CasinoUI.Models.SlotMachine
         public SlotMachineLogic(HumanPlayer human)
         {
             _human = human;
+            InitScreen(); 
+        }
+
+        private void InitScreen()
+        {
+            Screen = new SlotMachineIcon[SCREEN_WIDTH, SCREEN_HEIGHT];
+            for (int i = 0; i < Screen.GetLength(0); i++)
+            {
+                for (int j = 0; j < Screen.GetLength(1); j++)
+                {
+                    Screen[i, j] = SlotMachineIcon.GenerateRandomIcon();
+                }
+            }
         }
     }
 }
