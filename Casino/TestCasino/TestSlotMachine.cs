@@ -26,11 +26,11 @@ namespace TestCasino
         }
 
         [TestMethod]
-        public void NoIconNullOnScreen() // should logically pass if the previous test also passed.
+        public void MyTestMethod()
         {
-            for (int i = 0; i < 10000; i++)
+            while (true)
             {
-                Assert.AreEqual(0, _model.Spin().Cast<SlotMachineIcon>().Count(s => s == null));
+                _model.PullLever();
             }
         }
     }

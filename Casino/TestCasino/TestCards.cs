@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using CasinoUI.Models.Cards;
 using CasinoUI.Models.PlayerModel;
+using CasinoUI.Models.Profiles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestCasino
@@ -18,22 +19,13 @@ namespace TestCasino
         [TestMethod]
         public void NoImageNull()
         {
-            int nbImageNull = _stack.Cards.Count(c => c.Image == null);
-
-            Assert.AreEqual(0, nbImageNull);
+            Assert.AreEqual(0, _stack.Cards.Count(c => c.Image == null));
         }
 
         [TestMethod]
         public void NoDuplicateCard()
         {
-            //Arrange
-            int nbUniqueCards;
-
-            //Act
-            nbUniqueCards = _stack.Cards.Distinct().Count();
-
-            //Assert
-            Assert.AreEqual(52, nbUniqueCards);
+            Assert.AreEqual(52, _stack.Cards.Distinct().Count());
         }
 
         [TestMethod]
@@ -41,7 +33,10 @@ namespace TestCasino
         {
             //Arrange
             GameCardStack stack = new GameCardStack();
-            HumanPlayer player = new HumanPlayer(0, 0);
+            HumanPlayer player = new HumanPlayer(0, 0)
+            {
+                CurrentProfile = new PokerProfile()
+            };
             int playerCardsBefore = player.GetHand().Count, gameCardsBefore = stack.Cards.Count,
                 playerCardsAfter, gameCardsAfter;
 
