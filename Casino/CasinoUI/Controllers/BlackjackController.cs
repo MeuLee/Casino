@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Input;
+using System.Collections.Generic;
+using CasinoUI.Models.PlayerModel;
 
 namespace CasinoUI.Controllers
 {
@@ -27,7 +29,6 @@ namespace CasinoUI.Controllers
 
             AddEventsOnUIControls();
             SetImages();
-            SetCardImagesTemp();
         }
 
         private void AddEventsOnUIControls()
@@ -67,7 +68,8 @@ namespace CasinoUI.Controllers
 
         private void Hit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            _model.Hit();
+            _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));
         }
 
         private void Insurance_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -97,14 +99,6 @@ namespace CasinoUI.Controllers
                 }
             }
         }
-
-
-        private void SetCardImagesTemp()
-        {
-            _view.Img1Player.Source = Properties.Resources._10C.ToBitmapImage();
-            _view.Img2Player.Source = Properties.Resources._9D.ToBitmapImage();
-            _view.Img1Dealer.Source = Properties.Resources._6S.ToBitmapImage();
-            _view.Img2Dealer.Source = Properties.Resources._11S.ToBitmapImage();
-        }
+        
     }
 }

@@ -8,7 +8,7 @@ namespace CasinoUI.Models.Blackjack
 {
     public class BlackjackLogic
     {
-        private List<Player> _players;
+        public List<Player> _players { get; }
         public GameCardStack CardStack { get; set; }
 
         public int Bet { get; set; }
@@ -110,6 +110,19 @@ namespace CasinoUI.Models.Blackjack
                 player.GetHand().Clear();
                 player.GetGameType<IBlackjackAction>().PlayerHandValue = 0;
             }
+        }
+
+        public void Hit()
+        {
+            Player tempP = new Player();
+            foreach(Player p in _players)
+            {
+                if(p is HumanPlayer)
+                {
+                    tempP = p;
+                }
+            }
+            CardStack.PlayerDrawCard(tempP);
         }
 
         private void CurrentPlayerPlay(BlackjackActionCode Action, HumanPlayer CurrentPlayer)

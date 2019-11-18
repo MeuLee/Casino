@@ -1,6 +1,7 @@
-﻿using CasinoUI.Models.PlayerModel;
+﻿using CasinoUI.Models.Blackjack;
+using CasinoUI.Models.PlayerModel;
 
-namespace CasinoUI.Models.Blackjack
+namespace CasinoUI.Models.PlayerModel
 {
     public class BlackjackAI : PlayerAI, IBlackjackAction
     {
