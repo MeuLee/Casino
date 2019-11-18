@@ -23,7 +23,7 @@ namespace CasinoUI.Controllers
 
         public BlackjackController()
         {
-            _model = new BlackjackLogic(ApplicationSettings.HumanPlayer);
+            _model = new BlackjackLogic(ApplicationSettings.HumanPlayer, this);
             _view = new GameBlackjack();
             _view.Show();
 
@@ -70,21 +70,24 @@ namespace CasinoUI.Controllers
         {
             _model.Hit();
             _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));
+            _model.AIPlays();
         }
 
         private void Insurance_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            _model.Insurance();
         }
 
         private void DoubleDown_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            _model.DoubleDown();
+            _model.AIPlays();
         }
 
         private void Stand_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            _model.Stand();
+            _model.AIPlays();
         }
 
         private void SetImages()
@@ -99,6 +102,10 @@ namespace CasinoUI.Controllers
                 }
             }
         }
-        
+
+        public void UpdateViewNewCardAI()
+        {
+            _view.CreateNewImageSpace(_model.GetHuman(), _model.GetAI());
+        }
     }
 }

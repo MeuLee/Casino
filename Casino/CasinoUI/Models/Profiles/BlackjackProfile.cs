@@ -10,6 +10,7 @@ namespace CasinoUI.Models.Profiles
     class BlackjackProfile : Profile, IBlackjackAction
     {
         public int PlayerHandValue { get; set; }
+        public bool PlayerStand { get; set; }
 
         public int BlackjackDoubleDown(int currentBet)
         {

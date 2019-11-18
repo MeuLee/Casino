@@ -43,5 +43,10 @@ namespace CasinoUI.Views
                 Grid.Children.Add(image);
             }
         }
+
+        public void Stand()
+        {
+
+        }
     }
 }

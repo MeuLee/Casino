@@ -7,6 +7,8 @@ namespace CasinoUI.Models.PlayerModel
     {
         public int PlayerHandValue { get; set; }
 
+        public bool PlayerStand { get; set; }
+
         public int BlackjackDoubleDown(int currentBet)
         {
             throw new System.NotImplementedException();
