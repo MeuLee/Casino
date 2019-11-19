@@ -63,6 +63,7 @@
     <Compile Include="TestMap.cs" />
     <Compile Include="TestPokerAI.cs" />
     <Compile Include="TestPokerLogic.cs" />
+    <Compile Include="TesthandEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

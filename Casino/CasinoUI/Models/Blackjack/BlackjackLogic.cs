@@ -1,5 +1,6 @@
 ﻿using CasinoUI.Models.Cards;
 using CasinoUI.Models.PlayerModel;
+using CasinoUI.Models.Profiles;
 using System.Collections.Generic;
 
 namespace CasinoUI.Models.Blackjack
@@ -10,7 +11,7 @@ namespace CasinoUI.Models.Blackjack
         public List<Player> ListPlayers { get; set; }
         public GameCardStack CardStack { get; set; }
 
-        public int Pot { get; set; }
+        public int Bet { get; set; }
 
         public int PlayerHandValue { get; set; }
         public int DealerHandValue { get; set; }
@@ -25,7 +26,7 @@ namespace CasinoUI.Models.Blackjack
             this.Human = Human;
             InitListPlayers();
             CardStack = new GameCardStack();
-            Pot = 0;
+            Bet = 0;
             PlayerHandValue = 0;
             DealerHandValue = 0;
         }
@@ -69,8 +70,11 @@ namespace CasinoUI.Models.Blackjack
 
         private void InitListPlayers()
         {
-            ListPlayers[0] = Human;
-            ListPlayers[1] = new BlackjackAI();
+            ListPlayers = new List<Player>
+            {
+                Human,
+                new BlackjackAI()
+            };
         }
 
         private void DistributeCards()
@@ -120,7 +124,7 @@ namespace CasinoUI.Models.Blackjack
         private void ProceedNextTurn()
         {
             ClearHands();
-            Pot = 0;
+            Bet = 0;
         }
 
         private void ClearHands()
@@ -133,7 +137,7 @@ namespace CasinoUI.Models.Blackjack
             DealerHandValue = 0;
         }
 
-        private void CurrentPlayerPlay(BlackjackActionCode Action, Player CurrentPlayer)
+        private void CurrentPlayerPlay(BlackjackActionCode Action, HumanPlayer CurrentPlayer)
         {
             switch (Action)
             {
@@ -169,16 +173,7 @@ namespace CasinoUI.Models.Blackjack
                     break;
                 case BlackjackActionCode.DOUBLEDOWN:
                     CardStack.PlayerDrawCard(CurrentPlayer);
-                    if (CurrentPlayer is HumanPlayer)
-                    {
-                        CheckHandValue(PlayerHandValue, CurrentPlayer);
-
-                    }
-                    else
-                    {
-                        CheckHandValue(DealerHandValue, CurrentPlayer);
-                    }
-                    PlayerStand = true;
+                    CurrentPlayer.GetGameType<IBlackjackAction>().BlackjackDoubleDown(Bet);
                     //Double init bet
                     break;
             }

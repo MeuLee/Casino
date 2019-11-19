@@ -8,7 +8,7 @@
         FontSize="18" FontFamily="Algerian"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
-    <Grid>
+    <Grid x:Name="Grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="2*"/>
@@ -37,7 +37,7 @@
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 FontSize="16">
             <StackPanel Orientation="Horizontal">
-                <Image x:Name="ImgBackArrow" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <Image x:Name="ImgBackArrow" Style="{StaticResource Image.Left}"/>
                 <TextBlock Text="Go back to Map" Foreground="White"/>
             </StackPanel>
         </Button>
@@ -47,9 +47,9 @@
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <Image x:Name="ImgChip1" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <Image x:Name="ImgChip1" Style="{StaticResource Image.Left}"/>
                 <TextBlock Text="Poker" Foreground="White" />
-                <Image x:Name="ImgChip2" Height="25" Width ="25" Margin="10, 0, 0, 0"/>
+                <Image x:Name="ImgChip2" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
         <Button x:Name="BtnBlackJack" Style="{StaticResource Button.Hoverless}"
@@ -58,9 +58,9 @@
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="White"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <Image x:Name="ImgChip3" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <Image x:Name="ImgChip3" Style="{StaticResource Image.Left}"/>
                 <TextBlock Text="BlackJack" Foreground="White" />
-                <Image x:Name="ImgChip4" Height="25" Width ="25" Margin="10, 0, 0, 0"/>
+                <Image x:Name="ImgChip4" Style="{StaticResource Image.Right}"/>
             </StackPanel>            
         </Button>
         <Button x:Name="BtnSolitaire" Style="{StaticResource Button.Hoverless}"
@@ -69,9 +69,9 @@
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="White"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <Image x:Name="ImgChip5" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <Image x:Name="ImgChip5" Style="{StaticResource Image.Left}"/>
                 <TextBlock Text="Solitaire" Foreground="White" />
-                <Image x:Name="ImgChip6" Height="25" Width ="25" Margin="10, 0, 0, 0"/>
+                <Image x:Name="ImgChip6" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
         <Button x:Name="BtnSlotMachine" Style="{StaticResource Button.Hoverless}"
@@ -80,9 +80,9 @@
                 Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="White"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <Image x:Name="ImgChip7" Height="25" Width ="25" Margin="0, 0, 10, 0"/>
+                <Image x:Name="ImgChip7" Style="{StaticResource Image.Left}"/>
                 <TextBlock Text="Slot Machine" Foreground="White" />
-                <Image x:Name="ImgChip8" Height="25" Width ="25" Margin="10, 0, 0, 0"/>
+                <Image x:Name="ImgChip8" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
     </Grid>
