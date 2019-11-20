@@ -14,7 +14,7 @@ namespace TestCasino
     [TestClass]
     public class TestSlotMachine
     {
-        private SlotMachineLogic _model = new SlotMachineLogic(ApplicationSettings.HumanPlayer);
+        private SlotMachineLogic _model = new SlotMachineLogic(new HumanPlayer(0, 0));
         private PrivateObject _slotMachineLogic = new PrivateObject(typeof(SlotMachineLogic),
                                                                     new[] { typeof(HumanPlayer)},
                                                                     new[] { ApplicationSettings.HumanPlayer });
@@ -28,9 +28,10 @@ namespace TestCasino
         [TestMethod]
         public void MyTestMethod()
         {
+            _model.AddCredits(2);
             while (true)
             {
-                _model.PullLever();
+                _model.PullLever(2);
             }
         }
     }

@@ -6,18 +6,32 @@ using System.Windows;
 
 namespace CasinoUI.Models.SlotMachine
 {
-    public class SlotMachineLogic
+    public class SlotMachineLogic : ISlotMachineAction
     {
         public Action<SlotMachineIcon[,]> OnIconsUpdate { get; set; }
-        public Action<int> OnPotEarned { get; set; }
+        public Action<int> OnCreditsValueChanged { get; set; }
         private readonly HumanPlayer _human;
         private static readonly Random _r;
         private static List<Point>[] _payLines;
         private static readonly int SCREEN_HEIGHT = 3, SCREEN_WIDTH = 5, TOTAL_HEIGHT = 150;
-        private static readonly double FRUIT_MUL = 1.5, SUIT_MUL = 2.5, BELL_MUL = 4, SEVEN_MUL = 10;
+        private static readonly double FRUIT_MUL = 1.25, SUIT_MUL = 1.5, BELL_MUL = 2.5, SEVEN_MUL = 5;
         private SlotMachineIcon[,] _columns;
         private SlotMachineIcon[,] _screen;
+        private int _credits = 0;
+        private int Credits
+        {
+            get
+            {
+                return _credits;
+            }
+            set
+            {
+                _credits = value;
+                OnCreditsValueChanged?.Invoke(_credits);
+            }
+        }
 
+        #region static ctor
         static SlotMachineLogic()
         {
             _r = new Random();
@@ -36,6 +50,7 @@ namespace CasinoUI.Models.SlotMachine
                 }
             }
         }
+        #endregion
 
         public SlotMachineLogic(HumanPlayer human)
         {
@@ -56,18 +71,13 @@ namespace CasinoUI.Models.SlotMachine
             }
         }
 
-        public void PullLever()
+        #region Spin
+        public void PullLever(int bet)
         {
             Spin();
-            CalculateWinnings();
+            CalculateWinnings(bet);
         }
 
-        /// <summary>
-        /// For each column, generates a random number between 0 and the y-length of _columns.
-        /// The random number corresponds to the starting index in the current column.
-        /// Then, the sub-column from random number to random number + SCREEN_HEIGHT is assigned to the current column in the screen.
-        /// Finally, the delegate is invoked, allowing the UI to manipulate it.
-        /// </summary>
         private void Spin()
         {
             for (int i = 0; i < _columns.GetLength(0); i++)
@@ -82,18 +92,18 @@ namespace CasinoUI.Models.SlotMachine
             OnIconsUpdate?.Invoke(_screen);
         }
 
-        /// <summary>
-        /// Calculates the winnings for every payline, and invokes the delegate containing the total winnings.
-        /// </summary>
-        private void CalculateWinnings()
+        private void CalculateWinnings(int bet)
         {
-            int winnings = 0;
+            Credits -= bet;
+            double winnings = 0;
             foreach (var payline in _payLines)
             {
                 var paylineIcons = InitializePaylineIcons(payline);
                 winnings += CalculateWinnings(paylineIcons);
             }
-            OnPotEarned?.Invoke(winnings);
+
+            int creditsEarned = (int)Math.Round(winnings * bet);
+            Credits += creditsEarned;
         }
 
         private SlotMachineIcon[] InitializePaylineIcons(List<Point> payline)
@@ -114,7 +124,7 @@ namespace CasinoUI.Models.SlotMachine
         /// </summary>
         /// <param name="paylineIcons">The payline to have its winnings calculated</param>
         /// <returns>The winnings.</returns>
-        private int CalculateWinnings(SlotMachineIcon[] paylineIcons)
+        private double CalculateWinnings(SlotMachineIcon[] paylineIcons)
         {
             int nbFruits = paylineIcons.Count(i => i.IsFruit()),
                 nbSuits = paylineIcons.Count(i => i.IsSuit()),
@@ -127,10 +137,35 @@ namespace CasinoUI.Models.SlotMachine
                    CalculateWinnings(SEVEN_MUL, nbSeven);
         }
 
-        private int CalculateWinnings(double baseValue, int nb)
+        private double CalculateWinnings(double baseValue, int nb)
         {
             if (nb <= 2) return 0;
-            return (int)Math.Pow(baseValue, nb);
+            return Math.Pow(baseValue, nb);
+        }
+        #endregion
+
+        /// <summary>
+        /// Decreases the human player's money by the money arg and gives him credits equal to 4 times the money he spent.
+        /// </summary>
+        /// <param name="money">The amount of money the player spent</param>
+        /// <returns>The amount of credits generated</returns>
+        public int AddCredits(int money)
+        {
+            _human.Money -= money;
+            Credits += money * 4;
+            return money * 4;
+        }
+
+        /// <summary>
+        /// Sets the amount of credits to 0 and increases the human player's money by 4 times the amount of credits left.
+        /// </summary>
+        /// <returns>The money gained by cashing out.</returns>
+        public int CashOut()
+        {
+            int moneyFromCredits = Credits / 4;
+            _human.Money += moneyFromCredits;
+            Credits = 0;
+            return moneyFromCredits;
         }
     }
 }

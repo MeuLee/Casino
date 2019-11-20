@@ -17,6 +17,6 @@ namespace CasinoUI.Models.SlotMachine
         /// <returns>The amount, in dollar, returned to the player.</returns>
         int CashOut();
 
-        void Spin();
+        void PullLever(int bet);
     }
 }
