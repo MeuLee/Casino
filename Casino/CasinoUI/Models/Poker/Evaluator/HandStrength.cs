@@ -11,12 +11,12 @@ namespace CasinoUI.Models.Poker.Evaluator
     {
         public HandStrength(int tailleMain)
         {
-            MainJoueur = new Card[tailleMain];
+            HandPlayer = new Card[tailleMain];
             HighCard = null;
             Total = 0;
         }
 
-        public Card[] MainJoueur { get; set; }
+        public Card[] HandPlayer { get; set; }
         private int Total { get; set; }
         public Card HighCard { get; set; }
 
@@ -27,7 +27,7 @@ namespace CasinoUI.Models.Poker.Evaluator
 
         private int TrouverTotal()
         {
-            foreach (Card cardMain in MainJoueur)
+            foreach (Card cardMain in HandPlayer)
             {
                 Total += (int)cardMain.Value;
             }

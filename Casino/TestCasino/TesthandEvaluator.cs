@@ -34,8 +34,7 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.RoyalFlush, player);
-            Assert.AreEqual(60, evaluationCard.HandStrengths.Total);
-            Assert.AreEqual(14, evaluationCard.HandStrengths.HighCard);
+            Assert.AreEqual(60, evaluationCard.HandStrengths.CalculerTotal());
         }
 
         [TestMethod]
@@ -54,8 +53,24 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.RoyalFlush, player);
-            Assert.AreEqual(60, evaluationCard.HandStrengths.Total);
-            Assert.AreEqual(14, evaluationCard.HandStrengths.HighCard);
+            Assert.AreEqual(60, evaluationCard.HandStrengths.CalculerTotal());
+        }
+
+        [TestMethod]
+        public void TestRoyalFlushNotFlush()
+        {
+
+            jeuDeCarte[5] = new Card(Card.CardRank.Ace, Card.CardSuit.Spades);
+            jeuDeCarte[0] = new Card(Card.CardRank.King, Card.CardSuit.Spades);
+            jeuDeCarte[4] = new Card(Card.CardRank.Queen, Card.CardSuit.Spades);
+            jeuDeCarte[6] = new Card(Card.CardRank.Jack, Card.CardSuit.Diamonds);
+            jeuDeCarte[2] = new Card(Card.CardRank.Ten, Card.CardSuit.Spades);
+            jeuDeCarte[3] = new Card(Card.CardRank.Two, Card.CardSuit.Spades);
+            jeuDeCarte[1] = new Card(Card.CardRank.Five, Card.CardSuit.Diamonds);
+            evaluationCard = new HandEvaluator(jeuDeCarte);
+            Hand player = evaluationCard.EvaluateHand();
+            Assert.AreEqual(Hand.RoyalFlush, player);
+            Assert.AreEqual(60, evaluationCard.HandStrengths.CalculerTotal());
         }
 
         [TestMethod]
@@ -74,8 +89,8 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.StraightFlush, player);
-            Assert.AreEqual(55, evaluationCard.HandStrengths.Total);
-            Assert.AreEqual(13, evaluationCard.HandStrengths.HighCard);
+            Assert.AreEqual(55, evaluationCard.HandStrengths.CalculerTotal());
+            Assert.AreEqual(13, (int)evaluationCard.HandStrengths.HighCard.Value);
         }
 
         [TestMethod]
@@ -94,8 +109,8 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.StraightFlush, player);
-            Assert.AreEqual(40, evaluationCard.HandStrengths.Total);
-            Assert.AreEqual(10, evaluationCard.HandStrengths.HighCard);
+            Assert.AreEqual(40, evaluationCard.HandStrengths.CalculerTotal());
+            Assert.AreEqual(10, (int)evaluationCard.HandStrengths.HighCard.Value);
         }
 
         [TestMethod]
@@ -114,8 +129,8 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.StraightFlush, player);
-            Assert.AreEqual(55, evaluationCard.HandStrengths.Total);
-            Assert.AreEqual(13, evaluationCard.HandStrengths.HighCard);
+            Assert.AreEqual(55, evaluationCard.HandStrengths.CalculerTotal());
+            Assert.AreEqual(13, (int)evaluationCard.HandStrengths.HighCard.Value);
         }
 
         [TestMethod]
@@ -134,15 +149,7 @@ namespace TestCasino
             Hand player = evaluationCard.EvaluateHand();
 
             Assert.AreEqual(Hand.FourKind, player);
-            Assert.AreEqual(22, evaluationCard.HandStrengths.Total);
-        }
-
-        [TestMethod]
-        public void TestTwoPairs()
-        {
-            jeuDeCarte = InitializeCardArr(Card.CardSuit.Clubs, 9, 9, 8, 3, 8, 5, 4);
-            evaluationCard = new HandEvaluator(jeuDeCarte);
-            Assert.IsTrue(evaluationCard.HandHasPairs(2, 2));
+            //Assert.AreEqual(22, evaluationCard.HandStrengths.CalculerTotal());
         }
 
         [TestMethod]
@@ -150,8 +157,73 @@ namespace TestCasino
         {
             jeuDeCarte = InitializeCardArr(Card.CardSuit.Clubs, 14, 14, 13, 13, 13, 10, 9);
             evaluationCard = new HandEvaluator(jeuDeCarte);
-            Assert.IsTrue(evaluationCard.FullHouse());
+            Hand player = evaluationCard.EvaluateHand();
+            Assert.AreEqual(Hand.FullHouse, player);
         }
+
+        [TestMethod]
+        public void TestFlush()
+        {
+            jeuDeCarte = InitializeCardArr(Card.CardSuit.Clubs, 9, 9, 8, 3, 8, 5, 4);
+            evaluationCard = new HandEvaluator(jeuDeCarte);
+            Hand player = evaluationCard.EvaluateHand();
+            Assert.AreEqual(Hand.Flush, player);
+            Assert.AreEqual(39, evaluationCard.HandStrengths.CalculerTotal());
+            Assert.AreEqual(9, (int)evaluationCard.HandStrengths.HighCard.Value);
+        }
+
+        [TestMethod]
+        public void TestFlushAleatoire()
+        {
+            jeuDeCarte[0] = new Card(Card.CardRank.Ace, Card.CardSuit.Hearts);
+            jeuDeCarte[1] = new Card(Card.CardRank.Ten, Card.CardSuit.Hearts);
+            jeuDeCarte[2] = new Card(Card.CardRank.Five, Card.CardSuit.Hearts);
+            jeuDeCarte[3] = new Card(Card.CardRank.Two, Card.CardSuit.Hearts);
+            jeuDeCarte[4] = new Card(Card.CardRank.Jack, Card.CardSuit.Hearts);
+            jeuDeCarte[5] = new Card(Card.CardRank.Two, Card.CardSuit.Spades);
+            jeuDeCarte[6] = new Card(Card.CardRank.Five, Card.CardSuit.Diamonds);
+            evaluationCard = new HandEvaluator(jeuDeCarte);
+            Hand player = evaluationCard.EvaluateHand();
+            Assert.AreEqual(Hand.Flush, player);
+            Assert.AreEqual(42, evaluationCard.HandStrengths.CalculerTotal());
+            Assert.AreEqual(14, (int)evaluationCard.HandStrengths.HighCard.Value);
+
+
+        }
+
+        [TestMethod]
+        public void TestStraight()
+        {
+            jeuDeCarte[0] = new Card(Card.CardRank.Ace, Card.CardSuit.Hearts);
+            jeuDeCarte[1] = new Card(Card.CardRank.King, Card.CardSuit.Diamonds);
+            jeuDeCarte[2] = new Card(Card.CardRank.Jack, Card.CardSuit.Clubs);
+            jeuDeCarte[3] = new Card(Card.CardRank.Queen, Card.CardSuit.Spades);
+            jeuDeCarte[4] = new Card(Card.CardRank.Ten, Card.CardSuit.Hearts);
+            jeuDeCarte[5] = new Card(Card.CardRank.Two, Card.CardSuit.Spades);
+            jeuDeCarte[6] = new Card(Card.CardRank.Five, Card.CardSuit.Diamonds);
+            evaluationCard = new HandEvaluator(jeuDeCarte);
+            Hand player = evaluationCard.EvaluateHand();
+            Assert.AreEqual(Hand.Straight, player);
+            Assert.AreEqual(60, evaluationCard.HandStrengths.CalculerTotal());
+            Assert.AreEqual(14, (int)evaluationCard.HandStrengths.HighCard.Value);
+        }
+
+        [TestMethod]
+        public void TestTwoPairs()
+        {
+            jeuDeCarte[0] = new Card(Card.CardRank.Ace, Card.CardSuit.Clubs);
+            jeuDeCarte[1] = new Card(Card.CardRank.Ace, Card.CardSuit.Hearts);
+            jeuDeCarte[2] = new Card(Card.CardRank.Nine, Card.CardSuit.Diamonds);
+            jeuDeCarte[3] = new Card(Card.CardRank.Nine, Card.CardSuit.Hearts);
+            jeuDeCarte[4] = new Card(Card.CardRank.Ten, Card.CardSuit.Hearts);
+            jeuDeCarte[5] = new Card(Card.CardRank.Two, Card.CardSuit.Spades);
+            jeuDeCarte[6] = new Card(Card.CardRank.Five, Card.CardSuit.Diamonds);
+            evaluationCard = new HandEvaluator(jeuDeCarte);
+            Hand player = evaluationCard.EvaluateHand();
+            Assert.AreEqual(Hand.TwoPairs, player);
+        }
+
+        
 
         /// <summary>
         /// Creates a Card array with the specified suit and specified values.

@@ -125,7 +125,7 @@ namespace CasinoUI.Models.Poker
             {
                 if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
                 {
-                    AjouterCardHandStrength(cards[cards.Length - 5], cards[cards.Length - 4], cards[cards.Length - 3],
+                    AddCardHandStrength(cards[cards.Length - 5], cards[cards.Length - 4], cards[cards.Length - 3],
                         cards[cards.Length - 2], cards[cards.Length - 1]);
                     return true;
                 }
@@ -139,9 +139,12 @@ namespace CasinoUI.Models.Poker
                 cards[1].Value + 1 == cards[2].Value &&
                 cards[2].Value + 1 == cards[3].Value &&
                     cards[3].Value + 1 == cards[4].Value)
-            {
-                AjouterCardHandStrength(cards[0], cards[1], cards[2], cards[3], cards[4]);
-                return true;
+            {                
+                if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
+                {
+                    AddCardHandStrength(cards[0], cards[1], cards[2], cards[3], cards[4]);
+                    return true;
+                }
             }
             else if
             (cards[1].Value + 1 == cards[2].Value &&
@@ -149,20 +152,24 @@ namespace CasinoUI.Models.Poker
             cards[3].Value + 1 == cards[4].Value &&
             cards[4].Value + 1 == cards[5].Value)
             {
-                AjouterCardHandStrength(cards[1], cards[2], cards[3], cards[4], cards[5]);
-                return true;
+                if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
+                {
+                    AddCardHandStrength(cards[1], cards[2], cards[3], cards[4], cards[5]);
+                    return true;
+                }
             }
             else if (cards[2].Value + 1 == cards[3].Value &&
                 cards[3].Value + 1 == cards[4].Value &&
                 cards[4].Value + 1 == cards[5].Value &&
                 cards[5].Value + 1 == cards[6].Value)
             {
-                AjouterCardHandStrength(cards[2], cards[3], cards[4], cards[5], cards[6]);
-                return true;
+                if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
+                {
+                    AddCardHandStrength(cards[2], cards[3], cards[4], cards[5], cards[6]);
+                    return true;
+                }
             }
-
             return false;
-            //return Flush() && Straight();
         }
 
         private bool FourOfKind()
@@ -170,19 +177,19 @@ namespace CasinoUI.Models.Poker
             // premiere 4 cards, ajouter la valeur des 4 cards et la derniere est la plus haute
             if (cards[0].Value == cards[1].Value && cards[0].Value == cards[2].Value && cards[0].Value == cards[3].Value)
             {
-                AjouterCardHandStrength(cards[0], cards[0], cards[0], cards[0], cards[0]);
+                AddCardHandStrength(cards[0], cards[0], cards[0], cards[0], cards[0]);
                 return true;
             }
             else if (cards[3].Value == cards[4].Value && cards[3].Value == cards[5].Value && cards[3].Value == cards[6].Value)
             {
-                AjouterCardHandStrength(cards[3], cards[3], cards[3], cards[3], cards[3]);
+                AddCardHandStrength(cards[3], cards[3], cards[3], cards[3], cards[3]);
                 return true;
             }
 
             return false;
         }
 
-        public bool FullHouse()
+        private bool FullHouse()
         {
             return HandHasPairs(1, 2) && HandHasPairs(1, 3);
         }
@@ -191,25 +198,25 @@ namespace CasinoUI.Models.Poker
         {
             foreach (var suiteCards in cards)
             {
-                if (heartsSum == 5)
+                if (heartsSum >= 5)
                 {
                     CheckCardsFlush(Card.CardSuit.Hearts);
                     return true;
 
                 }
-                else if (diamondSum == 5)
+                else if (diamondSum >= 5)
                 {
                     CheckCardsFlush(Card.CardSuit.Diamonds);
                     return true;
 
                 }
-                else if (clubSum == 5)
+                else if (clubSum >= 5)
                 {
                     CheckCardsFlush(Card.CardSuit.Clubs);
                     return true;
 
                 }
-                else if (spadesSum == 5)
+                else if (spadesSum >= 5)
                 {
                     CheckCardsFlush(Card.CardSuit.Spades);
                     return true;
@@ -225,7 +232,7 @@ namespace CasinoUI.Models.Poker
                 cards[2].Value + 1 == cards[3].Value &&
                 cards[3].Value + 1 == cards[4].Value)
             {
-                AjouterCardHandStrength(cards[0], cards[1], cards[2], cards[3], cards[4]);
+                AddCardHandStrength(cards[0], cards[1], cards[2], cards[3], cards[4]);
                 return true;
 
             }
@@ -235,7 +242,7 @@ namespace CasinoUI.Models.Poker
             cards[3].Value + 1 == cards[4].Value &&
             cards[4].Value + 1 == cards[5].Value)
             {
-                AjouterCardHandStrength(cards[1], cards[2], cards[3], cards[4], cards[5]);
+                AddCardHandStrength(cards[1], cards[2], cards[3], cards[4], cards[5]);
                 return true;
             }
             else if (cards[2].Value + 1 == cards[3].Value &&
@@ -243,7 +250,7 @@ namespace CasinoUI.Models.Poker
                 cards[4].Value + 1 == cards[5].Value &&
                 cards[5].Value + 1 == cards[6].Value)
             {
-                AjouterCardHandStrength(cards[2], cards[3], cards[4], cards[5], cards[6]);
+                AddCardHandStrength(cards[2], cards[3], cards[4], cards[5], cards[6]);
                 return true;
             }
 
@@ -251,7 +258,7 @@ namespace CasinoUI.Models.Poker
 
         }
 
-        public bool HandHasPairs(int numPairs, int nbSameValue)
+        private bool HandHasPairs(int numPairs, int nbSameValue)
         {
             Dictionary<int, int> occurences = new Dictionary<int, int>();
             foreach (var card in cards)
@@ -268,7 +275,7 @@ namespace CasinoUI.Models.Poker
             if (occurences.Values.Count(v => v >= nbSameValue) >= numPairs)
             {
                 //handStrength.Total += occurences.Last(v => v.Value >= numPairs).Key * nbSameValue;
-                //AjouterCardHandStrength(cards[3], cards[3], cards[3], cards[3], cards[cards.Length - 1]);
+                //AddCardHandStrength(cards[3], cards[3], cards[3], cards[3], cards[cards.Length - 1]);
                 return true;
             }
             else
@@ -285,41 +292,46 @@ namespace CasinoUI.Models.Poker
         private void CheckCardsFlush(CardSuit suit)
         {
             Card[] listeCarteSuite = new Card[5];
-            int index = 0;
-            foreach(Card carteSuit in cards)
+            int index = listeCarteSuite.Length - 1;
+            for (int i = cards.Length - 1; i >= 0; i--)
             {
-                if(carteSuit.Suit == suit)
+                if (cards[i].Suit == suit)
                 {
-                    listeCarteSuite[index]  = carteSuit;
+                    if (index >= 0)
+                    {
+                        listeCarteSuite[index] = cards[i];
+                        index--;
+                    }
+
                 }
-                index++;
             }
-            AjouterCardHandStrength(listeCarteSuite[0], listeCarteSuite[1], listeCarteSuite[2],
-                listeCarteSuite[3], listeCarteSuite[4]);
+            AddCardHandStrength(listeCarteSuite[listeCarteSuite.Length - 5], listeCarteSuite[listeCarteSuite.Length - 4],
+                listeCarteSuite[listeCarteSuite.Length - 3], listeCarteSuite[listeCarteSuite.Length - 2],
+                listeCarteSuite[listeCarteSuite.Length - 1]);
         }
-        
+
         private bool isRoyal()
         {
-            if (cards[6].Value == Card.CardRank.Ace &&
-                cards[5].Value == Card.CardRank.King &&
-                cards[4].Value == Card.CardRank.Queen &&
-                cards[3].Value == Card.CardRank.Jack &&
-                cards[2].Value == Card.CardRank.Ten)
+            if (cards[cards.Length - 1].Value == Card.CardRank.Ace &&
+                cards[cards.Length - 2].Value == Card.CardRank.King &&
+                cards[cards.Length - 3].Value == Card.CardRank.Queen &&
+                cards[cards.Length - 4].Value == Card.CardRank.Jack &&
+                cards[cards.Length - 5].Value == Card.CardRank.Ten)
             {
                 return true;
             }
             return false;
         }
 
-        private void AjouterCardHandStrength(Card premiereCarte, Card deuxeiemeCarte, Card troisiemeCarte,
-            Card quatriemeCarte, Card cinquiemeCarte)
+        private void AddCardHandStrength(Card firstCard, Card secondCard, Card thirdCard,
+            Card fourthCard, Card fifthCard)
         {
-            handStrength.MainJoueur[0] = premiereCarte;
-            handStrength.MainJoueur[1] = deuxeiemeCarte;
-            handStrength.MainJoueur[2] = troisiemeCarte;
-            handStrength.MainJoueur[3] = quatriemeCarte;
-            handStrength.MainJoueur[4] = cinquiemeCarte;
-            handStrength.HighCard = cinquiemeCarte;
+            handStrength.HandPlayer[0] = firstCard;
+            handStrength.HandPlayer[1] = secondCard;
+            handStrength.HandPlayer[2] = thirdCard;
+            handStrength.HandPlayer[3] = fourthCard;
+            handStrength.HandPlayer[4] = fifthCard;
+            handStrength.HighCard = fifthCard;
         }
     }
 }
