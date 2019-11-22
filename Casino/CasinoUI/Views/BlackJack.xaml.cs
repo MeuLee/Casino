@@ -44,9 +44,6 @@ namespace CasinoUI.Views
             }
         }
 
-        public void Stand()
-        {
 
-        }
     }
 }

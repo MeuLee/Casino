@@ -42,6 +42,7 @@ namespace CasinoUI.Controllers
             _view.BtnInsurance.Click += Insurance_Click;
             _view.BtnDoubleDown.Click += DoubleDown_Click;
             _view.BtnStand.Click += Stand_Click;
+            _view.BtnBet.Click += Bet_Click;
         }
 
         private void Btn_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -88,6 +89,11 @@ namespace CasinoUI.Controllers
         {
             _model.Stand();
             _model.AIPlays();
+        }
+
+        private void Bet_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
         }
 
         private void SetImages()
