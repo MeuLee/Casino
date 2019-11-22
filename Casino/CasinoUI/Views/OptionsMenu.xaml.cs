@@ -5,9 +5,9 @@ namespace CasinoUI.Views
     /// <summary>
     /// Logique d'interaction pour OptionMenu.xaml
     /// </summary>
-    public partial class OptionMenu : Window
+    public partial class OptionsMenu : Window
     {
-        public OptionMenu()
+        public OptionsMenu()
         {
             InitializeComponent();
         }

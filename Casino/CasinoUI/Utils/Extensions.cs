@@ -10,7 +10,7 @@ namespace CasinoUI.Utils
 {
     public static class Extensions
     {
-        public static List<T> GetValues<T>()
+        public static List<T> GetValues<T>() where T : Enum
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToList();
         }
@@ -46,6 +46,12 @@ namespace CasinoUI.Utils
         public static bool ToBoolean(this string str)
         {
             return bool.Parse(str);
+        }
+
+        public static Bitmap Rotate90(this Bitmap bmp)
+        {
+            bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            return bmp;
         }
     }
 }

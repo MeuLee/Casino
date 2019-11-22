@@ -75,11 +75,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\ApplicationSettings.cs" />
+    <Compile Include="Controllers\CasinoGameController.cs" />
+    <Compile Include="Controllers\OptionsMenuController.cs" />
+    <Compile Include="Models\PlayerModel\PlayerSkin\Skin.cs" />
+    <Compile Include="Models\PlayerModel\PlayerSkin\SkinManager.cs" />
+    <Compile Include="Models\PlayerModel\PlayerSkin\Skins.cs" />
+    <Compile Include="Models\PlayerModel\PlayerSkin\SkinsGenerator.cs" />
+    <Compile Include="Models\Poker\Evaluator\Hand.cs" />
+    <Compile Include="Models\Poker\Evaluator\HandEvaluator.cs" />
+    <Compile Include="Models\Poker\Evaluator\HandStrength.cs" />
+    <Compile Include="Models\Profiles\BlackjackProfile.cs" />
+    <Compile Include="Models\Settings\ApplicationSettings.cs" />
+    <Compile Include="Controllers\BlackjackController.cs" />
     <Compile Include="Models\Blackjack\BlackjackActionCode.cs" />
     <Compile Include="Models\Blackjack\BlackjackLogic.cs" />
     <Compile Include="Models\Blackjack\IBlackjackAction.cs" />
+    <Compile Include="Utils\ColorConverter.cs" />
     <Compile Include="Models\IGameType.cs" />
+    <Compile Include="Models\SoundManager.cs" />
+    <Compile Include="Models\WindowModels\CasinoGameModel.cs" />
+    <Compile Include="Models\WindowModels\OptionsMenuModel.cs" />
     <Compile Include="Models\PlayerModel\BlackjackAI.cs" />
     <Compile Include="Models\Cards\Card.cs" />
     <Compile Include="Models\Cards\CardStack.cs" />
@@ -129,6 +144,7 @@
     <Compile Include="Views\Map\Tiles\RedFloorTile.cs" />
     <Compile Include="Views\Map\Tiles\SlotMachineTile.cs" />
     <Compile Include="Views\Map\Tiles\TableTile.cs" />
+    <Compile Include="Views\Map\Tiles\Tiles.cs" />
     <Compile Include="Views\OptionsMenu.xaml.cs">
       <DependentUpon>OptionsMenu.xaml</DependentUpon>
     </Compile>
@@ -462,5 +478,21 @@
     <Resource Include="Resources\DEALER.jpg" />
     <Resource Include="Resources\SMALL_BLIND.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\song2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\song1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\personnages.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Y /I /E "$(ProjectDir)Resources" "Resources"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>

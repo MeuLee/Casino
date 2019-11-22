@@ -1,5 +1,5 @@
-﻿using CasinoUI.Models;
-using CasinoUI.Models.PlayerModel;
+﻿using CasinoUI.Models.PlayerModel;
+using CasinoUI.Models.Settings;
 using CasinoUI.Views.Map.Tiles;
 using System;
 using System.Windows;
@@ -7,17 +7,16 @@ using System.Windows.Media;
 
 namespace CasinoUI.Views.Map
 {
-    public class MapRenderer
+    public static class MapRenderer
     {
 
         public static int TilesAroundPlayerX { get; set; } = 5;
         public static int TilesAroundPlayerY { get; set; } = 3;
 
         private static int _cameraCenterX, _cameraCenterY;
-        private static HumanPlayer _player = ApplicationSettings.HumanPlayer;
-        private static MapTile[,] _map = ApplicationSettings.Map;
-
-
+        private static readonly HumanPlayer _player = ApplicationSettings.HumanPlayer;
+        private static readonly MapTile[,] _map = ApplicationSettings.Map;
+        
         #region RenderMap
         public static void RenderMap(DrawingContext dc, float canvasWidth, float canvasHeight)
         {
@@ -41,7 +40,6 @@ namespace CasinoUI.Views.Map
         /// </summary>
         /// <param name="playerCoord">Player's X or Y</param>
         /// <param name="tilesAroundPlayer">Tiles around player, x or y</param>
-        /// <param name="dimension">Should be 0 or 1 as the map is 2d. 0 for horizontal (x), 1 for vertical (y)</param>
         /// <returns>
         /// Most of the time, playerCoord will be returned.
         /// However, if playerCoord is closer to the edge than tilesAroundPlayer, 
@@ -102,15 +100,14 @@ namespace CasinoUI.Views.Map
         {
             int uiPlayerX = PlayerCoordOnUI(_cameraCenterX, _player.X, _map.GetLength(0), TilesAroundPlayerX),
                 uiPlayerY = PlayerCoordOnUI(_cameraCenterY, _player.Y, _map.GetLength(1), TilesAroundPlayerY);
-            dc.DrawEllipse(Brushes.Green,
-                           new Pen(Brushes.Green, 1.0),
-                           new Point(uiPlayerX * tileWidth + tileWidth / 2,
-                                     uiPlayerY * tileWidth + tileWidth / 2),
-                           tileWidth / 3,
-                           tileWidth / 3);
+            dc.DrawImage(ApplicationSettings.HumanPlayer.CurrentImage, 
+                         new Rect(uiPlayerX * tileWidth,
+                                  uiPlayerY * tileWidth, 
+                                  tileWidth, 
+                                  tileWidth));
         }
 
-        public static int PlayerCoordOnUI(
+        private static int PlayerCoordOnUI(
             int cameraCenterCoord, 
             int playerCoord, 
             int mapLength, 
@@ -143,7 +140,8 @@ namespace CasinoUI.Views.Map
 
         private static float SetMiniMapTileSize(float canvasWidth, float canvasHeight)
         {
-            return Math.Min(canvasWidth / _map.GetLength(0), canvasHeight / _map.GetLength(1));
+            return Math.Min(canvasWidth / _map.GetLength(0),
+                            canvasHeight / _map.GetLength(1));
         }
 
         private static void DrawMiniMapTiles(DrawingContext dc, float tileWidth)

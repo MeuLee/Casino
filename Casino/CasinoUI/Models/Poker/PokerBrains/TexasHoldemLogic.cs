@@ -1,6 +1,5 @@
 ﻿using CasinoUI.Models.Cards;
 using CasinoUI.Models.PlayerModel;
-using CasinoUI.Models.Profiles;
 using System.Collections.Generic;
 
 namespace CasinoUI.Models.Poker.PokerBrains
@@ -19,15 +18,15 @@ namespace CasinoUI.Models.Poker.PokerBrains
                 player.GetHand().Add(CardStack.DrawCard());
             }
 
-            if (PlayerRoles[3] > 0) // pas mal sur que ca va planter si playerroles.length <= 3
-                                    // en fait ca sert a quoi? le foreach en haut devrait pogner toute les playerroles
-            {
-                foreach (var player in ListPlayers)
-                {
-                    player.GetHand().Add(CardStack.DrawCard());
-                    player.GetHand().Add(CardStack.DrawCard());
-                }
-            }
+            //if (PlayerRoles[3] > 0) // pas mal sur que ca va planter si playerroles.length <= 3
+            //                        // en fait ca sert a quoi? le foreach en haut devrait pogner toute les playerroles
+            //{
+            //    foreach (var player in ListPlayers)
+            //    {
+            //        player.GetHand().Add(CardStack.DrawCard());
+            //        player.GetHand().Add(CardStack.DrawCard());
+            //    }
+            //}
 
         }
 
