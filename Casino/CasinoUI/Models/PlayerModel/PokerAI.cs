@@ -40,7 +40,7 @@ namespace CasinoUI.Models.Poker
 
         public PokerActionCode MakeDecision(PokerActionCode[] pokerActionCode)
         {
-            //GameState
+            //GameState?
             List<Card> hand = GetHand();
             int TotalProb = AllProbability();
             PokerActionCode NextMove;
