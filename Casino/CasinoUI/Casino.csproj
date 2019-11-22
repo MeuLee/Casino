@@ -84,6 +84,7 @@
     <Compile Include="Models\Poker\Evaluator\Hand.cs" />
     <Compile Include="Models\Poker\Evaluator\HandEvaluator.cs" />
     <Compile Include="Models\Poker\Evaluator\HandStrength.cs" />
+    <Compile Include="Models\Poker\GameState.cs" />
     <Compile Include="Models\Profiles\BlackjackProfile.cs" />
     <Compile Include="Models\Settings\ApplicationSettings.cs" />
     <Compile Include="Controllers\BlackjackController.cs" />
