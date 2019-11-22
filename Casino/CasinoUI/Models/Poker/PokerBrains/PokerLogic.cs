@@ -8,22 +8,35 @@ namespace CasinoUI.Models.Poker.PokerBrains
         public List<Player> ListPlayers { get; set; }  // index 0 is always the human player
         public GameCardStack CardStack { get; set; }
 
+        public int currentPlayerTurnIdx { get; set; }
+
         public int[] PlayerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers
                                                     //       idx[1] = BigBlind's index in ListPlayers
-                                                    //       idx[2] = First player to play
+                                                    //       idx[2] = First player to play index
         public int Pot { get; set; }
         public int CurrentRaise { get; set; }
+        public bool someoneRaised { get; set; }
 
         public PokerLogic(HumanPlayer human) {
             InitListPlayers(human);
             SetInitialRoles();
+            currentPlayerTurnIdx = PlayerRoles[2];
             CardStack = new GameCardStack();
             Pot = 0;
             CurrentRaise = 2;
+            someoneRaised = false;
         }
 
-        private void InitListPlayers(HumanPlayer human)
-        {
+        public void PlayAGame() {
+            if (currentPlayerTurnIdx != 0) {
+                while ()
+            }
+
+
+            ProceedNextGame();
+        }
+
+        private void InitListPlayers(HumanPlayer human) {
             ListPlayers = new List<Player> { human };
 
             for (int i = 0; i < 4; i++) {
@@ -41,7 +54,7 @@ namespace CasinoUI.Models.Poker.PokerBrains
             // draw high card for dealer
         }
 
-        private void ProceedNextTurn() {
+        private void ProceedNextGame() {
             RotateRoles();
             ClearRoles();
             Pot = 0;
@@ -67,8 +80,10 @@ namespace CasinoUI.Models.Poker.PokerBrains
             }
         }
 
-        private void PlayerPlaysTurn(PokerActionCode pokerActionCode, int playerIdx) {
-            IPokerAction player = ListPlayers[playerIdx].GetGameType<IPokerAction>();
+        public void PlayerPlaysTurn(PokerActionCode pokerActionCode, int money) {
+            IPokerAction player = ListPlayers[currentPlayerTurnIdx].GetGameType<IPokerAction>();
+            ListPlayers[currentPlayerTurnIdx].p
+            
             switch (pokerActionCode) {
                 case PokerActionCode.CALL:
                     Pot += player.PokerCall(CurrentRaise);
@@ -80,13 +95,20 @@ namespace CasinoUI.Models.Poker.PokerBrains
                     player.PokerFold();
                     break;
                 case PokerActionCode.RAISE:
-                    Pot += player.PokerRaise(22); // should take in amount from UI
+                    Pot += player.PokerRaise(money); // should take in amount from UI
                     break;
                 case PokerActionCode.ALLIN:
                     player.PokerAllIn();
                     break;
             }
+        }
 
+        public void incCurrentPlayerTurn() {
+            currentPlayerTurnIdx++;
+
+            if (currentPlayerTurnIdx == ListPlayers.Count) {
+                currentPlayerTurnIdx = 0;
+            }
         }
 
     }

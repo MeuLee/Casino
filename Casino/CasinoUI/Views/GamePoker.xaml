@@ -31,7 +31,7 @@
                 Height="150"
                 Fill="Gray"
                 Canvas.Left="705"
-                Canvas.Top="495" />            
+                Canvas.Top="495" />
             <Image                
                 Width="485"
                 Height="145"
@@ -227,7 +227,47 @@
             <Image x:Name="CarteJeu4" Canvas.Left="665" Canvas.Top="280" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Image x:Name="CarteJeu5" Canvas.Left="765" Canvas.Top="280" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="76" RenderTransformOrigin="0.5,0.5"/>
             <Label Content="Argent :" Canvas.Left="710" Canvas.Top="500" FontSize="24" Foreground="White" Height="49" Width="110"/>
-            <Label Content="000000$" Canvas.Left="880" Canvas.Top="550" FontSize="34"  Foreground="White" Height="75" Width="150"/>
+            <Label x:Name="ArgentPlayer" Content="000000$" Canvas.Left="880" Canvas.Top="550" FontSize="34"  Foreground="White" Height="75" Width="150"/>
+            <Label x:Name="ArgentJoueur1" Content="000000$" Canvas.Top="276" FontSize="34"  Foreground="White" Height="51" Width="150" RenderTransformOrigin="0.5,0.5" Canvas.Left="51">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-450.518"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label x:Name="ArgentJoueur2" Content="000000$" Canvas.Top="79" FontSize="34"  Foreground="White" Height="51" Width="150" RenderTransformOrigin="0.5,0.5" Canvas.Left="308">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-360.891"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label x:Name="ArgentJoueur3" Content="000000$" Canvas.Top="76" FontSize="34"  Foreground="White" Height="51" Width="150" RenderTransformOrigin="0.5,0.5" Canvas.Left="750">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-360.891"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label x:Name="ArgentJoueur4" Content="000000$" Canvas.Top="276" FontSize="34"  Foreground="White" Height="51" Width="150" RenderTransformOrigin="0.5,0.5" Canvas.Left="976">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-269.289"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
         </Canvas>
     </Grid>
 </Window>

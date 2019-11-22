@@ -9,6 +9,11 @@ namespace CasinoUI.Models.Profiles
         {
             throw new NotImplementedException();
         }
+        public bool hasPlayed { get; set; }
+
+        public PokerProfile() {
+            hasPlayed = false;
+        }
 
         public int PokerCall(int currentRaise)
         {
