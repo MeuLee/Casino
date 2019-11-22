@@ -18,6 +18,8 @@ namespace CasinoUI.Models.Poker
         private bool IsStraight = false;
         private bool IsFlush = false;
 
+        private List<double> WinProb;
+
         public PokerAI()
         {
             Money = 1000;
@@ -27,6 +29,7 @@ namespace CasinoUI.Models.Poker
             this.ListValue = new List<Card>();
             this.ComboValuePoss = new List<Tuple<int, int>>();
             this.FlushCombo = Card.CardSuit.Diamonds;
+            this.WinProb = new List<double>();
         }
 
         public List<Card> CardsOnBoard
@@ -35,12 +38,80 @@ namespace CasinoUI.Models.Poker
             set { this.LisCardOnBoard = value; }
         }
 
-        public int MakeDecision()
+        public PokerActionCode MakeDecision(PokerActionCode[] pokerActionCode)
         {
+            //GameState
             List<Card> hand = GetHand();
+            int TotalProb = AllProbability();
+            PokerActionCode NextMove;
 
+            ChanceWinSamevalue(TotalProb, hand);
+            ChanceWinStraight(TotalProb, hand);
+            ChanceWinFlush(TotalProb, hand);
 
-            return (int) PokerActionCode.FOLD;
+            //Somme Porbabilite
+
+            return PokerActionCode.FOLD;
+        }
+
+        private void ChanceWinFlush(int TotalProb, List<Card> hand)
+        {
+            int chance = 0;
+            if (IsFlush)
+            {
+                foreach (Card card in hand)
+                {
+                    chance = FlushCombo == card.Suit ? +1 : chance;
+                }
+
+                chance = chance == 1 ? 0 : chance;
+
+                WinProb.Add(chance/ TotalProb );
+            }
+        }
+
+        private void ChanceWinStraight(int TotalProb, List<Card> hand)
+        {
+            int chance = 0;
+            if (IsStraight)
+            {
+                foreach (Card card in hand)
+                {
+                    chance = ListStraightCombo.Contains((int)card.Value) ? +1 : chance;
+                }
+
+                WinProb.Add(chance /TotalProb);
+            }
+        }
+
+        private void ChanceWinSamevalue(int TotalProb, List<Card> hand)
+        {
+           int chance = 0;
+
+           foreach (Tuple<int, int> combo in ComboValuePoss){
+
+                foreach (Card card in hand)
+                {
+                    chance = combo.Item1 == (int)card.Value 
+                        || combo.Item2 == (int)card.Value ?+ 1: chance;
+
+                }
+
+                WinProb.Add(chance/TotalProb);
+            }
+        }
+
+        private int AllProbability()
+        {
+
+            int debut = ListValue.Count + 1;
+
+            int Total = debut;
+
+            while(debut < 3) Total += (debut--);
+
+            return 2*Total + ListStraightCombo.Count + 2;
+
         }
 
         public void CreateAllPoss(List<Card> LisCardtOnBoard)
