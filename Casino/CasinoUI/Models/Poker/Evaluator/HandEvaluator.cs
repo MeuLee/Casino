@@ -103,16 +103,16 @@ namespace CasinoUI.Models.Poker
             {
                 switch (element.Suit)
                 {
-                    case Card.CardSuit.Hearts:
+                    case CardSuit.Hearts:
                         heartsSum++;
                         break;
-                    case Card.CardSuit.Diamonds:
+                    case CardSuit.Diamonds:
                         diamondSum++;
                         break;
-                    case Card.CardSuit.Clubs:
+                    case CardSuit.Clubs:
                         clubSum++;
                         break;
-                    case Card.CardSuit.Spades:
+                    case CardSuit.Spades:
                         spadesSum++;
                         break;
                 }
@@ -200,25 +200,25 @@ namespace CasinoUI.Models.Poker
             {
                 if (heartsSum >= 5)
                 {
-                    CheckCardsFlush(Card.CardSuit.Hearts);
+                    CheckCardsFlush(CardSuit.Hearts);
                     return true;
 
                 }
                 else if (diamondSum >= 5)
                 {
-                    CheckCardsFlush(Card.CardSuit.Diamonds);
+                    CheckCardsFlush(CardSuit.Diamonds);
                     return true;
 
                 }
                 else if (clubSum >= 5)
                 {
-                    CheckCardsFlush(Card.CardSuit.Clubs);
+                    CheckCardsFlush(CardSuit.Clubs);
                     return true;
 
                 }
                 else if (spadesSum >= 5)
                 {
-                    CheckCardsFlush(Card.CardSuit.Spades);
+                    CheckCardsFlush(CardSuit.Spades);
                     return true;
                 }
             }
@@ -312,11 +312,11 @@ namespace CasinoUI.Models.Poker
 
         private bool isRoyal()
         {
-            if (cards[cards.Length - 1].Value == Card.CardRank.Ace &&
-                cards[cards.Length - 2].Value == Card.CardRank.King &&
-                cards[cards.Length - 3].Value == Card.CardRank.Queen &&
-                cards[cards.Length - 4].Value == Card.CardRank.Jack &&
-                cards[cards.Length - 5].Value == Card.CardRank.Ten)
+            if (cards[cards.Length - 1].Value == CardRank.Ace  &&
+                cards[cards.Length - 2].Value == CardRank.King &&
+                cards[cards.Length - 3].Value == CardRank.Queen &&
+                cards[cards.Length - 4].Value == CardRank.Jack &&
+                cards[cards.Length - 5].Value == CardRank.Ten)
             {
                 return true;
             }
