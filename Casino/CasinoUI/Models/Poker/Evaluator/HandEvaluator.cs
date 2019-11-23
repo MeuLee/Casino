@@ -87,11 +87,19 @@ namespace CasinoUI.Models.Poker
                     listIndex++;
                     straights.Add(new List<Card>());
                 }
-                straights[listIndex].Add(kvp.Value[0]);
+                straights[listIndex].Add(GetCardMatchSuit(kvp.Value));
             }
 
             _straightList = straights.OrderByDescending(l => l.Count)
                                      .FirstOrDefault(l => l.Count >= 5);
+        }
+
+        private Card GetCardMatchSuit(List<Card> cards)
+        {
+            if (_flushList == null) return cards[0];
+            CardSuit suit = _flushList[0].Suit;
+            Card temp = cards.FirstOrDefault(c => c.Suit == suit);
+            return temp ?? cards[0];
         }
 
         public HandStrength HandStrengths
