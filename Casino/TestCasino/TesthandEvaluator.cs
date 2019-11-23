@@ -3,6 +3,8 @@ using CasinoUI.Models.Cards;
 using CasinoUI.Models.Poker;
 using CasinoUI.Models.Poker.Evaluator;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TestCasino
 {
@@ -11,6 +13,7 @@ namespace TestCasino
     {
         private Card[] jeuDeCarte;
         private HandEvaluator evaluationCard;
+        private PrivateObject _evaluator;
 
         [TestInitialize]
         public void TestInitialize()
@@ -18,6 +21,7 @@ namespace TestCasino
             jeuDeCarte = new Card[7];
         }
 
+        #region commented code
         //[TestMethod]
         //public void TestRoyalFlush()
         //{
@@ -222,23 +226,32 @@ namespace TestCasino
         //    Hand player = evaluationCard.EvaluateHand();
         //    Assert.AreEqual(Hand.TwoPairs, player);
         //}
+        #endregion
 
         [TestMethod]
-        public void MyTestMethod()
+        public void TestStraightList()
         {
-            var eval = new HandEvaluator(InitializeCardArr(Card.CardSuit.Clubs, 3, 4, 5, 6, 7, 9, 10));
-            Assert.AreEqual(5, eval.InitStraightList());
+            TestStraightList(InitCardArr(Card.CardSuit.Clubs, 3, 4, 5, 6, 7, 9, 10),
+                             new int[] { 7, 6, 5, 4, 3 });
 
-            eval = new HandEvaluator(InitializeCardArr(Card.CardSuit.Clubs, 3, 3, 4, 5, 6, 7, 9, 10, 11, 12));
-            Assert.AreEqual(5, eval.InitStraightList());
+            TestStraightList(InitCardArr(Card.CardSuit.Clubs, 3, 4, 6, 7, 9, 10),
+                             null);
+            
+            TestStraightList(InitCardArr(Card.CardSuit.Clubs, 3, 3, 4, 5, 6, 7, 9, 10, 11, 12),
+                             new int[] { 7, 6, 5, 4, 3 });
 
-            eval = new HandEvaluator(InitializeCardArr(Card.CardSuit.Clubs, 3, 4, 6, 7, 9, 10));
-            Assert.AreEqual(2, eval.InitStraightList());
-
-            eval = new HandEvaluator(InitializeCardArr(Card.CardSuit.Clubs, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14));
-            Assert.AreEqual(6, eval.InitStraightList());
+            TestStraightList(InitCardArr(Card.CardSuit.Clubs, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14),
+                             new int[] { 14, 13, 12, 11, 10, 9 });
         }
-        
+
+        private void TestStraightList(Card[] cardArr, int[] expectedVals)
+        {
+            var privateObj = new PrivateObject(new HandEvaluator(cardArr));
+            int[] actualVals = (privateObj.GetFieldOrProperty("_straightList") as List<Card>)?.Select(c => (int)c.Value)
+                                                                                              .ToArray();
+            CollectionAssert.AreEqual(expectedVals, actualVals);
+        }
+
 
         /// <summary>
         /// Creates a Card array with the specified suit and specified values.
@@ -246,7 +259,7 @@ namespace TestCasino
         /// <param name="suit">Suit to be assigned to all cards</param>
         /// <param name="values">Array of values to be assigned to all cards.</param>
         /// <returns>The newly created Card array.</returns>
-        private Card[] InitializeCardArr(Card.CardSuit suit, params int[] values)
+        private Card[] InitCardArr(Card.CardSuit suit, params int[] values)
         {
             var arr = new Card[values.Length];
             for (int i = 0; i < values.Length; i++)

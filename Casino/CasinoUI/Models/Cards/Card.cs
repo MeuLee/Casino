@@ -46,9 +46,11 @@ namespace CasinoUI.Models.Cards
             Suit = suit;
         }
 
-        public Card()
-        {
+        public Card() { }
 
+        public override string ToString()
+        {
+            return $"{(int)Value}{Suit.ToString()}";
         }
     }
 }

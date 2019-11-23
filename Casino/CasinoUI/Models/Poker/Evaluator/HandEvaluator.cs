@@ -28,7 +28,7 @@ namespace CasinoUI.Models.Poker
             InitNbOccurencesSuit();
             InitFlushList();
             InitNbOccurencesValue();
-            //InitStraightList();
+            InitStraightList();
         }
 
         private void InitNbOccurencesSuit()
@@ -68,10 +68,14 @@ namespace CasinoUI.Models.Poker
             }
         }
 
-        public int InitStraightList()
+        private void InitStraightList()
         {
             var tempDic = _nbOccurencesValue.ToList();
-            List<Card> straightTemp = new List<Card>() { tempDic[0].Value[0] };
+            var straights = new List<List<Card>>()
+            {
+                new List<Card>() { tempDic[0].Value[0] }
+            };
+            int listIndex = 0;
 
             for (int i = 1; i < tempDic.Count; i++)
             {
@@ -80,16 +84,14 @@ namespace CasinoUI.Models.Poker
                     current = (int)kvp.Key;
                 if (previous != current + 1)
                 {
-                    straightTemp.Clear();
+                    listIndex++;
+                    straights.Add(new List<Card>());
                 }
-                straightTemp.Add(kvp.Value[0]);
+                straights[listIndex].Add(kvp.Value[0]);
             }
 
-            if (straightTemp.Count >= 5)
-            {
-                _straightList = straightTemp;
-            }
-            return straightTemp.Count;
+            _straightList = straights.OrderByDescending(l => l.Count)
+                                     .FirstOrDefault(l => l.Count >= 5);
         }
 
         public HandStrength HandStrengths
@@ -102,16 +104,7 @@ namespace CasinoUI.Models.Poker
         public Card[] Cards
         {
             get { return _playerCards; }
-            set
-            {
-                _playerCards[0] = value[0];
-                _playerCards[1] = value[1];
-                _playerCards[2] = value[2];
-                _playerCards[3] = value[3];
-                _playerCards[4] = value[4];
-                _playerCards[5] = value[5];
-                _playerCards[6] = value[6];
-            }
+            set { _playerCards = value; }
         }
 
         //        public Hand EvaluateHand()
