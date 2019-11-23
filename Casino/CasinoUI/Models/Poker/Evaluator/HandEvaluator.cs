@@ -28,7 +28,7 @@ namespace CasinoUI.Models.Poker
             InitNbOccurencesSuit();
             InitFlushList();
             InitNbOccurencesValue();
-            InitStraightList();
+            //InitStraightList();
         }
 
         private void InitNbOccurencesSuit()
@@ -49,14 +49,7 @@ namespace CasinoUI.Models.Poker
 
         private void InitFlushList()
         {
-            foreach (var kvp in _nbOccurencesSuit)
-            {
-                if (kvp.Value.Count >= 5)
-                {
-                    _flushList = kvp.Value;
-                    break;
-                }
-            }
+            _flushList = _nbOccurencesSuit.FirstOrDefault(kvp => kvp.Value.Count >= 5).Value;
         }
 
         private void InitNbOccurencesValue()
@@ -78,21 +71,20 @@ namespace CasinoUI.Models.Poker
         public int InitStraightList()
         {
             var tempDic = _nbOccurencesValue.ToList();
-            List<Card> straightTemp = new List<Card>();
+            List<Card> straightTemp = new List<Card>() { tempDic[0].Value[0] };
+
             for (int i = 1; i < tempDic.Count; i++)
             {
-                var kvp = tempDic[i - 1];
-                int previous = (int)kvp.Key,
-                    current = (int)tempDic[i].Key;
-                if (previous == current + 1)
-                {
-                    straightTemp.Add(kvp.Value[0]);
-                }
-                else
+                var kvp = tempDic[i];
+                int previous = (int)tempDic[i - 1].Key,
+                    current = (int)kvp.Key;
+                if (previous != current + 1)
                 {
                     straightTemp.Clear();
                 }
+                straightTemp.Add(kvp.Value[0]);
             }
+
             if (straightTemp.Count >= 5)
             {
                 _straightList = straightTemp;
