@@ -41,7 +41,7 @@ namespace CasinoUI.Models.Poker.PokerBrains
             ListPlayers = new List<Player> { human };
 
             for (int i = 0; i < 4; i++) {
-                ListPlayers.Add(new PokerAI());
+                ListPlayers.Add(new PokerAI(TypePlayerPoker.NORMAL));
             }
         }
 

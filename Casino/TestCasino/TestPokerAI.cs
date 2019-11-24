@@ -24,7 +24,7 @@ namespace TestCasino
         public TestPokerAI()
         {
             list = new List<Card>();
-            pokerCombo = new PokerAI();
+            pokerCombo = new PokerAI(TypePlayerPoker.NORMAL);
             pokerCombo.CardsOnBoard = list;
             pokerTest = new PrivateObject(pokerCombo, new PrivateType(typeof(PokerAI)));
 

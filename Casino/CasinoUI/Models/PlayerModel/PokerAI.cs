@@ -7,6 +7,7 @@ namespace CasinoUI.Models.Poker
 {
     public class PokerAI : PlayerAI, IPokerAction
     {
+        private TypePlayerPoker CurrentType;
 
         private List<Card> LisCardOnBoard;
         private List<Card> ListValue;
@@ -20,7 +21,7 @@ namespace CasinoUI.Models.Poker
 
         private List<double> WinProb;
 
-        public PokerAI()
+        public PokerAI(TypePlayerPoker CurrentType)
         {
             Money = 1000;
 
@@ -30,6 +31,8 @@ namespace CasinoUI.Models.Poker
             this.ComboValuePoss = new List<Tuple<int, int>>();
             this.FlushCombo = Card.CardSuit.Diamonds;
             this.WinProb = new List<double>();
+
+            this.CurrentType = CurrentType;
         }
 
         public List<Card> CardsOnBoard
@@ -38,20 +41,59 @@ namespace CasinoUI.Models.Poker
             set { this.LisCardOnBoard = value; }
         }
 
-        public PokerActionCode MakeDecision(PokerActionCode[] pokerActionCode)
+        public PokerActionCode MakeDecision(GameState gameState, int amount_raise = 0)
         {
-            //GameState?
             List<Card> hand = GetHand();
             int TotalProb = AllProbability();
-            PokerActionCode NextMove;
 
             ChanceWinSamevalue(TotalProb, hand);
             ChanceWinStraight(TotalProb, hand);
             ChanceWinFlush(TotalProb, hand);
 
-            //Somme Porbabilite
+            return ReturnPokerAction(amount_raise, gameState);
+        }
 
-            return PokerActionCode.FOLD;
+        private PokerActionCode ReturnPokerAction(int amount_raise, GameState gameState)
+        {
+            PokerActionCode NextMove;
+
+            if (gameState != GameState.inital)
+            {
+                double chance = gameState == GameState.raised ? ChanceWinRaise(amount_raise) : 1;
+                double prob_win = CalculChance(chance);
+
+                NextMove = prob_win >= 0.5 ?
+                    amount_raise >= Money ?
+                    PokerActionCode.ALLIN :
+                    PokerActionCode.RAISE :
+                    prob_win >= 0.1 ?
+                    gameState == GameState.normal ?
+                    PokerActionCode.CHECK
+                    : PokerActionCode.CALL
+                    : PokerActionCode.FOLD;
+            }
+
+            else
+            {
+                NextMove = CurrentType == TypePlayerPoker.BIG_BLIND ?
+                    PokerActionCode.CHECK : PokerActionCode.CALL;
+            }
+
+            return NextMove;
+        }
+
+        private double CalculChance(double chance)
+        {
+            double somme = 0;
+            foreach (double nbr in WinProb) somme += nbr;
+            somme *= chance;
+
+            return somme;
+        }
+
+        private double ChanceWinRaise(int amount_raise)
+        {
+            return 1 - amount_raise/Money;
         }
 
         private void ChanceWinFlush(int TotalProb, List<Card> hand)
