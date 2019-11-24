@@ -50,7 +50,7 @@ namespace CasinoUI.Models.Poker.PokerBrains
             // draw high card for dealer
         }
 
-        private void ProceedNextGame() {
+        public void ProceedNextGame() {
             RotateRoles();
             ClearRoles();
             Pot = 0;
@@ -111,7 +111,17 @@ namespace CasinoUI.Models.Poker.PokerBrains
             }
         }
 
-        
+
+        public bool arePlayersDone() {
+            int len = isPlayerDone.Length;
+            for (int i = 0; i < len; i++) {
+                if (!isPlayerDone[i]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
     }
 }

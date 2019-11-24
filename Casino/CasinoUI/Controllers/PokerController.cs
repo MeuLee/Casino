@@ -16,11 +16,18 @@ namespace CasinoUI.Models.Poker {
             pokerView.Show();
 
             int numPlayers = pokerModel.ListPlayers.Count;
+
+            // game loop
             while (true) {
 
-                for (int i = 0; i < numPlayers; i++) {
-
+                // sub game loop
+                while (pokerModel.arePlayersDone()) {
+                    // AI shit
+                    //PlayerPlaysTurn();
+                    pokerModel.incCurrentPlayerTurn();
                 }
+
+                pokerModel.ProceedNextGame();
             }
         }
 
