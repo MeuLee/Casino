@@ -15,9 +15,12 @@ namespace CasinoUI.Models.Poker {
             pokerView = new GamePoker();
             pokerView.Show();
 
-            // if not human
-            if (pokerModel.currentPlayerTurnIdx != 0) { 
+            int numPlayers = pokerModel.ListPlayers.Count;
+            while (true) {
 
+                for (int i = 0; i < numPlayers; i++) {
+
+                }
             }
         }
 

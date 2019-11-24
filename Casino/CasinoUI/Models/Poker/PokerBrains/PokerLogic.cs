@@ -13,6 +13,8 @@ namespace CasinoUI.Models.Poker.PokerBrains
         public int[] PlayerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers
                                                     //       idx[1] = BigBlind's index in ListPlayers
                                                     //       idx[2] = First player to play index
+
+        public bool[] isPlayerDone { get; set; }
         public int Pot { get; set; }
         public int CurrentRaise { get; set; }
 
@@ -26,15 +28,8 @@ namespace CasinoUI.Models.Poker.PokerBrains
             Pot = 0;
             CurrentRaise = 2;
             currentGameState = GameState.inital;
-        }
 
-        public void PlayAGame() {
-            if (currentPlayerTurnIdx != 0) {
-                while ()
-            }
-
-
-            ProceedNextGame();
+            isPlayerDone = new bool[] { false, false, false, false, false};
         }
 
         private void InitListPlayers(HumanPlayer human) {
@@ -104,6 +99,8 @@ namespace CasinoUI.Models.Poker.PokerBrains
                     currentGameState = GameState.raised;
                     break;
             }
+
+            isPlayerDone[currentPlayerTurnIdx] = true;
         }
 
         public void incCurrentPlayerTurn() {
@@ -113,6 +110,8 @@ namespace CasinoUI.Models.Poker.PokerBrains
                 currentPlayerTurnIdx = 0;
             }
         }
+
+        
 
     }
 }
