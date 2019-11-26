@@ -73,7 +73,7 @@ namespace CasinoUI.Models.Poker
             var tempDic = _nbOccurencesValue.ToList();
             var straights = new List<List<Card>>()
             {
-                new List<Card>() { tempDic[0].Value[0] }
+                new List<Card>() { GetCardMatchSuit(tempDic[0].Value) }
             };
             int listIndex = 0;
 
@@ -115,85 +115,65 @@ namespace CasinoUI.Models.Poker
             set { _playerCards = value; }
         }
 
-        //        public Hand EvaluateHand()
-        //        {
-        //            SortCards();
-        //            getNumberOfSuit();
-        //            if (RoyalFlush())
-        //            {
-        //                return Hand.RoyalFlush;
-        //            }
-        //            else if (StraightFlush())
-        //            {
-        //                return Hand.StraightFlush;
-        //            }
-        //            else if (HandHasPairs(1, 4))
-        //            {
-        //                return Hand.FourKind;
-        //            }
-        //            else if (FullHouse())
-        //            {
-        //                return Hand.FullHouse;
-        //            }
-        //            else if (Flush())
-        //            {
-        //                return Hand.Flush;
-        //            }
-        //            else if (Straight())
-        //            {
-        //                return Hand.Straight;
-        //            }
-        //            else if (HandHasPairs(1, 3))
-        //            {
-        //                return Hand.ThreeKind;
-        //            }
-        //            else if (HandHasPairs(2, 2))
-        //            {
-        //                return Hand.TwoPairs;
-        //            }
-        //            else if (HandHasPairs(1, 2))
-        //            {
-        //                return Hand.OnePair;
-        //            }
+        //public Hand EvaluateHand()
+        //{
+        //    if (RoyalFlush())
+        //    {
+        //        return Hand.RoyalFlush;
+        //    }
+        //    else if (StraightFlush())
+        //    {
+        //        return Hand.StraightFlush;
+        //    }
+        //    else if (FourOfKind())
+        //    {
+        //        return Hand.FourKind;
+        //    }
+        //    else if (FullHouse())
+        //    {
+        //        return Hand.FullHouse;
+        //    }
+        //    else if (Flush())
+        //    {
+        //        return Hand.Flush;
+        //    }
+        //    else if (Straight())
+        //    {
+        //        return Hand.Straight;
+        //    }
+        //    else if (ThreeOfKind())
+        //    {
+        //        return Hand.ThreeKind;
+        //    }
+        //    else if (TwoPairs())
+        //    {
+        //        return Hand.TwoPairs;
+        //    }
+        //    else if (OnePair())
+        //    {
+        //        return Hand.OnePair;
+        //    }
 
-        //            _handStrength.HighCard = _playerCards[_playerCards.Length - 1];
-        //            return Hand.Nothing;
-        //        }
-        //        private void getNumberOfSuit()
-        //        {
-        //            foreach (var element in _playerCards)
-        //            {
-        //                switch (element.Suit)
-        //                {
-        //                    case Card.CardSuit.Hearts:
-        //                        heartsSum++;
-        //                        break;
-        //                    case Card.CardSuit.Diamonds:
-        //                        diamondSum++;
-        //                        break;
-        //                    case Card.CardSuit.Clubs:
-        //                        clubSum++;
-        //                        break;
-        //                    case Card.CardSuit.Spades:
-        //                        spadesSum++;
-        //                        break;
-        //                }
-        //            }
-        //        }
+        //    _handstrength.highcard = _playercards[_playercards.length - 1];
+        //    return Hand.Nothing;
+        //}
 
-        //        private bool RoyalFlush()
+        //private bool RoyalFlush()
+        //{
+        //    if (_straightList != null && _straightList[0].)
+
+
+        //    if (isRoyal())
+        //    {
+        //        if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
         //        {
-        //            if (isRoyal())
-        //            {
-        //                if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
-        //                {
-        //                    AddCardHandStrength(_playerCards[_playerCards.Length - 5], _playerCards[_playerCards.Length - 4], _playerCards[_playerCards.Length - 3],
-        //                        _playerCards[_playerCards.Length - 2], _playerCards[_playerCards.Length - 1]);
-        //                    return true;
-        //                }
-        //            }
-        //            return false;
+        //            AddCardHandStrength(_playerCards[_playerCards.Length - 5], _playerCards[_playerCards.Length - 4], _playerCards[_playerCards.Length - 3],
+        //                _playerCards[_playerCards.Length - 2], _playerCards[_playerCards.Length - 1]);
+        //            return true;
         //        }
+        //    }
+        //    return false;
+        //}
 
         //        private bool StraightFlush()
         //        {

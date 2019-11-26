@@ -244,11 +244,16 @@ namespace TestCasino
                              new int[] { 14, 13, 12, 11, 10, 9 });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cardArr"></param>
+        /// <param name="expectedVals"></param>
         private void TestStraightList(Card[] cardArr, int[] expectedVals)
         {
             var privateObj = new PrivateObject(new HandEvaluator(cardArr));
-            int[] actualVals = (privateObj.GetFieldOrProperty("_straightList") as List<Card>)?.Select(c => (int)c.Value)
-                                                                                              .ToArray();
+            int[] actualVals = (privateObj.GetFieldOrProperty("_straightList") as
+                List<Card>)?.Select(c => (int)c.Value).ToArray();
             CollectionAssert.AreEqual(expectedVals, actualVals);
         }
 
