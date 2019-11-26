@@ -28,12 +28,11 @@
             <RowDefinition Height="0.25*"/>
         </Grid.RowDefinitions>
         <Grid.Background>
-            <ImageBrush x:Name="ImgBackground"/>
+            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/table.jpg" />
         </Grid.Background>
-        <Image x:Name="ImgBlackJackTable"
-               Source="/CasinoUI;component/Resources/blackjackTable.png" 
+        <Image 
                VerticalAlignment="Top"
-               Grid.Column="1" Grid.ColumnSpan="4"/>        
+               Grid.Column="1" Grid.ColumnSpan="4" Source="pack://siteoforigin:,,,/Resources/blackjackTable.png"/>        
         <Button x:Name="BtnHit" Style="{StaticResource Button.Hoverless}"
                 Grid.Row="2" Grid.Column="2">
             <StackPanel Orientation="Horizontal">
@@ -66,14 +65,18 @@
                 <Image x:Name="ImgChip8" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="BtnReduceBet" Style="{StaticResource Btn.MinusSign}"/>
+            <TextBlock x:Name="TxbBet" Foreground="White" VerticalAlignment="Center" FontSize="26" Margin="10,0,10,0"/>
+            <Button x:Name="BtnIncreaseBet" Style="{StaticResource Btn.PlusSign}"/>
+        </StackPanel>
         <Button x:Name="BtnBet" Style="{StaticResource Button.Hoverless}"
-                Grid.Row="2" Grid.Column="0">
+                Grid.Column="0" Grid.Row="4">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip9" Style="{StaticResource Image.Left}"/>
                 <TextBlock Text="Bet" Foreground="White"/>
                 <Image x:Name="ImgChip10" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
-        
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using CasinoUI.Models.Cards;
+using CasinoUI.Models.PlayerModel;
 using CasinoUI.Utils;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace CasinoUI.Views
             _imgAi = new List<Image>();
         }
 
-        public void CreateNewImageSpace(Models.PlayerModel.Player humanPlayer, Models.PlayerModel.Player aiPlayer)
+        public void CreateNewImageSpace(Player humanPlayer, Player aiPlayer)
         {
             List<Card> _humanCards = humanPlayer.GetHand();
             AddCardImgUI(_humanCards, _imgHuman, 239, 65);
@@ -32,8 +33,7 @@ namespace CasinoUI.Views
         }
 
         private void AddCardImgUI(List<Card> cards, List<Image> images, int thiccValue1, int thiccValue2)
-        {
-            
+        {            
             for (int i = images.Count; i < cards.Count; i++)
             {
                 Image image = new Image() { Height = 76, Width = 50, Margin = new Thickness(193 + i * 20, thiccValue1, 223 - i * 20, thiccValue2) };

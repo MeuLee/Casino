@@ -1,4 +1,5 @@
-﻿using CasinoUI.Models.Cards;
+﻿using CasinoUI.Controllers;
+using CasinoUI.Models.Cards;
 using CasinoUI.Models.PlayerModel;
 using CasinoUI.Models.Profiles;
 using System;
@@ -20,9 +21,9 @@ namespace CasinoUI.Models.Blackjack
 
         public bool RoundEnd { get; set; }
 
-        Controllers.BlackjackController BJController;
+        BlackjackController BJController;
 
-        public BlackjackLogic(HumanPlayer human, Controllers.BlackjackController blackjackController)
+        public BlackjackLogic(HumanPlayer human, BlackjackController blackjackController)
         {
             CardStack = new GameCardStack();
             BJController = blackjackController;
@@ -30,24 +31,7 @@ namespace CasinoUI.Models.Blackjack
             _players = new List<Player>() { human, new BlackjackAI() };
         }
 
-        private void GameFlow()
-        {
-            DistributeCards();
-
-            foreach (var player in _players)
-            {
-                SetHandValue(player);
-            }
-
-            CheckForBlackjack();
-
-            if (RoundEnd)
-            {
-                ProceedNextTurn();
-            }
-        }
-
-        private void DistributeCards()
+        public void DistributeCards()
         {
             PlayerStand = false;
             DealerStand = false;
@@ -65,15 +49,15 @@ namespace CasinoUI.Models.Blackjack
             int handValue = 0;
             foreach (Card card in player.GetHand())
             {
-                if (card.Equals(Card.CardRank.Jack) || card.Equals(Card.CardRank.Queen) || card.Equals(Card.CardRank.King))
+                if (card.Equals(CardRank.Jack) || card.Equals(CardRank.Queen) || card.Equals(CardRank.King))
                 {
                     handValue += 10;
                 }
-                else if (card.Equals(Card.CardRank.Ace) && (handValue + 11 <= 21))
+                else if (card.Equals(CardRank.Ace) && (handValue + 11 <= 21))
                 {
                     handValue += 11;
                 }
-                else if (card.Equals(Card.CardRank.Ace) && (handValue + 11 > 21))
+                else if (card.Equals(CardRank.Ace) && (handValue + 11 > 21))
                 {
                     handValue += 1;                   
                 }
@@ -136,9 +120,9 @@ namespace CasinoUI.Models.Blackjack
 
         private bool CheckSoft17(IBlackjackAction ai)
         {
-            int sum = GetAI().GetHand().Select(c => (int)c.Value).Where(c => (Card.CardRank)c != Card.CardRank.Ace).Sum();
+            int sum = GetAI().GetHand().Select(c => (int)c.Value).Where(c => (CardRank)c != CardRank.Ace).Sum();
 
-            if (!GetAI().GetHand().Select(c => c.Value).Contains(Card.CardRank.Ace) || ai.PlayerHandValue != 17)
+            if (!GetAI().GetHand().Select(c => c.Value).Contains(CardRank.Ace) || ai.PlayerHandValue != 17)
             {
                 return false;
             }
@@ -166,11 +150,10 @@ namespace CasinoUI.Models.Blackjack
 
         public void DoubleDown()
         {
-            Player tempP = new Player();
-            tempP = GetHuman();
+            Player tempP = GetHuman();
             CardStack.PlayerDrawCard(tempP);
             tempP.GetGameType<IBlackjackAction>().PlayerStand = true;
-            //Bet *= 2;
+            Bet *= 2;
         }
 
         private void ProceedNextTurn()
