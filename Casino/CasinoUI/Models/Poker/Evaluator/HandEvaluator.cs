@@ -3,8 +3,6 @@ using CasinoUI.Models.Poker.Evaluator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CasinoUI.Models.Poker
 {
@@ -21,6 +19,10 @@ namespace CasinoUI.Models.Poker
         Dictionary<CardRank, List<Card>> _nbOccurencesValue;
         List<Card> _straightList = null;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="HandPlayer"></param>
         public HandEvaluator(Card[] HandPlayer)
         {
             _playerCards = HandPlayer.OrderByDescending(c => (int)c.Value).ToArray();
@@ -31,6 +33,9 @@ namespace CasinoUI.Models.Poker
             InitStraightList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitNbOccurencesSuit()
         {
             _nbOccurencesSuit = new Dictionary<CardSuit, List<Card>>();
@@ -47,11 +52,17 @@ namespace CasinoUI.Models.Poker
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitFlushList()
         {
             _flushList = _nbOccurencesSuit.FirstOrDefault(kvp => kvp.Value.Count >= 5).Value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitNbOccurencesValue()
         {
             _nbOccurencesValue = new Dictionary<CardRank, List<Card>>();
@@ -68,6 +79,9 @@ namespace CasinoUI.Models.Poker
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitStraightList()
         {
             var tempDic = _nbOccurencesValue.ToList();
@@ -94,6 +108,11 @@ namespace CasinoUI.Models.Poker
                                      .FirstOrDefault(l => l.Count >= 5);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cards"></param>
+        /// <returns></returns>
         private Card GetCardMatchSuit(List<Card> cards)
         {
             if (_flushList == null) return cards[0];
@@ -102,6 +121,9 @@ namespace CasinoUI.Models.Poker
             return temp ?? cards[0];
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public HandStrength HandStrengths
         {
             get { return _handStrength; }
@@ -109,12 +131,19 @@ namespace CasinoUI.Models.Poker
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Card[] Cards
         {
             get { return _playerCards; }
             set { _playerCards = value; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Hand EvaluateHand()
         {
             if (RoyalFlush())
@@ -129,57 +158,62 @@ namespace CasinoUI.Models.Poker
             {
                 return Hand.FourKind;
             }
-            //    else if (FullHouse())
-            //    {
-            //        return Hand.FullHouse;
-            //    }
-            //    else if (Flush())
-            //    {
-            //        return Hand.Flush;
-            //    }
-            //    else if (Straight())
-            //    {
-            //        return Hand.Straight;
-            //    }
-            //    else if (ThreeOfKind())
-            //    {
-            //        return Hand.ThreeKind;
-            //    }
-            //    else if (TwoPairs())
-            //    {
-            //        return Hand.TwoPairs;
-            //    }
-            //    else if (OnePair())
-            //    {
-            //        return Hand.OnePair;
-            //    }
+            else if (FullHouse())
+            {
+                return Hand.FullHouse;
+            }
+            else if (Flush())
+            {
+                return Hand.Flush;
+            }
+            else if (Straight())
+            {
+                return Hand.Straight;
+            }
+            else if (ThreeOfKind())
+            {
+                return Hand.ThreeKind;
+            }
+            else if (TwoPairs())
+            {
+                return Hand.TwoPairs;
+            }
+            else if (OnePair())
+            {
+                return Hand.OnePair;
+            }
             AddCardHandStrength(_playerCards[4], _playerCards[3], _playerCards[2],
                     _playerCards[1], _playerCards[0]);
             return Hand.Nothing;
         }
 
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un RoyalFlush
+        /// dans la main.
+        /// </summary>
+        /// <returns> True si un RoyalFlush present False si pas de RoyalFlush</returns>
         private bool RoyalFlush()
         {
-            if (_straightList != null && (int)_straightList[0].Value == 14)
+            if (_straightList != null && 
+                (int)_straightList[0].Value == 14 &&
+                _flushList != null)
             {
-                int countSuit = 0;
-                Card.CardSuit suiteRoyal = _straightList[0].Suit;
-                foreach (Card carteRoyalFlush in _straightList){
-                    if(carteRoyalFlush.Suit == suiteRoyal)
-                    {
-                        countSuit++;
-                    }                   
-                }
-                if(countSuit == 5)
+                if (Enumerable.SequenceEqual(_straightList.OrderByDescending(t => t),
+                    _flushList.OrderByDescending(t => t)))
                 {
                     AddCardHandStrength(_straightList[4], _straightList[3], _straightList[2],
-                    _straightList[1], _straightList[0]);
+                     _straightList[1], _straightList[0]);
                     return true;
                 }
-            }                        
+            }
             return false;
         }
 
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un StraightFlush
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un StraightFlush present False si pas de StraightFlush</returns>
         private bool StraightFlush()
         {
             if (_straightList != null && _flushList != null)
@@ -189,180 +223,237 @@ namespace CasinoUI.Models.Poker
                     AddCardHandStrength(_straightList[4], _straightList[3], _straightList[2],
                      _straightList[1], _straightList[0]);
                     return true;
-                }                
+                }
             }
             return false;
         }
 
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un FourOfKind
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un FourOfKind present False si pas de FourOfKind</returns>
         private bool FourOfKind()
         {
-            List<Card> mainGagnanteTemp = new List<Card>(5);
-            Card highCardTemp = null; 
-            foreach(var typeCard in _nbOccurencesValue)
+            List<Card> fourKindTemp;
+            Card highCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Clubs);
+            foreach (var typeCard in _nbOccurencesValue)
             {
-                if(typeCard.Value.Count == 4)
+                if (typeCard.Value.Count == 4)
                 {
-                    mainGagnanteTemp = typeCard.Value.ToList();
-                }
-
-                if(typeCard.Key > highCardTemp.Value)
-                {
-                    highCardTemp = typeCard.Value[0];
-                }
-            }
-
-            if(highCardTemp != mainGagnanteTemp[0])
-            {
-                AddCardHandStrength(mainGagnanteTemp[0], mainGagnanteTemp[0], mainGagnanteTemp[0], mainGagnanteTemp[0], highCardTemp);
-                return true;
-            }
-            else
-            {
-                foreach(Card cards in _playerCards)
-                {
-                    if(cards != mainGagnanteTemp[0])
+                    fourKindTemp = typeCard.Value.ToList();
+                    foreach (var playerCard in _playerCards)
                     {
-                        if((int)cards.Value < (int)mainGagnanteTemp[4].Value)
+                        if (playerCard.Value != typeCard.Key &&
+                            playerCard.Value >= highCardTemp.Value)
                         {
-                            mainGagnanteTemp[4] = cards;
+                            highCardTemp = playerCard;
                         }
                     }
+                    AddCardHandStrength(fourKindTemp[0], fourKindTemp[1],
+                        fourKindTemp[2], fourKindTemp[3], highCardTemp);
+                    return true;
                 }
-                AddCardHandStrength(mainGagnanteTemp[4], mainGagnanteTemp[3], mainGagnanteTemp[2], mainGagnanteTemp[1], mainGagnanteTemp[0]);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un FullHouse
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un FullHouse present False si pas de FullHouse</returns>
+        private bool FullHouse()
+        {
+            List<Card> threeKindTemp = null;
+            List<Card> twoKindTemp = null;
+            foreach (var typeCard in _nbOccurencesValue)
+            {
+                if (typeCard.Value.Count == 3)
+                {
+                    threeKindTemp = typeCard.Value.ToList();
+                }
+                else if (typeCard.Value.Count == 2)
+                {
+                    twoKindTemp = typeCard.Value.ToList();
+                }
+
+                if (threeKindTemp != null && twoKindTemp != null)
+                {
+                    AddCardHandStrength(twoKindTemp[0], twoKindTemp[1],
+                        threeKindTemp[0], threeKindTemp[1], threeKindTemp[2]);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un Flush
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un Flush present False si pas de Flush</returns>
+        private bool Flush()
+        {
+            if(_flushList != null)
+            {
+                AddCardHandStrength(_flushList[4], _flushList[3], _flushList[2],
+                    _flushList[1], _flushList[0]);
                 return true;
             }
             return false;
         }
 
-        //        private bool FullHouse()
-        //        {
-        //            return HandHasPairs(1, 2) && HandHasPairs(1, 3);
-        //        }
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un Straight
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un Straight present False si pas de Straight</returns>
+        private bool Straight()
+        {
+            if (_straightList != null)
+            {
+                AddCardHandStrength(_straightList[4], _straightList[3], _straightList[2],
+                    _straightList[1], _straightList[0]);
+                return true;
+            }
 
-        //        private bool Flush()
-        //        {
-        //            foreach (var suiteCards in _playerCards)
-        //            {
-        //                if (heartsSum >= 5)
-        //                {
-        //                    CheckCardsFlush(Card.CardSuit.Hearts);
-        //                    return true;
+            return false;
+        }
 
-        //                }
-        //                else if (diamondSum >= 5)
-        //                {
-        //                    CheckCardsFlush(Card.CardSuit.Diamonds);
-        //                    return true;
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un ThreeOfKind
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un ThreeOfKind present False si pas de ThreeOfKind</returns>
+        private bool ThreeOfKind()
+        {
+            List<Card> threeKindTemp;
+            Card highCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Clubs);
+            Card secondhighCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Diamonds);
+            foreach (var typeCard in _nbOccurencesValue)
+            {
+                if(typeCard.Value.Count == 3)
+                {
+                    threeKindTemp = typeCard.Value.ToList();
+                    foreach (var playerCard in _playerCards)
+                    {
+                        if (playerCard.Value != typeCard.Key &&
+                            playerCard.Value >= highCardTemp.Value)
+                        {
+                            highCardTemp = playerCard;
+                        }else if(playerCard.Value != typeCard.Key &&
+                            playerCard.Value >= secondhighCardTemp.Value)
+                        {
+                            secondhighCardTemp = playerCard;
+                        }
+                    }
+                    AddCardHandStrength(threeKindTemp[0], threeKindTemp[1],
+                        threeKindTemp[2], secondhighCardTemp, highCardTemp);
+                    return true;
+                }
+            }
+            return false;
+        }
 
-        //                }
-        //                else if (clubSum >= 5)
-        //                {
-        //                    CheckCardsFlush(Card.CardSuit.Clubs);
-        //                    return true;
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un TwoPairs
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un TwoPairs present False si pas de TwoPairs</returns>
+        private bool TwoPairs()
+        {
+            List<Card> twoKindTemp = null;
+            List<Card> secondTwoKindTemp = null;
+            Card highCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Clubs);
+            foreach (var typeCard in _nbOccurencesValue)
+            {
+                if (typeCard.Value.Count == 2)
+                {
+                    if(twoKindTemp == null)
+                    {
+                        twoKindTemp = typeCard.Value.ToList();
+                    }
+                    else if(secondTwoKindTemp == null)
+                    {
+                        secondTwoKindTemp = typeCard.Value.ToList();
 
-        //                }
-        //                else if (spadesSum >= 5)
-        //                {
-        //                    CheckCardsFlush(Card.CardSuit.Spades);
-        //                    return true;
-        //                }
-        //            }
-        //            return false;
-        //        }
+                        foreach (var playerCard in _playerCards)
+                        {
+                            if (playerCard.Value != typeCard.Key &&
+                                playerCard.Value != twoKindTemp[0].Value &&
+                                playerCard.Value >= highCardTemp.Value)
+                            {
+                                highCardTemp = playerCard;
+                            }
+                        }
+                    }                    
 
-        //        private bool Straight()
-        //        {
-        //            if (_playerCards[0].Value + 1 == _playerCards[1].Value &&
-        //                _playerCards[1].Value + 1 == _playerCards[2].Value &&
-        //                _playerCards[2].Value + 1 == _playerCards[3].Value &&
-        //                _playerCards[3].Value + 1 == _playerCards[4].Value)
-        //            {
-        //                AddCardHandStrength(_playerCards[0], _playerCards[1], _playerCards[2], _playerCards[3], _playerCards[4]);
-        //                return true;
+                    if (secondTwoKindTemp != null && twoKindTemp != null)
+                    {
+                        AddCardHandStrength(twoKindTemp[0], twoKindTemp[1],
+                            secondTwoKindTemp[0], secondTwoKindTemp[1], highCardTemp);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 
-        //            }
-        //            else if
-        //            (_playerCards[1].Value + 1 == _playerCards[2].Value &&
-        //            _playerCards[2].Value + 1 == _playerCards[3].Value &&
-        //            _playerCards[3].Value + 1 == _playerCards[4].Value &&
-        //            _playerCards[4].Value + 1 == _playerCards[5].Value)
-        //            {
-        //                AddCardHandStrength(_playerCards[1], _playerCards[2], _playerCards[3], _playerCards[4], _playerCards[5]);
-        //                return true;
-        //            }
-        //            else if (_playerCards[2].Value + 1 == _playerCards[3].Value &&
-        //                _playerCards[3].Value + 1 == _playerCards[4].Value &&
-        //                _playerCards[4].Value + 1 == _playerCards[5].Value &&
-        //                _playerCards[5].Value + 1 == _playerCards[6].Value)
-        //            {
-        //                AddCardHandStrength(_playerCards[2], _playerCards[3], _playerCards[4], _playerCards[5], _playerCards[6]);
-        //                return true;
-        //            }
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un OnePair
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un OnePair present False si pas de OnePair</returns>
+        private bool OnePair()
+        {
+            List<Card> onePairTemp;
+            Card highCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Clubs);
+            Card secondhighCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Diamonds);
+            Card thridhighCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Diamonds);
+            foreach (var typeCard in _nbOccurencesValue)
+            {
+                if (typeCard.Value.Count == 2)
+                {
+                    onePairTemp = typeCard.Value.ToList();
 
-        //            return false;
+                    foreach (var playerCard in _playerCards)
+                    {
+                        if (playerCard.Value != typeCard.Key &&
+                            playerCard.Value >= highCardTemp.Value)
+                        {
+                            highCardTemp = playerCard;
+                        }
+                        else if (playerCard.Value != typeCard.Key &&
+                           playerCard.Value >= secondhighCardTemp.Value)
+                        {
+                            secondhighCardTemp = playerCard;
+                        }else if(playerCard.Value != typeCard.Key &&
+                           playerCard.Value >= thridhighCardTemp.Value)
+                        {
+                            thridhighCardTemp = playerCard;
+                        }
+                    }
+                    AddCardHandStrength(onePairTemp[0], onePairTemp[1],
+                        thridhighCardTemp, secondhighCardTemp, highCardTemp);
+                    return true;
+                }
+            }
+            return false;
 
-        //        }
+        }
 
-        //        private bool HandHasPairs(int numPairs, int nbSameValue)
-        //        {
-        //            Dictionary<int, int> occurences = new Dictionary<int, int>();
-        //            foreach (var card in _playerCards)
-        //            {
-        //                if (!occurences.ContainsKey((int)card.Value))
-        //                {
-        //                    occurences.Add((int)card.Value, 1);
-        //                }
-        //                else
-        //                {
-        //                    occurences[(int)card.Value]++;
-        //                }
-        //            }
-        //            if (occurences.Values.Count(v => v >= nbSameValue) >= numPairs)
-        //            {
-        //                //handStrength.Total += occurences.Last(v => v.Value >= numPairs).Key * nbSameValue;
-        //                //AddCardHandStrength(cards[3], cards[3], cards[3], cards[3], cards[cards.Length - 1]);
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                return false;
-        //            }
-        //        }
-
-        //        private void CheckCardsFlush(CardSuit suit)
-        //        {
-        //            Card[] listeCarteSuite = new Card[5];
-        //            int index = listeCarteSuite.Length - 1;
-        //            for (int i = _playerCards.Length - 1; i >= 0; i--)
-        //            {
-        //                if (_playerCards[i].Suit == suit)
-        //                {
-        //                    if (index >= 0)
-        //                    {
-        //                        listeCarteSuite[index] = _playerCards[i];
-        //                        index--;
-        //                    }
-
-        //                }
-        //            }
-        //            AddCardHandStrength(listeCarteSuite[listeCarteSuite.Length - 5], listeCarteSuite[listeCarteSuite.Length - 4],
-        //                listeCarteSuite[listeCarteSuite.Length - 3], listeCarteSuite[listeCarteSuite.Length - 2],
-        //                listeCarteSuite[listeCarteSuite.Length - 1]);
-        //        }
-
-        //        private bool isRoyal()
-        //        {
-        //            if (_playerCards[_playerCards.Length - 1].Value == Card.CardRank.Ace &&
-        //                _playerCards[_playerCards.Length - 2].Value == Card.CardRank.King &&
-        //                _playerCards[_playerCards.Length - 3].Value == Card.CardRank.Queen &&
-        //                _playerCards[_playerCards.Length - 4].Value == Card.CardRank.Jack &&
-        //                _playerCards[_playerCards.Length - 5].Value == Card.CardRank.Ten)
-        //            {
-        //                return true;
-        //            }
-        //            return false;
-        //        }
-
+        /// <summary>
+        /// Méthode qui prend en parametre 5 carte pour les ajouter a la
+        /// main gagnate. La dernier carte est aussi la plus fort soit la
+        /// HighCard
+        /// </summary>
+        /// <param name="firstCard">Carte la moins forte</param>
+        /// <param name="secondCard">Deuxieme carte la moins forte</param>
+        /// <param name="thirdCard">Troisieme carte la moins forte</param>
+        /// <param name="fourthCard">Quatrieme carte la moins forte</param>
+        /// <param name="fifthCard">Cinquieme carte la moins forte 
+        /// AKA la plus fort highcard</param>
         private void AddCardHandStrength(Card firstCard, Card secondCard, Card thirdCard,
             Card fourthCard, Card fifthCard)
         {
