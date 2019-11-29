@@ -732,13 +732,13 @@ namespace TestCasino
             jeuDeCarte[1] = mainExpected[1] = new Card(Card.CardRank.Jack, Card.CardSuit.Clubs);
             jeuDeCarte[2] = mainExpected[2] = new Card(Card.CardRank.Jack, Card.CardSuit.Diamonds);
             jeuDeCarte[3] = mainExpected[3] = new Card(Card.CardRank.Jack, Card.CardSuit.Hearts);
-            jeuDeCarte[4] = new Card(Card.CardRank.King, Card.CardSuit.Spades);
+            jeuDeCarte[4] = mainExpected[4] = new Card(Card.CardRank.King, Card.CardSuit.Spades);
             jeuDeCarte[5] = new Card(Card.CardRank.King, Card.CardSuit.Diamonds);
-            jeuDeCarte[6] = mainExpected[4] = new Card(Card.CardRank.King, Card.CardSuit.Clubs);
+            jeuDeCarte[6] = new Card(Card.CardRank.King, Card.CardSuit.Clubs);
 
             evaluationCard = new HandEvaluator(jeuDeCarte);
 
-            Hand player = evaluationCard.EvaluateHand();
+            evaluationCard.EvaluateHand();
 
             TestVerifierHand(mainExpected, evaluationCard.HandStrengths.HandPlayer);
         }
@@ -1057,11 +1057,11 @@ namespace TestCasino
         {
             jeuDeCarte[0] = mainExpected[0] = new Card(Card.CardRank.Ace, Card.CardSuit.Hearts);
             jeuDeCarte[1] = mainExpected[1] = new Card(Card.CardRank.King, Card.CardSuit.Diamonds);
-            jeuDeCarte[2] = mainExpected[2] = new Card(Card.CardRank.Nine, Card.CardSuit.Clubs);
+            jeuDeCarte[2] = mainExpected[2] = new Card(Card.CardRank.Jack, Card.CardSuit.Clubs);
             jeuDeCarte[3] = mainExpected[3] = new Card(Card.CardRank.Queen, Card.CardSuit.Spades);
             jeuDeCarte[4] = mainExpected[4] = new Card(Card.CardRank.Ten, Card.CardSuit.Hearts);
             jeuDeCarte[5] = new Card(Card.CardRank.Eight, Card.CardSuit.Spades);
-            jeuDeCarte[6] = new Card(Card.CardRank.Five, Card.CardSuit.Diamonds);
+            jeuDeCarte[6] = new Card(Card.CardRank.Nine, Card.CardSuit.Diamonds);
 
             evaluationCard = new HandEvaluator(jeuDeCarte);
 
@@ -1282,6 +1282,24 @@ namespace TestCasino
             evaluationCard = new HandEvaluator(jeuDeCarte);
 
             Hand player = evaluationCard.EvaluateHand();
+
+            TestVerifierHand(mainExpected, evaluationCard.HandStrengths.HandPlayer);
+        }
+
+        [TestMethod]
+        public void TestTwoPairsTake2HigherOutOf3()
+        {
+            jeuDeCarte[0] = mainExpected[0] = new Card(Card.CardRank.Ace, Card.CardSuit.Clubs);
+            jeuDeCarte[1] = mainExpected[1] = new Card(Card.CardRank.Ace, Card.CardSuit.Hearts);
+            jeuDeCarte[2] = mainExpected[3] = new Card(Card.CardRank.Nine, Card.CardSuit.Diamonds);
+            jeuDeCarte[3] = new Card(Card.CardRank.Nine, Card.CardSuit.Hearts);
+            jeuDeCarte[4] = mainExpected[4] = new Card(Card.CardRank.Ten, Card.CardSuit.Hearts);
+            jeuDeCarte[5] = mainExpected[2] = new Card(Card.CardRank.Ten, Card.CardSuit.Spades);
+            jeuDeCarte[6] = new Card(Card.CardRank.Five, Card.CardSuit.Diamonds);
+
+            evaluationCard = new HandEvaluator(jeuDeCarte);
+
+            evaluationCard.EvaluateHand();
 
             TestVerifierHand(mainExpected, evaluationCard.HandStrengths.HandPlayer);
         }
