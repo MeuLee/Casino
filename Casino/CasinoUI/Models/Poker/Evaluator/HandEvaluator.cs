@@ -3,58 +3,64 @@ using CasinoUI.Models.Poker.Evaluator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CasinoUI.Models.Poker
 {
-    //Auteur : Damien Dussurget
+    //Auteur : Damien Dussurget, Mathieu Larivée
     //Fortement inspirer de la video suivante : https://www.youtube.com/watch?v=gkJKqVo30LA    
 
     public class HandEvaluator : Card
     {
-        private int heartsSum;
-        private int diamondSum;
-        private int clubSum;
-        private int spadesSum;
-        private Card[] cards;
-        private HandStrength handStrength;
+        private delegate bool ComboMethod();
+        private Dictionary<Hand, ComboMethod> _comboMethods;
+        private static readonly int tailleMainTotal = 5;
+        private Card[] _playerCards;
+        private HandStrength _handStrength;
+        Dictionary<CardSuit, List<Card>> _nbOccurencesSuit;
+        List<Card> _flushList = null;
+        Dictionary<CardRank, List<Card>> _nbOccurencesValue;
+        List<Card> _straightList = null;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="HandPlayer"></param>
         public HandEvaluator(Card[] HandPlayer)
         {
-            heartsSum = 0;
-            diamondSum = 0;
-            clubSum = 0;
-            spadesSum = 0;
-            cards = new Card[7];
-            cards = HandPlayer;
-            handStrength = new HandStrength();
+            _playerCards = HandPlayer.OrderByDescending(c => (int)c.Value).ToArray();
+            _handStrength = new HandStrength(tailleMainTotal);
+            InitNbOccurencesSuit();
+            InitFlushList();
+            InitNbOccurencesValue();
+            InitStraightList();
+            InitComboMethods();
         }
 
-        public HandStrength HandStrengths
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitNbOccurencesSuit()
         {
-            get { return handStrength; }
-            set { handStrength = value; }
-
-        }
-
-        public Card[] Cards
-        {
-            get { return cards; }
-            set
+            _nbOccurencesSuit = new Dictionary<CardSuit, List<Card>>();
+            foreach (var card in _playerCards)
             {
-                cards[0] = value[0];
-                cards[1] = value[1];
-                cards[2] = value[2];
-                cards[3] = value[3];
-                cards[4] = value[4];
-                cards[5] = value[5];
-                cards[6] = value[6];
+                if (!_nbOccurencesSuit.ContainsKey(card.Suit))
+                {
+                    _nbOccurencesSuit.Add(card.Suit, new List<Card>() { card });
+                }
+                else
+                {
+                    _nbOccurencesSuit[card.Suit].Add(card);
+                }
             }
         }
 
-        public Hand EvaluateHand()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitFlushList()
         {
+<<<<<<< HEAD
             SortCards();
             getNumberOfSuit();
             if (RoyalFlush())
@@ -117,53 +123,136 @@ namespace CasinoUI.Models.Poker
                         break;
                 }
             }
+=======
+            _flushList = _nbOccurencesSuit.FirstOrDefault(kvp => kvp.Value.Count >= 5).Value;
+            _flushList?.RemoveRange(5, _flushList.Count - 5);
+>>>>>>> Refactor_HandStrenght
         }
 
-        private bool RoyalFlush()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitNbOccurencesValue()
         {
-            if (isRoyal())
+            _nbOccurencesValue = new Dictionary<CardRank, List<Card>>();
+            foreach (var card in _playerCards)
             {
+<<<<<<< HEAD
                 if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
+=======
+                if (!_nbOccurencesValue.ContainsKey(card.Value))
                 {
-                    handStrength.Total = (int)Hand.RoyalFlush + (int)cards[6].Value;
-                    return true;
+                    _nbOccurencesValue.Add(card.Value, new List<Card>() { card });
+                }
+                else
+>>>>>>> Refactor_HandStrenght
+                {
+                    _nbOccurencesValue[card.Value].Add(card);
                 }
             }
+<<<<<<< HEAD
             return false;
+=======
+>>>>>>> Refactor_HandStrenght
         }
 
-        private bool StraightFlush()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitStraightList()
         {
+<<<<<<< HEAD
             return Flush() && Straight();
+=======
+            var tempDic = _nbOccurencesValue.ToList();
+            var straights = new List<List<Card>>()
+            {
+                new List<Card>() { GetCardMatchSuit(tempDic[0].Value) }
+            };
+            int listIndex = 0;
+
+            for (int i = 1; i < tempDic.Count; i++)
+            {
+                var kvp = tempDic[i];
+                int previous = (int)tempDic[i - 1].Key,
+                    current = (int)kvp.Key;
+                if (previous != current + 1)
+                {
+                    listIndex++;
+                    straights.Add(new List<Card>());
+                }
+                straights[listIndex].Add(GetCardMatchSuit(kvp.Value));
+            }
+
+            _straightList = straights.OrderByDescending(l => l.Count)
+                                     .FirstOrDefault(l => l.Count >= 5);
+            _straightList?.RemoveRange(5, _straightList.Count - 5);
         }
 
-        private bool FourOfKind()
+        private void InitComboMethods()
         {
-            // premiere 4 cards, ajouter la valeur des 4 cards et la derniere est la plus haute
-            if (cards[0].Value == cards[1].Value && cards[0].Value == cards[2].Value && cards[0].Value == cards[3].Value)
+            _comboMethods = new Dictionary<Hand, ComboMethod>()
             {
-                handStrength.Total = (int)Hand.FourKind + (int)cards[0].Value;
-                return true;
-            }
-            else if (cards[3].Value == cards[4].Value && cards[3].Value == cards[5].Value && cards[3].Value == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.FourKind + (int)cards[3].Value;
-                return true;
-            }
-
-            return false;
+                { Hand.RoyalFlush, RoyalFlush },
+                { Hand.StraightFlush, StraightFlush },
+                { Hand.FourKind, FourOfKind },
+                { Hand.FullHouse, FullHouse },
+                { Hand.Flush, Flush },
+                { Hand.Straight, Straight },
+                { Hand.ThreeKind, ThreeOfKind },
+                { Hand.TwoPairs, TwoPairs },
+                { Hand.OnePair, OnePair }
+            };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cards"></param>
+        /// <returns></returns>
+        private Card GetCardMatchSuit(List<Card> cards)
+        {
+            if (_flushList == null) return cards[0];
+            CardSuit suit = _flushList[0].Suit;
+            Card temp = cards.FirstOrDefault(c => c.Suit == suit);
+            return temp ?? cards[0];
+>>>>>>> Refactor_HandStrenght
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public HandStrength HandStrengths
+        {
+            get { return _handStrength; }
+            set { _handStrength = value; }
+
+        }
+
+<<<<<<< HEAD
         public bool FullHouse()
         {
             return HandHasPairs(2, 2) && HandHasPairs(1, 3);
+=======
+        /// <summary>
+        /// 
+        /// </summary>
+        public Card[] Cards
+        {
+            get { return _playerCards; }
+            set { _playerCards = value; }
+>>>>>>> Refactor_HandStrenght
         }
 
-        private bool Flush()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Hand EvaluateHand()
         {
-            bool checkCard = false;
-            foreach (var suiteCards in cards)
+            foreach (var combo in _comboMethods)
             {
+<<<<<<< HEAD
                 if (heartsSum == 5)
                 {
                     checkCard = CheckCardsFlush(suiteCards, Card.CardSuit.Hearts);
@@ -186,41 +275,39 @@ namespace CasinoUI.Models.Poker
                 }
             }
             return checkCard;
+=======
+                if (combo.Value())
+                {
+                    return combo.Key;
+                }
+            }
+            AddCardHandStrength(_playerCards.ToList());
+            return Hand.Nothing;        
+>>>>>>> Refactor_HandStrenght
         }
 
-        private bool Straight()
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un RoyalFlush
+        /// dans la main.
+        /// </summary>
+        /// <returns> True si un RoyalFlush present False si pas de RoyalFlush</returns>
+        private bool RoyalFlush()
         {
-            if (cards[0].Value + 1 == cards[1].Value &&
-                cards[1].Value + 1 == cards[2].Value &&
-                cards[2].Value + 1 == cards[3].Value &&
-                cards[3].Value + 1 == cards[4].Value)
+            if (_straightList != null && 
+                (int)_straightList[0].Value == 14 &&
+                _flushList != null)
             {
-                handStrength.Total = (int)Hand.Straight + (int)cards[4].Value;
-                return true;
-
+                if (Enumerable.SequenceEqual(_straightList.OrderByDescending(t => t),
+                    _flushList.OrderByDescending(t => t)))
+                {
+                    AddCardHandStrength(_straightList);
+                    return true;
+                }
             }
-            else if
-            (cards[1].Value + 1 == cards[2].Value &&
-            cards[2].Value + 1 == cards[3].Value &&
-            cards[3].Value + 1 == cards[4].Value &&
-            cards[4].Value + 1 == cards[5].Value)
-            {
-                handStrength.Total = (int)Hand.Straight + (int)cards[5].Value;
-                return true;
-            }
-            else if (cards[2].Value + 1 == cards[3].Value &&
-                cards[3].Value + 1 == cards[4].Value &&
-                cards[4].Value + 1 == cards[5].Value &&
-                cards[5].Value + 1 == cards[6].Value)
-            {
-                handStrength.Total = (int)Hand.Straight + (int)cards[6].Value;
-                return true;
-            }
-
             return false;
-
         }
 
+<<<<<<< HEAD
         public bool HandHasPairs(int numPairs, int nbSameValue)
         {
             Dictionary<int, int> occurences = new Dictionary<int, int>();
@@ -252,58 +339,160 @@ namespace CasinoUI.Models.Poker
         }
 
         private bool CheckCardsFlush(Card suiteCards, CardSuit suit)
+=======
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un StraightFlush
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un StraightFlush present False si pas de StraightFlush</returns>
+        private bool StraightFlush()
         {
-            if (suiteCards.Suit == suit)
+            if (_straightList != null && _flushList != null)
             {
-                if (handStrength.Total < (int)suiteCards.Value)
-                    handStrength.Total = (int)suiteCards.Value + (int)Hand.Straight;
+                if (Enumerable.SequenceEqual(_straightList.OrderByDescending(t => t), _flushList.OrderByDescending(t => t)))
+                {
+                    AddCardHandStrength(_straightList);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un FourOfKind
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un FourOfKind present False si pas de FourOfKind</returns>
+        private bool FourOfKind()
+        {
+            return HandHasSameCards(4);
+        }
+
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un FullHouse
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un FullHouse present False si pas de FullHouse</returns>
+        private bool FullHouse()
+        {
+            List<Card> threeKindTemp = _nbOccurencesValue.FirstOrDefault(kvp => kvp.Value.Count == 3).Value;
+            List<Card> twoKindTemp = _nbOccurencesValue.FirstOrDefault(kvp => kvp.Value.Count == 2).Value;
+            if (threeKindTemp == null || twoKindTemp == null)
+            {
+                return false;
+            }
+            AddCardHandStrength(twoKindTemp, threeKindTemp);
+            return true;
+        }
+
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un Flush
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un Flush present False si pas de Flush</returns>
+        private bool Flush()
+        {
+            if(_flushList != null)
+            {
+                AddCardHandStrength(_flushList);
                 return true;
             }
             return false;
         }
 
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un Straight
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un Straight present False si pas de Straight</returns>
+        private bool Straight()
+        {
+            if (_straightList != null)
+            {
+                AddCardHandStrength(_straightList);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un ThreeOfKind
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un ThreeOfKind present False si pas de ThreeOfKind</returns>
+        private bool ThreeOfKind()
+        {
+            return HandHasSameCards(3);
+        }
+
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un TwoPairs
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un TwoPairs present False si pas de TwoPairs</returns>
+        private bool TwoPairs()
+        {
+            var twoPairs = _nbOccurencesValue.Values.Where(l => l.Count == 2).Take(2).ToList();
+
+            if (twoPairs == null || twoPairs.Count < 2)
+            {
+                return false;
+            }
+            var comboList = twoPairs[0].Concat(twoPairs[1]).ToList();
+            var highCards = _playerCards.Except(comboList).ToList();
+            AddCardHandStrength(comboList, highCards);
+            return true;
+        }
+
+        /// <summary>
+        /// Méthode qui va regarder les cartes pour trouver s'il y a un OnePair
+        /// dans la main.
+        /// </summary>
+        /// <returns>True si un OnePair present False si pas de OnePair</returns>
+        private bool OnePair()
+>>>>>>> Refactor_HandStrenght
+        {
+            return HandHasSameCards(2);
+        }
+
+<<<<<<< HEAD
         private bool CheckCardsStraightFlush(CardSuit suit)
+=======
+        private bool HandHasSameCards(int nbSameValue)
+>>>>>>> Refactor_HandStrenght
         {
-            if (cards[0].Value + 1 == cards[1].Value &&
-                cards[1].Value + 1 == cards[2].Value &&
-                cards[2].Value + 1 == cards[3].Value &&
-                    cards[3].Value + 1 == cards[4].Value)
+            var pair = _nbOccurencesValue.FirstOrDefault(kvp => kvp.Value.Count == nbSameValue).Value;
+            if (pair == null)
             {
-                    handStrength.Total = (int)cards[4].Value + (int)Hand.StraightFlush;
-                return true;
+                return false;
             }
-            else if
-            (cards[1].Value + 1 == cards[2].Value &&
-            cards[2].Value + 1 == cards[3].Value &&
-            cards[3].Value + 1 == cards[4].Value &&
-            cards[4].Value + 1 == cards[5].Value)
-            {
-                    handStrength.Total = (int)cards[5].Value + (int)Hand.StraightFlush;
-                return true;
-            }
-            else if (cards[2].Value + 1 == cards[3].Value &&
-                cards[3].Value + 1 == cards[4].Value &&
-                cards[4].Value + 1 == cards[5].Value &&
-                cards[5].Value + 1 == cards[6].Value)
-            {
-                handStrength.Total = (int)cards[6].Value + (int)Hand.StraightFlush;
-                return true;
-            }
-
-            return false;
+            CardRank value = pair[0].Value;
+            var highCards = _playerCards.Except(pair).ToList();
+            AddCardHandStrength(pair, highCards);
+            return true;
         }
 
-        private bool isRoyal()
+        /// <summary>
+        /// Méthode qui prend en parametre 5 carte pour les ajouter a la
+        /// main gagnate. La dernier carte est aussi la plus fort soit la
+        /// HighCard
+        /// </summary>
+        /// <param name="comboCards">
+        /// AKA la plus fort highcard</param>
+        private void AddCardHandStrength(List<Card> comboCards, List<Card> highCards = null)
         {
-            if (cards[6].Value == Card.CardRank.Ace &&
-                cards[5].Value == Card.CardRank.King &&
-                cards[4].Value == Card.CardRank.Queen &&
-                cards[3].Value == Card.CardRank.Jack &&
-                cards[2].Value == Card.CardRank.Ten)
+            comboCards = comboCards.OrderByDescending(c => c.Value).ToList();
+            if (highCards == null)
             {
-                return true;
+                _handStrength.HandPlayer = comboCards.Take(5).ToArray();
+                _handStrength.HighCard = comboCards[0];
             }
-            return false;
+            else
+            {
+                _handStrength.HandPlayer = comboCards.Concat(highCards.Take(5 - comboCards.Count)).ToArray();
+                _handStrength.HighCard = highCards.OrderByDescending(c => c.Value).ToList()[0];
+            }            
         }
     }
 }
