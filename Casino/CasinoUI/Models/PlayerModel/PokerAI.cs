@@ -7,7 +7,7 @@ namespace CasinoUI.Models.Poker
 {
     public class PokerAI : PlayerAI, IPokerAction
     {
-        private TypePlayerPoker CurrentType;
+        private TypePlayerPoker CurrentType { get; set; }
 
         private List<Card> LisCardOnBoard;
         private List<Card> ListValue;
@@ -43,10 +43,10 @@ namespace CasinoUI.Models.Poker
 
         public PokerActionCode MakeDecision(GameState gameState, int amount_raise = 0)
         {
-            List<Card> hand = GetHand();
+            List<Card> hand = Hand;
             int TotalProb = AllProbability();
 
-            ChanceWinSamevalue(TotalProb, hand);
+            ChanceWinSamevalue(TotalProb);
             ChanceWinStraight(TotalProb, hand);
             ChanceWinFlush(TotalProb, hand);
 
@@ -126,21 +126,21 @@ namespace CasinoUI.Models.Poker
             }
         }
 
-        private void ChanceWinSamevalue(int TotalProb, List<Card> hand)
+        private void ChanceWinSamevalue(int TotalProb)
         {
-           int chance = 0;
+           double chance = 0;
 
            foreach (Tuple<int, int> combo in ComboValuePoss){
 
-                foreach (Card card in hand)
+                foreach (Card card in Hand)
                 {
                     chance = combo.Item1 == (int)card.Value 
-                        || combo.Item2 == (int)card.Value ?+ 1: chance;
+                        || combo.Item2 == (int)card.Value ?chance + 1: chance;
 
                 }
-
-                WinProb.Add(chance/TotalProb);
             }
+
+            WinProb.Add(chance / TotalProb);
         }
 
         private int AllProbability()
@@ -148,11 +148,15 @@ namespace CasinoUI.Models.Poker
 
             int debut = ListValue.Count + 1;
 
-            int Total = debut;
+            int Total =  0;
 
-            while(debut < 3) Total += (debut--);
+            while(debut > 1) Total += (debut--);
 
-            return 2*Total + ListStraightCombo.Count + 2;
+            Total = 2 * Total;
+            Total = IsStraight ? Total + ListStraightCombo.Count : Total;
+            Total = IsFlush ? Total + 2 : Total;
+
+            return Total;
 
         }
 

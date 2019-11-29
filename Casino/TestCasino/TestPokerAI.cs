@@ -601,8 +601,69 @@ namespace TestCasino
             Assert.AreEqual(Card.CardSuit.Diamonds, (Card.CardSuit)pokerTest.GetFieldOrProperty("FlushCombo"));
             ClearLists();
         }
+
+        private void CreateGameEnvironnment(List<Card> HandContent)
+        {
+            AddCardList(Card.CardRank.Queen, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Diamonds);
+
+            pokerCombo.CreateAllPoss(list);
+
+            pokerCombo.Hand = HandContent;
+        }
+
+        [TestMethod]
+        public void TestAllProbability()
+        {
+            AddCardList(Card.CardRank.Queen, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Diamonds);
+
+            pokerCombo.CreateAllPoss(list);
+
+            int nbr = (int) pokerTest.Invoke("AllProbability");
+
+            Assert.AreEqual(23, nbr);
+
+        }
+
+        [TestMethod]
+        public void TestChanceWinSameValue()
+        {
+
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+
+            int nbr = (int)pokerTest.Invoke("AllProbability");
+
+            object[] args = new object[1] {nbr};
+            pokerTest.Invoke("ChanceWinSamevalue", args);
+            List<double> vals = (List<double>)pokerTest.GetFieldOrProperty("WinProb");
+            double nbrExpect = 8.0 / 23.0;
+
+            Assert.AreEqual(nbrExpect,vals[0]);
+
+        }
+        [TestMethod]
+        public void TestChanceWinStraight()
+        {
+
+        }
+        [TestMethod]
+        public void TestChanceWinFlush()
+        { 
+
+        }
+            [TestMethod]
+        public void TestReturnPokerAction()
+        {
+
+        }
     }
-
-
     }
 
