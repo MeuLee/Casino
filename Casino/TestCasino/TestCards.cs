@@ -18,9 +18,9 @@ namespace TestCasino
         [TestMethod]
         public void NoImageNull()
         {
-            var nbImageNull = _stack.Cards.Where(c => c.Image == null);
+            int nbImageNull = _stack.Cards.Count(c => c.Image == null);
 
-            Assert.AreEqual(0, nbImageNull.Count());
+            Assert.AreEqual(0, nbImageNull);
         }
 
         [TestMethod]

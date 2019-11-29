@@ -9,7 +9,7 @@ namespace CasinoUI.Views.Map.Tiles
         internal ChairTile(int x, int y, BitmapImage image) : base(x, y, image)
         {
             OnMovedOver += MovedOver;
-            MiniMapBrush = Brushes.Brown;
+            MiniMapBrush = System.Windows.Media.Brushes.Brown;
             MiniMapPen = new Pen(MiniMapBrush, PEN_WIDTH);
         }
 
