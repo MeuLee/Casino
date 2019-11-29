@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace CasinoUI.Models.Poker.Evaluator
 {
-    public struct HandStrength
+    public class HandStrength
     {
-        public HandStrength(int tailleMain)
+        public HandStrength()
         {
-            HandPlayer = new Card[tailleMain];
             HighCard = null;
             Total = 0;
         }

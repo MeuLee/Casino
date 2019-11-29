@@ -13,13 +13,12 @@ namespace CasinoUI.Models.Poker
     {
         private delegate bool ComboMethod();
         private Dictionary<Hand, ComboMethod> _comboMethods;
-        private static readonly int tailleMainTotal = 5;
         private Card[] _playerCards;
         private HandStrength _handStrength;
-        Dictionary<CardSuit, List<Card>> _nbOccurencesSuit;
-        List<Card> _flushList = null;
-        Dictionary<CardRank, List<Card>> _nbOccurencesValue;
-        List<Card> _straightList = null;
+        private Dictionary<CardSuit, List<Card>> _nbOccurencesSuit;
+        private List<Card> _flushList = null;
+        private Dictionary<CardRank, List<Card>> _nbOccurencesValue;
+        private List<Card> _straightList = null;
 
         /// <summary>
         /// 
@@ -28,7 +27,7 @@ namespace CasinoUI.Models.Poker
         public HandEvaluator(Card[] HandPlayer)
         {
             _playerCards = HandPlayer.OrderByDescending(c => (int)c.Value).ToArray();
-            _handStrength = new HandStrength(tailleMainTotal);
+            _handStrength = new HandStrength();
             InitNbOccurencesSuit();
             InitFlushList();
             InitNbOccurencesValue();
@@ -55,78 +54,10 @@ namespace CasinoUI.Models.Poker
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private void InitFlushList()
         {
-<<<<<<< HEAD
-            SortCards();
-            getNumberOfSuit();
-            if (RoyalFlush())
-            {
-                return Hand.RoyalFlush;
-            }
-            else if (StraightFlush())
-            {
-                return Hand.StraightFlush;
-            }
-            else if (HandHasPairs(1, 4))
-            {
-                return Hand.FourKind;
-            }
-            else if (FullHouse())
-            {
-                return Hand.FullHouse;
-            }
-            else if (Flush())
-            {
-                return Hand.Flush;
-            }
-            else if (Straight())
-            {
-                return Hand.Straight;
-            }
-            else if (HandHasPairs(1, 3))
-            {
-                return Hand.ThreeKind;
-            }
-            else if (HandHasPairs(2, 2))
-            {
-                return Hand.TwoPairs;
-            }
-            else if (HandHasPairs(1, 2))
-            {
-                return Hand.OnePair;
-            }
-
-            handStrength.HighCard = (int)cards[6].Value;
-            return Hand.Nothing;
-        }
-        private void getNumberOfSuit()
-        {
-            foreach (var element in cards)
-            {
-                switch (element.Suit)
-                {
-                    case Card.CardSuit.Hearts:
-                        heartsSum++;
-                        break;
-                    case Card.CardSuit.Diamonds:
-                        diamondSum++;
-                        break;
-                    case Card.CardSuit.Clubs:
-                        clubSum++;
-                        break;
-                    case Card.CardSuit.Spades:
-                        spadesSum++;
-                        break;
-                }
-            }
-=======
             _flushList = _nbOccurencesSuit.FirstOrDefault(kvp => kvp.Value.Count >= 5).Value;
             _flushList?.RemoveRange(5, _flushList.Count - 5);
->>>>>>> Refactor_HandStrenght
         }
 
         /// <summary>
@@ -137,23 +68,15 @@ namespace CasinoUI.Models.Poker
             _nbOccurencesValue = new Dictionary<CardRank, List<Card>>();
             foreach (var card in _playerCards)
             {
-<<<<<<< HEAD
-                if (heartsSum == 5 || diamondSum == 5 || clubSum == 5 || spadesSum == 5)
-=======
                 if (!_nbOccurencesValue.ContainsKey(card.Value))
                 {
                     _nbOccurencesValue.Add(card.Value, new List<Card>() { card });
                 }
                 else
->>>>>>> Refactor_HandStrenght
                 {
                     _nbOccurencesValue[card.Value].Add(card);
                 }
             }
-<<<<<<< HEAD
-            return false;
-=======
->>>>>>> Refactor_HandStrenght
         }
 
         /// <summary>
@@ -161,9 +84,6 @@ namespace CasinoUI.Models.Poker
         /// </summary>
         private void InitStraightList()
         {
-<<<<<<< HEAD
-            return Flush() && Straight();
-=======
             var tempDic = _nbOccurencesValue.ToList();
             var straights = new List<List<Card>>()
             {
@@ -216,7 +136,6 @@ namespace CasinoUI.Models.Poker
             CardSuit suit = _flushList[0].Suit;
             Card temp = cards.FirstOrDefault(c => c.Suit == suit);
             return temp ?? cards[0];
->>>>>>> Refactor_HandStrenght
         }
 
         /// <summary>
@@ -229,21 +148,6 @@ namespace CasinoUI.Models.Poker
 
         }
 
-<<<<<<< HEAD
-        public bool FullHouse()
-        {
-            return HandHasPairs(2, 2) && HandHasPairs(1, 3);
-=======
-        /// <summary>
-        /// 
-        /// </summary>
-        public Card[] Cards
-        {
-            get { return _playerCards; }
-            set { _playerCards = value; }
->>>>>>> Refactor_HandStrenght
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -252,38 +156,13 @@ namespace CasinoUI.Models.Poker
         {
             foreach (var combo in _comboMethods)
             {
-<<<<<<< HEAD
-                if (heartsSum == 5)
-                {
-                    checkCard = CheckCardsFlush(suiteCards, Card.CardSuit.Hearts);
-
-                }
-                else if (diamondSum == 5)
-                {
-                    checkCard = CheckCardsFlush(suiteCards, Card.CardSuit.Diamonds);
-
-                }
-                else if (clubSum == 5)
-                {
-                    checkCard = CheckCardsFlush(suiteCards, Card.CardSuit.Clubs);
-
-                }
-                else if (spadesSum == 5)
-                {
-                    checkCard = CheckCardsFlush(suiteCards, Card.CardSuit.Spades);
-
-                }
-            }
-            return checkCard;
-=======
                 if (combo.Value())
                 {
                     return combo.Key;
                 }
             }
             AddCardHandStrength(_playerCards.ToList());
-            return Hand.Nothing;        
->>>>>>> Refactor_HandStrenght
+            return Hand.Nothing;
         }
 
         /// <summary>
@@ -297,8 +176,8 @@ namespace CasinoUI.Models.Poker
                 (int)_straightList[0].Value == 14 &&
                 _flushList != null)
             {
-                if (Enumerable.SequenceEqual(_straightList.OrderByDescending(t => t),
-                    _flushList.OrderByDescending(t => t)))
+                if (Enumerable.SequenceEqual(_straightList?.OrderByDescending(t => t),
+                                             _flushList?.OrderByDescending(t => t)))
                 {
                     AddCardHandStrength(_straightList);
                     return true;
@@ -307,39 +186,6 @@ namespace CasinoUI.Models.Poker
             return false;
         }
 
-<<<<<<< HEAD
-        public bool HandHasPairs(int numPairs, int nbSameValue)
-        {
-            Dictionary<int, int> occurences = new Dictionary<int, int>();
-            foreach (var card in cards)
-            {
-                if (!occurences.ContainsKey((int)card.Value))
-                {
-                    occurences.Add((int)card.Value, 1);
-                }
-                else
-                {
-                    occurences[(int)card.Value]++;
-                }
-            }
-            if (occurences.Values.Count(v => v >= nbSameValue) >= numPairs)
-            {
-                handStrength.Total = occurences.Last(v => v.Value >= numPairs).Key;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void SortCards()
-        {
-            cards = cards.OrderBy(c => (int)c.Value).ToArray();
-        }
-
-        private bool CheckCardsFlush(Card suiteCards, CardSuit suit)
-=======
         /// <summary>
         /// Méthode qui va regarder les cartes pour trouver s'il y a un StraightFlush
         /// dans la main.
@@ -451,16 +297,11 @@ namespace CasinoUI.Models.Poker
         /// </summary>
         /// <returns>True si un OnePair present False si pas de OnePair</returns>
         private bool OnePair()
->>>>>>> Refactor_HandStrenght
         {
             return HandHasSameCards(2);
         }
 
-<<<<<<< HEAD
-        private bool CheckCardsStraightFlush(CardSuit suit)
-=======
         private bool HandHasSameCards(int nbSameValue)
->>>>>>> Refactor_HandStrenght
         {
             var pair = _nbOccurencesValue.FirstOrDefault(kvp => kvp.Value.Count == nbSameValue).Value;
             if (pair == null)
