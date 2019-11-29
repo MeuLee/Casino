@@ -153,6 +153,11 @@ namespace CasinoUI.Models.Blackjack
             Player tempP = GetHuman();
             CardStack.PlayerDrawCard(tempP);
             tempP.GetGameType<IBlackjackAction>().PlayerStand = true;
+            if (Bet *2 > tempP.Money)
+            {
+                Bet = tempP.Money;
+                return;
+            }
             Bet *= 2;
         }
 

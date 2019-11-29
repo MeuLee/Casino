@@ -27,6 +27,7 @@ namespace CasinoUI.Controllers
                 _view.TxbBet.Text = _currentBet.ToString();
             }
         }
+
         private static readonly BitmapImage _casinoChip1 = Properties.Resources.PokerEntrer.ToBitmapImage();
         private static readonly BitmapImage _casinoChip2 = Properties.Resources.redChip.ToBitmapImage();
         private readonly HumanPlayer _humanPlayer;
@@ -45,6 +46,11 @@ namespace CasinoUI.Controllers
             AddEventsOnUIControls();
             SetImages();
             CurrentBet = _minimumBet;
+
+            _view.BtnHit.Visibility = Visibility.Hidden;
+            _view.BtnInsurance.Visibility = Visibility.Hidden;
+            _view.BtnStand.Visibility = Visibility.Hidden;
+            _view.BtnDoubleDown.Visibility = Visibility.Hidden;
         }
 
         private void AddEventsOnUIControls()
@@ -69,8 +75,19 @@ namespace CasinoUI.Controllers
 
         private void BtnBet_Click(object sender, RoutedEventArgs e)
         {
+            _view.BtnHit.Visibility = Visibility.Visible;
+            _view.BtnInsurance.Visibility = Visibility.Visible;
+            _view.BtnStand.Visibility = Visibility.Visible;
+            _view.BtnDoubleDown.Visibility = Visibility.Visible;
+            _view.BtnIncreaseBet.Visibility = Visibility.Hidden;
+            _view.BtnReduceBet.Visibility = Visibility.Hidden;
+            _view.BtnBet.Visibility = Visibility.Hidden;
+
             _model.CardStack = new GameCardStack();
             _model.DistributeCards();
+            _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));
+
+            _model.Bet = CurrentBet;
         }
 
         private void BtnBet_MouseLeave(object sender, MouseEventArgs e)
@@ -132,8 +149,12 @@ namespace CasinoUI.Controllers
         private void Hit_Click(object sender, RoutedEventArgs e)
         {
             _model.Hit();
+            if (_humanPlayer.GetGameType<IBlackjackAction>().PlayerStand)
+            {
+                HideWhenStand();
+            }
             _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));
-            _model.AIPlays();
+            _model.AIPlays();                   
         }
 
         private void Insurance_Click(object sender, RoutedEventArgs e)
@@ -145,17 +166,27 @@ namespace CasinoUI.Controllers
         {
             _model.DoubleDown();
             _model.AIPlays();
+
+            HideWhenStand();
+            CurrentBet = _model.Bet;
         }
 
         private void Stand_Click(object sender, RoutedEventArgs e)
         {
             _model.Stand();
             _model.AIPlays();
+            HideWhenStand();
         }
 
-        private void Bet_Click(object sender, RoutedEventArgs e)
+        private void HideWhenStand()
         {
-
+            _view.BtnHit.Visibility = Visibility.Hidden;
+            _view.BtnInsurance.Visibility = Visibility.Hidden;
+            _view.BtnStand.Visibility = Visibility.Hidden;
+            _view.BtnDoubleDown.Visibility = Visibility.Hidden;
+            _view.BtnBet.Visibility = Visibility.Visible;
+            _view.BtnIncreaseBet.Visibility = Visibility.Visible;
+            _view.BtnReduceBet.Visibility = Visibility.Visible;
         }
 
         private void SetImages()
