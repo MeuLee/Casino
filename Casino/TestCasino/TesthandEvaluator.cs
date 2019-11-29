@@ -43,11 +43,11 @@ namespace TestCasino
         [TestMethod]
         public void TestRoyalFlushMoreFlush()
         {
-            jeuDeCarte[0] = mainExpected[4] = new Card(Card.CardRank.Ace, Card.CardSuit.Hearts);
-            jeuDeCarte[1] = mainExpected[3] = new Card(Card.CardRank.King, Card.CardSuit.Hearts);
-            jeuDeCarte[2] = mainExpected[2] = new Card(Card.CardRank.Queen, Card.CardSuit.Hearts);
-            jeuDeCarte[3] = mainExpected[1] = new Card(Card.CardRank.Jack, Card.CardSuit.Hearts);
-            jeuDeCarte[4] = mainExpected[0] = new Card(Card.CardRank.Ten, Card.CardSuit.Hearts);
+            jeuDeCarte[0] = new Card(Card.CardRank.Ace, Card.CardSuit.Hearts);
+            jeuDeCarte[1] = new Card(Card.CardRank.King, Card.CardSuit.Hearts);
+            jeuDeCarte[2] = new Card(Card.CardRank.Queen, Card.CardSuit.Hearts);
+            jeuDeCarte[3] = new Card(Card.CardRank.Jack, Card.CardSuit.Hearts);
+            jeuDeCarte[4] = new Card(Card.CardRank.Ten, Card.CardSuit.Hearts);
             jeuDeCarte[5] = new Card(Card.CardRank.Two, Card.CardSuit.Hearts);
             jeuDeCarte[6] = new Card(Card.CardRank.Five, Card.CardSuit.Diamonds);
 
@@ -1430,22 +1430,6 @@ namespace TestCasino
             TestVerifierHand(mainExpected, evaluationCard.HandStrengths.HandPlayer);
         }
 
-        [TestMethod]
-        public void TestStraightList()
-        {
-            TestStraightList(InitCardArr(Card.CardSuit.Clubs, 3, 4, 5, 6, 7, 9, 10),
-                             new int[] { 7, 6, 5, 4, 3 });
-
-            TestStraightList(InitCardArr(Card.CardSuit.Clubs, 3, 4, 6, 7, 9, 10),
-                             null);
-            
-            TestStraightList(InitCardArr(Card.CardSuit.Clubs, 3, 3, 4, 5, 6, 7, 9, 10, 11, 12),
-                             new int[] { 7, 6, 5, 4, 3 });
-
-            TestStraightList(InitCardArr(Card.CardSuit.Clubs, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14),
-                             new int[] { 14, 13, 12, 11, 10, 9 });
-        }
-
         /// <summary>
         /// Tester deux main pour savoir s'il elles sont pareil
         /// </summary>
@@ -1454,36 +1438,6 @@ namespace TestCasino
         private void TestVerifierHand(Card[] cardArr, Card[] cardExpected)
         {
             Assert.IsTrue(Enumerable.SequenceEqual(cardArr.OrderBy(c => c.Suit).ThenBy(c => c.Value), cardExpected.OrderBy(c => c.Suit).ThenBy(c => c.Value)));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cardArr"></param>
-        /// <param name="expectedVals"></param>
-        private void TestStraightList(Card[] cardArr, int[] expectedVals)
-        {
-            var privateObj = new PrivateObject(new HandEvaluator(cardArr));
-            int[] actualVals = (privateObj.GetFieldOrProperty("_straightList") as
-                List<Card>)?.Select(c => (int)c.Value).ToArray();
-            CollectionAssert.AreEqual(expectedVals, actualVals);
-        }
-
-
-        /// <summary>
-        /// Creates a Card array with the specified suit and specified values.
-        /// </summary>
-        /// <param name="suit">Suit to be assigned to all cards</param>
-        /// <param name="values">Array of values to be assigned to all cards.</param>
-        /// <returns>The newly created Card array.</returns>
-        private Card[] InitCardArr(Card.CardSuit suit, params int[] values)
-        {
-            var arr = new Card[values.Length];
-            for (int i = 0; i < values.Length; i++)
-            {
-                arr[i] = new Card((Card.CardRank)values[i], suit, null);
-            }
-            return arr;
         }
     }
 }

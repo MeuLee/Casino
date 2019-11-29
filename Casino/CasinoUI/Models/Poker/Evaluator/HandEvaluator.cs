@@ -58,7 +58,6 @@ namespace CasinoUI.Models.Poker
         private void InitFlushList()
         {
             _flushList = _nbOccurencesSuit.FirstOrDefault(kvp => kvp.Value.Count >= 5).Value;
-            _flushList?.RemoveRange(5, _flushList.Count - 5);
         }
 
         /// <summary>
@@ -107,7 +106,6 @@ namespace CasinoUI.Models.Poker
 
             _straightList = straights.OrderByDescending(l => l.Count)
                                      .FirstOrDefault(l => l.Count >= 5);
-            _straightList?.RemoveRange(5, _straightList.Count - 5);
         }
 
         /// <summary>
@@ -238,7 +236,7 @@ namespace CasinoUI.Models.Poker
         private bool FourOfKind()
         {
             List<Card> fourKindTemp;
-            Card highCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Clubs);
+            Card highCardTemp = new Card(CardRank.Two, CardSuit.Clubs);
             foreach (var typeCard in _nbOccurencesValue)
             {
                 if (typeCard.Value.Count == 4)
@@ -331,8 +329,8 @@ namespace CasinoUI.Models.Poker
         private bool ThreeOfKind()
         {
             List<Card> threeKindTemp;
-            Card highCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Clubs);
-            Card secondhighCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Diamonds);
+            Card highCardTemp = new Card(CardRank.Two, CardSuit.Clubs);
+            Card secondhighCardTemp = new Card(CardRank.Two, CardSuit.Diamonds);
             foreach (var typeCard in _nbOccurencesValue)
             {
                 if(typeCard.Value.Count == 3)
@@ -367,7 +365,7 @@ namespace CasinoUI.Models.Poker
         {
             List<Card> twoKindTemp = null;
             List<Card> secondTwoKindTemp = null;
-            Card highCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Clubs);
+            Card highCardTemp = new Card(CardRank.Two, CardSuit.Clubs);
             foreach (var typeCard in _nbOccurencesValue)
             {
                 if (typeCard.Value.Count == 2)
@@ -409,40 +407,48 @@ namespace CasinoUI.Models.Poker
         /// <returns>True si un OnePair present False si pas de OnePair</returns>
         private bool OnePair()
         {
-            List<Card> onePairTemp;
-            Card highCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Clubs);
-            Card secondhighCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Diamonds);
-            Card thridhighCardTemp = new Card(Card.CardRank.Two, Card.CardSuit.Diamonds);
-            foreach (var typeCard in _nbOccurencesValue)
+            //List<Card> onePairTemp;
+            //Card highCardTemp = new Card(CardRank.Two, CardSuit.Clubs);
+            //Card secondhighCardTemp = new Card(CardRank.Two, CardSuit.Diamonds);
+            //Card thridhighCardTemp = new Card(CardRank.Two, CardSuit.Diamonds);
+            //foreach (var typeCard in _nbOccurencesValue)
+            //{
+            //    if (typeCard.Value.Count == 2)
+            //    {
+            //        onePairTemp = typeCard.Value.ToList();
+
+            //        foreach (var playerCard in _playerCards)
+            //        {
+            //            if (playerCard.Value != typeCard.Key &&
+            //                playerCard.Value >= highCardTemp.Value)
+            //            {
+            //                highCardTemp = playerCard;
+            //            }
+            //            else if (playerCard.Value != typeCard.Key &&
+            //               playerCard.Value >= secondhighCardTemp.Value)
+            //            {
+            //                secondhighCardTemp = playerCard;
+            //            }else if(playerCard.Value != typeCard.Key &&
+            //               playerCard.Value >= thridhighCardTemp.Value)
+            //            {
+            //                thridhighCardTemp = playerCard;
+            //            }
+            //        }
+            //        AddCardHandStrength(onePairTemp[0], onePairTemp[1],
+            //            thridhighCardTemp, secondhighCardTemp, highCardTemp);
+            //        return true;
+            //    }
+            //}
+            //return false;
+            var pair = _nbOccurencesValue.FirstOrDefault(kvp => kvp.Value.Count == 2).Value;
+            if (pair == null)
             {
-                if (typeCard.Value.Count == 2)
-                {
-                    onePairTemp = typeCard.Value.ToList();
-
-                    foreach (var playerCard in _playerCards)
-                    {
-                        if (playerCard.Value != typeCard.Key &&
-                            playerCard.Value >= highCardTemp.Value)
-                        {
-                            highCardTemp = playerCard;
-                        }
-                        else if (playerCard.Value != typeCard.Key &&
-                           playerCard.Value >= secondhighCardTemp.Value)
-                        {
-                            secondhighCardTemp = playerCard;
-                        }else if(playerCard.Value != typeCard.Key &&
-                           playerCard.Value >= thridhighCardTemp.Value)
-                        {
-                            thridhighCardTemp = playerCard;
-                        }
-                    }
-                    AddCardHandStrength(onePairTemp[0], onePairTemp[1],
-                        thridhighCardTemp, secondhighCardTemp, highCardTemp);
-                    return true;
-                }
+                return false;
             }
-            return false;
-
+            CardRank value = pair[0].Value;
+            var highCards = _playerCards.Where(c => c.Value != value).OrderByDescending(c => c.Value).Take(3).ToList();
+            AddCardHandStrength(pair[0], pair[1], highCards[2], highCards[1], highCards[0]);
+            return true;
         }
 
         /// <summary>
