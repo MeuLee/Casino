@@ -1,5 +1,4 @@
-﻿using CasinoUI.Models.Cards;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,29 +8,7 @@ namespace CasinoUI.Models.Poker.Evaluator
 {
     public struct HandStrength
     {
-        public HandStrength(int tailleMain)
-        {
-            HandPlayer = new Card[tailleMain];
-            HighCard = null;
-            Total = 0;
-        }
-
-        public Card[] HandPlayer { get; set; }
-        private int Total { get; set; }
-        public Card HighCard { get; set; }
-
-        public int CalculerTotal()
-        {
-            return TrouverTotal();
-        }
-
-        private int TrouverTotal()
-        {
-            foreach (Card cardMain in HandPlayer)
-            {
-                Total += (int)cardMain.Value;
-            }
-            return Total;
-        }
+        public int Total { get; set; }
+        public int HighCard { get; set; }
     }
 }
