@@ -58,6 +58,7 @@ namespace CasinoUI.Models.Poker
         private void InitFlushList()
         {
             _flushList = _nbOccurencesSuit.FirstOrDefault(kvp => kvp.Value.Count >= 5).Value;
+            _flushList?.RemoveRange(5, _flushList.Count - 5);
         }
 
         /// <summary>
@@ -106,6 +107,7 @@ namespace CasinoUI.Models.Poker
 
             _straightList = straights.OrderByDescending(l => l.Count)
                                      .FirstOrDefault(l => l.Count >= 5);
+            _straightList?.RemoveRange(5, _straightList.Count - 5);
         }
 
         /// <summary>
