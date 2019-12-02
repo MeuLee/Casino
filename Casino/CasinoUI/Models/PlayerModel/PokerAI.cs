@@ -43,12 +43,11 @@ namespace CasinoUI.Models.Poker
 
         public PokerActionCode MakeDecision(GameState gameState, int amount_raise = 0)
         {
-            List<Card> hand = Hand;
             int TotalProb = AllProbability();
 
             ChanceWinSamevalue(TotalProb);
-            ChanceWinStraight(TotalProb, hand);
-            ChanceWinFlush(TotalProb, hand);
+            ChanceWinStraight(TotalProb);
+            ChanceWinFlush(TotalProb);
 
             return ReturnPokerAction(amount_raise, gameState);
         }
@@ -93,17 +92,17 @@ namespace CasinoUI.Models.Poker
 
         private double ChanceWinRaise(int amount_raise)
         {
-            return 1 - amount_raise/Money;
+            return 1.0 - amount_raise/Money;
         }
 
-        private void ChanceWinFlush(int TotalProb, List<Card> hand)
+        private void ChanceWinFlush(int TotalProb)
         {
-            int chance = 0;
+            double chance = 0;
             if (IsFlush)
             {
-                foreach (Card card in hand)
+                foreach (Card card in Hand)
                 {
-                    chance = FlushCombo == card.Suit ? +1 : chance;
+                    chance = FlushCombo == card.Suit ? chance + 1 : chance;
                 }
 
                 chance = chance == 1 ? 0 : chance;
@@ -112,14 +111,14 @@ namespace CasinoUI.Models.Poker
             }
         }
 
-        private void ChanceWinStraight(int TotalProb, List<Card> hand)
+        private void ChanceWinStraight(int TotalProb)
         {
-            int chance = 0;
+            double chance = 0;
             if (IsStraight)
             {
-                foreach (Card card in hand)
+                foreach (Card card in Hand)
                 {
-                    chance = ListStraightCombo.Contains((int)card.Value) ? +1 : chance;
+                    chance = ListStraightCombo.Contains((int)card.Value) ? chance + 1 : chance;
                 }
 
                 WinProb.Add(chance /TotalProb);

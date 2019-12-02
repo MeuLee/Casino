@@ -613,6 +613,22 @@ namespace TestCasino
             pokerCombo.Hand = HandContent;
         }
 
+        private void AssertSingleTestChanceWin(String method, double expectNbr)
+        {
+            int nbr = (int)pokerTest.Invoke("AllProbability");
+
+            object[] args = new object[1] { nbr };
+            pokerTest.Invoke(method, args);
+            List<double> vals = (List<double>)pokerTest.GetFieldOrProperty("WinProb");
+
+            Assert.AreEqual(expectNbr, vals[0]);
+        }
+
+        private void AssertMultTestChanceWinf()
+        {
+
+        }
+
         [TestMethod]
         public void TestAllProbability()
         {
@@ -639,30 +655,95 @@ namespace TestCasino
             };
             CreateGameEnvironnment(HandContent);
 
-            int nbr = (int)pokerTest.Invoke("AllProbability");
-
-            object[] args = new object[1] {nbr};
-            pokerTest.Invoke("ChanceWinSamevalue", args);
-            List<double> vals = (List<double>)pokerTest.GetFieldOrProperty("WinProb");
-            double nbrExpect = 8.0 / 23.0;
-
-            Assert.AreEqual(nbrExpect,vals[0]);
+            AssertSingleTestChanceWin("ChanceWinSamevalue", 8.0 / 23.0);
 
         }
         [TestMethod]
         public void TestChanceWinStraight()
         {
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Ten, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.Nine, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
 
+            AssertSingleTestChanceWin("ChanceWinStraight", 2.0 / 23.0);
         }
         [TestMethod]
         public void TestChanceWinFlush()
-        { 
-
-        }
-            [TestMethod]
-        public void TestReturnPokerAction()
         {
 
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+
+            AssertSingleTestChanceWin("ChanceWinFlush", 2.0 / 23.0);
+
+        }
+        [TestMethod]
+        public void TestChanceWinRaise()
+        {
+
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+
+            int nbr = (int)pokerTest.Invoke("AllProbability");
+            object[] args = new object[1] { nbr };
+
+            pokerTest.Invoke("ChanceWinSamevalue", args);
+            pokerTest.Invoke("ChanceWinStraight", args);
+            pokerTest.Invoke("ChanceWinFlush", args);
+
+            double nbrExpect =(double) pokerTest.Invoke("ChanceWinRaise", args);
+
+            Assert.AreEqual(2.0 / 23.0, nbrExpect);
+
+        }
+
+        [TestMethod]
+        public void TestCalculChance()
+        {
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+
+            int nbr = (int)pokerTest.Invoke("AllProbability");
+
+            object[] args = new object[1] { nbr };
+
+            pokerTest.Invoke("ChanceWinSamevalue", args);
+            pokerTest.Invoke("ChanceWinStraight", args);
+            pokerTest.Invoke("ChanceWinFlush", args);
+        }
+
+        [TestMethod]
+        public void TestReturnPokerAction()
+        {
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+
+            int nbr = (int)pokerTest.Invoke("AllProbability");
+
+            object[] args = new object[1] { nbr };
+
+            pokerTest.Invoke("ChanceWinSamevalue", args);
+            pokerTest.Invoke("ChanceWinStraight", args);
+            pokerTest.Invoke("ChanceWinFlush", args);
         }
     }
     }
