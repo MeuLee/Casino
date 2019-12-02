@@ -79,9 +79,10 @@
                 <Image x:Name="ImgChip10" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
-        <StackPanel Name="AICards" Orientation="Horizontal" HorizontalAlignment="Left"
+        <StackPanel Name="AICards" Orientation="Horizontal" HorizontalAlignment="Center"
                     Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2"></StackPanel>
-        <StackPanel Name="HumanCards" Orientation="Horizontal" HorizontalAlignment="Left"
-                    Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"></StackPanel>
+        <StackPanel Name="HumanCards" Orientation="Horizontal" HorizontalAlignment="Center"
+                    Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"
+                    Height="auto" Width="auto"></StackPanel>
     </Grid>
 </Window>

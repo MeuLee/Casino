@@ -16,11 +16,6 @@ namespace CasinoUI.Models.Blackjack
 
         public int Bet { get; set; }
 
-        public bool PlayerStand { get; set; }
-        public bool DealerStand { get; set; }
-
-        public bool RoundEnd { get; set; }
-
         BlackjackController BJController;
 
         public BlackjackLogic(HumanPlayer human, BlackjackController blackjackController)
@@ -32,16 +27,14 @@ namespace CasinoUI.Models.Blackjack
         }
 
         public void DistributeCards()
-        {
-            PlayerStand = false;
-            DealerStand = false;
+        {            
             foreach (Player player in _players)
             {
+                player.GetHand().Clear();
                 CardStack.PlayerDrawCard(player);
                 CardStack.PlayerDrawCard(player);
                 SetHandValue(player);
             }
-            RoundEnd = false;
         }
 
         private void SetHandValue(Player player)

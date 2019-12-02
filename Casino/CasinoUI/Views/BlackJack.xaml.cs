@@ -32,22 +32,22 @@ namespace CasinoUI.Views
         public void CreateNewImageSpace(Player humanPlayer, Player aiPlayer)
         {
             List<Card> _humanCards = humanPlayer.GetHand();
-            AddCardImgUI(_humanCards, _imgHuman, 239, 65, "human");
+            AddCardImgUI(_humanCards, _imgHuman, "human");
 
             List<Card> _aiCards = aiPlayer.GetHand();
             
-            AddCardImgUI(_aiCards, _imgAi, 24, 280, "ai");
+            AddCardImgUI(_aiCards, _imgAi, "ai");
             if (_aiCards.Count == 2)
             {
                 _imgAi[0].Source = Properties.Resources.Carte_Dos.ToBitmapImage();
             }
         }
 
-        private void AddCardImgUI(List<Card> cards, List<Image> images, int thiccValue1, int thiccValue2, String playerString)
+        private void AddCardImgUI(List<Card> cards, List<Image> images, String playerString)
         {            
             for (int i = images.Count; i < cards.Count; i++)
             {
-                Image image = new Image() { Height = 76, Width = 50, Margin = new Thickness(193 + i * 20, thiccValue1, 223 - i * 20, thiccValue2) };
+                Image image = new Image() { Height = 76, Width = 50 };
                 image.SetValue(Grid.ColumnSpanProperty, 2);
                 image.SetValue(Grid.ColumnProperty, 2);
                 image.Source = cards[i].Image.ToBitmapImage();
@@ -69,8 +69,12 @@ namespace CasinoUI.Views
         }
 
         public void ClearImgs()
-        {
-
+        {                            
+            _imgAi.Clear();
+            _imgHuman.Clear();
+            AICards.Children.Clear();
+            HumanCards.Children.Clear();
+            Grid.UpdateLayout();
         }
     }
 }

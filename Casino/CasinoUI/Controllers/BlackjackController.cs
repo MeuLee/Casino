@@ -82,7 +82,8 @@ namespace CasinoUI.Controllers
             _view.BtnIncreaseBet.Visibility = Visibility.Hidden;
             _view.BtnReduceBet.Visibility = Visibility.Hidden;
             _view.BtnBet.Visibility = Visibility.Hidden;
-            
+
+            _view.ClearImgs();
             _model.CardStack = new GameCardStack();
             _model.DistributeCards();
             _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));
