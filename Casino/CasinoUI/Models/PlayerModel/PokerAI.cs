@@ -528,29 +528,31 @@ namespace CasinoUI.Models.Poker
             LisCardOnBoard.Sort((a, b) => b.Value.CompareTo(a.Value));
         }
 
-        public void PokerAllIn()
+        public int PokerAllIn()
         {
-            throw new System.NotImplementedException();
+            MoneyCall = Money;
+            return MoneyCall;
         }
 
         public int PokerCall(int currentRaise)
         {
-            throw new System.NotImplementedException();
+            MoneyCall = currentRaise;
+            return MoneyCall;
         }
 
         public void PokerCheck()
         {
-            throw new System.NotImplementedException();
         }
 
         public void PokerFold()
         {
-            throw new System.NotImplementedException();
+            CurrentType = TypePlayerPoker.NULL;
         }
 
         public int PokerRaise(int moneyRaised)
         {
-            throw new System.NotImplementedException();
+            MoneyCall += moneyRaised;
+            return MoneyCall;
         }
     }
 }

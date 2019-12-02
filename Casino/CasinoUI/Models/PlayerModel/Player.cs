@@ -7,6 +7,7 @@ namespace CasinoUI.Models.PlayerModel
     public class Player
     {
         public int Money { get; set; }
+        public int MoneyCall { get; set; }
 
         /// <summary>
         /// Throws: System.Exception, if the current (this) player is not a HumanPlayer or a PlayerAI. 
