@@ -102,6 +102,7 @@ namespace CasinoUI.Models.Blackjack
             {
                 CardStack.PlayerDrawCard(GetAI());
                 BJController.UpdateViewNewCardAI();
+                CheckBust(ai);
             }
             else
             {
@@ -188,48 +189,21 @@ namespace CasinoUI.Models.Blackjack
             {
                 GetHuman().GetGameType<IBlackjackAction>().PlayerStand = true;
             }
+
+            IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>();
+
+            CheckBust(human);            
         }
 
-        private void CurrentPlayerPlay(BlackjackActionCode Action, HumanPlayer CurrentPlayer)
+        private void CheckBust(IBlackjackAction player)
         {
-            switch (Action)
+            SetHandValue(GetHuman());
+
+            if(player.PlayerHandValue > 21)
             {
-                case BlackjackActionCode.HIT:
-                    CardStack.PlayerDrawCard(CurrentPlayer);
-                    if (CurrentPlayer is HumanPlayer)
-                    {
-                        //CheckHandValue(PlayerHandValue, CurrentPlayer); TODO @Motoki
-                    }
-                    else
-                    {
-                        //CheckHandValue(DealerHandValue, CurrentPlayer); TODO @Motoki
-                    }
-                    break;
-                case BlackjackActionCode.STAND:
-                    if(CurrentPlayer is HumanPlayer)
-                    {
-                        PlayerStand = true;
-                    } else
-                    {
-                        DealerStand = true;
-                    }
-                    break;
-                case BlackjackActionCode.INSURANCE:
-                    
-                    break;
-                case BlackjackActionCode.DOUBLEDOWN:
-                    CardStack.PlayerDrawCard(CurrentPlayer);
-                    CurrentPlayer.GetGameType<IBlackjackAction>().BlackjackDoubleDown(Bet);
-                    //Double init bet
-                    break;
+                player.PlayerStand = true;
+                player.PlayerBust = true;
             }
-
-            IncCurrentPlayerTurn();
-        }
-
-        private void IncCurrentPlayerTurn()
-        {
-
         }
 
         public Player GetHuman()

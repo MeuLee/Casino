@@ -10,5 +10,7 @@
         int PlayerHandValue { get; set; }
 
         bool PlayerStand { get; set; }
+
+        bool PlayerBust { get; set; }
     }
 }

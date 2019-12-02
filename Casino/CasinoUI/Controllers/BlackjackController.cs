@@ -82,12 +82,13 @@ namespace CasinoUI.Controllers
             _view.BtnIncreaseBet.Visibility = Visibility.Hidden;
             _view.BtnReduceBet.Visibility = Visibility.Hidden;
             _view.BtnBet.Visibility = Visibility.Hidden;
-
+            
             _model.CardStack = new GameCardStack();
             _model.DistributeCards();
             _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));
 
             _model.Bet = CurrentBet;
+
         }
 
         private void BtnBet_MouseLeave(object sender, MouseEventArgs e)
@@ -152,9 +153,18 @@ namespace CasinoUI.Controllers
             if (_humanPlayer.GetGameType<IBlackjackAction>().PlayerStand)
             {
                 HideWhenStand();
+                if (_humanPlayer.GetGameType<IBlackjackAction>().PlayerBust)
+                {
+                    _model.GetHuman().Money -= _model.Bet;
+                } 
+                else
+                {
+                    _view.RevealAIFirstCard(_model._players.First(p => p is BlackjackAI));
+                    _model.AIPlays();
+                }
+                
             }
-            _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));
-            _model.AIPlays();                   
+            _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));                
         }
 
         private void Insurance_Click(object sender, RoutedEventArgs e)
@@ -168,12 +178,14 @@ namespace CasinoUI.Controllers
             _model.AIPlays();
 
             HideWhenStand();
+            _view.RevealAIFirstCard(_model._players.First(p => p is BlackjackAI));
             CurrentBet = _model.Bet;
         }
 
         private void Stand_Click(object sender, RoutedEventArgs e)
         {
             _model.Stand();
+            _view.RevealAIFirstCard(_model._players.First(p => p is BlackjackAI));
             _model.AIPlays();
             HideWhenStand();
         }
