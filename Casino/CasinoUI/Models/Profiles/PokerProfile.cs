@@ -5,7 +5,7 @@ namespace CasinoUI.Models.Profiles
 {
     public class PokerProfile : Profile, IPokerAction
     {
-        public void PokerAllIn()
+        public int PokerAllIn()
         {
             throw new NotImplementedException();
         }
