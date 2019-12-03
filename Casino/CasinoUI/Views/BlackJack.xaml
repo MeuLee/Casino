@@ -84,5 +84,9 @@
         <StackPanel Name="HumanCards" Orientation="Horizontal" HorizontalAlignment="Center"
                     Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"
                     Height="auto" Width="auto"></StackPanel>
+        <TextBlock x:Name="Winner" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center"
+                    Foreground="White" VerticalAlignment="Center" FontSize="26"></TextBlock>
+        <TextBlock x:Name="Money" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"
+                   Foreground="White" VerticalAlignment="Center" FontSize="26"></TextBlock>
     </Grid>
 </Window>

@@ -12,6 +12,7 @@ namespace CasinoUI.Models.Profiles
         public int PlayerHandValue { get; set; }
         public bool PlayerStand { get; set; }
         public bool PlayerBust { get; set; }
+        public bool Has21 { get; set; }
 
         public int BlackjackDoubleDown(int currentBet)
         {

@@ -27,6 +27,16 @@ namespace CasinoUI.Controllers
                 _view.TxbBet.Text = _currentBet.ToString();
             }
         }
+        private String _winner;
+        private String Winner
+        {
+            get { return _winner; }
+            set
+            {
+                _winner = value;
+                _view.Winner.Text = _winner;
+            }
+        }        
 
         private static readonly BitmapImage _casinoChip1 = Properties.Resources.PokerEntrer.ToBitmapImage();
         private static readonly BitmapImage _casinoChip2 = Properties.Resources.redChip.ToBitmapImage();
@@ -84,12 +94,24 @@ namespace CasinoUI.Controllers
             _view.BtnBet.Visibility = Visibility.Hidden;
 
             _view.ClearImgs();
+            Winner = "";
+            _model.ResetPlayers();
             _model.CardStack = new GameCardStack();
             _model.DistributeCards();
             _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));
 
             _model.Bet = CurrentBet;
+            _humanPlayer.Money -= CurrentBet;
 
+            _model.CheckBlackJack();
+            if(_humanPlayer.GetGameType<IBlackjackAction>().PlayerStand 
+                && _model.GetAI().GetGameType<IBlackjackAction>().PlayerStand)
+            {
+                _view.RevealAIFirstCard(_model.GetAI());
+                Winner = _model.CheckForWinner();
+                HideWhenStand();
+            }
+            _view.Money.Text = _humanPlayer.Money.ToString();
         }
 
         private void BtnBet_MouseLeave(object sender, MouseEventArgs e)
@@ -154,16 +176,13 @@ namespace CasinoUI.Controllers
             if (_humanPlayer.GetGameType<IBlackjackAction>().PlayerStand)
             {
                 HideWhenStand();
-                if (_humanPlayer.GetGameType<IBlackjackAction>().PlayerBust)
-                {
-                    _model.GetHuman().Money -= _model.Bet;
-                } 
-                else
-                {
+                if (!_humanPlayer.GetGameType<IBlackjackAction>().PlayerBust)
+                {  
                     _view.RevealAIFirstCard(_model._players.First(p => p is BlackjackAI));
                     _model.AIPlays();
                 }
-                
+                Winner = _model.CheckForWinner();
+                _view.Money.Text = _humanPlayer.Money.ToString();
             }
             _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));                
         }
@@ -176,11 +195,13 @@ namespace CasinoUI.Controllers
         private void DoubleDown_Click(object sender, RoutedEventArgs e)
         {
             _model.DoubleDown();
-            _model.AIPlays();
+            _model.AIPlays();                        
+            Winner = _model.CheckForWinner();
 
             HideWhenStand();
             _view.RevealAIFirstCard(_model._players.First(p => p is BlackjackAI));
             CurrentBet = _model.Bet;
+            _view.Money.Text = _humanPlayer.Money.ToString();
         }
 
         private void Stand_Click(object sender, RoutedEventArgs e)
@@ -188,6 +209,8 @@ namespace CasinoUI.Controllers
             _model.Stand();
             _view.RevealAIFirstCard(_model._players.First(p => p is BlackjackAI));
             _model.AIPlays();
+            Winner = _model.CheckForWinner();
+            _view.Money.Text = _humanPlayer.Money.ToString();
             HideWhenStand();
         }
 
@@ -212,7 +235,7 @@ namespace CasinoUI.Controllers
                 }
             }
         }
-
+        
         public void UpdateViewNewCardAI()
         {
             _view.CreateNewImageSpace(_model.GetHuman(), _model.GetAI());

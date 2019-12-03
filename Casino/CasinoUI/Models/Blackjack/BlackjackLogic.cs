@@ -27,10 +27,23 @@ namespace CasinoUI.Models.Blackjack
             _players = new List<Player>() { human, new BlackjackAI() };
         }
 
+        public void ResetPlayers()
+        {
+            IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
+                             ai = _players.OfType<BlackjackAI>().First().GetGameType<IBlackjackAction>();
+
+            human.PlayerBust = false;
+            ai.PlayerBust = false;
+            human.PlayerStand = false;
+            ai.PlayerStand = false;
+            human.Has21 = false;
+            ai.Has21 = false;
+        }
+
         public void DistributeCards()
-        {            
+        {         
             foreach (Player player in _players)
-            {
+            {                
                 player.GetHand().Clear();
                 CardStack.PlayerDrawCard(player);
                 CardStack.PlayerDrawCard(player);
@@ -41,17 +54,20 @@ namespace CasinoUI.Models.Blackjack
         private void SetHandValue(Player player)
         {
             int handValue = 0;
-            foreach (Card card in player.GetHand())
+            List<Card> tempHand = player.GetHand();
+            tempHand = tempHand.OrderBy(o => o.Value).ToList();
+            tempHand.Reverse();
+            foreach (Card card in tempHand)
             {
-                if (card.Equals(CardRank.Jack) || card.Equals(CardRank.Queen) || card.Equals(CardRank.King))
+                if (card.Value.Equals(CardRank.Jack) || card.Value.Equals(CardRank.Queen) || card.Value.Equals(CardRank.King))
                 {
                     handValue += 10;
                 }
-                else if (card.Equals(CardRank.Ace) && (handValue + 11 <= 21))
+                else if (card.Value.Equals(CardRank.Ace) && (handValue + 11 <= 21))
                 {
                     handValue += 11;
                 }
-                else if (card.Equals(CardRank.Ace) && (handValue + 11 > 21))
+                else if (card.Value.Equals(CardRank.Ace) && (handValue + 11 > 21))
                 {
                     handValue += 1;                   
                 }
@@ -61,6 +77,10 @@ namespace CasinoUI.Models.Blackjack
                 }
             }
             player.GetGameType<IBlackjackAction>().PlayerHandValue = handValue;
+            if(handValue == 21)
+            {
+                player.GetGameType<IBlackjackAction>().Has21 = true;
+            }
         }
 
         public void AIPlays()
@@ -79,7 +99,11 @@ namespace CasinoUI.Models.Blackjack
             {
                 CardStack.PlayerDrawCard(GetAI());
                 BJController.UpdateViewNewCardAI();
-                CheckBust(ai);
+                CheckBust(ai, GetAI());
+                if (ai.Has21)
+                {
+                    ai.PlayerStand = true;
+                }
             }
             else
             {
@@ -129,9 +153,12 @@ namespace CasinoUI.Models.Blackjack
             tempP.GetGameType<IBlackjackAction>().PlayerStand = true;
             if (Bet *2 > tempP.Money)
             {
-                Bet = tempP.Money;
+                Bet += tempP.Money;
+                tempP.Money = 0;
                 return;
             }
+            CheckBust(tempP.GetGameType<IBlackjackAction>(), GetHuman());
+            tempP.Money -= Bet;
             Bet *= 2;
         }      
 
@@ -143,24 +170,88 @@ namespace CasinoUI.Models.Blackjack
         public void Hit()
         {
             CardStack.PlayerDrawCard(GetHuman());
-            if(GetHuman().GetGameType<IBlackjackAction>().PlayerHandValue >= 22)
-            {
-                GetHuman().GetGameType<IBlackjackAction>().PlayerStand = true;
-            }
-
             IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>();
-
-            CheckBust(human);            
+            CheckBust(human, GetHuman());
+            if (human.Has21)
+            {
+                human.PlayerStand = true;
+            }
         }
 
-        private void CheckBust(IBlackjackAction player)
+        private void CheckBust(IBlackjackAction player, Player pType)
         {
-            SetHandValue(GetHuman());
+            SetHandValue(pType);
 
             if(player.PlayerHandValue > 21)
             {
                 player.PlayerStand = true;
                 player.PlayerBust = true;
+            }
+        }
+
+        public void CheckBlackJack()
+        {
+            IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
+                             ai = _players.OfType<BlackjackAI>().First().GetGameType<IBlackjackAction>();
+
+            Player humanPlayer = GetHuman();
+            Player aiPlayer = GetAI();
+
+            SetHandValue(humanPlayer);
+            SetHandValue(aiPlayer);
+
+            if(human.Has21 && ai.Has21)
+            {
+                humanPlayer.Money += Bet;
+                human.PlayerStand = true;
+                ai.PlayerStand = true;
+            }
+            else if(human.Has21)
+            {
+                humanPlayer.Money += Bet + (int)(Bet * 1.5);
+                human.PlayerStand = true;
+                ai.PlayerStand = true;
+            }
+            else if(ai.Has21)
+            {
+                human.PlayerStand = true;
+                ai.PlayerStand = true;
+            }
+        }
+
+        public String CheckForWinner()
+        {
+            IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
+                             ai = _players.OfType<BlackjackAI>().First().GetGameType<IBlackjackAction>();
+
+            Player humanPlayer = GetHuman();
+            Player aiPlayer = GetAI();
+
+            SetHandValue(humanPlayer);
+            SetHandValue(aiPlayer);
+
+            if (human.PlayerBust)
+            {
+                return "Dealer Wins";
+            }
+            else if (ai.PlayerBust)
+            {
+                humanPlayer.Money += Bet * 2;
+                return "Player Wins";
+            }
+            else if(human.PlayerHandValue == ai.PlayerHandValue)
+            {
+                humanPlayer.Money += Bet;
+                return "Draw";
+            }
+            else if(human.PlayerHandValue > ai.PlayerHandValue)
+            {
+                humanPlayer.Money += Bet * 2;
+                return "Player Wins";
+            }
+            else
+            {
+                return "Dealer Wins";
             }
         }
 

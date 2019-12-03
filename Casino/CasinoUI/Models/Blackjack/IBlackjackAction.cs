@@ -12,5 +12,7 @@
         bool PlayerStand { get; set; }
 
         bool PlayerBust { get; set; }
+
+        bool Has21 { get; set; }
     }
 }

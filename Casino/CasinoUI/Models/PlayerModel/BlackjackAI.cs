@@ -9,6 +9,7 @@ namespace CasinoUI.Models.PlayerModel
 
         public bool PlayerStand { get; set; }
         public bool PlayerBust { get; set; }
+        public bool Has21 { get; set; }
 
         public int BlackjackDoubleDown(int currentBet)
         {
