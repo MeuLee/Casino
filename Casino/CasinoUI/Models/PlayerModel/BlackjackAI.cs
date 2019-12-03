@@ -1,5 +1,4 @@
 ﻿using CasinoUI.Models.Blackjack;
-using CasinoUI.Models.PlayerModel;
 
 namespace CasinoUI.Models.PlayerModel
 {

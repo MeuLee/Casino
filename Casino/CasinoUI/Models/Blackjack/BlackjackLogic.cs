@@ -66,7 +66,6 @@ namespace CasinoUI.Models.Blackjack
             int handValue = 0;
             List<Card> tempHand = player.Hand;
             tempHand = tempHand.OrderBy(o => o.Value).ToList();
-            tempHand.Reverse();
             foreach (Card card in tempHand)
             {
                 if (card.Value.Equals(CardRank.Jack) || card.Value.Equals(CardRank.Queen) || card.Value.Equals(CardRank.King))

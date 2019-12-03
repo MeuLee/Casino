@@ -3,7 +3,6 @@ using CasinoUI.Models.Settings;
 using CasinoUI.Models.WindowModels;
 using CasinoUI.Utils;
 using CasinoUI.Views;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;

@@ -1,9 +1,6 @@
 ﻿using CasinoUI.Models.PlayerModel.PlayerSkin;
-using CasinoUI.Models.Poker;
 using CasinoUI.Models.Profiles;
 using CasinoUI.Models.Settings;
-using System;
-using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace CasinoUI.Models.PlayerModel

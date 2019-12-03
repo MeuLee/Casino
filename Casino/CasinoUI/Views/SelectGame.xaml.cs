@@ -3,7 +3,6 @@ using CasinoUI.Models.Poker;
 using CasinoUI.Models.Profiles;
 using CasinoUI.Models.Settings;
 using CasinoUI.Utils;
-using CasinoUI.View;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -91,12 +90,10 @@ namespace CasinoUI.Views
         private void BtnPoker_Click(object sender, RoutedEventArgs e)
         {
             new PokerController();
-            Close();
         }
 
         private void BtnBlackJack_Click(object sender, RoutedEventArgs e)
         {
-            ApplicationSettings.HumanPlayer.CurrentProfile = new BlackjackProfile();
             new BlackjackController();
         }
     }
