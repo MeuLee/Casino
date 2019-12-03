@@ -4,7 +4,7 @@ using CasinoUI.Models.Poker;
 using CasinoUI.Models.Poker.Evaluator;
 using System.Linq;
 
-namespace TestCasino
+namespace TestCasino.Models.Poker.Evaluator
 {
     [TestClass]
     public class TesthandEvaluator

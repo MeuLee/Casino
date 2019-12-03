@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Reflection;
 
-namespace TestCasino
+namespace TestCasino.Views.Map
 {
     [TestClass]
     public class TestMap

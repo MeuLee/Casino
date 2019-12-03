@@ -3,7 +3,7 @@ using CasinoUI.Models.Cards;
 using CasinoUI.Models.PlayerModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestCasino
+namespace TestCasino.Models.Cards
 {
     [TestClass]
     public class TestCards

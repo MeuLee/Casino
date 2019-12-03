@@ -5,7 +5,7 @@ using CasinoUI.View;
 
 namespace CasinoUI.Models.Poker
 {
-    class PokerController {
+    public class PokerController {
         PokerLogic pokerModel;
         GamePoker pokerView;
         int playerIdx; 

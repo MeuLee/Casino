@@ -5,7 +5,7 @@ using CasinoUI.Models.Poker.PokerBrains;
 using CasinoUI.Models.Profiles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestCasino
+namespace TestCasino.Models.PokerBrains
 {
     [TestClass]
     public class TestPokerLogic {

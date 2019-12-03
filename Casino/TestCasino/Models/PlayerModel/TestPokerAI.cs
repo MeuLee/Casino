@@ -5,7 +5,7 @@ using CasinoUI.Models.Cards;
 using System.Drawing;
 using System;
 
-namespace TestCasino
+namespace TestCasino.Models.PlayerModel
 {
     /// <summary>
     /// Summary description for TestPokerHand
