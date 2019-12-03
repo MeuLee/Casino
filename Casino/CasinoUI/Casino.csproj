@@ -86,8 +86,8 @@
     <Compile Include="Models\Poker\Evaluator\Hand.cs" />
     <Compile Include="Models\Poker\Evaluator\HandEvaluator.cs" />
     <Compile Include="Models\Poker\Evaluator\HandStrength.cs" />
-    <Compile Include="Models\Poker\GameState.cs" />
-    <Compile Include="Models\Poker\TypePlayerPoker.cs" />
+    <Compile Include="Models\Poker\Enumeration\GameState.cs" />
+    <Compile Include="Models\Poker\Enumeration\TypePlayerPoker.cs" />
     <Compile Include="Models\Profiles\BlackjackProfile.cs" />
     <Compile Include="Models\Settings\ApplicationSettings.cs" />
     <Compile Include="Controllers\BlackjackController.cs" />
@@ -107,13 +107,12 @@
     <Compile Include="Models\PlayerModel\HumanPlayer.cs" />
     <Compile Include="Models\PlayerModel\Player.cs" />
     <Compile Include="Models\Poker\IPokerAction.cs" />
-    <Compile Include="Models\Poker\PokerActionCode.cs" />
+    <Compile Include="Models\Poker\Enumeration\PokerActionCode.cs" />
     <Compile Include="Models\PlayerModel\PokerAI.cs" />
     <Compile Include="Controllers\PokerController.cs" />
-    <Compile Include="Models\Poker\PokerHand.cs" />
     <Compile Include="Models\Poker\PokerBrains\FiveCardDrawLogic.cs" />
     <Compile Include="Models\Poker\PokerBrains\PokerLogic.cs" />
-    <Compile Include="Models\Poker\PokerPlayerState.cs" />
+    <Compile Include="Models\Poker\Enumeration\PokerPlayerState.cs" />
     <Compile Include="Models\Poker\PokerBrains\TexasHoldemLogic.cs" />
     <Compile Include="Models\Profiles\PokerProfile.cs" />
     <Compile Include="Models\Profiles\Profile.cs" />
