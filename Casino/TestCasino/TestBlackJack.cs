@@ -30,14 +30,19 @@ namespace TestCasino
 
         [TestMethod]
         public void TestCheckSoft17True()
-        {      
-            aiPlayer.GetHand().Add(new Card(Card.CardRank.Ace, Card.CardSuit.Clubs, null));
-            aiPlayer.GetHand().Add(new Card(Card.CardRank.Six, Card.CardSuit.Clubs, null));
+        {
+            AddCardsToPlayer(aiPlayer, 1, 6);
             bool res = (bool)_BlackjackLogic.Invoke("CheckSoft17", ai);
             Assert.IsTrue(res);
         }
 
-
+        private void AddCardsToPlayer(Player player, params int[] values)
+        {
+            foreach (var cardValue in values)
+            {
+                player.GetHand().Add(new Card((Card.CardRank)cardValue, Card.CardSuit.Clubs, null));
+            }
+        }
         
     }
 }
