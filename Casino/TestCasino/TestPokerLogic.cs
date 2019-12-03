@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using CasinoUI.Models.PlayerModel;
+using CasinoUI.Models.Poker;
 using CasinoUI.Models.Poker.PokerBrains;
+using CasinoUI.Models.Profiles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestCasino
@@ -18,6 +20,7 @@ namespace TestCasino
         public TestPokerLogic()
         {
             humanPlayer = new HumanPlayer(0, 0);
+            humanPlayer.CurrentProfile = new PokerProfile();
 
             pokerLogic = new PokerLogic(humanPlayer);
 
@@ -52,6 +55,26 @@ namespace TestCasino
             Assert.AreEqual(beforeBigBlindIdx + 1, pokerLogic.PlayerRoles[1]);
             Assert.AreEqual(beforeFirstPlayerIdx + 1, pokerLogic.PlayerRoles[2]);
 
+        }
+
+        [TestMethod]
+        public void TestIncCurrentPlayerTurn() {
+            Assert.AreEqual(2, pokerLogic.currentPlayerTurnIdx);
+            pokerLogic.incCurrentPlayerTurn();
+            Assert.AreEqual(3, pokerLogic.currentPlayerTurnIdx);
+        }
+
+        [TestMethod]
+        public void TestArePlayersDone() {
+            Assert.IsFalse(pokerLogic.arePlayersDone());
+
+            // all players CALL
+            for (int i = 0; i < 5; i++) {
+                pokerLogic.PlayerPlaysTurn(PokerActionCode.CALL, -1);
+                pokerLogic.incCurrentPlayerTurn();
+            }
+
+            Assert.IsTrue(pokerLogic.arePlayersDone());
         }
     }
 }

@@ -34,7 +34,8 @@ namespace CasinoUI.Models.Poker.PokerBrains
         }
 
         private void InitListPlayers(HumanPlayer human) {
-            ListPlayers = new List<Player> { human };
+            ListPlayers = new List<Player>();
+            ListPlayers.Add(human);
 
             for (int i = 1; i < 5; i++) {
                 ListPlayers.Add(new PokerAI(TypePlayerPoker.NORMAL));
@@ -86,6 +87,8 @@ namespace CasinoUI.Models.Poker.PokerBrains
 
         public void PlayerPlaysTurn(PokerActionCode pokerActionCode, int money) {
             IPokerAction player = ListPlayers[currentPlayerTurnIdx].GetGameType<IPokerAction>();
+            
+
             // ListPlayers[currentPlayerTurnIdx].p
 
             switch (pokerActionCode) {
