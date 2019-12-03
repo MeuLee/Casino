@@ -20,8 +20,7 @@
             <ColumnDefinition Width="0.25*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="190"/>
-            <RowDefinition Height="190"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="0.25*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.25*"/>
@@ -29,64 +28,47 @@
             <RowDefinition Height="0.25*"/>
         </Grid.RowDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/table.jpg" />
+            <ImageBrush x:Name="ImgBackground"/>
         </Grid.Background>
-        <Image 
+        <Image x:Name="ImgBlackJackTable"
+               Source="/CasinoUI;component/Resources/blackjackTable.png" 
                VerticalAlignment="Top"
-               Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Source="pack://siteoforigin:,,,/Resources/blackjackTable.png"/>        
-        <Button x:Name="BtnHit" Style="{StaticResource Button.Hoverless}"
-                Grid.Row="3" Grid.Column="2">
+               Grid.Column="1" Grid.ColumnSpan="4"/>
+        <Button x:Name="BtnAction1" Style="{StaticResource Button.Hoverless}"
+                Grid.Row="2" Grid.Column="2">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip1" Style="{StaticResource Image.Left}"/>
-                <TextBlock Text="Hit" Foreground="White"/>
+                <TextBlock Text="Action1" Foreground="White"/>
                 <Image x:Name="ImgChip2" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
-        <Button x:Name="BtnInsurance" Style="{StaticResource Button.Hoverless}"
-                Grid.Row="5" Grid.Column="3">
+        <Button x:Name="BtnAction2" Style="{StaticResource Button.Hoverless}"
+                Grid.Row="2" Grid.Column="3">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip3" Style="{StaticResource Image.Left}"/>
-                <TextBlock Text="Insurance" Foreground="White"/>
+                <TextBlock Text="Action2" Foreground="White"/>
                 <Image x:Name="ImgChip4" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
-        <Button x:Name="BtnDoubleDown" Style="{StaticResource Button.Hoverless}"
-                Grid.Row="5" Grid.Column="2">
+        <Button x:Name="BtnAction3" Style="{StaticResource Button.Hoverless}"
+                Grid.Row="4" Grid.Column="2">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip5" Style="{StaticResource Image.Left}"/>
-                <TextBlock Text="Double Down" Foreground="White"/>
+                <TextBlock Text="Action3" Foreground="White"/>
                 <Image x:Name="ImgChip6" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
-        <Button x:Name="BtnStand" Style="{StaticResource Button.Hoverless}"
-                Grid.Row="3" Grid.Column="3">
+        <Button x:Name="BtnAction4" Style="{StaticResource Button.Hoverless}"
+                Grid.Row="4" Grid.Column="3">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgChip7" Style="{StaticResource Image.Left}"/>
-                <TextBlock Text="Stand" Foreground="White"/>
+                <TextBlock Text="Action4" Foreground="White"/>
                 <Image x:Name="ImgChip8" Style="{StaticResource Image.Right}"/>
             </StackPanel>
         </Button>
-        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="BtnReduceBet" Style="{StaticResource Btn.MinusSign}"/>
-            <TextBlock x:Name="TxbBet" Foreground="White" VerticalAlignment="Center" FontSize="26" Margin="10,0,10,0"/>
-            <Button x:Name="BtnIncreaseBet" Style="{StaticResource Btn.PlusSign}"/>
-        </StackPanel>
-        <Button x:Name="BtnBet" Style="{StaticResource Button.Hoverless}"
-                Grid.Column="0" Grid.Row="5">
-            <StackPanel Orientation="Horizontal">
-                <Image x:Name="ImgChip9" Style="{StaticResource Image.Left}"/>
-                <TextBlock Text="Bet" Foreground="White"/>
-                <Image x:Name="ImgChip10" Style="{StaticResource Image.Right}"/>
-            </StackPanel>
-        </Button>
-        <StackPanel Name="AICards" Orientation="Horizontal" HorizontalAlignment="Center"
-                    Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2"></StackPanel>
-        <StackPanel Name="HumanCards" Orientation="Horizontal" HorizontalAlignment="Center"
-                    Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"
-                    Height="auto" Width="auto"></StackPanel>
-        <TextBlock x:Name="Winner" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center"
-                    Foreground="White" VerticalAlignment="Center" FontSize="26"></TextBlock>
-        <TextBlock x:Name="Money" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"
-                   Foreground="White" VerticalAlignment="Center" FontSize="26"></TextBlock>
+        <Image x:Name="Img1Player" Height="76" Width="50" Grid.ColumnSpan="2" Grid.Column="2" Margin="193,239,223,65"/>
+        <Image x:Name="Img2Player" Height="76" Width="50" Grid.ColumnSpan="2" Grid.Column="2" Margin="213,239,203,65"/>
+        <Image x:Name="Img1Dealer" Height="76" Width="50" Grid.ColumnSpan="2" Grid.Column="2" Margin="193,24,223,280"/>
+        <Image x:Name="Img2Dealer" Height="76" Width="50" Grid.ColumnSpan="2" Grid.Column="2" Margin="213,24,203,280"/>
     </Grid>
 </Window>

@@ -5,32 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CasinoUI.Models.Profiles
-{
-    public class BlackjackProfile : Profile, IBlackjackAction
-    {
-        public int PlayerHandValue { get; set; }
-        public bool PlayerStand { get; set; }
-        public bool PlayerBust { get; set; }
-        public bool Has21 { get; set; }
-
-        public int BlackjackDoubleDown(int currentBet)
-        {
+namespace CasinoUI.Models.Profiles {
+    class BlackjackProfile : Profile, IBlackjackAction {
+        public int BlackjackDoubleDown(int currentBet) {
             throw new NotImplementedException();
         }
 
-        public void BlackjackHit()
-        {
+        public void BlackjackHit() {
             throw new NotImplementedException();
         }
 
-        public void BlackjackInsurance()
-        {
+        public void BlackjackInsurance() {
             throw new NotImplementedException();
         }
 
-        public void BlackjackStand()
-        {
+        public void BlackjackStand() {
             throw new NotImplementedException();
         }
     }

@@ -37,7 +37,7 @@ namespace CasinoUI
             Application.Current.Shutdown();
         }
 
-        private void Btn_MouseEnter(object sender, MouseEventArgs e)
+        private void Btn_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             Button btn = sender as Button;
             btn.FontSize += 4;
@@ -48,7 +48,7 @@ namespace CasinoUI
             btn.Cursor = Cursors.Hand;
         }
 
-        private void Btn_MouseLeave(object sender, MouseEventArgs e)
+        private void Btn_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             Button btn = sender as Button;
             btn.FontSize -= 4;

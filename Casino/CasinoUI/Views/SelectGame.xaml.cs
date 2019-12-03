@@ -1,5 +1,5 @@
 ﻿using CasinoUI.Controllers;
-using CasinoUI.Models.Profiles;
+using CasinoUI.Models.Poker;
 using CasinoUI.Models.Settings;
 using CasinoUI.Utils;
 using CasinoUI.View;
@@ -95,7 +95,6 @@ namespace CasinoUI.Views
 
         private void BtnBlackJack_Click(object sender, RoutedEventArgs e)
         {
-            ApplicationSettings.HumanPlayer.CurrentProfile = new BlackjackProfile();
             new BlackjackController();
         }
     }

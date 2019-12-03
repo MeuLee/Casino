@@ -8,14 +8,15 @@ namespace CasinoUI.Models.PlayerModel
     {
 
         public List<Card> Hand { get; set; } // need to new this list every time he plays a new game
+        public int Money { get; set; }
         public int MoneyCall { get; set; }
-        public int Money { get; set; } = 1000;
+
         public Player() {
-            Hand = new List<Card>();
+            Hand = new List<Card>();   
         }
 
         /// <summary>
-        /// Throws: System.Exception, if the current (this) player is not a HumanPlayer or a PlayerAI.
+        /// Throws: System.Exception, if the current (this) player is not a HumanPlayer or a PlayerAI. 
         /// </summary>
         /// <returns>The current (this) player's hand. </returns>
         //public List<Card> GetHand()
@@ -54,7 +55,7 @@ namespace CasinoUI.Models.PlayerModel
                 }
                 throw new InvalidCastException($"{"this"} is a PlayerAI but is not of type T");
             }
-
+            
             throw new InvalidCastException($"{"this"} should be human or ai");
         }
     }

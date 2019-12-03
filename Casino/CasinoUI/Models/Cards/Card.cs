@@ -10,8 +10,7 @@ namespace CasinoUI.Models.Cards
         protected double cardValue;
         public enum CardRank
         {
-            Ace = 1,
-            Two,
+            Two = 2,
             Three,
             Four,
             Five,
@@ -22,7 +21,8 @@ namespace CasinoUI.Models.Cards
             Ten,
             Jack,
             Queen,
-            King
+            King,
+            Ace
         }
         public enum CardSuit
         {
