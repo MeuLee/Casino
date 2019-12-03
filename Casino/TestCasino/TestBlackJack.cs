@@ -37,7 +37,7 @@ namespace TestCasino
         {
             foreach (var cardValue in values)
             {
-                player.GetHand().Add(new Card((Card.CardRank)cardValue, Card.CardSuit.Clubs, null));
+                player.Hand.Add(new Card((Card.CardRank)cardValue, Card.CardSuit.Clubs, null));
             }
         }
 
@@ -96,7 +96,7 @@ namespace TestCasino
         {
             AddCardsToPlayer(aiPlayer, 1, 6);
             _BlackjackLogic.Invoke("AIPlays");
-            Assert.AreEqual(3, aiPlayer.GetHand().Count);
+            Assert.AreEqual(3, aiPlayer.Hand.Count);
         }
 
         /**
@@ -107,7 +107,7 @@ namespace TestCasino
         {
             AddCardsToPlayer(aiPlayer, 8, 6);
             _BlackjackLogic.Invoke("AIPlays");
-            Assert.IsTrue(aiPlayer.GetHand().Count > 2);
+            Assert.IsTrue(aiPlayer.Hand.Count > 2);
         }
 
         [TestMethod]
@@ -149,11 +149,11 @@ namespace TestCasino
         [TestMethod]
         public void TestDistributeCards()
         {
-            Assert.AreEqual(0, aiPlayer.GetHand().Count);
-            Assert.AreEqual(0, humanPlayer.GetHand().Count);
+            Assert.AreEqual(0, aiPlayer.Hand.Count);
+            Assert.AreEqual(0, humanPlayer.Hand.Count);
             _BlackjackLogic.Invoke("DistributeCards");
-            Assert.AreEqual(2, aiPlayer.GetHand().Count);
-            Assert.AreEqual(2, humanPlayer.GetHand().Count);
+            Assert.AreEqual(2, aiPlayer.Hand.Count);
+            Assert.AreEqual(2, humanPlayer.Hand.Count);
         }
 
         [TestMethod]
@@ -260,9 +260,9 @@ namespace TestCasino
         [TestMethod]
         public void TestDoubleDownPlayerHandCountUpBy1()
         {
-            Assert.AreEqual(0, humanPlayer.GetHand().Count);
+            Assert.AreEqual(0, humanPlayer.Hand.Count);
             _BlackjackLogic.Invoke("DoubleDown");
-            Assert.AreEqual(1, humanPlayer.GetHand().Count);
+            Assert.AreEqual(1, humanPlayer.Hand.Count);
         }
 
         /**
@@ -287,9 +287,9 @@ namespace TestCasino
         [TestMethod]
         public void TestHitGives1Card()
         {
-            Assert.AreEqual(0, humanPlayer.GetHand().Count);
+            Assert.AreEqual(0, humanPlayer.Hand.Count);
             _BlackjackLogic.Invoke("Hit");
-            Assert.AreEqual(1, humanPlayer.GetHand().Count);
+            Assert.AreEqual(1, humanPlayer.Hand.Count);
         }
 
         [TestMethod]

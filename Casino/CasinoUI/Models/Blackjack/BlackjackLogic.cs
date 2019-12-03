@@ -50,7 +50,7 @@ namespace CasinoUI.Models.Blackjack
         {
             foreach (Player player in _players)
             {
-                player.GetHand().Clear();
+                player.Hand.Clear();
                 CardStack.PlayerDrawCard(player);
                 CardStack.PlayerDrawCard(player);
                 SetHandValue(player);
@@ -64,7 +64,7 @@ namespace CasinoUI.Models.Blackjack
         private void SetHandValue(Player player)
         {
             int handValue = 0;
-            List<Card> tempHand = player.GetHand();
+            List<Card> tempHand = player.Hand;
             tempHand = tempHand.OrderBy(o => o.Value).ToList();
             tempHand.Reverse();
             foreach (Card card in tempHand)
@@ -137,9 +137,9 @@ namespace CasinoUI.Models.Blackjack
         /// <returns></returns>
         private bool CheckSoft17(IBlackjackAction ai)
         {
-            int sum = GetAI().GetHand().Select(c => (int)c.Value).Where(c => (CardRank)c != CardRank.Ace).Sum();
+            int sum = GetAI().Hand.Select(c => (int)c.Value).Where(c => (CardRank)c != CardRank.Ace).Sum();
 
-            if (!GetAI().GetHand().Select(c => c.Value).Contains(CardRank.Ace))
+            if (!GetAI().Hand.Select(c => c.Value).Contains(CardRank.Ace))
             {
                 return false;
             }

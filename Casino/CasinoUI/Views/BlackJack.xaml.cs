@@ -36,10 +36,10 @@ namespace CasinoUI.Views
         /// <param name="aiPlayer"></param>
         public void CreateNewImageSpace(Player humanPlayer, Player aiPlayer)
         {
-            List<Card> _humanCards = humanPlayer.GetHand();
+            List<Card> _humanCards = humanPlayer.Hand;
             AddCardImgUI(_humanCards, _imgHuman, "human");
 
-            List<Card> _aiCards = aiPlayer.GetHand();
+            List<Card> _aiCards = aiPlayer.Hand;
             
             AddCardImgUI(_aiCards, _imgAi, "ai");
             if (_aiCards.Count == 2)
@@ -80,7 +80,7 @@ namespace CasinoUI.Views
         /// <param name="aiPlayer"></param>
         public void RevealAIFirstCard(Player aiPlayer)
         {
-            _imgAi[0].Source = aiPlayer.GetHand()[0].Image.ToBitmapImage();
+            _imgAi[0].Source = aiPlayer.Hand[0].Image.ToBitmapImage();
         }
 
         /// <summary>
