@@ -684,6 +684,16 @@ namespace TestCasino
             AssertSingleTestChanceWin("ChanceWinFlush", 2.0 / 23.0);
 
         }
+
+        private void DoAllPoss()
+        {
+            int nbr = (int)pokerTest.Invoke("AllProbability");
+            object[] TotalProb = new object[1] { nbr };
+
+            pokerTest.Invoke("ChanceWinSamevalue", TotalProb);
+            pokerTest.Invoke("ChanceWinStraight", TotalProb);
+            pokerTest.Invoke("ChanceWinFlush", TotalProb);
+        }
         [TestMethod]
         public void TestChanceWinRaise()
         {
@@ -694,17 +704,13 @@ namespace TestCasino
                 new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
             };
             CreateGameEnvironnment(HandContent);
+            DoAllPoss();
 
-            int nbr = (int)pokerTest.Invoke("AllProbability");
-            object[] args = new object[1] { nbr };
+            pokerCombo.Money = 800;
+            object[] amountRaise = new object[1] { 124 };
+            double nbrExpect =(double) pokerTest.Invoke("ChanceWinRaise", amountRaise);
 
-            pokerTest.Invoke("ChanceWinSamevalue", args);
-            pokerTest.Invoke("ChanceWinStraight", args);
-            pokerTest.Invoke("ChanceWinFlush", args);
-
-            double nbrExpect =(double) pokerTest.Invoke("ChanceWinRaise", args);
-
-            Assert.AreEqual(2.0 / 23.0, nbrExpect);
+            Assert.AreEqual(0.845, nbrExpect);
 
         }
 
@@ -717,16 +723,21 @@ namespace TestCasino
                 new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
             };
             CreateGameEnvironnment(HandContent);
+            DoAllPoss();
 
-            int nbr = (int)pokerTest.Invoke("AllProbability");
+            object[] args_Chance = new object[1] { 1 };
+            double nbrExpect = (double)pokerTest.Invoke("CalculChance", args_Chance);
 
-            object[] args = new object[1] { nbr };
-
-            pokerTest.Invoke("ChanceWinSamevalue", args);
-            pokerTest.Invoke("ChanceWinStraight", args);
-            pokerTest.Invoke("ChanceWinFlush", args);
+            Assert.AreEqual(10.0/23.0, nbrExpect);
         }
+        private PokerActionCode GameSituationCreater(int MoneyRaise, GameState currentState)
+        {
+            pokerCombo.Money = 1000;
+            object[] args = new object[2] { currentState, MoneyRaise };
+            PokerActionCode expectedAct = (PokerActionCode)pokerTest.Invoke("MakeDecision", args);
 
+            return expectedAct;
+        }
         [TestMethod]
         public void TestReturnPokerAction()
         {
@@ -737,13 +748,11 @@ namespace TestCasino
             };
             CreateGameEnvironnment(HandContent);
 
-            int nbr = (int)pokerTest.Invoke("AllProbability");
+            Assert.AreEqual(PokerActionCode.RAISE, GameSituationCreater(0, GameState.normal));
 
-            object[] args = new object[1] { nbr };
+            Assert.AreEqual(PokerActionCode.FOLD, GameSituationCreater(1000, GameState.raised));
 
-            pokerTest.Invoke("ChanceWinSamevalue", args);
-            pokerTest.Invoke("ChanceWinStraight", args);
-            pokerTest.Invoke("ChanceWinFlush", args);
+            Assert.AreEqual(PokerActionCode.CALL, GameSituationCreater(500, GameState.raised));
         }
     }
     }

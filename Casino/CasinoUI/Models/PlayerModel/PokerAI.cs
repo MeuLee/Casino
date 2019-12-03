@@ -42,6 +42,7 @@ namespace CasinoUI.Models.Poker
 
         public PokerActionCode MakeDecision(GameState gameState, int amount_raise = 0)
         {
+            WinProb.Clear();
             int TotalProb = AllProbability();
 
             ChanceWinSamevalue(TotalProb);
@@ -60,14 +61,14 @@ namespace CasinoUI.Models.Poker
                 double chance = gameState == GameState.raised ? ChanceWinRaise(amount_raise) : 1;
                 double prob_win = CalculChance(chance);
 
-                NextMove = prob_win >= 0.5 ?
+                NextMove = prob_win >= 0.4 ?
                     amount_raise >= Money ?
                     PokerActionCode.ALLIN :
                     PokerActionCode.RAISE :
                     prob_win >= 0.1 ?
                     gameState == GameState.normal ?
-                    PokerActionCode.CHECK
-                    : PokerActionCode.CALL
+                    PokerActionCode.CHECK:
+                    PokerActionCode.CALL
                     : PokerActionCode.FOLD;
             }
 
@@ -91,7 +92,7 @@ namespace CasinoUI.Models.Poker
 
         private double ChanceWinRaise(int amount_raise)
         {
-            return 1.0 - amount_raise/Money;
+            return 1.0 - (double)amount_raise/Money;
         }
 
         private void ChanceWinFlush(int TotalProb)
