@@ -31,7 +31,7 @@ namespace CasinoUI.Models.PlayerModel
 
         public BitmapImage CurrentImage { get; set; }
 
-        public HumanPlayer(int x, int y)
+        public HumanPlayer(int x, int y) : base()
         {
             X = x;
             Y = y;

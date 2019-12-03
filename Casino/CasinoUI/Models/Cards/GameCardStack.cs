@@ -44,7 +44,7 @@ namespace CasinoUI.Models.Cards
         public void PlayerDrawCard(Player current)
         {
             Card card = Cards[0];
-            current.GetHand().Add(card);
+            current.Hand.Add(card);
             Cards.Remove(card);
         }
 

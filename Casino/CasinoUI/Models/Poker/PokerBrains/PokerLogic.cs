@@ -21,10 +21,11 @@ namespace CasinoUI.Models.Poker.PokerBrains
         public GameState currentGameState;
 
         public PokerLogic(HumanPlayer human) {
+            CardStack = new GameCardStack();
             InitListPlayers(human);
             SetInitialRoles();
+            playersDrawCards();
             currentPlayerTurnIdx = PlayerRoles[2];
-            CardStack = new GameCardStack();
             Pot = 0;
             CurrentRaise = 2;
             currentGameState = GameState.inital;
@@ -35,8 +36,15 @@ namespace CasinoUI.Models.Poker.PokerBrains
         private void InitListPlayers(HumanPlayer human) {
             ListPlayers = new List<Player> { human };
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 1; i < 5; i++) {
                 ListPlayers.Add(new PokerAI(TypePlayerPoker.NORMAL));
+            }
+        }
+
+        private void playersDrawCards() {
+            for (int i = 0; i < ListPlayers.Count; i++) {
+                ListPlayers[i].Hand.Add(CardStack.DrawCard());
+                ListPlayers[i].Hand.Add(CardStack.DrawCard());
             }
         }
 
@@ -52,7 +60,7 @@ namespace CasinoUI.Models.Poker.PokerBrains
 
         public void ProceedNextGame() {
             RotateRoles();
-            ClearRoles();
+            ClearHands();
             Pot = 0;
             // restore deck and shuffle
             // check if everyone has enough money
@@ -70,9 +78,9 @@ namespace CasinoUI.Models.Poker.PokerBrains
             }
         }
 
-        private void ClearRoles() {
+        private void ClearHands() {
             foreach (Player player in ListPlayers) {
-                player.GetHand().Clear();
+                player.Hand.Clear();
             }
         }
 

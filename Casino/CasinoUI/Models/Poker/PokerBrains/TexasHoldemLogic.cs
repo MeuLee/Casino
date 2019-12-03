@@ -14,8 +14,8 @@ namespace CasinoUI.Models.Poker.PokerBrains
         private void PlayersDrawCards() {
             foreach (var player in ListPlayers)
             {
-                player.GetHand().Add(CardStack.DrawCard());
-                player.GetHand().Add(CardStack.DrawCard());
+                player.Hand.Add(CardStack.DrawCard());
+                player.Hand.Add(CardStack.DrawCard());
             }
 
             //if (PlayerRoles[3] > 0) // pas mal sur que ca va planter si playerroles.length <= 3

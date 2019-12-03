@@ -6,25 +6,31 @@ namespace CasinoUI.Models.PlayerModel
 {
     public class Player
     {
+
+        public List<Card> Hand { get; set; } // need to new this list every time he plays a new game
         public int Money { get; set; }
         public int MoneyCall { get; set; }
+
+        public Player() {
+            Hand = new List<Card>();   
+        }
 
         /// <summary>
         /// Throws: System.Exception, if the current (this) player is not a HumanPlayer or a PlayerAI. 
         /// </summary>
         /// <returns>The current (this) player's hand. </returns>
-        public List<Card> GetHand()
-        {
-            if (this is HumanPlayer hp)
-            {
-                return hp.CurrentProfile.Hand;
-            }
-            else if (this is PlayerAI ai)
-            {
-                return ai.Hand;
-            }
-            throw new InvalidCastException($"{"this"} should be human or ai");
-        }
+        //public List<Card> GetHand()
+        //{
+        //    if (this is HumanPlayer hp)
+        //    {
+        //        return hp.CurrentProfile.Hand;
+        //    }
+        //    else if (this is PlayerAI ai)
+        //    {
+        //        return ai.Hand;
+        //    }
+        //    throw new InvalidCastException($"{"this"} should be human or ai");
+        //}
 
         /// <summary>
         /// Usage: IPokerAction currentPlayer = humanPlayer.GetGameType<IPokerAction>();

@@ -8,7 +8,7 @@ namespace CasinoUI.Models.Poker {
     class PokerController {
         PokerLogic pokerModel;
         GamePoker pokerView;
-        int playerIdx;
+        int playerIdx; 
 
         public PokerController() {
             pokerModel = new PokerLogic(ApplicationSettings.HumanPlayer);

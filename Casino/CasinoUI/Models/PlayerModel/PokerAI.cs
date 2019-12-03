@@ -21,8 +21,7 @@ namespace CasinoUI.Models.Poker
 
         private List<double> WinProb;
 
-        public PokerAI(TypePlayerPoker CurrentType)
-        {
+        public PokerAI(TypePlayerPoker CurrentType) : base() {
             Money = 1000;
 
             this.LisCardOnBoard = new List<Card>();
