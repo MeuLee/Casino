@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CasinoUI.Models.Poker;
 using CasinoUI.Models.Cards;
 using System.Drawing;
+using System;
 
 namespace TestCasino
 {
@@ -10,9 +11,9 @@ namespace TestCasino
     /// Summary description for TestPokerHand
     /// </summary>
     [TestClass]
-    public class TestPokerHand
+    public class TestPokerAI
     {
-        private PokerHand pokerCombo;
+        private PokerAI pokerCombo;
         private List<Card> list;
         private PrivateObject pokerTest;
 
@@ -20,11 +21,12 @@ namespace TestCasino
         private Card.CardSuit cardSuit;
         private Bitmap imageBidon;
 
-        public TestPokerHand()
+        public TestPokerAI()
         {
             list = new List<Card>();
-            pokerCombo = new PokerHand(list);
-            pokerTest = new PrivateObject(pokerCombo, new PrivateType(typeof(PokerHand)));
+            pokerCombo = new PokerAI(TypePlayerPoker.NORMAL);
+            pokerCombo.CardsOnBoard = list;
+            pokerTest = new PrivateObject(pokerCombo, new PrivateType(typeof(PokerAI)));
 
             cardRank = Card.CardRank.Two;
             cardSuit = Card.CardSuit.Clubs;
@@ -34,9 +36,11 @@ namespace TestCasino
 
         private void ClearLists()
         {
-            list.Clear();
-            pokerCombo.ListValue.Clear();
-            pokerCombo.ComboValuePoss.Clear();
+            list.Clear(); 
+            List<Card> listVal = (List<Card>) pokerTest.GetFieldOrProperty("ListValue");
+            listVal.Clear();
+            List<Tuple<int, int>> listTuple = (List<Tuple<int, int>>)pokerTest.GetFieldOrProperty("ComboValuePoss");
+            listTuple.Clear();
         }
 
         private void AddCardList(Card.CardRank rank, Card.CardSuit suit = Card.CardSuit.Clubs)
@@ -63,21 +67,22 @@ namespace TestCasino
 
         private void AssertSameCombo()
         {
-            List<Card> listValue = pokerCombo.ListValue;
+            List<Card> listValue =(List<Card>)pokerTest.GetFieldOrProperty("ListValue");
+            List<Tuple<int, int>> listTuple = (List<Tuple<int, int>>)pokerTest.GetFieldOrProperty("ComboValuePoss");
             int compt = 0;
             int comptC = 0;
 
-            for(int i = 0; i < pokerCombo.ComboValuePoss.Count; i++)
+            for(int i = 0; i < listTuple.Count; i++)
             {
                 if (compt < listValue.Count && comptC < listValue.Count && listValue.Count > 1) {
-                    Assert.AreEqual((int)listValue[comptC].Value, pokerCombo.ComboValuePoss[i].Item1);
-                    Assert.AreEqual((int)listValue[compt].Value, pokerCombo.ComboValuePoss[i].Item2);
+                    Assert.AreEqual((int)listValue[comptC].Value, listTuple[i].Item1);
+                    Assert.AreEqual((int)listValue[compt].Value, listTuple[i].Item2);
                     compt++;
                 }
                 else
                 {
-                    Assert.AreEqual((int)listValue[comptC].Value, pokerCombo.ComboValuePoss[i].Item1);
-                    Assert.AreEqual(-1, pokerCombo.ComboValuePoss[i].Item2);
+                    Assert.AreEqual((int)listValue[comptC].Value, listTuple[i].Item1);
+                    Assert.AreEqual(-1, listTuple[i].Item2);
 
                     comptC++;
                     compt = comptC;
@@ -91,35 +96,35 @@ namespace TestCasino
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("isStraightCombo");
-            Assert.AreEqual(false, pokerCombo.IsStraight);
+            Assert.AreEqual(false, (bool)pokerTest.GetFieldOrProperty("IsStraight"));
             ClearLists();
 
             CreateTableCard(3, 1);
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("isStraightCombo");
-            Assert.AreEqual(false, pokerCombo.IsStraight);
+            Assert.AreEqual(false, (bool)pokerTest.GetFieldOrProperty("IsStraight"));
             ClearLists();
 
             CreateTableCard(4, 1);
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("isStraightCombo");
-            Assert.AreEqual(false, pokerCombo.IsStraight);
+            Assert.AreEqual(false, (bool)pokerTest.GetFieldOrProperty("IsStraight"));
             ClearLists();
 
             CreateTableCard(4, 2);
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("isStraightCombo");
-            Assert.AreEqual(true, pokerCombo.IsStraight);
+            Assert.AreEqual(true, (bool)pokerTest.GetFieldOrProperty("IsStraight"));
             ClearLists();
 
             CreateTableCard(5, 4);
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("isStraightCombo");
-            Assert.AreEqual(true, pokerCombo.IsStraight);
+            Assert.AreEqual(true, (bool)pokerTest.GetFieldOrProperty("IsStraight"));
             ClearLists();
         }
 
@@ -131,7 +136,7 @@ namespace TestCasino
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("isStraightCombo");
-            Assert.AreEqual(true, pokerCombo.IsStraight);
+            Assert.AreEqual(true, (bool)pokerTest.GetFieldOrProperty("IsStraight"));
             ClearLists();
 
             AddCardList(Card.CardRank.King, cardSuit);
@@ -140,7 +145,7 @@ namespace TestCasino
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("isStraightCombo");
-            Assert.AreEqual(true, pokerCombo.IsStraight);
+            Assert.AreEqual(true, (bool)pokerTest.GetFieldOrProperty("IsStraight"));
             ClearLists();
 
             AddCardList(Card.CardRank.King, cardSuit);
@@ -150,7 +155,7 @@ namespace TestCasino
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("isStraightCombo");
-            Assert.AreEqual(false, pokerCombo.IsStraight);
+            Assert.AreEqual(false, (bool)pokerTest.GetFieldOrProperty("IsStraight"));
             ClearLists();
 
             AddCardList(Card.CardRank.King, cardSuit);
@@ -161,7 +166,7 @@ namespace TestCasino
             pokerTest.Invoke("DescendValueList");
             pokerTest.Invoke("CreateListValue");
             pokerTest.Invoke("isStraightCombo");
-            Assert.AreEqual(true, pokerCombo.IsStraight);
+            Assert.AreEqual(true, (bool)pokerTest.GetFieldOrProperty("IsStraight"));
             ClearLists();
 
 
@@ -171,7 +176,7 @@ namespace TestCasino
         private void AsserCreateList()
         {
             int[] tab = {14, 13, 12, 11, 10, 9};
-            List<int> list =(List<int>) pokerTest.GetFieldOrProperty("ListTempCombo");
+            List<int> list = (List<int>)pokerTest.GetFieldOrProperty("ListStraightCombo");
             for(int i = 0; i < list.Count; i++)
             {
                 Assert.AreEqual(tab[i],list[i]);
@@ -193,7 +198,7 @@ namespace TestCasino
         }
         private void AssertRemoveCard(int[] tab)
         {
-            List<int> list = (List<int>)pokerTest.GetFieldOrProperty("ListTempCombo");
+            List<int> list = (List<int>)pokerTest.GetFieldOrProperty("ListStraightCombo");
             for (int i = 0; i < list.Count; i++)
             {
                 Assert.AreEqual(tab[i], list[i]);
@@ -224,44 +229,47 @@ namespace TestCasino
         [TestMethod]
         public void CreateListValueTestfilter()
         {
+            List<Card> ListVal = (List<Card>)pokerTest.GetFieldOrProperty("ListValue");
             pokerTest.Invoke("DescendValueList");
             CreateTableCard(3, 0);
             pokerTest.Invoke("CreateListValue");
-            Assert.AreEqual(1, pokerCombo.ListValue.Count);
+            Assert.AreEqual(1, ListVal.Count);
             ClearLists();
 
             CreateTableCard(3, 1);
             pokerTest.Invoke("CreateListValue");
-            Assert.AreEqual(2, pokerCombo.ListValue.Count);
+            Assert.AreEqual(2, ListVal.Count);
             ClearLists();
 
             CreateTableCard(5, 4);
             pokerTest.Invoke("CreateListValue");
-            Assert.AreEqual(5, pokerCombo.ListValue.Count);
+            Assert.AreEqual(5, ListVal.Count);
             ClearLists();
         }
 
         [TestMethod]
         public void TestDescendingValue()
         {
+            List<Card> ListVal = (List<Card>)pokerTest.GetFieldOrProperty("ListValue");
+
             AddCardList(Card.CardRank.Eight, Card.CardSuit.Clubs);
             AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
             AddCardList(Card.CardRank.Jack, Card.CardSuit.Hearts);
 
             pokerTest.Invoke("DescendValueList");
 
-            for(int i = 0; i < pokerCombo.ListValue.Count; i++)
+            for(int i = 0; i < ListVal.Count; i++)
             {
                 switch (i)
                 {
                     case 0:
-                        Assert.AreEqual(Card.CardRank.King, pokerCombo.ListValue[i]);
+                        Assert.AreEqual(Card.CardRank.King, ListVal[i]);
                         break;
                     case 1:
-                        Assert.AreEqual(Card.CardRank.Jack, pokerCombo.ListValue[i]);
+                        Assert.AreEqual(Card.CardRank.Jack, ListVal[i]);
                         break;
                     case 2:
-                        Assert.AreEqual(Card.CardRank.Eight, pokerCombo.ListValue[i]);
+                        Assert.AreEqual(Card.CardRank.Eight, ListVal[i]);
                         break;
                 }
             }
@@ -510,18 +518,18 @@ namespace TestCasino
 
             pokerTest.Invoke("DescendSuitList");
 
-            for (int i = 0; i < pokerCombo.ListCardInGame.Count; i++)
+            for (int i = 0; i < pokerCombo.CardsOnBoard.Count; i++)
             {
                 switch (i)
                 {
                     case 0:
-                        Assert.AreEqual(Card.CardSuit.Hearts, pokerCombo.ListCardInGame[i].Suit);
+                        Assert.AreEqual(Card.CardSuit.Hearts, pokerCombo.CardsOnBoard[i].Suit);
                         break;
                     case 1:
-                        Assert.AreEqual(Card.CardSuit.Clubs, pokerCombo.ListCardInGame[i].Suit);
+                        Assert.AreEqual(Card.CardSuit.Clubs, pokerCombo.CardsOnBoard[i].Suit);
                         break;
                     case 2:
-                        Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.ListCardInGame[i].Suit);
+                        Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.CardsOnBoard[i].Suit);
                         break;
                 }
             }
@@ -539,7 +547,7 @@ namespace TestCasino
             pokerTest.Invoke("DescendSuitList");
             pokerTest.Invoke("isFlushCombo");
 
-            Assert.IsFalse(pokerCombo.IsFlush);
+            Assert.IsFalse((bool)pokerTest.GetFieldOrProperty("IsFlush"));
             ClearLists();
 
             AddCardList(Card.CardRank.Eight, Card.CardSuit.Diamonds);
@@ -549,7 +557,7 @@ namespace TestCasino
             pokerTest.Invoke("DescendSuitList");
             pokerTest.Invoke("isFlushCombo");
 
-            Assert.IsTrue(pokerCombo.IsFlush);
+            Assert.IsTrue((bool)pokerTest.GetFieldOrProperty("IsFlush"));
 
         }
 
@@ -564,7 +572,7 @@ namespace TestCasino
             pokerTest.Invoke("isFlushCombo");
             pokerTest.Invoke("ComboFlush");
 
-            Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.FlushCombo);
+            Assert.AreEqual(Card.CardSuit.Diamonds, (Card.CardSuit)pokerTest.GetFieldOrProperty("FlushCombo"));
             ClearLists();
 
 
@@ -577,7 +585,7 @@ namespace TestCasino
             pokerTest.Invoke("isFlushCombo");
             pokerTest.Invoke("ComboFlush");
 
-            Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.FlushCombo);
+            Assert.AreEqual(Card.CardSuit.Diamonds, (Card.CardSuit)pokerTest.GetFieldOrProperty("FlushCombo"));
             ClearLists();
 
             AddCardList(Card.CardRank.Eight, Card.CardSuit.Diamonds);
@@ -590,11 +598,162 @@ namespace TestCasino
             pokerTest.Invoke("isFlushCombo");
             pokerTest.Invoke("ComboFlush");
 
-            Assert.AreEqual(Card.CardSuit.Diamonds, pokerCombo.FlushCombo);
+            Assert.AreEqual(Card.CardSuit.Diamonds, (Card.CardSuit)pokerTest.GetFieldOrProperty("FlushCombo"));
             ClearLists();
         }
+
+        private void CreateGameEnvironnment(List<Card> HandContent)
+        {
+            AddCardList(Card.CardRank.Queen, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Diamonds);
+
+            pokerCombo.CreateAllPoss(list);
+
+            pokerCombo.Hand = HandContent;
+        }
+
+        private void AssertSingleTestChanceWin(String method, double expectNbr)
+        {
+            int nbr = (int)pokerTest.Invoke("AllProbability");
+
+            object[] args = new object[1] { nbr };
+            pokerTest.Invoke(method, args);
+            List<double> vals = (List<double>)pokerTest.GetFieldOrProperty("WinProb");
+
+            Assert.AreEqual(expectNbr, vals[0]);
+        }
+
+        private void AssertMultTestChanceWinf()
+        {
+
+        }
+
+        [TestMethod]
+        public void TestAllProbability()
+        {
+            AddCardList(Card.CardRank.Queen, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.King, Card.CardSuit.Diamonds);
+            AddCardList(Card.CardRank.Jack, Card.CardSuit.Diamonds);
+
+            pokerCombo.CreateAllPoss(list);
+
+            int nbr = (int) pokerTest.Invoke("AllProbability");
+
+            Assert.AreEqual(23, nbr);
+
+        }
+
+        [TestMethod]
+        public void TestChanceWinSameValue()
+        {
+
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+
+            AssertSingleTestChanceWin("ChanceWinSamevalue", 8.0 / 23.0);
+
+        }
+        [TestMethod]
+        public void TestChanceWinStraight()
+        {
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Ten, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.Nine, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+
+            AssertSingleTestChanceWin("ChanceWinStraight", 2.0 / 23.0);
+        }
+        [TestMethod]
+        public void TestChanceWinFlush()
+        {
+
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+
+            AssertSingleTestChanceWin("ChanceWinFlush", 2.0 / 23.0);
+
+        }
+
+        private void DoAllPoss()
+        {
+            int nbr = (int)pokerTest.Invoke("AllProbability");
+            object[] TotalProb = new object[1] { nbr };
+
+            pokerTest.Invoke("ChanceWinSamevalue", TotalProb);
+            pokerTest.Invoke("ChanceWinStraight", TotalProb);
+            pokerTest.Invoke("ChanceWinFlush", TotalProb);
+        }
+        [TestMethod]
+        public void TestChanceWinRaise()
+        {
+
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+            DoAllPoss();
+
+            pokerCombo.Money = 800;
+            object[] amountRaise = new object[1] { 124 };
+            double nbrExpect =(double) pokerTest.Invoke("ChanceWinRaise", amountRaise);
+
+            Assert.AreEqual(0.845, nbrExpect);
+
+        }
+
+        [TestMethod]
+        public void TestCalculChance()
+        {
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+            DoAllPoss();
+
+            object[] args_Chance = new object[1] { 1 };
+            double nbrExpect = (double)pokerTest.Invoke("CalculChance", args_Chance);
+
+            Assert.AreEqual(10.0/23.0, nbrExpect);
+        }
+        private PokerActionCode GameSituationCreater(int MoneyRaise, GameState currentState)
+        {
+            pokerCombo.Money = 1000;
+            object[] args = new object[2] { currentState, MoneyRaise };
+            PokerActionCode expectedAct = (PokerActionCode)pokerTest.Invoke("MakeDecision", args);
+
+            return expectedAct;
+        }
+        [TestMethod]
+        public void TestReturnPokerAction()
+        {
+            List<Card> HandContent = new List<Card>()
+            {
+                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
+                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
+            };
+            CreateGameEnvironnment(HandContent);
+
+            Assert.AreEqual(PokerActionCode.RAISE, GameSituationCreater(0, GameState.normal));
+
+            Assert.AreEqual(PokerActionCode.FOLD, GameSituationCreater(1000, GameState.raised));
+
+            Assert.AreEqual(PokerActionCode.CALL, GameSituationCreater(500, GameState.raised));
+        }
     }
-
-
     }
 

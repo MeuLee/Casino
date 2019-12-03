@@ -5,25 +5,29 @@ namespace CasinoUI.Models.Profiles
 {
     public class PokerProfile : Profile, IPokerAction
     {
+        public bool hasPlayed { get; set; }
 
-        public int PokerCall(int currentRaise)
-        {
-            throw new NotImplementedException();
+        public PokerProfile() {
+            hasPlayed = false;
         }
 
-        public void PokerCheck()
-        {
-            throw new NotImplementedException();
+        public int PokerAllIn() {
+            return -1;
         }
 
-        public void PokerFold()
-        {
-            throw new NotImplementedException();
+        public int PokerCall(int currentRaise) {
+            return -1;
         }
 
-        public int PokerRaise(int moneyRaised)
-        {
-            throw new NotImplementedException();
+        public void PokerCheck() {
+        }
+
+        public void PokerFold() {
+            
+        }
+
+        public int PokerRaise(int moneyRaised) {
+            return -1;
         }
     }
 }

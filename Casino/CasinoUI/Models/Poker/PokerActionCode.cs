@@ -1,9 +1,10 @@
 ﻿namespace CasinoUI.Models.Poker
 {
-    enum PokerActionCode {
+    public enum PokerActionCode {
         CALL = 1,
         CHECK = 2,
         RAISE = 3,
-        FOLD = 4
+        FOLD = 4,
+        ALLIN = 5
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CasinoUI.Models.PlayerModel.PlayerSkin;
+using CasinoUI.Models.Poker;
 using CasinoUI.Models.Profiles;
 using CasinoUI.Models.Settings;
 using System;
@@ -9,6 +10,7 @@ namespace CasinoUI.Models.PlayerModel
 {
     public class HumanPlayer : Player
     {
+
         public int X { get; set; }
         public int Y { get; set; }
         public string Name { get { return CurrentSkin.Name; } }
@@ -31,8 +33,7 @@ namespace CasinoUI.Models.PlayerModel
 
         public BitmapImage CurrentImage { get; set; }
 
-        public HumanPlayer(int x, int y)
-        {
+        public HumanPlayer(int x, int y) : base() {
             X = x;
             Y = y;
             CurrentSkin = SkinManager.Instance[Skins.GreenMan];
@@ -75,5 +76,7 @@ namespace CasinoUI.Models.PlayerModel
                 CurrentImage = CurrentSkin.NextRightImage;
             }
         }
+
+
     }
 }

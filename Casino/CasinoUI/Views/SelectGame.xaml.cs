@@ -1,4 +1,5 @@
 ﻿using CasinoUI.Controllers;
+using CasinoUI.Models.Poker;
 using CasinoUI.Models.Settings;
 using CasinoUI.Utils;
 using CasinoUI.View;
@@ -88,7 +89,7 @@ namespace CasinoUI.Views
 
         private void BtnPoker_Click(object sender, RoutedEventArgs e)
         {
-            new GamePoker().Show();
+            new PokerController();
             Close();
         }
 
