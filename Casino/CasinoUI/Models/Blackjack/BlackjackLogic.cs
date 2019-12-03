@@ -27,6 +27,9 @@ namespace CasinoUI.Models.Blackjack
             _players = new List<Player>() { human, new BlackjackAI() };
         }
 
+        /// <summary>
+        /// Remet le joueur et le dealer a leur etat initial afin de commencer une nouvelle partie
+        /// </summary>
         public void ResetPlayers()
         {
             IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
@@ -40,6 +43,9 @@ namespace CasinoUI.Models.Blackjack
             ai.Has21 = false;
         }
 
+        /// <summary>
+        /// Distribue les 2 premieres cartes au debut de la partie a chaque joueur
+        /// </summary>
         public void DistributeCards()
         {         
             foreach (Player player in _players)
@@ -51,6 +57,10 @@ namespace CasinoUI.Models.Blackjack
             }
         }
 
+        /// <summary>
+        /// Donne la valeur de la main au joueur
+        /// </summary>
+        /// <param name="player"></param>
         private void SetHandValue(Player player)
         {
             int handValue = 0;
@@ -83,6 +93,10 @@ namespace CasinoUI.Models.Blackjack
             }
         }
 
+        /// <summary>
+        /// Methode qui determine la maniere dont le dealer va jouer
+        /// Dans notre version de jeu, le dealer Hit lorsqu'il a un soft 17
+        /// </summary>
         public void AIPlays()
         {
             IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
@@ -116,6 +130,11 @@ namespace CasinoUI.Models.Blackjack
             }
         }
 
+        /// <summary>
+        /// Methode qui verifie si le dealer a un soft 17
+        /// </summary>
+        /// <param name="ai"></param>
+        /// <returns></returns>
         private bool CheckSoft17(IBlackjackAction ai)
         {
             int sum = GetAI().GetHand().Select(c => (int)c.Value).Where(c => (CardRank)c != CardRank.Ace).Sum();
@@ -134,6 +153,9 @@ namespace CasinoUI.Models.Blackjack
             }
         }
 
+        /// <summary>
+        /// Methode Insurance ne fonctionne pas en ce moment
+        /// </summary>
         public void Insurance()
         {
             //only available if dealer face up card is ACE
@@ -146,6 +168,9 @@ namespace CasinoUI.Models.Blackjack
             //If in previous case Player loses, player loses both bets
         }
 
+        /// <summary>
+        /// Double le pari et le joueur tire une carte
+        /// </summary>
         public void DoubleDown()
         {
             Player tempP = GetHuman();
@@ -162,11 +187,17 @@ namespace CasinoUI.Models.Blackjack
             Bet *= 2;
         }      
 
+        /// <summary>
+        /// Termine le tour du joueur
+        /// </summary>
         public void Stand()
         {
             GetHuman().GetGameType<IBlackjackAction>().PlayerStand = true;
         }
 
+        /// <summary>
+        /// Le joueur tire une carte
+        /// </summary>
         public void Hit()
         {
             CardStack.PlayerDrawCard(GetHuman());
@@ -178,6 +209,11 @@ namespace CasinoUI.Models.Blackjack
             }
         }
 
+        /// <summary>
+        /// Verifie si le joueur en parametre a tirer une carte qui le met au dessus de 21
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="pType"></param>
         private void CheckBust(IBlackjackAction player, Player pType)
         {
             SetHandValue(pType);
@@ -189,6 +225,10 @@ namespace CasinoUI.Models.Blackjack
             }
         }
 
+        /// <summary>
+        /// Verifie si le joueur a un Blackjack. Cette methode est seulement appeler suite a
+        /// la distribution des cartes.
+        /// </summary>
         public void CheckBlackJack()
         {
             IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
@@ -219,6 +259,10 @@ namespace CasinoUI.Models.Blackjack
             }
         }
 
+        /// <summary>
+        /// Verifie quel joueur a gagne et distribue l'argent du pari
+        /// </summary>
+        /// <returns>Un String qui est afficher sur le UI suite a la partie</returns>
         public String CheckForWinner()
         {
             IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
@@ -255,11 +299,19 @@ namespace CasinoUI.Models.Blackjack
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns>Retourne le joueur humain</returns>
         public Player GetHuman()
         {
             return _players.First(p => p is HumanPlayer);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Retourne le joueur dealer</returns>
         public Player GetAI()
         {
             return _players.First(p => p is BlackjackAI);

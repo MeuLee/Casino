@@ -63,6 +63,9 @@ namespace CasinoUI.Controllers
             _view.BtnDoubleDown.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Methode qui ajoute des events aux contoles du UI
+        /// </summary>
         private void AddEventsOnUIControls()
         {
             foreach (var btn in _view.Grid.Children.OfType<Button>())
@@ -83,6 +86,13 @@ namespace CasinoUI.Controllers
             _view.BtnBet.Click += BtnBet_Click;
         }
 
+        /// <summary>
+        /// Lorsque le bouton Bet est appuyer, les boutons de jeu sont visible.
+        /// La table de jeu est reset
+        /// Les cartes sont distribuer et verifie s'il y a un Blackjack
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBet_Click(object sender, RoutedEventArgs e)
         {
             _view.BtnHit.Visibility = Visibility.Visible;
@@ -114,6 +124,11 @@ namespace CasinoUI.Controllers
             _view.Money.Text = _humanPlayer.Money.ToString();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBet_MouseLeave(object sender, MouseEventArgs e)
         {
             Button btn = sender as Button;
@@ -121,6 +136,11 @@ namespace CasinoUI.Controllers
             btn.Cursor = Cursors.Arrow;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBet_MouseOver(object sender, MouseEventArgs e)
         {
             Button btn = sender as Button;
@@ -128,6 +148,11 @@ namespace CasinoUI.Controllers
             btn.Cursor = Cursors.Hand;
         }
 
+        /// <summary>
+        /// Augmente le pari
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnIncreaseBet_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentBet + _minimumBet > _humanPlayer.Money)
@@ -138,6 +163,11 @@ namespace CasinoUI.Controllers
             CurrentBet += _minimumBet;
         }
 
+        /// <summary>
+        /// Reduit le pari
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnReduceBet_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentBet - _minimumBet < _minimumBet)
@@ -148,6 +178,11 @@ namespace CasinoUI.Controllers
             CurrentBet -= _minimumBet;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_MouseEnter(object sender, MouseEventArgs e)
         {
             Button btn = sender as Button;
@@ -159,6 +194,11 @@ namespace CasinoUI.Controllers
             btn.Cursor = Cursors.Hand;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_MouseLeave(object sender, MouseEventArgs e)
         {
             Button btn = sender as Button;
@@ -170,6 +210,11 @@ namespace CasinoUI.Controllers
             btn.Cursor = Cursors.Arrow;
         }
 
+        /// <summary>
+        /// Lorsque le joueur appuie sur le bouton Hit, le joueur tire une carte
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Hit_Click(object sender, RoutedEventArgs e)
         {
             _model.Hit();
@@ -187,11 +232,21 @@ namespace CasinoUI.Controllers
             _view.CreateNewImageSpace(_model._players.First(p => p is HumanPlayer), _model._players.First(p => p is BlackjackAI));                
         }
 
+        /// <summary>
+        /// Methode n'est pas presentement fonctionnelle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Insurance_Click(object sender, RoutedEventArgs e)
         {
             _model.Insurance();
         }
 
+        /// <summary>
+        /// Double le pari et termine le tour du joueur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DoubleDown_Click(object sender, RoutedEventArgs e)
         {
             _model.DoubleDown();
@@ -204,6 +259,11 @@ namespace CasinoUI.Controllers
             _view.Money.Text = _humanPlayer.Money.ToString();
         }
 
+        /// <summary>
+        /// Termine le tour du joueur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Stand_Click(object sender, RoutedEventArgs e)
         {
             _model.Stand();
@@ -214,6 +274,9 @@ namespace CasinoUI.Controllers
             HideWhenStand();
         }
 
+        /// <summary>
+        /// Affiche le bouton Bet et cache les boutons du jeu lorsque le joueur et le dealer Stand
+        /// </summary>
         private void HideWhenStand()
         {
             _view.BtnHit.Visibility = Visibility.Hidden;
@@ -225,6 +288,9 @@ namespace CasinoUI.Controllers
             _view.BtnReduceBet.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void SetImages()
         {
             foreach (var btn in _view.Grid.Children.OfType<Button>())
@@ -236,6 +302,9 @@ namespace CasinoUI.Controllers
             }
         }
         
+        /// <summary>
+        /// Modifie le UI afin d'afficher les cartes du dealer
+        /// </summary>
         public void UpdateViewNewCardAI()
         {
             _view.CreateNewImageSpace(_model.GetHuman(), _model.GetAI());

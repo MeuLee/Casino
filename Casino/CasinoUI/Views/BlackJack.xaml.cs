@@ -29,6 +29,11 @@ namespace CasinoUI.Views
             tempGrid = this.Grid;
         }
 
+        /// <summary>
+        /// Methode qui determine les cartes du joueurs et du dealer qui doivent etre creer
+        /// </summary>
+        /// <param name="humanPlayer"></param>
+        /// <param name="aiPlayer"></param>
         public void CreateNewImageSpace(Player humanPlayer, Player aiPlayer)
         {
             List<Card> _humanCards = humanPlayer.GetHand();
@@ -43,6 +48,12 @@ namespace CasinoUI.Views
             }
         }
 
+        /// <summary>
+        /// Methode qui ajoute dynamiquement les nouvelles cartes au UI
+        /// </summary>
+        /// <param name="cards"></param>
+        /// <param name="images"></param>
+        /// <param name="playerString"></param>
         private void AddCardImgUI(List<Card> cards, List<Image> images, String playerString)
         {            
             for (int i = images.Count; i < cards.Count; i++)
@@ -63,11 +74,18 @@ namespace CasinoUI.Views
             }
         }
 
+        /// <summary>
+        /// Tourne la premiere carte de la main du dealer afin que le joueur puisse la voir
+        /// </summary>
+        /// <param name="aiPlayer"></param>
         public void RevealAIFirstCard(Player aiPlayer)
         {
             _imgAi[0].Source = aiPlayer.GetHand()[0].Image.ToBitmapImage();
         }
 
+        /// <summary>
+        /// Retire les images de cartes du ui
+        /// </summary>
         public void ClearImgs()
         {                            
             _imgAi.Clear();
