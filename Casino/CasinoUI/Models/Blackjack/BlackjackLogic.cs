@@ -20,6 +20,7 @@ namespace CasinoUI.Models.Blackjack
 
         public BlackjackLogic(HumanPlayer human, BlackjackController blackjackController)
         {
+            human.CurrentProfile = new BlackjackProfile();
             CardStack = new GameCardStack();
             BJController = blackjackController;
             Bet = 0;
@@ -62,23 +63,6 @@ namespace CasinoUI.Models.Blackjack
             player.GetGameType<IBlackjackAction>().PlayerHandValue = handValue;
         }
 
-        private void CheckForBlackjack()
-        {
-            IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
-                             ai = _players.OfType<BlackjackAI>().First().GetGameType<IBlackjackAction>();
-            
-            if (human.PlayerHandValue == 21 && ai.PlayerHandValue != 21)
-            {
-                //Player wins bet 3:2
-                RoundEnd = true;
-            }
-            else if (human.PlayerHandValue == 21 && ai.PlayerHandValue == 21)
-            {
-                //There is a tie. Return bet to player.
-                RoundEnd = true;
-            }
-        }
-
         public void AIPlays()
         {
             IBlackjackAction human = _players.OfType<HumanPlayer>().First().GetGameType<IBlackjackAction>(),
@@ -100,11 +84,7 @@ namespace CasinoUI.Models.Blackjack
             else
             {
                 ai.PlayerStand = true;
-            }
-
-            //if soft 17 dealer hits
-            //if hard 17 or more dealer stands
-            //else hit always 
+            } 
 
             if(human.PlayerStand)
             {
@@ -116,7 +96,7 @@ namespace CasinoUI.Models.Blackjack
         {
             int sum = GetAI().GetHand().Select(c => (int)c.Value).Where(c => (CardRank)c != CardRank.Ace).Sum();
 
-            if (!GetAI().GetHand().Select(c => c.Value).Contains(CardRank.Ace) || ai.PlayerHandValue != 17)
+            if (!GetAI().GetHand().Select(c => c.Value).Contains(CardRank.Ace))
             {
                 return false;
             }
@@ -153,26 +133,11 @@ namespace CasinoUI.Models.Blackjack
                 return;
             }
             Bet *= 2;
-        }
-
-        private void ProceedNextTurn()
-        {
-            ClearHands();
-            Bet = 0;
-        }
+        }      
 
         public void Stand()
         {
             GetHuman().GetGameType<IBlackjackAction>().PlayerStand = true;
-        }
-
-        private void ClearHands()
-        {
-            foreach (Player player in _players)
-            {
-                player.GetHand().Clear();
-                player.GetGameType<IBlackjackAction>().PlayerHandValue = 0;
-            }
         }
 
         public void Hit()

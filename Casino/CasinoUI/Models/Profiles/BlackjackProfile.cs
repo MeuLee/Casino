@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CasinoUI.Models.Profiles
 {
-    class BlackjackProfile : Profile, IBlackjackAction
+    public class BlackjackProfile : Profile, IBlackjackAction
     {
         public int PlayerHandValue { get; set; }
         public bool PlayerStand { get; set; }
