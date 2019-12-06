@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using CasinoUI.Models.PlayerModel;
 using CasinoUI.Models.Poker;
 using CasinoUI.Models.Poker.PokerBrains;

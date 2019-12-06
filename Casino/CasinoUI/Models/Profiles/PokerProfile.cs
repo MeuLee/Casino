@@ -1,5 +1,4 @@
 ﻿using CasinoUI.Models.Poker;
-using System;
 
 namespace CasinoUI.Models.Profiles
 {

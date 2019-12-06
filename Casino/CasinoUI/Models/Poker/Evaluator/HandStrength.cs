@@ -1,14 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CasinoUI.Models.Cards;
 
 namespace CasinoUI.Models.Poker.Evaluator
 {
-    public struct HandStrength
+    public class HandStrength
     {
-        public int Total { get; set; }
-        public int HighCard { get; set; }
+        public HandStrength()
+        {
+            HighCard = null;
+            Total = 0;
+        }
+
+        public Card[] HandPlayer { get; set; }
+        private int Total { get; set; }
+        public Card HighCard { get; set; }
+
+        public int CalculerTotal()
+        {
+            return TrouverTotal();
+        }
+
+        private int TrouverTotal()
+        {
+            foreach (Card cardMain in HandPlayer)
+            {
+                Total += (int)cardMain.Value;
+            }
+            return Total;
+        }
     }
 }
