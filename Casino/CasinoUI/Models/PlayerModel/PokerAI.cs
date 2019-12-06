@@ -20,6 +20,7 @@ namespace CasinoUI.Models.Poker
         private bool IsFlush = false;
 
         private List<double> WinProb;
+        private double ConfidenceLevel;
 
         public PokerAI(TypePlayerPoker CurrentType) : base() {
             Money = 1000;
@@ -49,18 +50,31 @@ namespace CasinoUI.Models.Poker
             ChanceWinStraight(TotalProb);
             ChanceWinFlush(TotalProb);
 
-            return ReturnPokerAction(amount_raise, gameState);
+            double chance = CreateChance(gameState, amount_raise);
+            SetChanceLevel(ref chance);
+            double prob_win = CalculChance(chance);
+
+            return ReturnPokerAction(prob_win, gameState, amount_raise);
         }
 
-        private PokerActionCode ReturnPokerAction(int amount_raise, GameState gameState)
+        private double CreateChance(GameState gameState, int amount_raise)
+        {
+            return gameState == GameState.raised ? ChanceWinRaise(amount_raise) : 1;
+        }
+
+        private void SetChanceLevel(ref double chance)
+        {
+            Random random = new Random();
+            this.ConfidenceLevel = random.NextDouble() * (2.0 - 1.0) + 1.0;
+            chance *= this.ConfidenceLevel;
+        }
+
+        private PokerActionCode ReturnPokerAction(double prob_win, GameState gameState, int amount_raise)
         {
             PokerActionCode NextMove;
 
             if (gameState != GameState.inital)
             {
-                double chance = gameState == GameState.raised ? ChanceWinRaise(amount_raise) : 1;
-                double prob_win = CalculChance(chance);
-
                 NextMove = prob_win >= 0.4 ?
                     amount_raise >= Money ?
                     PokerActionCode.ALLIN :

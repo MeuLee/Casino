@@ -685,7 +685,7 @@ namespace TestCasino
 
         }
 
-        private void DoAllPoss()
+        private void DoAllWinProb()
         {
             int nbr = (int)pokerTest.Invoke("AllProbability");
             object[] TotalProb = new object[1] { nbr };
@@ -697,21 +697,11 @@ namespace TestCasino
         [TestMethod]
         public void TestChanceWinRaise()
         {
-
-            List<Card> HandContent = new List<Card>()
-            {
-                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
-                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
-            };
-            CreateGameEnvironnment(HandContent);
-            DoAllPoss();
-
             pokerCombo.Money = 800;
             object[] amountRaise = new object[1] { 124 };
             double nbrExpect =(double) pokerTest.Invoke("ChanceWinRaise", amountRaise);
 
             Assert.AreEqual(0.845, nbrExpect);
-
         }
 
         [TestMethod]
@@ -723,36 +713,57 @@ namespace TestCasino
                 new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
             };
             CreateGameEnvironnment(HandContent);
-            DoAllPoss();
+            DoAllWinProb();
 
             object[] args_Chance = new object[1] { 1 };
             double nbrExpect = (double)pokerTest.Invoke("CalculChance", args_Chance);
 
             Assert.AreEqual(10.0/23.0, nbrExpect);
         }
-        private PokerActionCode GameSituationCreater(int MoneyRaise, GameState currentState)
+
+        [TestMethod]
+        public void TestCreateChance()
+        {
+            object[] args = new object[2] {GameState.normal, 100 };
+            double chance =(double) pokerTest.Invoke("CreateChance", args);
+
+            Assert.AreEqual(1, chance);
+        }
+        [TestMethod]
+        public void TestSetChanceLevel()
+        {
+            for (int i = 0; i < 100; i++) {
+                object[] chance = new object[1] { 1.0 };
+                pokerTest.Invoke("SetChanceLevel", chance);
+                Assert.IsTrue((double)chance[0] > 1.0 && (double)chance[0] < 2.0);
+            }
+        }
+
+        private PokerActionCode GameSituationCreater(double probWin, int MoneyRaise, GameState currentState)
         {
             pokerCombo.Money = 1000;
-            object[] args = new object[2] { currentState, MoneyRaise };
-            PokerActionCode expectedAct = (PokerActionCode)pokerTest.Invoke("MakeDecision", args);
+            object[] args = new object[3] {probWin, currentState, MoneyRaise};
+            PokerActionCode expectedAct = (PokerActionCode)pokerTest.Invoke("ReturnPokerAction", args);
 
             return expectedAct;
         }
         [TestMethod]
         public void TestReturnPokerAction()
         {
-            List<Card> HandContent = new List<Card>()
-            {
-                new Card(Card.CardRank.Queen, Card.CardSuit.Diamonds, imageBidon),
-                new Card(Card.CardRank.King, Card.CardSuit.Diamonds, imageBidon)
-            };
-            CreateGameEnvironnment(HandContent);
 
-            Assert.AreEqual(PokerActionCode.RAISE, GameSituationCreater(0, GameState.normal));
+            pokerTest.SetFieldOrProperty("CurrentType", TypePlayerPoker.BIG_BLIND);
 
-            Assert.AreEqual(PokerActionCode.FOLD, GameSituationCreater(1000, GameState.raised));
+            Assert.AreEqual(PokerActionCode.RAISE, GameSituationCreater(1, 1,GameState.normal));
 
-            Assert.AreEqual(PokerActionCode.CALL, GameSituationCreater(500, GameState.raised));
+            Assert.AreEqual(PokerActionCode.FOLD, GameSituationCreater(0, 1, GameState.raised));
+
+            Assert.AreEqual(PokerActionCode.CALL, GameSituationCreater(0.1,1 ,GameState.raised));
+
+            Assert.AreEqual(PokerActionCode.ALLIN, GameSituationCreater(0.7, 1000, GameState.raised));
+
+            Assert.AreEqual(PokerActionCode.CHECK, GameSituationCreater(0.2, 1, GameState.normal));
+
+            Assert.AreEqual(PokerActionCode.CHECK, GameSituationCreater(0.2, 1, GameState.inital));
         }
     }
     }
