@@ -11,10 +11,7 @@ namespace TestCasino.Controllers
     [TestClass()]
     public class PokerControllerTests
     {
-        [TestMethod()]
-        public void PokerControllerTest()
-        {
-            Assert.Fail();
-        }
+        
+        
     }
 }
