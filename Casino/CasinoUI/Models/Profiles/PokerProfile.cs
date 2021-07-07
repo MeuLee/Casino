@@ -1,5 +1,4 @@
 ﻿using CasinoUI.Models.Poker;
-using System;
 
 namespace CasinoUI.Models.Profiles
 {
@@ -11,24 +10,23 @@ namespace CasinoUI.Models.Profiles
             hasPlayed = false;
         }
 
-        public int PokerCall(int currentRaise)
-        {
-            throw new NotImplementedException();
+        public int PokerAllIn() {
+            return -1;
         }
 
-        public void PokerCheck()
-        {
-            throw new NotImplementedException();
+        public int PokerCall(int currentRaise) {
+            return -1;
         }
 
-        public void PokerFold()
-        {
-            throw new NotImplementedException();
+        public void PokerCheck() {
         }
 
-        public int PokerRaise(int moneyRaised)
-        {
-            throw new NotImplementedException();
+        public void PokerFold() {
+            
+        }
+
+        public int PokerRaise(int moneyRaised) {
+            return -1;
         }
     }
 }

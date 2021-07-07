@@ -8,21 +8,28 @@ namespace CasinoUI.Models.Poker
     {
         private List<Card> listCardInGame;
         private List<Card> listValue;
-        private List<int> ListTempCombo;
 
+        private List<int> listStraightCombo;
         private List<Tuple<int, int>> comboValuePoss;
         private Card.CardSuit flushCombo;
+
 
         private bool isStraight = false;
         private bool isFlush = false;
 
-        public PokerHand(List<Card> listCardInGame)
+        public PokerHand()
         {
-            this.listCardInGame = listCardInGame;
-            ListTempCombo = new List<int>();
+            this.listCardInGame = new List<Card>();
+            listStraightCombo = new List<int>();
             listValue = new List<Card>();
             comboValuePoss = new List<Tuple<int, int>>();
             flushCombo = Card.CardSuit.Diamonds;
+        }
+
+        public List<int> ListSraightCombo
+        {
+            get { return listStraightCombo; }
+            set { this.listStraightCombo = value; }
         }
 
         public List<Card> ListCardInGame {
@@ -56,10 +63,35 @@ namespace CasinoUI.Models.Poker
         }
         private void CheckCombo()
         {
-            //Si seulement straight ou flush calcul hignestCombo
-            //
+            if (isFlush)
+            {
+                CheckFlush();
+            }
+
+            if (isStraight)
+            {
+                CheckStraight();
+            }
+
+            CheckSameKind();
         }
-        public void CreateAllCombo()
+
+        private void CheckStraight()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckFlush()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckSameKind()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateAllCombo(List<Card> listCardInGame)
         {
             DescendValueList();
             CreateListValue();
@@ -113,9 +145,9 @@ namespace CasinoUI.Models.Poker
 
             foreach (Card card in listValue)
             {
-                if (ListTempCombo.Contains((int)card.Value))
+                if (listStraightCombo.Contains((int)card.Value))
                 {
-                    ListTempCombo.Remove((int)card.Value);
+                    listStraightCombo.Remove((int)card.Value);
                 }
             }
 
@@ -144,9 +176,9 @@ namespace CasinoUI.Models.Poker
             switch (SpaceBetweenCard())
             {
                 case 2:
-                    if (ThreeCardEnd() && ListTempCombo[0] == 14)
+                    if (ThreeCardEnd() && listStraightCombo[0] == 14)
                     {
-                        ListTempCombo.RemoveAt(0);
+                        listStraightCombo.RemoveAt(0);
                     }
                     break;
                 case 3:
@@ -158,9 +190,9 @@ namespace CasinoUI.Models.Poker
                         {
                             int itemStraight = (int)listValue[listValue.Count - 1].Value - compt;
 
-                            if (itemStraight < 15 && itemStraight > 1 && !ListTempCombo.Contains(itemStraight))
+                            if (itemStraight < 15 && itemStraight > 1 && !listStraightCombo.Contains(itemStraight))
                             {
-                                ListTempCombo.Add(itemStraight);
+                                listStraightCombo.Add(itemStraight);
                             }
                             compt++;
                         }
@@ -171,25 +203,25 @@ namespace CasinoUI.Models.Poker
 
         private void ThreeCardsStraighPoss()
         {
-            if (ListTempCombo.Count > 3)
+            if (listStraightCombo.Count > 3)
             {
 
                 switch (SpaceBetweenCard())
                 {
                     case 2:
-                        ListTempCombo.RemoveAt(0);
+                        listStraightCombo.RemoveAt(0);
                         break;
                     case 3:
-                        ListTempCombo.RemoveRange(0, 2);
+                        listStraightCombo.RemoveRange(0, 2);
                         break;
                 }
             }
-            else if (ListTempCombo.Count > 2)
+            else if (listStraightCombo.Count > 2)
             {
                 switch (SpaceBetweenCard())
                 {
                     case 3:
-                        ListTempCombo.RemoveAt(0);
+                        listStraightCombo.RemoveAt(0);
                         break;
                 }
             }
@@ -197,18 +229,18 @@ namespace CasinoUI.Models.Poker
 
         private void FourCardStraightPoss()
         {
-            if (ListTempCombo.Count > 2)
+            if (listStraightCombo.Count > 2)
             {
                 switch (SpaceBetweenCard())
                 {
                     case 2:
-                        if (ListTempCombo[0] != 14)
+                        if (listStraightCombo[0] != 14)
                         {
-                            ListTempCombo.RemoveAt(0);
+                            listStraightCombo.RemoveAt(0);
                         }
                         break;
                     case 3:
-                        ListTempCombo.RemoveAt(0);
+                        listStraightCombo.RemoveAt(0);
                         break;
                 }
             }
@@ -263,13 +295,13 @@ namespace CasinoUI.Models.Poker
 
         private void CreateList()
         {
-            ListTempCombo = new List<int>();
+            listStraightCombo = new List<int>();
             int itemStraight = (int)listCardInGame[0].Value + 2;
 
             for (int i = 0; i < listCardInGame.Count + 4; i++)
             {
                 if (itemStraight < 15 && itemStraight > 1) {
-                    ListTempCombo.Add(itemStraight);
+                    listStraightCombo.Add(itemStraight);
                 }
                 itemStraight--;
             }

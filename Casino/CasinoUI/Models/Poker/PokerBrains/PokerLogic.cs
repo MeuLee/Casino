@@ -13,34 +13,39 @@ namespace CasinoUI.Models.Poker.PokerBrains
         public int[] PlayerRoles { get; set; }      // <---  idx[0] = SmallBlind's index in ListPlayers
                                                     //       idx[1] = BigBlind's index in ListPlayers
                                                     //       idx[2] = First player to play index
+
+        public bool[] isPlayerDone { get; set; }
         public int Pot { get; set; }
         public int CurrentRaise { get; set; }
-        public bool someoneRaised { get; set; }
+
+        public GameState currentGameState;
 
         public PokerLogic(HumanPlayer human) {
+            CardStack = new GameCardStack();
             InitListPlayers(human);
             SetInitialRoles();
+            playersDrawCards();
             currentPlayerTurnIdx = PlayerRoles[2];
-            CardStack = new GameCardStack();
             Pot = 0;
             CurrentRaise = 2;
-            someoneRaised = false;
-        }
+            currentGameState = GameState.inital;
 
-        public void PlayAGame() {
-            if (currentPlayerTurnIdx != 0) {
-                while ()
-            }
-
-
-            ProceedNextGame();
+            isPlayerDone = new bool[] { false, false, false, false, false};
         }
 
         private void InitListPlayers(HumanPlayer human) {
-            ListPlayers = new List<Player> { human };
+            ListPlayers = new List<Player>();
+            ListPlayers.Add(human);
 
-            for (int i = 0; i < 4; i++) {
-                ListPlayers.Add(new PokerAI());
+            for (int i = 1; i < 5; i++) {
+                ListPlayers.Add(new PokerAI(TypePlayerPoker.NORMAL));
+            }
+        }
+
+        private void playersDrawCards() {
+            for (int i = 0; i < ListPlayers.Count; i++) {
+                ListPlayers[i].Hand.Add(CardStack.DrawCard());
+                ListPlayers[i].Hand.Add(CardStack.DrawCard());
             }
         }
 
@@ -54,9 +59,9 @@ namespace CasinoUI.Models.Poker.PokerBrains
             // draw high card for dealer
         }
 
-        private void ProceedNextGame() {
+        public void ProceedNextGame() {
             RotateRoles();
-            ClearRoles();
+            ClearHands();
             Pot = 0;
             // restore deck and shuffle
             // check if everyone has enough money
@@ -74,16 +79,18 @@ namespace CasinoUI.Models.Poker.PokerBrains
             }
         }
 
-        private void ClearRoles() {
+        private void ClearHands() {
             foreach (Player player in ListPlayers) {
-                player.GetHand().Clear();
+                player.Hand.Clear();
             }
         }
 
         public void PlayerPlaysTurn(PokerActionCode pokerActionCode, int money) {
             IPokerAction player = ListPlayers[currentPlayerTurnIdx].GetGameType<IPokerAction>();
-            ListPlayers[currentPlayerTurnIdx].p
             
+
+            // ListPlayers[currentPlayerTurnIdx].p
+
             switch (pokerActionCode) {
                 case PokerActionCode.CALL:
                     Pot += player.PokerCall(CurrentRaise);
@@ -96,8 +103,15 @@ namespace CasinoUI.Models.Poker.PokerBrains
                     break;
                 case PokerActionCode.RAISE:
                     Pot += player.PokerRaise(money); // should take in amount from UI
+                    currentGameState = GameState.raised;
+                    break;
+                case PokerActionCode.ALLIN:
+                    player.PokerAllIn();
+                    currentGameState = GameState.raised;
                     break;
             }
+
+            isPlayerDone[currentPlayerTurnIdx] = true;
         }
 
         public void incCurrentPlayerTurn() {
@@ -106,6 +120,18 @@ namespace CasinoUI.Models.Poker.PokerBrains
             if (currentPlayerTurnIdx == ListPlayers.Count) {
                 currentPlayerTurnIdx = 0;
             }
+        }
+
+
+        public bool arePlayersDone() {
+            int len = isPlayerDone.Length;
+            for (int i = 0; i < len; i++) {
+                if (!isPlayerDone[i]) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
     }

@@ -12,27 +12,15 @@ namespace TestCasino
         [TestMethod]
         public void Generated52Cards()
         {
-            //Arrange
-            int cardNb;
-
-            //Act
-            cardNb = _stack.Cards.Count;
-
-            //Assert
-            Assert.AreEqual(52, cardNb);
+            Assert.AreEqual(52, _stack.Cards.Count);
         }
 
         [TestMethod]
         public void NoImageNull()
         {
-            //Arrange
-            int nbImageNull;
+            var nbImageNull = _stack.Cards.Where(c => c.Image == null);
 
-            //Act
-            nbImageNull = _stack.Cards.Count(c => c.Image == null);
-
-            //Assert
-            Assert.AreEqual(0, nbImageNull);
+            Assert.AreEqual(0, nbImageNull.Count());
         }
 
         [TestMethod]
@@ -54,12 +42,12 @@ namespace TestCasino
             //Arrange
             GameCardStack stack = new GameCardStack();
             HumanPlayer player = new HumanPlayer(0, 0);
-            int playerCardsBefore = player.GetHand().Count, gameCardsBefore = stack.Cards.Count,
+            int playerCardsBefore = player.Hand.Count, gameCardsBefore = stack.Cards.Count,
                 playerCardsAfter, gameCardsAfter;
 
             //Act
             stack.PlayerDrawCard(player);
-            playerCardsAfter = player.GetHand().Count;
+            playerCardsAfter = player.Hand.Count;
             gameCardsAfter = stack.Cards.Count;
 
             //Assert

@@ -3,7 +3,6 @@ using CasinoUI.Models.Settings;
 using CasinoUI.Models.WindowModels;
 using CasinoUI.Utils;
 using CasinoUI.Views;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -28,7 +27,7 @@ namespace CasinoUI.Controllers
         private OptionsMenu _view;
         private Window _parent;
         private List<Skin> _skins = SkinManager.Instance.SkinsList;
-        private int _skinIndex = 0;
+        private static int _skinIndex = 0;
         private static int _skinCount = SkinsGenerator.SKIN_COUNT;
 
         public OptionsMenuController(Window parent)
@@ -38,7 +37,6 @@ namespace CasinoUI.Controllers
             _parent = parent;
             _parent.Hide();
             _view.Show();
-            _skinIndex = 0;
 
             AddEvents();
             ModifySlidersValue();
@@ -50,9 +48,9 @@ namespace CasinoUI.Controllers
         {
             SetPictureIndexes(out int leftIndex, out int centerIndex, out int rightIndex);
             _view.TbCharacterName.Text = _skins[centerIndex].Name;
-            _view.ImgLeftCharacter.Source = _skins[leftIndex].DownImages[0];
-            _view.ImgCenterCharacter.Source = _skins[centerIndex].DownImages[0];
-            _view.ImgRightCharacter.Source = _skins[rightIndex].DownImages[0];
+            _view.ImgLeftCharacter.Source = _skins[leftIndex].BaseDownImage;
+            _view.ImgCenterCharacter.Source = _skins[centerIndex].BaseDownImage;
+            _view.ImgRightCharacter.Source = _skins[rightIndex].BaseDownImage;
             ApplicationSettings.HumanPlayer.CurrentSkin = _skins[centerIndex];
         }
 

@@ -43,6 +43,7 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <DocumentationFile>
     </DocumentationFile>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,6 +53,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -81,6 +83,11 @@
     <Compile Include="Models\PlayerModel\PlayerSkin\SkinManager.cs" />
     <Compile Include="Models\PlayerModel\PlayerSkin\Skins.cs" />
     <Compile Include="Models\PlayerModel\PlayerSkin\SkinsGenerator.cs" />
+    <Compile Include="Models\Poker\Evaluator\Hand.cs" />
+    <Compile Include="Models\Poker\Evaluator\HandEvaluator.cs" />
+    <Compile Include="Models\Poker\Evaluator\HandStrength.cs" />
+    <Compile Include="Models\Poker\GameState.cs" />
+    <Compile Include="Models\Poker\TypePlayerPoker.cs" />
     <Compile Include="Models\Profiles\BlackjackProfile.cs" />
     <Compile Include="Models\Settings\ApplicationSettings.cs" />
     <Compile Include="Controllers\BlackjackController.cs" />
@@ -439,7 +446,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainMenu.xaml">
-      <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Views\OptionsMenu.xaml">
